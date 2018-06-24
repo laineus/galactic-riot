@@ -38,5 +38,9 @@ export default {
     const x = Math.cos(Math.degToRad(this.rotation))
     const y = Math.sin(Math.degToRad(this.rotation))
     this.physical.force(x * this.speed, y * this.speed)
+    if (this.x < 0) this.x = this.field.width
+    if (this.x > this.field.width) this.x = 0
+    if (this.y < 0) this.y = this.field.height
+    if (this.y > this.field.height) this.y = 0
   }
 }
