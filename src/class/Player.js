@@ -3,6 +3,8 @@ const SPEED = 6
 export default {
   superClass: 'DisplayElement',
   targetDeg: 0,
+  screenX: 0,
+  screenY: 0,
   init (option) {
     this.superInit(option)
     this.setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
@@ -11,14 +13,23 @@ export default {
   },
   setField (field) {
     this.field = field
-    this.field.onpointend = e => {
-      const diffX = e.pointer.x - this.x
-      const diffY = e.pointer.y - this.y
+    return this
+  },
+  setScreen (screen) {
+    this.screen = screen
+    this.screen.onpointend = e => {
+      const diffX = e.pointer.x - this.screenX
+      const diffY = e.pointer.y - this.screenY
       const deg = Math.radToDeg(Math.atan2(diffY, diffX))
       this.targetDeg = deg >= 0 ? deg : deg + 360
     }
+    return this
   },
   update (app) {
+    if (this.field) {
+      this.screenX = this.x + this.field.x
+      this.screenY = this.y + this.field.y
+    }
     this.tern()
     this.move()
   },
