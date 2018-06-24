@@ -5,14 +5,14 @@ export default {
     this.superInit(option)
     this.setBody(Sprite('player').setScale(0.2, 0.2))
     this.setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
+    this.setShotDelay(7)
     this.setSpeed(6)
   },
   update (app) {
+    this.superMethod('update', app)
     this.ctrlSpeed(app.keyboard)
     this.ctrlTurn(app.keyboard)
-    if (app.keyboard.getKeyDown('Z')) {
-      Laser().setPosition(this.x, this.y).setRotation(this.rotation).addChildTo(this.field)
-    }
+    this.ctrAction(app.keyboard)
   },
   ctrlSpeed (key) {
     if (key.getKey('up')) return this.move(1.5, true)
@@ -22,5 +22,8 @@ export default {
   ctrlTurn (key) {
     if (key.getKey('left')) return this.turn(-1)
     if (key.getKey('right')) return this.turn(1)
+  },
+  ctrAction (key) {
+    if (key.getKey('Z')) this.shot(Laser())
   }
 }
