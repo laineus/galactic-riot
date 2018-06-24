@@ -23,14 +23,14 @@ export default {
     if (this.rotation > 360) this.rotation -= 360
     if (this.rotation < 0) this.rotation += 360
   },
-  move (accele) {
+  move (accele, roop) {
     this.speed = this.baseSpeed * accele
     const x = Math.cos(Math.degToRad(this.rotation))
     const y = Math.sin(Math.degToRad(this.rotation))
     this.physical.force(x * this.speed, y * this.speed)
-    if (this.x < 0) this.x = this.field.width
-    if (this.x > this.field.width) this.x = 0
-    if (this.y < 0) this.y = this.field.height
-    if (this.y > this.field.height) this.y = 0
+    if (this.x < 0) roop ? this.x = this.field.width : this.remove()
+    if (this.x > this.field.width) roop ? this.x = 0 : this.remove()
+    if (this.y < 0) roop ? this.y = this.field.height : this.remove()
+    if (this.y > this.field.height) roop ? this.y = 0 : this.remove()
   }
 }

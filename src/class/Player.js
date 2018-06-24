@@ -10,11 +10,14 @@ export default {
   update (app) {
     this.ctrlSpeed(app.keyboard)
     this.ctrlTurn(app.keyboard)
+    if (app.keyboard.getKeyDown('Z')) {
+      Laser().setPosition(this.x, this.y).setRotation(this.rotation).addChildTo(this.field).setField(this.field)
+    }
   },
   ctrlSpeed (key) {
-    if (key.getKey('up')) return this.move(1.5)
-    if (key.getKey('down')) return this.move(0.5)
-    this.move(1)
+    if (key.getKey('up')) return this.move(1.5, true)
+    if (key.getKey('down')) return this.move(0.5, true)
+    this.move(1, true)
   },
   ctrlTurn (key) {
     if (key.getKey('left')) return this.turn(-1)
