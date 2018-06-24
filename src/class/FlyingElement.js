@@ -5,6 +5,8 @@ export default {
   speed: 0,
   baseShotDelay: 0,
   shotDelay: 0,
+  cos: 0,
+  sin: 0,
   init (option) {
     this.superInit(option)
     this.field = state.field
@@ -12,6 +14,8 @@ export default {
   },
   update () {
     if (this.shotDelay > 0) this.shotDelay--
+    this.cos = Math.cos(Math.degToRad(this.rotation))
+    this.sin = Math.sin(Math.degToRad(this.rotation))
   },
   setBody (sprite) {
     this.body = sprite.addChildTo(this)
@@ -32,9 +36,7 @@ export default {
   },
   move (accele, roop) {
     this.speed = this.baseSpeed * accele
-    const x = Math.cos(Math.degToRad(this.rotation))
-    const y = Math.sin(Math.degToRad(this.rotation))
-    this.physical.force(x * this.speed, y * this.speed)
+    this.physical.force(this.cos * this.speed, this.sin * this.speed)
     if (this.x < 0) roop ? this.x = this.field.width : this.remove()
     if (this.x > this.field.width) roop ? this.x = 0 : this.remove()
     if (this.y < 0) roop ? this.y = this.field.height : this.remove()
@@ -42,7 +44,10 @@ export default {
   },
   shot (Bullet) {
     if (this.shotDelay > 0) return
-    Bullet.setPosition(this.x, this.y).setRotation(this.rotation).addChildTo(this.field)
+    Bullet.addChildTo(this.field).setRotation(this.rotation).setPosition(
+      this.x + (this.cos * 60),
+      this.y + (this.sin * 60)
+    )
     this.shotDelay = this.baseShotDelay
   }
 }
