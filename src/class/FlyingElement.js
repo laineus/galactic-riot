@@ -1,9 +1,11 @@
+import state from '../config/state'
 export default {
   superClass: 'DisplayElement',
   baseSpeed: 0,
   speed: 0,
   init (option) {
     this.superInit(option)
+    this.field = state.field
     this.physical.friction = 1
   },
   setBody (sprite) {
@@ -12,10 +14,6 @@ export default {
   },
   setSpeed (speed) {
     this.baseSpeed = speed
-    return this
-  },
-  setField (field) {
-    this.field = field
     return this
   },
   turn (direction) {

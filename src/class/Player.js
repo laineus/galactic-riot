@@ -11,7 +11,7 @@ export default {
     this.ctrlSpeed(app.keyboard)
     this.ctrlTurn(app.keyboard)
     if (app.keyboard.getKeyDown('Z')) {
-      Laser().setPosition(this.x, this.y).setRotation(this.rotation).addChildTo(this.field).setField(this.field)
+      Laser().setPosition(this.x, this.y).setRotation(this.rotation).addChildTo(this.field)
     }
   },
   ctrlSpeed (key) {

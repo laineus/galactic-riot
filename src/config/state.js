@@ -1,2 +1,3 @@
 export default {
+  field: null
 }

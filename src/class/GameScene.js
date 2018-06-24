@@ -1,14 +1,15 @@
 import variables from '../config/variables'
 import settings from '../config/settings'
+import state from '../config/state'
 export default {
   superClass: 'DisplayScene',
   init (option) {
     this.superInit(option)
     this.backgroundColor = variables.color.black
-    this.field = Sprite('map').addChildTo(this).setOrigin(0, 0)
+    this.field = state.field = Sprite('map').addChildTo(this).setOrigin(0, 0)
     this.field.width = this.field.srcRect.width
     this.field.height = this.field.srcRect.height
-    this.field.player = Player().addChildTo(this.field).setField(this.field)
+    this.field.player = Player().addChildTo(this.field)
   },
   update () {
     this.updateCamera()
