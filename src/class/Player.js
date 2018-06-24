@@ -2,7 +2,7 @@ import settings from '../config/settings'
 const SPEED = 6
 export default {
   superClass: 'DisplayElement',
-  targetRadian: 0,
+  targetDeg: 0,
   init (option) {
     this.superInit(option)
     this.setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
@@ -14,12 +14,23 @@ export default {
     this.field.onpointend = e => {
       const diffX = e.pointer.x - this.x
       const diffY = e.pointer.y - this.y
-      this.targetRadian = Math.atan2(diffY, diffX)
+      const deg = Math.radToDeg(Math.atan2(diffY, diffX))
+      this.targetDeg = deg >= 0 ? deg : deg + 360
     }
   },
   update (app) {
-    const r = (Math.radToDeg(this.targetRadian) - this.rotation) > 0 ? 1 : -1
-    this.rotation += r * SPEED
+    this.tern()
+    this.move()
+  },
+  tern () {
+    const diff = this.targetDeg - this.rotation
+    const direction = (diff > 0 && diff < 180) || diff < -180 ? 1 : -1
+    const power = Math.abs(diff) < SPEED ? Math.abs(diff) : SPEED
+    this.rotation += direction * power
+    if (this.rotation > 360) this.rotation -= 360
+    if (this.rotation < 0) this.rotation += 360
+  },
+  move () {
     const x = Math.cos(Math.degToRad(this.rotation))
     const y = Math.sin(Math.degToRad(this.rotation))
     this.physical.force(x * SPEED, y * SPEED)
