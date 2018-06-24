@@ -8,7 +8,7 @@ export default {
     this.field = Sprite('map').addChildTo(this).setOrigin(0, 0)
     this.field.width = this.field.srcRect.width
     this.field.height = this.field.srcRect.height
-    this.field.player = Player().addChildTo(this.field).setScreen(this).setField(this.field)
+    this.field.player = Player().addChildTo(this.field).setField(this.field)
   },
   update () {
     this.updateCamera()
