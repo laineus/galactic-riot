@@ -44,10 +44,11 @@ export default {
   },
   shot (Bullet) {
     if (this.shotDelay > 0) return
-    Bullet.addChildTo(this.field).setRotation(this.rotation).setPosition(
+    const bullet = Bullet.addChildTo(this.field.bullet).setRotation(this.rotation).setPosition(
       this.x + (this.cos * 60),
       this.y + (this.sin * 60)
     )
+    bullet.shooter = this
     this.shotDelay = this.baseShotDelay
   }
 }

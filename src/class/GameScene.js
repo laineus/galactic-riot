@@ -11,6 +11,9 @@ export default {
     this.field.width = this.field.srcRect.width
     this.field.height = this.field.srcRect.height
     this.field.player = Player().addChildTo(this.field)
+    this.field.enemy = DisplayElement().addChildTo(this.field)
+    this.field.bullet = DisplayElement().addChildTo(this.field)
+    this.randomEnemy()
   },
   update (app) {
     this.updateCamera(app.keyboard)
@@ -31,5 +34,9 @@ export default {
     if (playerPosition < (screenSize / 2)) return 0
     if (playerPosition > fieldSize - (screenSize / 2)) return -fieldSize + screenSize
     return (screenSize / 2) - playerPosition
+  },
+  randomEnemy () {
+    if (this.field.enemy.children.length < 10) Enemy().addChildTo(this.field.enemy)
+    setTimeout(() => this.randomEnemy(), Math.randint(3000, 5000))
   }
 }
