@@ -3,6 +3,7 @@ import settings from '../config/settings'
 import state from '../config/state'
 export default {
   superClass: 'DisplayScene',
+  zoom: 0,
   init (option) {
     this.superInit(option)
     this.backgroundColor = variables.color.black
@@ -11,13 +12,18 @@ export default {
     this.field.height = this.field.srcRect.height
     this.field.player = Player().addChildTo(this.field)
   },
-  update () {
-    this.updateCamera()
+  update (app) {
+    this.updateCamera(app.keyboard)
   },
-  updateCamera () {
+  updateCamera (key) {
     if (this.field.player) {
-      const x = this.getScrollPositon(settings.SCREEN_WIDTH, this.field.player.x, this.field.width)
-      const y = this.getScrollPositon(settings.SCREEN_HEIGHT, this.field.player.y, this.field.height)
+      if (key.getKey('X') && this.zoom < 100) {
+        this.zoom += 25
+      } else if (!key.getKey('X') && this.zoom > 0) {
+        this.zoom -= 25
+      }
+      const x = this.getScrollPositon(settings.SCREEN_WIDTH, this.field.player.x + (this.field.player.cos * this.zoom), this.field.width)
+      const y = this.getScrollPositon(settings.SCREEN_HEIGHT, this.field.player.y  + (this.field.player.sin * this.zoom), this.field.height)
       this.field.setPosition(x, y)
     }
   },
