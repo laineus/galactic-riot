@@ -1,3 +1,4 @@
+// https://cdn.rawgit.com/phi-jp/phina.js/v0.2.0/build/phina.js
 import phina from 'phina.js'
 import settings from './config/settings'
 import assets from './config/assets'
