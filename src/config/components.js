@@ -5,5 +5,6 @@ export default [
   { className: 'FlyingElement', class: require('../class/FlyingElement.js').default },
   { className: 'Player', class: require('../class/Player.js').default },
   { className: 'Computer', class: require('../class/Computer.js').default },
-  { className: 'Laser', class: require('../class/Laser.js').default }
+  { className: 'Laser', class: require('../class/Laser.js').default },
+  { className: 'Explosion', class: require('../class/Explosion.js').default }
 ]
