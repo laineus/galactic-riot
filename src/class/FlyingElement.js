@@ -17,6 +17,10 @@ export default {
     this.cos = Math.cos(Math.degToRad(this.rotation))
     this.sin = Math.sin(Math.degToRad(this.rotation))
   },
+  setType (type) {
+    this.type = type
+    this.addChildTo(state.field[type])
+  },
   setBody (sprite) {
     this.body = sprite.addChildTo(this)
     return this

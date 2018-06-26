@@ -7,12 +7,16 @@ export default {
   init (option) {
     this.superInit(option)
     this.backgroundColor = variables.color.black
+    // Field
     this.field = state.field = Sprite('map').addChildTo(this).setOrigin(0, 0)
     this.field.width = this.field.srcRect.width
     this.field.height = this.field.srcRect.height
-    this.field.player = Player().addChildTo(this.field)
+    // Layer
+    this.field.friend = DisplayElement().addChildTo(this.field)
     this.field.enemy = DisplayElement().addChildTo(this.field)
     this.field.bullet = DisplayElement().addChildTo(this.field)
+    // Fighter
+    this.field.player = Player()
     this.randomEnemy()
   },
   update (app) {
@@ -36,7 +40,7 @@ export default {
     return (screenSize / 2) - playerPosition
   },
   randomEnemy () {
-    if (this.field.enemy.children.length < 10) Computer().addChildTo(this.field.enemy)
+    if (this.field.enemy.children.length < 10) Computer().setType(['friend', 'enemy'].pickup())
     setTimeout(() => this.randomEnemy(), Math.randint(3000, 5000))
   }
 }

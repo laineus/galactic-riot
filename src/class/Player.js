@@ -3,6 +3,7 @@ export default {
   superClass: 'FlyingElement',
   init (option) {
     this.superInit(option)
+    this.setType('friend')
     this.setBody(Sprite('f3_f').setScale(0.2, 0.2))
     this.setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
     this.setShotDelay(7)
