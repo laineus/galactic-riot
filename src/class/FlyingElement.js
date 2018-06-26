@@ -66,5 +66,9 @@ export default {
   },
   inShotRange (target) {
     return Math.abs(this.dereegDiff(target)) < 15 && this.distanceDiff(target) < 100
+  },
+  explosion () {
+    Explosion(this.x, this.y)
+    return this
   }
 }
