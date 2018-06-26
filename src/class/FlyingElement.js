@@ -50,5 +50,17 @@ export default {
     )
     bullet.shooter = this
     this.shotDelay = this.baseShotDelay
+  },
+  dereegDiff (target) {
+    return target.rotation - this.rotation
+  },
+  distanceDiff (target) {
+    return Math.sqrt(Math.pow(target.x - this.x, 2) + Math.pow(target.y - this.y, 2))
+  },
+  inVision (target) {
+    return Math.abs(this.dereegDiff(target)) < 45 && this.distanceDiff(target) < 300
+  },
+  inShotRange (target) {
+    return Math.abs(this.dereegDiff(target)) < 15 && this.distanceDiff(target) < 100
   }
 }
