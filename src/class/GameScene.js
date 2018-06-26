@@ -36,7 +36,7 @@ export default {
     return (screenSize / 2) - playerPosition
   },
   randomEnemy () {
-    if (this.field.enemy.children.length < 10) Enemy().addChildTo(this.field.enemy)
+    if (this.field.enemy.children.length < 10) Computer().addChildTo(this.field.enemy)
     setTimeout(() => this.randomEnemy(), Math.randint(3000, 5000))
   }
 }
