@@ -8,6 +8,7 @@ export default {
   shotDelay: 0,
   cos: 0,
   sin: 0,
+  acceleration: 1.0,
   init (option) {
     this.superInit(option)
     this.field = state.field
@@ -39,14 +40,25 @@ export default {
     this.baseShotDelay = delay
     return this
   },
+  accele (direction) {
+    const add = 0.05
+    if (direction === 0) {
+      if (this.acceleration > 1.0) this.acceleration -= add
+      if (this.acceleration < 1.0) this.acceleration += add
+    } else if (direction === -1 && this.acceleration > 0.5) {
+      this.acceleration -= add
+    } else if (direction === 1 && this.acceleration < 1.5) {
+      this.acceleration += add
+    }
+  },
   turn (direction) {
-    const accele = 1.5 - (this.speed / this.baseSpeed) * 0.5
+    const accele = 1.5 - this.acceleration * 0.5
     this.rotation += this.baseMobility * accele * direction
     if (this.rotation > 360) this.rotation -= 360
     if (this.rotation < 0) this.rotation += 360
   },
-  move (accele, roop) {
-    this.speed = this.baseSpeed * accele
+  move (roop) {
+    this.speed = this.baseSpeed * this.acceleration
     this.physical.velocity.x += this.cos
     this.physical.velocity.y += this.sin
     if (Math.abs(this.physical.velocity.x) > this.speed) this.physical.velocity.x = this.physical.velocity.x > 0 ? this.speed : -this.speed

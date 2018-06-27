@@ -15,11 +15,12 @@ export default {
     this.ctrlSpeed(app.keyboard)
     this.ctrlTurn(app.keyboard)
     this.ctrAction(app.keyboard)
+    this.move(true)
   },
   ctrlSpeed (key) {
-    if (key.getKey('up')) return this.move(1.5, true)
-    if (key.getKey('down')) return this.move(0.5, true)
-    this.move(1, true)
+    if (key.getKey('up')) return this.accele(1)
+    if (key.getKey('down')) return this.accele(-1)
+    this.accele(0)
   },
   ctrlTurn (key) {
     if (key.getKey('left')) return this.turn(-1)

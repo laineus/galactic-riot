@@ -7,7 +7,7 @@ export default {
   },
   update (app) {
     this.superMethod('update', app)
-    this.move(1, false)
+    this.move(false)
     for (const tgt of this.field.enemy.children) {
       if (this.distanceDiff(tgt) < 30) {
         tgt.explosion().remove()

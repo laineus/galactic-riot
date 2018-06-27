@@ -19,7 +19,7 @@ export default {
     this.setBody(Sprite(type === 'friend' ? 'f1_f' : 'f6_e').setScale(0.2, 0.2))
   },
   ctrlSpeed () {
-    this.move(1, true)
+    this.move(true)
   },
   ctrlTurn () {
   },
