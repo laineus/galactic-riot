@@ -5,7 +5,8 @@ export default {
     f3_f: '/img/f3_f.png',
     f6_e: '/img/f6_e.png',
     laser: '/img/laser.png',
-    smoke: '/img/smoke.png'
+    smoke: '/img/smoke.png',
+    light: '/img/light.png'
   },
   font: {
     aldrich: '/font/aldrich.woff'

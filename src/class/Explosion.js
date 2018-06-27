@@ -9,11 +9,12 @@ export default {
     setTimeout(() => this.remove(), 1000)
   },
   explosion () {
-    Array('#444', '#D30', '#EA0', '#FBA').forEach((color, i) => {
-      this.maskImage('smoke', color, `smoke_${color}`)
+    Array('#321', '#D30', '#EA0', '#FBA').forEach((color, i) => {
+      const img = i < 2 ? 'smoke' : 'light'
+      this.maskImage(img, color, `${img}_${color}`)
       const range = 50 - (i * 12)
       Number(5).times(() => {
-        const sprite = Sprite(`smoke_${color}`)
+        const sprite = Sprite(`${img}_${color}`)
         .addChildTo(this)
         .setRotation(Math.randint(0, 360))
         .setScale(Math.random() + 1 - (i / 3))
