@@ -57,12 +57,16 @@ export default {
     if (this.rotation > 360) this.rotation -= 360
     if (this.rotation < 0) this.rotation += 360
   },
-  move (roop) {
+  move (roop, force = false) {
     this.speed = this.baseSpeed * this.acceleration
-    this.physical.velocity.x += this.cos
-    this.physical.velocity.y += this.sin
-    if (Math.abs(this.physical.velocity.x) > this.speed) this.physical.velocity.x = this.physical.velocity.x > 0 ? this.speed : -this.speed
-    if (Math.abs(this.physical.velocity.y) > this.speed) this.physical.velocity.y = this.physical.velocity.y > 0 ? this.speed : -this.speed
+    if (force) {
+      this.physical.force(this.cos * this.speed, this.sin * this.speed)
+    } else {
+      this.physical.velocity.x += this.cos
+      this.physical.velocity.y += this.sin
+      if (Math.abs(this.physical.velocity.x) > this.speed) this.physical.velocity.x = this.physical.velocity.x > 0 ? this.speed : -this.speed
+      if (Math.abs(this.physical.velocity.y) > this.speed) this.physical.velocity.y = this.physical.velocity.y > 0 ? this.speed : -this.speed
+    }
     if (this.x < 0) roop ? this.x = this.field.width : this.remove()
     if (this.x > this.field.width) roop ? this.x = 0 : this.remove()
     if (this.y < 0) roop ? this.y = this.field.height : this.remove()
