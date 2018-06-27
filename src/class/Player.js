@@ -7,7 +7,8 @@ export default {
     this.setBody(Sprite('f3_f').setScale(0.2, 0.2))
     this.setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
     this.setShotDelay(7)
-    this.setSpeed(6)
+    this.setMobility(3)
+    this.setSpeed(8)
   },
   update (app) {
     this.superMethod('update', app)

@@ -1,6 +1,7 @@
 import state from '../config/state'
 export default {
   superClass: 'DisplayElement',
+  baseMobility: 0,
   baseSpeed: 0,
   speed: 0,
   baseShotDelay: 0,
@@ -10,7 +11,8 @@ export default {
   init (option) {
     this.superInit(option)
     this.field = state.field
-    this.physical.friction = 1
+    this.physical.friction = 0.96
+    this.physical.velocity.set(0, 0)
   },
   update () {
     if (this.shotDelay > 0) this.shotDelay--
@@ -25,6 +27,10 @@ export default {
     this.body = sprite.addChildTo(this)
     return this
   },
+  setMobility (mobility) {
+    this.baseMobility = mobility
+    return this
+  },
   setSpeed (speed) {
     this.baseSpeed = speed
     return this
@@ -34,13 +40,17 @@ export default {
     return this
   },
   turn (direction) {
-    this.rotation += this.baseSpeed * direction
+    const accele = 1.5 - (this.speed / this.baseSpeed) * 0.5
+    this.rotation += this.baseMobility * accele * direction
     if (this.rotation > 360) this.rotation -= 360
     if (this.rotation < 0) this.rotation += 360
   },
   move (accele, roop) {
     this.speed = this.baseSpeed * accele
-    this.physical.force(this.cos * this.speed, this.sin * this.speed)
+    this.physical.velocity.x += this.cos
+    this.physical.velocity.y += this.sin
+    if (Math.abs(this.physical.velocity.x) > this.speed) this.physical.velocity.x = this.physical.velocity.x > 0 ? this.speed : -this.speed
+    if (Math.abs(this.physical.velocity.y) > this.speed) this.physical.velocity.y = this.physical.velocity.y > 0 ? this.speed : -this.speed
     if (this.x < 0) roop ? this.x = this.field.width : this.remove()
     if (this.x > this.field.width) roop ? this.x = 0 : this.remove()
     if (this.y < 0) roop ? this.y = this.field.height : this.remove()
