@@ -3,7 +3,7 @@ import settings from '../config/settings'
 import state from '../config/state'
 export default {
   superClass: 'DisplayScene',
-  zoom: 0,
+  zoom: 1.0,
   init (option) {
     this.superInit(option)
     this.backgroundColor = variables.color.black
@@ -24,17 +24,21 @@ export default {
   },
   updateCamera (key) {
     if (this.field.player) {
-      if (key.getKey('X') && this.zoom < 100) {
-        this.zoom += 25
-      } else if (!key.getKey('X') && this.zoom > 0) {
-        this.zoom -= 25
+      if (key.getKey('X') && this.zoom < 1.5) {
+        this.zoom += 0.1
+      } else if (!key.getKey('X') && this.zoom > 1.0) {
+        this.zoom -= 0.1
       }
-      const x = this.getScrollPositon(settings.SCREEN_WIDTH, this.field.player.x + (this.field.player.cos * this.zoom), this.field.width)
-      const y = this.getScrollPositon(settings.SCREEN_HEIGHT, this.field.player.y  + (this.field.player.sin * this.zoom), this.field.height)
+      this.field.scale.x = this.zoom
+      this.field.scale.y = this.zoom
+      const x = this.getScrollPositon(settings.SCREEN_WIDTH, this.field.player.x, this.field.width)
+      const y = this.getScrollPositon(settings.SCREEN_HEIGHT, this.field.player.y, this.field.height)
       this.field.setPosition(x, y)
     }
   },
   getScrollPositon (screenSize, playerPosition, fieldSize) {
+    playerPosition *= this.zoom
+    fieldSize *= this.zoom
     if (playerPosition < (screenSize / 2)) return 0
     if (playerPosition > fieldSize - (screenSize / 2)) return -fieldSize + screenSize
     return (screenSize / 2) - playerPosition
