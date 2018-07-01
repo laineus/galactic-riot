@@ -14,6 +14,7 @@ export default {
     this.field = state.field
     this.physical.friction = 0.96
     this.physical.velocity.set(0, 0)
+    this.hp = 100
   },
   update () {
     if (this.shotDelay > 0) this.shotDelay--
