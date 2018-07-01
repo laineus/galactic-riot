@@ -81,17 +81,21 @@ export default {
     bullet.shooter = this
     this.shotDelay = this.baseShotDelay
   },
-  dereegDiff (target) {
-    return target.rotation - this.rotation
+  degreeTo (target) {
+    const deg = Math.radToDeg(Math.atan2(target.y - this.y, target.x - this.x))
+    return deg >= 0 ? deg : deg + 360
+  },
+  degreeDiff (target) {
+    return this.degreeTo(target) - this.rotation
   },
   distanceDiff (target) {
     return Math.sqrt(Math.pow(target.x - this.x, 2) + Math.pow(target.y - this.y, 2))
   },
   inVision (target) {
-    return Math.abs(this.dereegDiff(target)) < 45 && this.distanceDiff(target) < 300
+    return Math.abs(this.degreeDiff(target)) < 45 && this.distanceDiff(target) < 1000
   },
   inShotRange (target) {
-    return Math.abs(this.dereegDiff(target)) < 15 && this.distanceDiff(target) < 100
+    return Math.abs(this.degreeDiff(target)) < 15 && this.distanceDiff(target) < 500
   },
   explosion () {
     Explosion(this.x, this.y)
