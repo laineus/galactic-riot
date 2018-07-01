@@ -13,16 +13,36 @@ export default {
     this.ctrlSpeed()
     this.ctrlTurn()
     this.ctrAction()
+    if (!this.target) this.searchTarget()
   },
   setType (type) {
     this.superMethod('setType', type)
     this.setBody(Sprite(type === 'friend' ? 'f1_f' : 'f6_e').setScale(0.2, 0.2))
   },
+  searchTarget () {
+    for (const enemy of this.targetGroup()) {
+      if (this.inVision(enemy)) {
+        this.target = enemy
+        break
+      }
+    }
+  },
   ctrlSpeed () {
     this.move(true)
   },
   ctrlTurn () {
+    if (this.target) {
+      const degDiff = this.degreeDiff(this.target)
+      if (Math.abs(degDiff) > 1) {
+        this.turn((degDiff > 0 && degDiff < 180) || degDiff < -180 ? 1 : -1)
+      }
+    }
   },
   ctrAction () {
+    if (this.target) {
+      if (this.inShotRange(this.target)) {
+        this.shot(Laser())
+      }
+    }
   }
 }

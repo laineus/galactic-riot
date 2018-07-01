@@ -24,6 +24,9 @@ export default {
     this.type = type
     this.addChildTo(state.field[type])
   },
+  targetGroup () {
+    return this.field[this.type === 'friend' ? 'enemy' : 'friend'].children
+  },
   setBody (sprite) {
     this.body = sprite.addChildTo(this)
     return this
@@ -79,6 +82,7 @@ export default {
       this.y + (this.sin * 60)
     )
     bullet.shooter = this
+    bullet.type = this.type
     this.shotDelay = this.baseShotDelay
   },
   degreeTo (target) {
@@ -92,13 +96,21 @@ export default {
     return Math.sqrt(Math.pow(target.x - this.x, 2) + Math.pow(target.y - this.y, 2))
   },
   inVision (target) {
-    return Math.abs(this.degreeDiff(target)) < 45 && this.distanceDiff(target) < 1000
+    return Math.abs(this.degreeDiff(target)) < 45 && this.distanceDiff(target) < 600
   },
   inShotRange (target) {
-    return Math.abs(this.degreeDiff(target)) < 15 && this.distanceDiff(target) < 500
+    return Math.abs(this.degreeDiff(target)) < 15 && this.distanceDiff(target) < 400
   },
   explosion () {
     Explosion(this.x, this.y)
+    return this
+  },
+  dead () {
+    this.explosion()
+    for (const tgt of this.targetGroup()) {
+      if (tgt.target === this) tgt.target = null
+    }
+    this.remove()
     return this
   }
 }

@@ -8,9 +8,9 @@ export default {
   update (app) {
     this.superMethod('update', app)
     this.move(false, true)
-    for (const tgt of this.field.enemy.children) {
+    for (const tgt of this.targetGroup()) {
       if (this.distanceDiff(tgt) < 30) {
-        tgt.explosion().remove()
+        tgt.dead()
         this.remove()
         break
       }

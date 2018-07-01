@@ -44,7 +44,8 @@ export default {
     return (screenSize / 2) - playerPosition
   },
   randomEnemy () {
-    if (this.field.enemy.children.length < 10) Computer().setType(['friend', 'enemy'].pickup())
-    setTimeout(() => this.randomEnemy(), Math.randint(3000, 5000))
+    const type = ['friend', 'enemy'].pickup()
+    if (this.field[type].children.length < 10) Computer().setType(type)
+    setTimeout(() => this.randomEnemy(), Math.randint(1000, 3000))
   }
 }
