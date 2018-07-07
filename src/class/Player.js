@@ -16,6 +16,7 @@ export default {
     this.ctrlTurn(app.keyboard)
     this.ctrAction(app.keyboard)
     this.move(true)
+    this.searchTarget()
   },
   ctrlSpeed (key) {
     if (key.getKey('up')) {
@@ -31,6 +32,14 @@ export default {
   },
   ctrAction (key) {
     if (key.getKey('Z')) this.shot(Laser())
+  },
+  searchTarget () {
+    if (!this.target) {
+      const tgt = this.findInVision()
+      if (tgt) this.target = tgt
+    } else if (!this.inVision(this.target)) {
+      this.target = null
+    }
   },
   damage (app) {
     this.superMethod('damage', app)
