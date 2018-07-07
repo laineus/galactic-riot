@@ -20,12 +20,8 @@ export default {
     this.setBody(Sprite(type === 'friend' ? 'f1_f' : 'f6_e').setScale(0.2, 0.2))
   },
   searchTarget () {
-    for (const enemy of this.targetGroup()) {
-      if (this.inVision(enemy)) {
-        this.target = enemy
-        break
-      }
-    }
+    const tgt = this.findInVision()
+    if (tgt) this.target = tgt
   },
   ctrlSpeed () {
     this.move(true)

@@ -102,6 +102,12 @@ export default {
   inShotRange (target) {
     return Math.abs(this.degreeDiff(target)) < 15 && this.distanceDiff(target) < 400
   },
+  findInVision () {
+    return this.targetGroup().find(v => this.inVision(v))
+  },
+  findInShotRange () {
+    return this.targetGroup().find(v => this.inShotRange(v))
+  },
   explosion () {
     Explosion(this.x, this.y)
     return this
