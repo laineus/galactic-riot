@@ -5,6 +5,8 @@ export default {
   field: null,
   target: null,
   shock: 0,
+  diffX: 0,
+  diffY: 0,
   init (field, target) {
     this.superInit()
     this.setField(field)
@@ -16,8 +18,8 @@ export default {
     if (!this.target) return
     this.updateShock()
     this.lookTarget()
-    const posX = this.target.x + this.physical.velocity.x
-    const posY = this.target.y + this.physical.velocity.y
+    const posX = this.target.x + this.physical.velocity.x + this.diffX
+    const posY = this.target.y + this.physical.velocity.y + this.diffY
     this.field.scale.x = this.zoom * 0.01
     this.field.scale.y = this.zoom * 0.01
     const x = this.getScrollPositon(settings.SCREEN_WIDTH, posX, this.field.width)
@@ -33,15 +35,19 @@ export default {
   },
   lookTarget () {
     const getMax = () => {
-      if (!this.target.target) return 100
-      return this.target.inShotRange(this.target.target) ? 150 : 120
+      if (!this.target.target) return 80
+      return this.target.inShotRange(this.target.target) ? 120 : 100
     }
     const max = getMax()
     if (this.zoom < max) {
-      this.zoom += 5
+      this.zoom += 4
     } else if (this.zoom > max) {
-      this.zoom -= 5
+      this.zoom -= 4
     }
+    const diffX = this.target.target ? (this.target.target.x - this.target.x) * 0.7 : 0
+    const diffY = this.target.target ? (this.target.target.y - this.target.y) * 0.9 : 0
+    this.diffX += Math.sign(diffX - this.diffX)
+    this.diffY += Math.sign(diffY - this.diffY)
   },
   addShock (shock) {
     this.shock += shock

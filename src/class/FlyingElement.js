@@ -94,7 +94,7 @@ export default {
     return this.degreeTo(target) - this.rotation
   },
   distanceDiff (target) {
-    return Math.sqrt(Math.pow(target.x - this.x, 2) + Math.pow(target.y - this.y, 2))
+    return Math.hypot(target.x - this.x, target.y - this.y)
   },
   inVision (target) {
     return Math.abs(this.degreeDiff(target)) < 45 && this.distanceDiff(target) < 600
