@@ -10,8 +10,7 @@ export default {
     this.move(false, true)
     for (const tgt of this.targetGroup()) {
       if (this.distanceDiff(tgt) < 30) {
-        tgt.hp -= Math.randint(20, 40)
-        if (tgt.hp <= 0) tgt.dead()
+        tgt.damage()
         this.remove()
         break
       }

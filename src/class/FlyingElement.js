@@ -106,6 +106,10 @@ export default {
     Explosion(this.x, this.y)
     return this
   },
+  damage () {
+    this.hp -= Math.randint(20, 40)
+    if (this.hp <= 0) this.dead()
+  },
   dead () {
     this.explosion()
     for (const tgt of this.targetGroup()) {

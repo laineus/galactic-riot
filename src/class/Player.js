@@ -18,7 +18,10 @@ export default {
     this.move(true)
   },
   ctrlSpeed (key) {
-    if (key.getKey('up')) return this.accele(1)
+    if (key.getKey('up')) {
+      if (this.field.camera.shock < 3) this.field.camera.addShock(1)
+      return this.accele(1)
+    }
     if (key.getKey('down')) return this.accele(-1)
     this.accele(0)
   },
@@ -28,5 +31,9 @@ export default {
   },
   ctrAction (key) {
     if (key.getKey('Z')) this.shot(Laser())
+  },
+  damage (app) {
+    this.superMethod('damage', app)
+    this.field.camera.addShock(15)
   }
 }
