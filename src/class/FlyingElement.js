@@ -97,7 +97,7 @@ export default {
     return Math.hypot(target.x - this.x, target.y - this.y)
   },
   inVision (target) {
-    return Math.abs(this.degreeDiff(target)) < 45 && this.distanceDiff(target) < 600
+    return Math.abs(this.degreeDiff(target)) < 45 && this.distanceDiff(target) < 560
   },
   inShotRange (target) {
     return Math.abs(this.degreeDiff(target)) < 15 && this.distanceDiff(target) < 400

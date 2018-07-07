@@ -6,8 +6,8 @@ export default {
     this.superInit(option)
     this.backgroundColor = variables.color.black
     // Field
-    const width = 4000
-    const height = 3000
+    const width = 6000
+    const height = 4000
     this.field = state.field = Tile('map', width, height).addChildTo(this).setOrigin(0, 0)
     this.field.width = width
     this.field.height = height

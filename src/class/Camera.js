@@ -28,26 +28,33 @@ export default {
   },
   updateShock () {
     if (this.shock > 0) {
+      this.shock = Math.min(this.shock, 40)
       this.physical.velocity.x += Math.randint(-this.shock, this.shock)
       this.physical.velocity.y += Math.randint(-this.shock, this.shock)
       this.shock -= 2
     }
   },
   lookTarget () {
+    const getTarget = () => {
+      const tgt = this.target.targetGroup().find(v => v.inShotRange(this.target))
+      if (tgt) return tgt
+      return this.target.target
+    }
+    const target = getTarget()
     const getMax = () => {
-      if (!this.target.target) return 80
-      return this.target.inShotRange(this.target.target) ? 120 : 100
+      if (!target) return 80
+      return this.target.inShotRange(target) ? 120 : 100
     }
     const max = getMax()
     if (this.zoom < max) {
-      this.zoom += 4
+      this.zoom += 2
     } else if (this.zoom > max) {
-      this.zoom -= 4
+      this.zoom -= 2
     }
-    const diffX = this.target.target ? (this.target.target.x - this.target.x) * 0.7 : 0
-    const diffY = this.target.target ? (this.target.target.y - this.target.y) * 0.9 : 0
-    this.diffX += Math.sign(diffX - this.diffX)
-    this.diffY += Math.sign(diffY - this.diffY)
+    const diffX = target ? (target.x - this.target.x) * 0.7 : this.target.cos * 200
+    const diffY = target ? (target.y - this.target.y) * 0.7 : this.target.sin * 200
+    this.diffX += Math.abs(diffX - this.diffX) > 5 ? Math.sign(diffX - this.diffX) * 5 : Math.sign(diffX - this.diffX)
+    this.diffY += Math.abs(diffY - this.diffY) > 5 ? Math.sign(diffY - this.diffY) * 5 : Math.sign(diffY - this.diffY)
   },
   addShock (shock) {
     this.shock += shock
