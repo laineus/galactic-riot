@@ -3,7 +3,7 @@ export default {
   init (option) {
     this.superInit(option)
     this.setBody(Sprite('laser').setScale(0.2, 0.2))
-    this.setSpeed(30)
+    this.setSpeed(40)
   },
   update (app) {
     this.superMethod('update', app)

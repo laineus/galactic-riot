@@ -8,7 +8,7 @@ export default {
     this.setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
     this.setShotDelay(7)
     this.setMobility(3)
-    this.setSpeed(8)
+    this.setSpeed(10)
   },
   update (app) {
     this.superMethod('update', app)

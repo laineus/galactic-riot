@@ -6,7 +6,7 @@ export default {
     this.setRotation(Math.randint(0, 360))
     this.setShotDelay(7)
     this.setMobility(3)
-    this.setSpeed(6)
+    this.setSpeed(9)
   },
   update (app) {
     this.superMethod('update', app)
