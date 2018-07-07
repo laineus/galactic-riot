@@ -25,6 +25,6 @@ export default {
   randomEnemy () {
     const type = ['friend', 'enemy'].pickup()
     if (this.field[type].children.length < 10) Computer().setType(type)
-    setTimeout(() => this.randomEnemy(), Math.randint(1000, 3000))
+    setTimeout(() => this.randomEnemy(), Math.randint(500, 1000))
   }
 }

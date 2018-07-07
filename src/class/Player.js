@@ -9,6 +9,7 @@ export default {
     this.setShotDelay(7)
     this.setMobility(3)
     this.setSpeed(10)
+    this.hp = 500
   },
   update (app) {
     this.superMethod('update', app)
