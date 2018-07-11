@@ -18,13 +18,16 @@ export default {
     // Fighter
     this.field.player = Player()
     this.field.camera = Camera(this.field, this.field.player).addChildTo(this)
-    this.randomEnemy()
+    Number(40).times(() => this.randomComputer(['friend', 'enemy'].pickup()))
+    this.computerRespone()
   },
   update (app) {
   },
-  randomEnemy () {
-    const type = ['friend', 'enemy'].pickup()
-    if (this.field[type].children.length < 10) Computer().setType(type)
-    setTimeout(() => this.randomEnemy(), Math.randint(500, 1000))
+  randomComputer (type) {
+    if (this.field[type].children.length < 20) Computer().setType(type)
+  },
+  computerRespone () {
+    this.randomComputer(['friend', 'enemy'].pickup())
+    setTimeout(() => this.computerRespone(), Math.randint(1000, 2000))
   }
 }
