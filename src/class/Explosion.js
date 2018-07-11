@@ -6,7 +6,9 @@ export default {
     this.addChildTo(state.field)
     this.setPosition(x, y)
     this.explosion()
-    state.field.camera.addShock(25)
+    if (Math.hypot(state.field.player.x - this.x, state.field.player.y - this.y) < 600) {
+      state.field.camera.addShock(25)
+    }
     setTimeout(() => this.remove(), 1000)
   },
   explosion () {
