@@ -36,6 +36,10 @@ export default {
     this.imageName = name
     return this
   },
+  setColorIndex (i) {
+    this.colorIndex = i
+    return this
+  },
   setMobility (mobility) {
     this.baseMobility = mobility
     return this
@@ -80,14 +84,9 @@ export default {
     if (this.y < 0) roop ? this.y = this.field.height : this.remove()
     if (this.y > this.field.height) roop ? this.y = 0 : this.remove()
   },
-  shot (Bullet) {
+  shot () {
     if (this.shotDelay > 0) return
-    const bullet = Bullet.addChildTo(this.field.bullet).setRotation(this.rotation).setPosition(
-      this.x + (this.cos * 60),
-      this.y + (this.sin * 60)
-    )
-    bullet.shooter = this
-    bullet.type = this.type
+    Laser(this)
     this.shotDelay = this.baseShotDelay
   },
   degreeTo (target) {
