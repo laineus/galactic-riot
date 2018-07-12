@@ -2,25 +2,28 @@ import state from '../config/state'
 import maskImage from '../utils/maskImage'
 export default {
   superClass: 'DisplayElement',
-  init (x, y, pieceImage = null) {
+  init (options) {
     this.superInit()
+    const x = options.x ? options.x : 0
+    const y = options.y ? options.y : 0
     if (Math.hypot(state.field.player.x - x, state.field.player.y - y) > 600) return
+    this.level = options.level ? options.level : 5
     this.addChildTo(state.field)
     this.setPosition(x, y)
     this.explosion()
-    if (pieceImage) this.piece(pieceImage)
-    state.field.camera.addShock(25)
+    if (options.piece) this.piece(options.piece)
+    if (options.shock) state.field.camera.addShock(options.shock)
     setTimeout(() => this.remove(), 1000)
   },
   explosion () {
     Array('#321', '#D30', '#EA0', '#FBA').forEach((color, i) => {
       const img = i < 2 ? 'smoke' : 'light'
       const range = 50 - (i * 12)
-      Number(5).times(() => {
+      Number(this.level).times(() => {
         const sprite = maskImage.getSprite(img, color)
         .addChildTo(this)
         .setRotation(Math.randint(0, 360))
-        .setScale(Math.random() + 1 - (i / 3))
+        .setScale(Math.random() + (this.level / 5) - (i / 3))
         .tweener.by({
           x: Math.randint(-range, range),
           y: Math.randint(-range, range),
@@ -31,7 +34,7 @@ export default {
     })
   },
   piece (pieceImage) {
-    Number(5).times(() => {
+    Number(this.level).times(() => {
       Piece(pieceImage, 3, 3)
       .addChildTo(this)
       .setRotation(Math.randint(0, 360))

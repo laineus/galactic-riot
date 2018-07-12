@@ -112,16 +112,17 @@ export default {
   findInShotRange () {
     return this.targetGroup().find(v => this.inShotRange(v))
   },
-  explosion () {
-    Explosion(this.x, this.y, this.imageName)
+  explosion (level, shock = false) {
+    Explosion({ x: this.x, y: this.y, piece: this.imageName, level: level, shock: shock })
     return this
   },
   damage () {
+    this.explosion(1)
     this.hp -= Math.randint(20, 40)
     if (this.hp <= 0) this.dead()
   },
   dead () {
-    this.explosion()
+    this.explosion(5, 25)
     for (const tgt of this.targetGroup()) {
       if (tgt.target === this) tgt.target = null
     }
