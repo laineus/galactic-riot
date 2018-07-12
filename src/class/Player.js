@@ -5,6 +5,7 @@ export default {
     this.superInit(option)
     this.setType('friend')
     this.setBody(Sprite('f3_f').setScale(0.2, 0.2))
+    this.setImageName('f3_f')
     this.setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
     this.setShotDelay(5)
     this.setMobility(3)

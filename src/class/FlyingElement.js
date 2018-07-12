@@ -32,6 +32,10 @@ export default {
     this.body = sprite.addChildTo(this)
     return this
   },
+  setImageName (name) {
+    this.imageName = name
+    return this
+  },
   setMobility (mobility) {
     this.baseMobility = mobility
     return this
@@ -109,7 +113,7 @@ export default {
     return this.targetGroup().find(v => this.inShotRange(v))
   },
   explosion () {
-    Explosion(this.x, this.y)
+    Explosion(this.x, this.y, this.imageName)
     return this
   },
   damage () {

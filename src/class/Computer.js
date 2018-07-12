@@ -18,6 +18,7 @@ export default {
   setType (type) {
     this.superMethod('setType', type)
     this.setBody(Sprite(type === 'friend' ? 'f1_f' : 'f6_e').setScale(0.2, 0.2))
+    this.setImageName(type === 'friend' ? 'f1_f' : 'f6_e')
   },
   searchTarget () {
     const tgt = this.findInVision()
