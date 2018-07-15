@@ -10,7 +10,9 @@ export default {
       parent.x + (parent.cos * 60),
       parent.y + (parent.sin * 60)
     )
-    this.setBody(SlicedSprite('laser', 1, 3, parent.colorIndex).setScale(0.2, 0.2))
+    const body = SlicedSprite('laser', 1, 3, parent.colorIndex).setScale(0.2, 0.2)
+    body.blendMode = 'lighter'
+    this.setBody(body)
     this.addChildTo(parent.field.bullet)
   },
   update (app) {
