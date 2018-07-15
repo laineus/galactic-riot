@@ -28,6 +28,11 @@ export default {
   targetGroup () {
     return this.field[this.type === 'friend' ? 'enemy' : 'friend'].children
   },
+  setJet () {
+    this.jet = Sprite('jet').setScale(0.1, 0.1).addChildTo(this)
+    this.jet.blendMode = 'lighter'
+    return this
+  },
   setBody (sprite) {
     this.body = sprite.addChildTo(this)
     return this
@@ -61,6 +66,10 @@ export default {
       this.acceleration -= add
     } else if (direction === 1 && this.acceleration < 1.5) {
       this.acceleration += add
+    }
+    if (this.jet) {
+      this.jet.scale.x = (this.acceleration + 1) * 0.05
+      this.jet.scale.y = (this.acceleration + 1) * 0.05
     }
   },
   turn (direction) {

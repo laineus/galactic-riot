@@ -4,6 +4,7 @@ export default {
   init (option) {
     this.superInit(option)
     this.setType('friend')
+    this.setJet()
     this.setBody(Sprite('f3_f').setScale(0.2, 0.2))
     this.setImageName('f3_f')
     this.setColorIndex(1)
