@@ -95,7 +95,7 @@ export default {
   },
   shot () {
     if (this.shotDelay > 0) return
-    Laser(this, 'laser')
+    Laser(this, 'assult')
     this.shotDelay = this.baseShotDelay
   },
   degreeTo (target) {
