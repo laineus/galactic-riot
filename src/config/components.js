@@ -6,6 +6,7 @@ export default [
   { className: 'SlicedSprite', class: require('../class/SlicedSprite.js').default },
   { className: 'Piece', class: require('../class/Piece.js').default },
   { className: 'Camera', class: require('../class/Camera.js').default },
+  { className: 'InterfaceScreen', class: require('../class/InterfaceScreen.js').default },
   { className: 'InterfaceField', class: require('../class/InterfaceField.js').default },
   { className: 'FlyingElement', class: require('../class/FlyingElement.js').default },
   { className: 'Player', class: require('../class/Player.js').default },
