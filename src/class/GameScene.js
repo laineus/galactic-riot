@@ -12,7 +12,7 @@ export default {
     this.field.width = width
     this.field.height = height
     // Interface
-    this.field.interface = Interface().addChildTo(this.field)
+    this.field.interface = InterfaceField().addChildTo(this.field)
     // Layer
     this.field.friend = DisplayElement().addChildTo(this.field)
     this.field.enemy = DisplayElement().addChildTo(this.field)
