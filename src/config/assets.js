@@ -1,6 +1,7 @@
 export default {
   image: {
     map: '/img/map.png',
+    circle: '/img/circle.png',
     jet: '/img/jet.png',
     f1_f: '/img/f1_f.png',
     f3_f: '/img/f3_f.png',
