@@ -7,7 +7,7 @@ export default {
     this.superInit()
     const x = options.x ? options.x : 0
     const y = options.y ? options.y : 0
-    if (Math.hypot(state.field.x - settings.SCREEN_WIDTH_C + x, state.field.y - settings.SCREEN_HEIGHT_C + y) > 600) return
+    if (!state.field.camera.inVision(x, y)) return
     this.level = options.level ? options.level : 5
     this.addChildTo(state.field)
     this.setPosition(x, y)

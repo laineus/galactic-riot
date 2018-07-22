@@ -74,5 +74,13 @@ export default {
     if (playerPosition < (screenSize / 2)) return 0
     if (playerPosition > fieldSize - (screenSize / 2)) return -fieldSize + screenSize
     return (screenSize / 2) - playerPosition
+  },
+  inVision (x, y) {
+    x *= this.zoom * 0.01
+    y *= this.zoom * 0.01
+    x += this.field.x
+    y += this.field.y
+    const margin = 50
+    return x >= -margin && y >= -margin && x <= settings.SCREEN_WIDTH + margin && y <= settings.SCREEN_HEIGHT + margin
   }
 }
