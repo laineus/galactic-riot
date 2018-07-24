@@ -23,6 +23,8 @@ export default {
     this.field.camera = Camera(this.field, this.field.player).addChildTo(this)
     Number(40).times(() => this.randomComputer(['friend', 'enemy'].pickup()))
     this.computerRespone()
+    // Mission
+    this.mission = Mission().addChildTo(this)
   },
   update (app) {
   },
