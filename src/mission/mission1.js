@@ -1,17 +1,13 @@
+import state from '../config/state'
 const self = {
   count: 0,
   functions: [
     () => {
-      console.log('first')
+      Player().setPosition(100, 100)
+      Number(10).times(() => Computer().setType('enemy'))
       return true
     },
     () => {
-      self.count++
-      console.log('second: ' + self.count)
-      return self.count >= 100
-    },
-    () => {
-      console.log('third')
       return true
     }
   ]

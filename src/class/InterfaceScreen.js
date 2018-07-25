@@ -27,6 +27,7 @@ export default {
       .setPosition(this.width / 2, this.height / 2)
   },
   update (app) {
+    if (!this.field.player) return
     this.map.field.setPosition(
       (this.field.player.x * -this.size) + (this.width / 2),
       (this.field.player.y * -this.size) + (this.height / 2)

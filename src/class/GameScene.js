@@ -20,8 +20,9 @@ export default {
     this.field.bullet = DisplayElement().addChildTo(this.field)
     // Camera
     this.field.camera = Camera()
-    Number(40).times(() => this.randomComputer(['friend', 'enemy'].pickup()))
-    this.computerRespone()
+    // Player()
+    // Number(40).times(() => this.randomComputer(['friend', 'enemy'].pickup()))
+    // this.computerRespone()
     // Mission
     this.mission = Mission().addChildTo(this)
   },

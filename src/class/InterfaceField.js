@@ -10,6 +10,7 @@ export default {
     this.lockon.alpha = 0
   },
   update (app) {
+    if (!this.field.player) return
     if (this.field.player.hp > 0 && this.field.player.target) {
       this.lockon.x = this.field.player.target.x
       this.lockon.y = this.field.player.target.y
