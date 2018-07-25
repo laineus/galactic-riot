@@ -1,4 +1,4 @@
-import settings from '../config/settings'
+import state from '../config/state'
 export default {
   superClass: 'FlyingElement',
   init (option) {
@@ -8,11 +8,12 @@ export default {
     this.setBody(Sprite('f3_f').setScale(0.2, 0.2))
     this.setImageName('f3_f')
     this.setColorIndex(1)
-    this.setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
     this.setShotDelay(5)
     this.setMobility(3)
     this.setSpeed(10)
     this.hp = 500
+    state.field.player = this
+    state.field.camera.setTarget(this)
   },
   update (app) {
     this.superMethod('update', app)

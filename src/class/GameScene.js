@@ -18,8 +18,7 @@ export default {
     this.field.friend = DisplayElement().addChildTo(this.field)
     this.field.enemy = DisplayElement().addChildTo(this.field)
     this.field.bullet = DisplayElement().addChildTo(this.field)
-    // Fighter
-    this.field.player = Player()
+    // Camera
     this.field.camera = Camera()
     Number(40).times(() => this.randomComputer(['friend', 'enemy'].pickup()))
     this.computerRespone()

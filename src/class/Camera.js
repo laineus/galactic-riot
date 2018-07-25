@@ -12,7 +12,6 @@ export default {
     this.superInit()
     this.field = state.field
     this.addChildTo(this.field)
-    this.setTarget(this.field.player)
     this.physical.friction = 0.9
     this.physical.velocity.set(0, 0)
   },
