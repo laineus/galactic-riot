@@ -1,10 +1,13 @@
 import state from '../config/state'
 const self = {
   count: 0,
+  created () {
+    Player().setPosition(100, 100)
+  },
   functions: [
     () => {
-      Player().setPosition(100, 100)
       Number(10).times(() => Computer().setType('enemy'))
+      Number(10).times(() => Computer().setType('friend'))
       return true
     },
     () => {

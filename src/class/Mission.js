@@ -4,6 +4,7 @@ export default {
   init () {
     this.superInit()
     mission.index = 0
+    mission.created()
   },
   update () {
     if (!mission.functions[mission.index]) return
