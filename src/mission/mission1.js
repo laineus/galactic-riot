@@ -11,7 +11,11 @@ const self = {
       return true
     },
     () => {
-      return true
+      return state.field.enemy.children.length <= 0
+    },
+    () => {
+      console.log(clear)
+      return false
     }
   ]
 }
