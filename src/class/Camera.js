@@ -1,4 +1,5 @@
 import settings from '../config/settings'
+import state from '../config/state'
 export default {
   superClass: 'DisplayElement',
   zoom: 100,
@@ -7,10 +8,11 @@ export default {
   shock: 0,
   diffX: 0,
   diffY: 0,
-  init (field, target) {
+  init () {
     this.superInit()
-    this.setField(field)
-    this.setTarget(target)
+    this.field = state.field
+    this.addChildTo(this.field)
+    this.setTarget(this.field.player)
     this.physical.friction = 0.9
     this.physical.velocity.set(0, 0)
   },
@@ -58,10 +60,6 @@ export default {
   },
   addShock (shock) {
     this.shock += shock
-    return
-  },
-  setField (field) {
-    this.field = field
     return
   },
   setTarget (target) {
