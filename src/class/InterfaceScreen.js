@@ -22,9 +22,22 @@ export default {
       strokeWidth: 1,
       padding: 0
     }).addChildTo(this.map).setOrigin(0, 0)
-    this.map.player = CircleShape({ radius: 2, fill: variables.color.white, strokeWidth: 0, padding: 0 })
-      .addChildTo(this.map)
-      .setPosition(this.width / 2, this.height / 2)
+    const addArc = (ctx, obj) => {
+      ctx.beginPath()
+      ctx.arc((obj.x * this.size), (obj.y * this.size), 1.5, 0, Math.PI*2, false)
+      ctx.fill()
+    }
+    this.map.field.draw = canvas => {
+      this.map.field.superMethod('draw', canvas)
+      for (const obj of this.field.friend.children) {
+        canvas.context.fillStyle = obj === this.field.player ? variables.color.blue : variables.color.green
+        addArc(canvas.context, obj)
+      }
+      canvas.context.fillStyle = variables.color.pink
+      for (const obj of this.field.enemy.children) {
+        addArc(canvas.context, obj)
+      }
+    }
   },
   update (app) {
     if (!this.field.player) return
