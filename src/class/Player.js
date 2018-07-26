@@ -12,7 +12,7 @@ export default {
     this.setMobility(3)
     this.setSpeed(10)
     this.hp = 500
-    this.addChildTo(state.field)
+    this.addChildTo(state.field.friend)
     state.field.player = this
     state.field.camera.setTarget(this)
   },
