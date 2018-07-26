@@ -11,9 +11,6 @@ export default {
     this.field = state.field = Tile('map', width, height).addChildTo(this).setOrigin(0, 0)
     this.field.width = width
     this.field.height = height
-    // Interface
-    this.interface = InterfaceScreen().addChildTo(this)
-    this.field.interface = InterfaceField().addChildTo(this.field)
     // Layer
     this.field.friend = DisplayElement().addChildTo(this.field)
     this.field.enemy = DisplayElement().addChildTo(this.field)
@@ -25,6 +22,9 @@ export default {
     // this.computerRespone()
     // Mission
     this.mission = Mission().addChildTo(this)
+    // Interface
+    this.interface = InterfaceScreen().addChildTo(this)
+    this.field.interface = InterfaceField().addChildTo(this.field)
   },
   update (app) {
   },
