@@ -1,6 +1,7 @@
 export default {
   image: {
-    map: '/img/map.png',
+    map1_bg: '/img/map1_bg.png',
+    map1_fg: '/img/map1_fg.png',
     circle: '/img/circle.png',
     jet: '/img/jet.png',
     f1_f: '/img/f1_f.png',
