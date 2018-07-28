@@ -1,5 +1,7 @@
 export default {
   image: {
+    logo: '/img/logo.png',
+    title: '/img/title.png',
     map1_bg: '/img/map1_bg.png',
     map1_fg: '/img/map1_fg.png',
     circle: '/img/circle.png',
