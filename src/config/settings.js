@@ -1,5 +1,5 @@
 export default {
-  GAME_TITLE: 'TITLE',
+  GAME_TITLE: 'GALACTIC RIOT',
   DOM_ID: 'game',
   SCREEN_WIDTH: 960,
   SCREEN_HEIGHT: 540,
