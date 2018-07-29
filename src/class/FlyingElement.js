@@ -1,10 +1,11 @@
 import state from '../config/state'
+import lasers from '../config/lasers'
 export default {
   superClass: 'DisplayElement',
   baseMobility: 0,
   baseSpeed: 0,
   speed: 0,
-  baseShotDelay: 0,
+  mainLaser: null,
   shotDelay: 0,
   cos: 0,
   sin: 0,
@@ -15,6 +16,7 @@ export default {
     this.physical.friction = 0.96
     this.physical.velocity.set(0, 0)
     this.hp = 100
+    this.mainLaser = lasers.assult
   },
   update () {
     if (this.shotDelay > 0) this.shotDelay--
@@ -52,10 +54,6 @@ export default {
   },
   setSpeed (speed) {
     this.baseSpeed = speed
-    return this
-  },
-  setShotDelay (delay) {
-    this.baseShotDelay = delay
     return this
   },
   accele (direction) {
@@ -96,8 +94,9 @@ export default {
   },
   shot () {
     if (this.shotDelay > 0) return
-    Laser(this, 'assult')
-    this.shotDelay = this.baseShotDelay
+    Laser(this, this.mainLaser)
+    if (this.mainLaser.name === 'twin') Laser(this, this.mainLaser)
+    this.shotDelay = this.mainLaser.delay
   },
   degreeTo (target) {
     const deg = Math.radToDeg(Math.atan2(target.y - this.y, target.x - this.x))
@@ -125,9 +124,9 @@ export default {
     Explosion({ x: this.x, y: this.y, piece: this.imageName, level: level, shock: shock })
     return this
   },
-  damage () {
+  damage (damage) {
     this.explosion(1)
-    this.hp -= Math.randint(20, 40)
+    this.hp -= damage
     if (this.hp <= 0) this.dead()
   },
   dead () {

@@ -1,27 +1,26 @@
-import TYPES from '../config/lasers'
 export default {
   superClass: 'FlyingElement',
-  init (parent, type) {
+  init (parent, laser) {
     this.superInit()
-    this.data = TYPES[type]
+    this.laser = laser
     this.shooter = parent
     this.type = parent.type
     this.target = parent.target
     if (!this.shooter.shotCount) this.shooter.shotCount = 0
     this.shooter.shotCount++
-    this.setSpeed(this.data.speed)
+    this.setSpeed(this.laser.speed)
     this.setMobility(5)
-    this.setRotation(type === 'tailgun' ? parent.rotation + 180 : parent.rotation)
-    if (type === 'tailgun') {
+    this.setRotation(laser.name === 'tailgun' ? parent.rotation + 180 : parent.rotation)
+    if (laser.name === 'tailgun') {
       this.setPosition(
         parent.x + (parent.cos * -60),
         parent.y + (parent.sin * -60)
       )
-    } else if (this.data.twinDiff) {
+    } else if (this.laser.twinDiff) {
       const add = this.shooter.shotCount % 2 === 0 ? -45 : 45
       this.setPosition(
-        parent.x + (Math.cos(Math.degToRad(this.rotation + add)) * this.data.twinDiff),
-        parent.y + (Math.sin(Math.degToRad(this.rotation + add)) * this.data.twinDiff)
+        parent.x + (Math.cos(Math.degToRad(this.rotation + add)) * this.laser.twinDiff),
+        parent.y + (Math.sin(Math.degToRad(this.rotation + add)) * this.laser.twinDiff)
       )
     } else {
       this.setPosition(
@@ -29,7 +28,7 @@ export default {
         parent.y + (parent.sin * 60)
       )
     }
-    const body = SlicedSprite(this.data.image, 1, 3, parent.colorIndex).setScale(0.2, 0.2)
+    const body = SlicedSprite(this.laser.image, 1, 3, parent.colorIndex).setScale(0.2, 0.2)
     body.blendMode = 'lighter'
     this.setBody(body)
     this.addChildTo(parent.field.bullet)
@@ -38,12 +37,12 @@ export default {
     this.superMethod('update', app)
     this.move(false, true)
     this.hitCheck()
-    if (this.data.isHoming) homing()
+    if (this.laser.isHoming) homing()
   },
   hitCheck () {
     for (const tgt of this.targetGroup()) {
       if (this.distanceDiff(tgt) < 30) {
-        tgt.damage()
+        tgt.damage(this.laser.damage)
         this.remove()
         break
       }
