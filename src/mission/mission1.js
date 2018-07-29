@@ -1,4 +1,5 @@
 import state from '../config/state'
+import addComputer from '../utils/addComputer'
 const self = {
   count: 0,
   created () {
@@ -6,8 +7,7 @@ const self = {
   },
   functions: [
     () => {
-      Number(10).times(() => Computer().setType('enemy'))
-      Number(10).times(() => Computer().setType('friend'))
+      addComputer(-200, 200, 135, 'enemy', 6)
       return true
     },
     () => {

@@ -24,6 +24,7 @@ export default {
   setType (type) {
     this.type = type
     this.addChildTo(state.field[type])
+    return this
   },
   targetGroup () {
     return this.field[this.type === 'friend' ? 'enemy' : 'friend'].children
