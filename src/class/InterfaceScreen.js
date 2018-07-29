@@ -9,6 +9,7 @@ export default {
     this.radar()
   },
   radar () {
+    if (!this.field.player) return
     const width = 160
     const height = 120
     const size = 0.05
