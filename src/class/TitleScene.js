@@ -1,7 +1,9 @@
 import variables from '../config/variables'
 import settings from '../config/settings'
+import state from '../config/state'
 import Cursor from '../utils/Cursor'
 import labelList from '../utils/labelList'
+import missions from '../mission/missions'
 export default {
   superClass: 'DisplayScene',
   init (option) {
@@ -40,7 +42,9 @@ export default {
       }
     }, (current) => {
       switch (current.text) {
-        case 'Mission': return this.exit('Game')
+        case 'Mission':
+          state.mission = missions[0]
+          return this.exit('Game')
         case 'Exit': return this.backToTitle()
       }
     }, () => {

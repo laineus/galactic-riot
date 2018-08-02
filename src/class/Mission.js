@@ -1,13 +1,14 @@
-import mission from '../mission/mission1'
+import state from '../config/state'
 export default {
   superClass: 'DisplayElement',
   init () {
     this.superInit()
-    mission.index = 0
-    mission.created()
+    this.mission = state.mission
+    this.mission.index = 0
+    this.mission.created()
   },
   update () {
-    if (!mission.functions[mission.index]) return
-    if (mission.functions[mission.index]()) mission.index++
+    if (!this.mission.functions[this.mission.index]) return
+    if (this.mission.functions[this.mission.index]()) this.mission.index++
   }
 }

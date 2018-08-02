@@ -1,3 +1,4 @@
 export default {
-  field: null
+  field: null,
+  mission: null
 }
