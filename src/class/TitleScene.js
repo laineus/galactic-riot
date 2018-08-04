@@ -37,9 +37,7 @@ export default {
     this.list = labelList(['Mission', 'Customize', 'Exit'], settings.SCREEN_WIDTH_C, 440, this, { margin: 23 })
     this.cursor = new Cursor(this.list, (current, other) => {
       current.fill = variables.color.blue
-      for (const row of other) {
-        row.fill = variables.color.white
-      }
+      other.forEach(v => v.fill = variables.color.white)
     }, (current) => {
       switch (current.text) {
         case 'Mission':
