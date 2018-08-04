@@ -1,7 +1,7 @@
 import variables from '../config/variables'
 export default {
   superClass: 'Label',
-  init(option) {
+  init (option) {
     this.superInit(option)
     this.blendMode = 'lighter'
     this.shadowOffsetX = option.shadowOffsetX || 0
@@ -9,11 +9,15 @@ export default {
     this.shadowBlur = option.shadowBlur != null ? option.shadowBlur : 10
     this.shadowColor = option.shadowColor || variables.color.blue
   },
-  renderFill(canvas) {
+  draw (canvas) {
     canvas.context.shadowOffsetX = this.shadowOffsetX
     canvas.context.shadowOffsetY = this.shadowOffsetY
     canvas.context.shadowBlur = this.shadowBlur
     canvas.context.shadowColor = this.shadowColor
-    this.superMethod('renderFill', canvas)
+    this.superMethod('draw', canvas)
+    canvas.context.shadowOffsetX = null
+    canvas.context.shadowOffsetY = null
+    canvas.context.shadowBlur = null
+    canvas.context.shadowColor = null
   }
 }
