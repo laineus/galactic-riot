@@ -4,20 +4,16 @@ export default {
   init (option) {
     this.superInit(option)
     this.blendMode = 'lighter'
-    this.shadowOffsetX = option.shadowOffsetX || 0
-    this.shadowOffsetY = option.shadowOffsetY || 0
-    this.shadowBlur = option.shadowBlur != null ? option.shadowBlur : 10
-    this.shadowColor = option.shadowColor || variables.color.blue
+    this.fill = option.fill || variables.color.white
+    this.shadow = option.shadow || variables.color.blue
   },
-  draw (canvas) {
-    canvas.context.shadowOffsetX = this.shadowOffsetX
-    canvas.context.shadowOffsetY = this.shadowOffsetY
-    canvas.context.shadowBlur = this.shadowBlur
-    canvas.context.shadowColor = this.shadowColor
-    this.superMethod('draw', canvas)
-    canvas.context.shadowOffsetX = null
-    canvas.context.shadowOffsetY = null
-    canvas.context.shadowBlur = null
-    canvas.context.shadowColor = null
+  renderFill (canvas) {
+    canvas.context.shadowBlur = 5
+    canvas.context.shadowColor = this.shadow
+    canvas.context.fillStyle = this.shadow
+    this.superMethod('renderFill', canvas)
+    canvas.context.shadowBlur = 15
+    canvas.context.fillStyle = this.fill
+    this.superMethod('renderFill', canvas)
   }
 }

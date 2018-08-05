@@ -42,7 +42,7 @@ export default {
     }
     radar.area.draw = canvas => {
       radar.area.superMethod('draw', canvas)
-      canvas.context.fillStyle = canvas.context.fillStyle = variables.color.green
+      canvas.context.fillStyle = variables.color.green
       for (const obj of this.field.friend.children) {
         if (obj !== this.field.player) addArc(canvas.context, obj)
       }
