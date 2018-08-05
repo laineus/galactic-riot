@@ -5,6 +5,7 @@ export default class Cursor {
     this.onEnter = onEnter
     this.onCancel = onCancel
     this.index = 0
+    this.delay = 0
     this.firstFrame = true
   }
   get index () {
@@ -24,8 +25,15 @@ export default class Cursor {
   }
   update (key) {
     if (this.firstFrame) return this.firstFrame = false
-    if (key.getKeyDown('up')) this.index--
-    if (key.getKeyDown('down')) this.index++
+    if (key.getKeyDown('up') || (this.delay === 0 && key.getKey('up'))) {
+      this.index--
+      this.delay = key.getKeyDown('up') ? 8 : 2
+    }
+    if (key.getKeyDown('down') || (this.delay === 0 && key.getKey('down'))) {
+      this.index++
+      this.delay = key.getKeyDown('down') ? 8 : 2
+    }
+    if (this.delay > 0) this.delay--
     if (key.getKeyDown('Z') && this.onEnter) this.onEnter(this.current)
     if (key.getKeyDown('X') && this.onCancel) this.onCancel()
   }
