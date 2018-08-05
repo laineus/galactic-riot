@@ -5,6 +5,7 @@ export default class Cursor {
     this.onEnter = onEnter
     this.onCancel = onCancel
     this.index = 0
+    this.firstFrame = true
   }
   get index () {
     return this._index
@@ -21,6 +22,7 @@ export default class Cursor {
     return this.list.filter((_, i) => i !== this.index)
   }
   update (key) {
+    if (this.firstFrame) return this.firstFrame = false
     if (key.getKeyDown('up')) this.index--
     if (key.getKeyDown('down')) this.index++
     if (key.getKeyDown('Z') && this.onEnter) this.onEnter(this.current)

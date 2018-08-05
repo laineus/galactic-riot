@@ -1,9 +1,7 @@
 import variables from '../config/variables'
 import settings from '../config/settings'
-import state from '../config/state'
 import Cursor from '../utils/Cursor'
 import labelList from '../utils/labelList'
-import missions from '../mission/missions'
 export default {
   superClass: 'DisplayScene',
   init (option) {
@@ -17,14 +15,14 @@ export default {
   },
   update (app) {
     if (this.startLabel) {
-      if (app.keyboard.getKeyDown('Z')) {
-        this.goToMenu()
-      }
+      if (app.keyboard.getKeyDown('Z')) this.addMenu()
     } else if (this.list) {
-      this.cursor.update(app.keyboard)
+      this.list.cursor.update(app.keyboard)
     }
   },
   addStartLabel () {
+    this.removeAll()
+    this.logo.alpha = 1
     this.startLabel = BlurLabel({
       text: '- PRESS \'Z\' KEY -',
       fontFamily: 'aldrich',
@@ -35,29 +33,38 @@ export default {
     }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(13.5))
   },
   addMenu () {
+    this.removeAll()
+    this.logo.alpha = 1
     this.list = labelList(['Mission', 'Customize', 'Exit'], settings.SCREEN_WIDTH_C, 440, this, { margin: 23 })
-    this.cursor = new Cursor(this.list, (current, other) => {
+    this.list.cursor = new Cursor(this.list, (current, other) => {
       current.fill = variables.color.blue
       other.forEach(v => v.fill = variables.color.white)
     }, (current) => {
       switch (current.text) {
-        case 'Mission':
-          state.mission = missions[0]
-          return this.exit('Game')
-        case 'Exit': return this.backToTitle()
+        case 'Mission': return this.addMissionSelect()
+        case 'Exit': return this.addStartLabel()
       }
     }, () => {
-      this.backToTitle()
+      this.addStartLabel()
     })
   },
-  goToMenu () {
-    this.startLabel.remove()
-    this.startLabel = null
-    this.addMenu()
+  addMissionSelect () {
+    this.removeAll()
+    this.logo.alpha = 0
+    this.missionSelect = MissionSelect(this, () => this.addMenu()).addChildTo(this)
   },
-  backToTitle () {
-    this.list.forEach(v => v.remove())
-    this.list = null
-    this.addStartLabel()
+  removeAll () {
+    if (this.startLabel) {
+      this.startLabel.remove()
+      this.startLabel = null
+    }
+    if (Array.isArray(this.list)) {
+      this.list.forEach(v => v.remove())
+      this.list = null
+    }
+    if (this.missionSelect) {
+      this.missionSelect.remove()
+      this.missionSelect = null
+    }
   }
 }

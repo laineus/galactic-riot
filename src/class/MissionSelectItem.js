@@ -18,6 +18,7 @@ export default {
       fontSize: 15,
       fill: variables.color.white
     }).addChildTo(this).setOrigin(0, 0).setPosition(10, 5)
+    this.mission = mission
   },
   update () {
     const color = this.active ? variables.color.blue : 'transparent'
