@@ -11,7 +11,8 @@ export default class Cursor {
     return this._index
   }
   set index (i) {
-    if (i < 0 || i >= this.list.length) return
+    if (i < 0) i = this.list.length - 1
+    if (i >= this.list.length) i = 0
     this._index = i
     if (this.onUpdate) this.onUpdate(this.current, this.other)
   }
