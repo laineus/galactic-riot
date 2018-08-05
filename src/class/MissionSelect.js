@@ -9,9 +9,9 @@ export default {
     this.list = []
     this.scene = scene
     missions.forEach((mission, i) => {
-      this.list.push(MissionSelectItem(mission).addChildTo(this).setPosition(0, i * 50))
+      this.list.push(MissionSelectItem(mission).addChildTo(this).setPosition(0, i * 38))
     })
-    this.setPosition(settings.SCREEN_WIDTH_C - 200, 40)
+    this.setPosition(settings.SCREEN_WIDTH_C - 200, 50)
     this.cursor = new Cursor(this.list, (current, other) => {
       current.active = true
       other.forEach(v => v.active = false)

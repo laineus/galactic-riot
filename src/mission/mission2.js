@@ -1,7 +1,7 @@
 import state from '../config/state'
 import addComputer from '../utils/addComputer'
 const self = {
-  name: 'Mission2',
+  name: 'Mission-02',
   count: 0,
   created () {
     Player().setPosition(100, 100)

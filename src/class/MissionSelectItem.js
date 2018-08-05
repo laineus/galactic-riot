@@ -5,7 +5,7 @@ export default {
   init (mission) {
     this.superInit({
       width: 400,
-      height: 40,
+      height: 32,
       fill: variables.color.black_05,
       stroke: null,
       strokeWidth: 2,
@@ -17,7 +17,7 @@ export default {
       fontFamily: 'aldrich',
       fontSize: 15,
       fill: variables.color.white
-    }).addChildTo(this).setOrigin(0, 0).setPosition(10, 5)
+    }).addChildTo(this).setOrigin(0, 0).setPosition(10, 0)
     this.mission = mission
   },
   update () {
