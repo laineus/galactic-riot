@@ -14,6 +14,7 @@ export default [
   { className: 'Player', class: require('../class/Player.js').default },
   { className: 'Computer', class: require('../class/Computer.js').default },
   { className: 'Laser', class: require('../class/Laser.js').default },
+  { className: 'Gate', class: require('../class/Gate.js').default },
   { className: 'MissionSelect', class: require('../class/MissionSelect.js').default },
   { className: 'MissionSelectItem', class: require('../class/MissionSelectItem.js').default },
   { className: 'Explosion', class: require('../class/Explosion.js').default }
