@@ -4,11 +4,11 @@ const self = {
   name: 'Mission-01',
   count: 0,
   created () {
-    Player().setPosition(100, 100)
+    addComputer(200, 3200, 350, 'player', 6)
   },
   functions: [
     () => {
-      addComputer(-200, 200, 135, 'enemy', 6)
+      addComputer(-200, 200, 165, 'enemy', 6)
       return true
     },
     () => {
