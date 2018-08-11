@@ -5,6 +5,7 @@ const self = {
   count: 0,
   created () {
     addComputer(200, 3200, 350, 'player', 6)
+    Gate().setPosition(1000, 3200).addChildTo(state.field)
   },
   functions: [
     () => {

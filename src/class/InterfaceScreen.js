@@ -9,7 +9,7 @@ export default {
     this.radar()
   },
   radar () {
-    if (!this.field.player) return
+    if (!this.player) return
     const width = 160
     const height = 120
     const size = 0.05
@@ -24,10 +24,10 @@ export default {
       strokeWidth: 1,
       padding: 0
     }).setOrigin(0, 0).setPosition(width, height).addChildTo(radar)
-    const me = maskImage.getSprite(this.field.player.imageName, variables.color.blue).addChildTo(radar.area).setScale(0.03, 0.03)
+    const me = maskImage.getSprite(this.player.imageName, variables.color.blue).addChildTo(radar.area).setScale(0.03, 0.03)
     me.update = () => {
-      me.setRotation(this.field.player.rotation)
-      me.setPosition(this.field.player.x * size, this.field.player.y * size)
+      me.setRotation(this.player.rotation)
+      me.setPosition(this.player.x * size, this.player.y * size)
     }
     const addArc = (ctx, obj) => {
       ctx.beginPath()
@@ -36,15 +36,15 @@ export default {
     }
     radar.area.update = () => {
       radar.area.setPosition(
-        (this.field.player.x * -size) + (width / 2),
-        (this.field.player.y * -size) + (height / 2)
+        (this.player.x * -size) + (width / 2),
+        (this.player.y * -size) + (height / 2)
       )
     }
     radar.area.draw = canvas => {
       radar.area.superMethod('draw', canvas)
       canvas.context.fillStyle = variables.color.green
       for (const obj of this.field.friend.children) {
-        if (obj !== this.field.player) addArc(canvas.context, obj)
+        if (obj !== this.player) addArc(canvas.context, obj)
       }
       canvas.context.fillStyle = variables.color.pink
       for (const obj of this.field.enemy.children) {

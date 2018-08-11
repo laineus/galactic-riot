@@ -3,6 +3,7 @@ export default {
   superClass: 'FlyingElement',
   init (option) {
     this.superInit(option)
+    state.player = this
     this.setType('friend')
     this.setJet()
     this.setBody(Sprite('f3_f').setScale(0.2, 0.2))
@@ -12,8 +13,6 @@ export default {
     this.setSpeed(10)
     this.hp = 500
     this.addChildTo(state.field.friend)
-    state.field.player = this
-    state.field.camera.setTarget(this)
   },
   update (app) {
     this.superMethod('update', app)
