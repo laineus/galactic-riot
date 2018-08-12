@@ -11,7 +11,7 @@ export default {
     this.mission.index = 0
     this.mission.created()
     // Camera
-    this.field.camera = Camera()
+    this.field.camera = Camera().addChildTo(this.field)
     this.field.camera.setTarget(state.player)
     // Interface
     this.interface = InterfaceScreen().addChildTo(this)

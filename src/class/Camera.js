@@ -1,5 +1,4 @@
 import { settings } from '../config/variables'
-import state from '../config/state'
 export default {
   superClass: 'DisplayElement',
   zoom: 100,
@@ -10,8 +9,6 @@ export default {
   diffY: 0,
   init () {
     this.superInit()
-    this.field = state.field
-    this.addChildTo(this.field)
     this.physical.friction = 0.9
     this.physical.velocity.set(0, 0)
   },
@@ -26,6 +23,15 @@ export default {
     const x = this.getScrollPositon(settings.SCREEN_WIDTH, posX, this.field.width)
     const y = this.getScrollPositon(settings.SCREEN_HEIGHT, posY, this.field.height)
     this.field.setPosition(x, y)
+  },
+  addChildTo (field) {
+    this.superMethod('addChildTo', field)
+    this.field = field
+    return this
+  },
+  setTarget (target) {
+    this.target = target
+    return this
   },
   updateShock () {
     if (this.shock > 0) {
@@ -59,11 +65,7 @@ export default {
   },
   addShock (shock) {
     this.shock += shock
-    return
-  },
-  setTarget (target) {
-    this.target = target
-    return
+    return this
   },
   getScrollPositon (screenSize, playerPosition, fieldSize) {
     playerPosition *= this.zoom * 0.01
