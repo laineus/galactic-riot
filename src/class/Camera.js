@@ -24,8 +24,7 @@ export default {
     const y = this.getScrollPositon(settings.SCREEN_HEIGHT, posY, this.field.height)
     this.field.setPosition(x, y)
   },
-  addChildTo (field) {
-    this.superMethod('addChildTo', field)
+  setField (field) {
     this.field = field
     return this
   },

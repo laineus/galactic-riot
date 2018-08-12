@@ -21,8 +21,8 @@ export const fields = {
     height: 4000
   },
   sublatant_2: {
-    width: 1000,
-    height: 1000
+    width: 3000,
+    height: 3000
   }
 }
 export const fighters = {

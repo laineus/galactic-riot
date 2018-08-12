@@ -11,11 +11,12 @@ export default {
     this.mission.index = 0
     this.mission.created()
     // Camera
-    this.field.camera = Camera().addChildTo(this.field)
+    this.field.camera = Camera().addChildTo(this)
+    this.field.camera.setField(this.field)
     this.field.camera.setTarget(state.player)
     // Interface
     this.interface = InterfaceScreen().addChildTo(this)
-    this.field.interface = InterfaceField().addChildTo(this.field)
+    this.interface.setRadar(this.field, state.player)
   },
   update () {
     if (!this.mission.functions[this.mission.index]) return

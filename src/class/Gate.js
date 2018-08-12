@@ -1,9 +1,9 @@
 import state from '../config/state'
 export default {
   superClass: 'DisplayElement',
-  init (field, x, y) {
+  init (fieldSrc, x, y) {
     this.superInit()
-    this.field = field
+    this.fieldSrc = fieldSrc
     this.x = x
     this.y = y
     Sprite('gate_blur').addChildTo(this).setScale(1.5, 1.5)
@@ -24,6 +24,8 @@ export default {
       state.player.physical.velocity.x = Math.cos(Math.degToRad(this.rotation)) * 60
       state.player.physical.velocity.y = Math.sin(Math.degToRad(this.rotation)) * 60
       state.player.setSpeed(60)
+      state.field.resetField(this.fieldSrc)
+      state.interface.setRadar(state.field, state.player)
     }
   }
 }

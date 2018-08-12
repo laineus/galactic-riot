@@ -5,11 +5,10 @@ export default {
   superClass: 'DisplayElement',
   init (option) {
     this.superInit(option)
-    this.field = state.field
-    this.radar()
+    state.interface = this
   },
-  radar () {
-    if (!this.player) return
+  setRadar (field, player) {
+    if (this.radar) this.radar.remove()
     const width = 160
     const height = 120
     const size = 0.05
@@ -17,17 +16,17 @@ export default {
     const radar = RectangleShape(option).setPosition(20, 20).setOrigin(0, 0).addChildTo(this)
     radar.clip = canvas => canvas.beginPath().rect(0, 0, width, height)
     radar.area = RectangleShape({
-      width: this.field.width * size,
-      height: this.field.height * size,
+      width: field.width * size,
+      height: field.height * size,
       fill: 'transparent',
       stroke: colors.white,
       strokeWidth: 1,
       padding: 0
     }).setOrigin(0, 0).setPosition(width, height).addChildTo(radar)
-    const me = maskImage.getSprite(this.player.imageName, colors.blue).addChildTo(radar.area).setScale(0.03, 0.03)
+    const me = maskImage.getSprite(player.imageName, colors.blue).addChildTo(radar.area).setScale(0.03, 0.03)
     me.update = () => {
-      me.setRotation(this.player.rotation)
-      me.setPosition(this.player.x * size, this.player.y * size)
+      me.setRotation(player.rotation)
+      me.setPosition(player.x * size, player.y * size)
     }
     const addArc = (ctx, obj) => {
       ctx.beginPath()
@@ -36,20 +35,21 @@ export default {
     }
     radar.area.update = () => {
       radar.area.setPosition(
-        (this.player.x * -size) + (width / 2),
-        (this.player.y * -size) + (height / 2)
+        (player.x * -size) + (width / 2),
+        (player.y * -size) + (height / 2)
       )
     }
     radar.area.draw = canvas => {
       radar.area.superMethod('draw', canvas)
       canvas.context.fillStyle = colors.green
-      for (const obj of this.field.friend.children) {
-        if (obj !== this.player) addArc(canvas.context, obj)
+      for (const obj of field.friend.children) {
+        if (obj !== player) addArc(canvas.context, obj)
       }
       canvas.context.fillStyle = colors.pink
-      for (const obj of this.field.enemy.children) {
+      for (const obj of field.enemy.children) {
         addArc(canvas.context, obj)
       }
     }
+    this.radar = radar
   }
 }

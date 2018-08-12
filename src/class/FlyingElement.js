@@ -87,10 +87,10 @@ export default {
       if (Math.abs(this.physical.velocity.x) > this.speed) this.physical.velocity.x = this.physical.velocity.x > 0 ? this.speed : -this.speed
       if (Math.abs(this.physical.velocity.y) > this.speed) this.physical.velocity.y = this.physical.velocity.y > 0 ? this.speed : -this.speed
     }
-    if (this.x < 0) roop ? this.x = this.field.width : this.remove()
-    if (this.x > this.field.width) roop ? this.x = 0 : this.remove()
-    if (this.y < 0) roop ? this.y = this.field.height : this.remove()
-    if (this.y > this.field.height) roop ? this.y = 0 : this.remove()
+    if (this.x < 0) roop ? this.x += this.field.width : this.remove()
+    if (this.x > this.field.width) roop ? this.x -= this.field.width : this.remove()
+    if (this.y < 0) roop ? this.y += this.field.height : this.remove()
+    if (this.y > this.field.height) roop ? this.y -= this.field.height : this.remove()
   },
   shot () {
     if (this.shotDelay > 0) return
