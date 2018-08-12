@@ -6,26 +6,25 @@ export default {
     this.fieldSrc = fieldSrc
     this.x = x
     this.y = y
-    Sprite('gate_blur').addChildTo(this).setScale(1.5, 1.5)
-    Sprite('gate').addChildTo(this).setScale(0.33, 0.33)
-    Sprite('gate_blur').addChildTo(this).setScale(1, 1)
-    this.children[0].blendMode = 'lighter'
-    this.children[2].blendMode = 'lighter'
+    this.active = false
+    this.blur1 = Sprite('gate_blur').addChildTo(this).setScale(1.5, 1.5)
+    this.blur1.blendMode = 'lighter'
+    this.gate = Sprite('gate').addChildTo(this).setScale(0.33, 0.33)
+    this.blur2 = Sprite('gate_blur').addChildTo(this).setScale(1, 1)
+    this.blur2.blendMode = 'lighter'
   },
   update () {
     if (!state.player) return
-    if (state.player.inVision(this)) {
-      const diff = Math.sign(state.player.degreeDiff(this))
-      state.player.x += Math.cos(Math.degToRad(state.player.rotation + (90 * diff))) * 3
-      state.player.y += Math.sin(Math.degToRad(state.player.rotation + (90 * diff))) * 3
-    }
-    if (state.player.distanceDiff(this) < 50) {
+    if (state.player.distanceDiff(this) < 50 && !this.active) {
       state.player.rotation = this.rotation
-      state.player.physical.velocity.x = Math.cos(Math.degToRad(this.rotation)) * 60
-      state.player.physical.velocity.y = Math.sin(Math.degToRad(this.rotation)) * 60
-      state.player.setSpeed(60)
-      state.field.resetField(this.fieldSrc)
-      state.interface.setRadar(state.field, state.player)
+      this.blur1.tweener.to({ scaleX: 50 }, 200, 'easeInQuad')
+      this.blur2.tweener.to({ scaleX: 50 }, 200, 'easeInQuad')
+      state.interface.lightMask.tweener.to({ alpha: 1 }, 200, 'easeInQuad').to({ alpha: 0 }, 300, 'easeOutQuad')
+      setTimeout(() => {
+        state.field.resetField(this.fieldSrc)
+        state.interface.setRadar(state.field, state.player)
+      }, 200)
+      this.active = true
     }
   }
 }

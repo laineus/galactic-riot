@@ -1,4 +1,4 @@
-import { colors } from '../config/variables'
+import { settings, colors } from '../config/variables'
 import state from '../config/state'
 import maskImage from '../utils/maskImage'
 export default {
@@ -6,6 +6,15 @@ export default {
   init (option) {
     this.superInit(option)
     state.interface = this
+    this.lightMask = RectangleShape({
+      width: settings.SCREEN_WIDTH,
+      height: settings.SCREEN_HEIGHT,
+      fill: colors.white,
+      strokeWidth: 0,
+      padding: 0
+    }).setOrigin(0, 0).addChildTo(this)
+    this.lightMask.alpha = 0
+    this.lightMask.blendMode = 'lighter'
   },
   setRadar (field, player) {
     if (this.radar) this.radar.remove()
