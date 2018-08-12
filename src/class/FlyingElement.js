@@ -1,5 +1,5 @@
+import { lasers } from '../config/variables'
 import state from '../config/state'
-import lasers from '../config/lasers'
 export default {
   superClass: 'DisplayElement',
   baseMobility: 0,

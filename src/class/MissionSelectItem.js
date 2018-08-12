@@ -1,4 +1,4 @@
-import variables from '../config/variables'
+import { colors } from '../config/variables'
 export default {
   superClass: 'RectangleShape',
   active: false,
@@ -6,7 +6,7 @@ export default {
     this.superInit({
       width: 400,
       height: 32,
-      fill: variables.color.black_05,
+      fill: colors.black_05,
       stroke: null,
       strokeWidth: 2,
       padding: 0
@@ -16,12 +16,12 @@ export default {
       text: mission.name,
       fontFamily: 'aldrich',
       fontSize: 15,
-      fill: variables.color.white
+      fill: colors.white
     }).addChildTo(this).setOrigin(0, 0).setPosition(10, 0)
     this.mission = mission
   },
   update () {
-    const color = this.active ? variables.color.blue : 'transparent'
+    const color = this.active ? colors.blue : 'transparent'
     this.stroke = color
     this.children.forEach(v => v.shadowColor = color)
   }

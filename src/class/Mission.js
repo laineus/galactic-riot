@@ -1,5 +1,5 @@
 import state from '../config/state'
-import fields from '../config/fields'
+import { fields } from '../config/variables'
 export default {
   superClass: 'DisplayElement',
   init () {

@@ -1,4 +1,4 @@
-import settings from '../config/settings'
+import { settings } from '../config/variables'
 import state from '../config/state'
 export default {
   superClass: 'DisplayElement',
@@ -15,7 +15,7 @@ export default {
     this.physical.friction = 0.9
     this.physical.velocity.set(0, 0)
   },
-  update (app) {
+  update () {
     if (!this.target) return
     this.updateShock()
     this.lookTarget()

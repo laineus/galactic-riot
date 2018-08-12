@@ -8,7 +8,7 @@ export default {
     this.lockon.blendMode = 'lighter'
     this.lockon.alpha = 0
   },
-  update (app) {
+  update () {
     if (!state.player) return
     if (state.player.hp > 0 && state.player.target) {
       this.lockon.x = state.player.target.x

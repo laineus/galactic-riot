@@ -1,5 +1,4 @@
 import state from '../config/state'
-import settings from '../config/settings'
 import maskImage from '../utils/maskImage'
 export default {
   superClass: 'DisplayElement',

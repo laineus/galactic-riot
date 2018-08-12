@@ -1,7 +1,7 @@
-import missions from '../mission/missions'
-import settings from '../config/settings'
-import Cursor from '../utils/Cursor'
+import { settings } from '../config/variables'
 import state from '../config/state'
+import missions from '../mission/missions'
+import Cursor from '../utils/Cursor'
 export default {
   superClass: 'DisplayElement',
   init (scene, cancel) {

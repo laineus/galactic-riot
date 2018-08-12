@@ -1,11 +1,11 @@
-import variables from '../config/variables'
+import { colors } from '../config/variables'
 export default {
   superClass: 'Label',
   init (option) {
     this.superInit(option)
     this.blendMode = 'lighter'
-    this.fill = option.fill || variables.color.white
-    this.shadow = option.shadow || variables.color.blue
+    this.fill = option.fill || colors.white
+    this.shadow = option.shadow || colors.blue
   },
   renderFill (canvas) {
     canvas.context.shadowBlur = 5

@@ -1,4 +1,4 @@
-import variables from '../config/variables'
+import { colors } from '../config/variables'
 import state from '../config/state'
 import maskImage from '../utils/maskImage'
 export default {
@@ -13,18 +13,18 @@ export default {
     const width = 160
     const height = 120
     const size = 0.05
-    const option = { width: width, height: height, fill: variables.color.black_05, strokeWidth: 0, padding: 0 }
+    const option = { width: width, height: height, fill: colors.black_05, strokeWidth: 0, padding: 0 }
     const radar = RectangleShape(option).setPosition(20, 20).setOrigin(0, 0).addChildTo(this)
     radar.clip = canvas => canvas.beginPath().rect(0, 0, width, height)
     radar.area = RectangleShape({
       width: this.field.width * size,
       height: this.field.height * size,
       fill: 'transparent',
-      stroke: variables.color.white,
+      stroke: colors.white,
       strokeWidth: 1,
       padding: 0
     }).setOrigin(0, 0).setPosition(width, height).addChildTo(radar)
-    const me = maskImage.getSprite(this.player.imageName, variables.color.blue).addChildTo(radar.area).setScale(0.03, 0.03)
+    const me = maskImage.getSprite(this.player.imageName, colors.blue).addChildTo(radar.area).setScale(0.03, 0.03)
     me.update = () => {
       me.setRotation(this.player.rotation)
       me.setPosition(this.player.x * size, this.player.y * size)
@@ -42,11 +42,11 @@ export default {
     }
     radar.area.draw = canvas => {
       radar.area.superMethod('draw', canvas)
-      canvas.context.fillStyle = variables.color.green
+      canvas.context.fillStyle = colors.green
       for (const obj of this.field.friend.children) {
         if (obj !== this.player) addArc(canvas.context, obj)
       }
-      canvas.context.fillStyle = variables.color.pink
+      canvas.context.fillStyle = colors.pink
       for (const obj of this.field.enemy.children) {
         addArc(canvas.context, obj)
       }

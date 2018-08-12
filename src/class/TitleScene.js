@@ -1,12 +1,11 @@
-import variables from '../config/variables'
-import settings from '../config/settings'
+import { settings, colors } from '../config/variables'
 import Cursor from '../utils/Cursor'
 import labelList from '../utils/labelList'
 export default {
   superClass: 'DisplayScene',
   init (option) {
     this.superInit(option)
-    this.backgroundColor = variables.color.black
+    this.backgroundColor = colors.black
     this.bg = Sprite('title').addChildTo(this).setOrigin(0, 0).setScale(0.75, 0.75)
     this.logo = Sprite('logo').addChildTo(this).setScale(0.5, 0.5)
                               .setPosition(this.gridX.center(), this.gridY.span(10))
@@ -26,10 +25,10 @@ export default {
     this.startLabel = BlurLabel({
       text: '- PRESS \'Z\' KEY -',
       fontFamily: 'aldrich',
-      fill: variables.color.white,
+      fill: colors.white,
       fontSize: 14,
       shadowBlur: 6,
-      shadowColor: variables.color.blue
+      shadowColor: colors.blue
     }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(13.5))
   },
   addMenu () {
@@ -37,8 +36,8 @@ export default {
     this.logo.alpha = 1
     this.list = labelList(['Mission', 'Customize', 'Exit'], settings.SCREEN_WIDTH_C, 440, this, { margin: 23 })
     this.list.cursor = new Cursor(this.list, (current, other) => {
-      current.fill = variables.color.blue
-      other.forEach(v => v.fill = variables.color.white)
+      current.fill = colors.blue
+      other.forEach(v => v.fill = colors.white)
     }, (current) => {
       switch (current.text) {
         case 'Mission': return this.addMissionSelect()

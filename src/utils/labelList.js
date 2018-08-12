@@ -1,4 +1,4 @@
-import variables from '../config/variables'
+import { colors } from '../config/variables'
 export default (textArray, x, y, parent, options = {}) => {
   const margin = options.margin || 20
   const list = []
@@ -7,10 +7,10 @@ export default (textArray, x, y, parent, options = {}) => {
       BlurLabel({
         text: name,
         fontFamily: 'aldrich',
-        fill: variables.color.white,
+        fill: colors.white,
         fontSize: options.fontSize || 14,
         shadowBlur: 6,
-        shadowColor: variables.color.blue
+        shadowColor: colors.blue
       }).addChildTo(parent).setPosition(x, y + (list.length * margin))
     )
   }

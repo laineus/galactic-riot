@@ -1,15 +1,14 @@
-import settings from '../config/settings'
-import variables from '../config/variables'
+import { settings, colors } from '../config/variables'
 export default {
   superClass: 'DisplayScene',
   init (option) {
     this.superInit(option)
-    this.backgroundColor = variables.color.black
+    this.backgroundColor = colors.black
     Label({
       text: 'NOW LOADING...',
       fontFamily: 'aldrich',
       fontSize: 15,
-      fill: variables.color.white,
+      fill: colors.white,
       x: settings.SCREEN_WIDTH_C,
       y: settings.SCREEN_HEIGHT_C - 10
     }).addChildTo(this)
@@ -20,7 +19,7 @@ export default {
       maxValue: 1,
       value: 0,
       fill: '#333',
-      gaugeColor: variables.color.white,
+      gaugeColor: colors.white,
       x: settings.SCREEN_WIDTH_C,
       y: settings.SCREEN_HEIGHT_C + 10,
       strokeWidth: 0
