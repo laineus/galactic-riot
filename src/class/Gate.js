@@ -1,9 +1,9 @@
 import state from '../config/state'
 export default {
   superClass: 'DisplayElement',
-  init (fieldSrc, x, y) {
+  init (fieldName, x, y) {
     this.superInit()
-    this.fieldSrc = fieldSrc
+    this.fieldName = fieldName
     this.x = x
     this.y = y
     this.active = false
@@ -21,7 +21,7 @@ export default {
       this.blur2.tweener.to({ scaleX: 50 }, 200, 'easeInQuad')
       state.interface.lightMask.tweener.to({ alpha: 1 }, 200, 'easeInQuad').to({ alpha: 0 }, 300, 'easeOutQuad')
       setTimeout(() => {
-        state.field.resetField(this.fieldSrc)
+        state.field.setField(this.fieldName)
         state.interface.setRadar(state.field, state.player)
       }, 200)
       this.active = true

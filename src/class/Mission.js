@@ -1,11 +1,10 @@
 import state from '../config/state'
-import { fields } from '../config/variables'
 export default {
   superClass: 'DisplayElement',
   init () {
     this.superInit()
     // Field
-    this.field = Field(fields.sublatant_1).addChildTo(this)
+    this.field = Field().addChildTo(this)
     // Mission
     this.mission = state.mission
     this.mission.index = 0
