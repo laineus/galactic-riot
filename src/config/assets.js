@@ -12,6 +12,7 @@ export default {
     f3_f: '/img/f3_f.png',
     f6_e: '/img/f6_e.png',
     laser: '/img/laser.png',
+    laser_flash: '/img/laser_flash.png',
     smoke: '/img/smoke.png',
     light: '/img/light.png'
   },

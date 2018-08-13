@@ -32,6 +32,10 @@ export default {
     body.blendMode = 'lighter'
     this.setBody(body)
     this.addChildTo(parent.field.bullet)
+    // flash
+    const flash = SlicedSprite('laser_flash', 1, 3, parent.colorIndex).setScale(0, 0).setPosition(this.x, this.y).setRotation(this.rotation).addChildTo(parent.field)
+    flash.blendMode = 'lighter'
+    flash.tweener.to({ scaleX: 0.08, scaleY: 0.08 }, 16).to({ scaleX: 0, scaleY: 0 }, 16).wait(32).call(() => flash.remove())
   },
   update (app) {
     this.superMethod('update', app)
