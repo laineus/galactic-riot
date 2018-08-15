@@ -8,7 +8,7 @@ export default {
     const y = options.y ? options.y : 0
     if (!state.field.camera.inVision(x, y)) return
     this.level = options.level ? options.level : 5
-    this.addChildTo(state.field)
+    this.addChildTo(state.field.object)
     this.setPosition(x, y)
     this.explosion()
     if (options.piece) this.piece(options.piece)

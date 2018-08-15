@@ -9,6 +9,7 @@ export default {
     this.friend = DisplayElement().addChildTo(this)
     this.enemy = DisplayElement().addChildTo(this)
     this.bullet = DisplayElement().addChildTo(this)
+    this.object = DisplayElement().addChildTo(this)
     // Interface
     this.interfaceField = InterfaceField().addChildTo(this)
   },
@@ -18,6 +19,7 @@ export default {
     this.height = fieldSrc.height
     this.enemy.children.clear()
     this.bullet.children.clear()
+    this.object.children.clear()
     if (this.bg) this.bg.remove()
     if (this.fg) this.fg.remove()
     this.bg = Tile('map1_bg', this.width, this.height).addChildTo(this).setOrigin(0, 0)
