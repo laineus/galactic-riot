@@ -15,7 +15,7 @@ export default {
     this.field.camera.setTarget(state.player)
     // Interface
     this.interface = InterfaceScreen().addChildTo(this)
-    this.interface.setRadar(this.field, state.player)
+    this.interface.initRadar(this.field, state.player)
   },
   update () {
     if (!this.mission.functions[this.mission.index]) return

@@ -1,0 +1,43 @@
+import { colors } from '../config/variables'
+import maskImage from '../utils/maskImage'
+const WIDTH = 160
+const HEIGHT = 120
+const SIZE = 0.05
+export default {
+  superClass: 'RectangleShape',
+  init (field, player) {
+    this.superInit({ width: WIDTH, height: HEIGHT, fill: colors.black_05, strokeWidth: 0, padding: 0 })
+    this.clip = canvas => canvas.beginPath().rect(0, 0, WIDTH, HEIGHT)
+    this.area = RectangleShape({
+      width: field.width * SIZE,
+      height: field.height * SIZE,
+      fill: 'transparent',
+      stroke: colors.white,
+      strokeWidth: 1,
+      padding: 0
+    }).setOrigin(0, 0).setPosition(WIDTH, HEIGHT).addChildTo(this)
+    this.area.me = maskImage.getSprite(player.imageName, colors.blue).addChildTo(this.area).setScale(0.03, 0.03)
+    this.area.me.update = () => {
+      this.area.me.setRotation(player.rotation)
+      this.area.me.setPosition(player.x * SIZE, player.y * SIZE)
+    }
+    const addArc = (ctx, obj) => {
+      ctx.beginPath()
+      ctx.arc((obj.x * SIZE), (obj.y * SIZE), 1.5, 0, Math.PI*2, false)
+      ctx.fill()
+    }
+    this.area.update = () => {
+      this.area.setPosition(
+        (player.x * -SIZE) + (WIDTH / 2),
+        (player.y * -SIZE) + (HEIGHT / 2)
+      )
+    }
+    this.area.draw = canvas => {
+      this.area.superMethod('draw', canvas)
+      canvas.context.fillStyle = colors.green
+      field.friend.children.forEach(obj => { if (obj !== player) addArc(canvas.context, obj) })
+      canvas.context.fillStyle = colors.pink
+      field.enemy.children.forEach(obj => addArc(canvas.context, obj))
+    }
+  }
+}

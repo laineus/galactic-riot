@@ -11,6 +11,7 @@ export default [
   { className: 'Camera', class: require('../class/Camera.js').default },
   { className: 'InterfaceScreen', class: require('../class/InterfaceScreen.js').default },
   { className: 'InterfaceField', class: require('../class/InterfaceField.js').default },
+  { className: 'Radar', class: require('../class/Radar.js').default },
   { className: 'FlyingElement', class: require('../class/FlyingElement.js').default },
   { className: 'Player', class: require('../class/Player.js').default },
   { className: 'Computer', class: require('../class/Computer.js').default },

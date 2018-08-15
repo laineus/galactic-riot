@@ -22,7 +22,7 @@ export default {
       state.interface.lightMask.tweener.to({ alpha: 1 }, 200, 'easeInQuad').to({ alpha: 0 }, 300, 'easeOutQuad')
       setTimeout(() => {
         state.field.setField(this.fieldName)
-        state.interface.setRadar(state.field, state.player)
+        state.interface.initRadar(state.field, state.player)
       }, 200)
       this.active = true
     }
