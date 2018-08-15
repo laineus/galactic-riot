@@ -2,13 +2,17 @@ class MaskImage {
   constructor () {
     this.assets = {}
   }
-  getSprite (imageKey, color) {
+  getName (imageKey, color) {
     const maskName = `${imageKey}_${color}`
-    if (this.assets[maskName]) {
-      return Sprite(maskName)
-    }
+    if (this.assets[maskName]) return maskName
     this.saveMask(imageKey, color, maskName)
-    return Sprite(maskName)
+    return maskName
+  }
+  getSprite (imageKey, color) {
+    return Sprite(this.getName(imageKey, color))
+  }
+  getImage (imageKey, color) {
+    return AssetManager.get('image', this.getName(imageKey, color))
   }
   saveMask (imageKey, color, maskName) {
     const original = AssetManager.get('image', imageKey).domElement
