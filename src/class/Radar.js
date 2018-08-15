@@ -7,6 +7,7 @@ export default {
   superClass: 'RectangleShape',
   init (field, player) {
     this.superInit({ width: WIDTH, height: HEIGHT, fill: colors.black_05, strokeWidth: 0, padding: 0 })
+    const GATE_IMAGE = maskImage.getImage('gate', colors.white)
     this.clip = canvas => canvas.beginPath().rect(0, 0, WIDTH, HEIGHT)
     this.area = RectangleShape({
       width: field.width * SIZE,
@@ -38,6 +39,9 @@ export default {
       field.friend.children.forEach(obj => { if (obj !== player) addArc(canvas.context, obj) })
       canvas.context.fillStyle = colors.pink
       field.enemy.children.forEach(obj => addArc(canvas.context, obj))
+      field.object.children.forEach(obj => {
+        if (obj.name === 'Gate') canvas.context.drawImage(GATE_IMAGE.domElement, (obj.x * SIZE) - 8, (obj.y * SIZE) - 8, 16, 16)
+      })
     }
   }
 }

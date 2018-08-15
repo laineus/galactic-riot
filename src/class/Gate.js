@@ -1,6 +1,7 @@
 import state from '../config/state'
 export default {
   superClass: 'DisplayElement',
+  name: 'Gate',
   init (fieldName, x, y) {
     this.superInit()
     this.fieldName = fieldName
