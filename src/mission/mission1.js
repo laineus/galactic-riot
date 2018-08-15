@@ -6,7 +6,7 @@ const self = {
   created () {
     state.field.setField('sublatant_1')
     addComputer(200, 3200, 350, 'player', 6)
-    Gate('sublatant_2', 100, 100).setPosition(1000, 3200).addChildTo(state.field)
+    Gate('sublatant_2', 100, 100).setPosition(1000, 3200).addChildTo(state.field.object)
   },
   functions: [
     () => {

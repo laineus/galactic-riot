@@ -40,7 +40,7 @@ export default {
       canvas.context.fillStyle = colors.pink
       field.enemy.children.forEach(obj => addArc(canvas.context, obj))
       field.object.children.forEach(obj => {
-        if (obj.name === 'Gate') canvas.context.drawImage(GATE_IMAGE.domElement, (obj.x * SIZE) - 8, (obj.y * SIZE) - 8, 16, 16)
+        if (obj.name === 'Gate') canvas.context.drawImage(GATE_IMAGE.domElement, (obj.x * SIZE) - 7, (obj.y * SIZE) - 7, 14, 14)
       })
     }
   }
