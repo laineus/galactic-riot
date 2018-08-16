@@ -28,6 +28,12 @@ export default {
     this.addChildTo(state.field[type])
     return this
   },
+  sameGroup () {
+    return this.field[this.type].children
+  },
+  sameHash () {
+    return this.field[this.type].children.filter(v => this.hash === v.hash)
+  },
   targetGroup () {
     return this.field[this.type === 'friend' ? 'enemy' : 'friend'].children
   },
@@ -124,9 +130,10 @@ export default {
     Explosion({ x: this.x, y: this.y, piece: this.imageName, level: level, shock: shock })
     return this
   },
-  damage (damage) {
+  damage (damage, shooter) {
     this.explosion(1)
     this.hp -= damage
+    this.sameHash().forEach(obj => obj.target = shooter)
     if (this.hp <= 0) this.dead()
   },
   dead () {

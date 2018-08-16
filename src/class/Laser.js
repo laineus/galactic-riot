@@ -46,7 +46,7 @@ export default {
   hitCheck () {
     for (const tgt of this.targetGroup()) {
       if (this.distanceDiff(tgt) < 30) {
-        tgt.damage(this.laser.damage)
+        tgt.damage(this.laser.damage, this.shooter)
         this.remove()
         break
       }
