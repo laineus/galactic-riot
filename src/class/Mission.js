@@ -18,6 +18,7 @@ export default {
     this.interface.initRadar(this.field, state.player)
   },
   update () {
+    this.mission.update()
     if (!this.mission.functions[this.mission.index]) return
     if (this.mission.functions[this.mission.index]()) this.mission.index++
   }

@@ -4,6 +4,9 @@ const sin = (rotation, distance) => Math.sin(Math.degToRad(rotation)) * distance
 const initElement = (x, y, r, type) => (type === 'player' ? Player() : Computer().setType(type)).setPosition(x, y).setRotation(r)
 export default (x, y, r, type, count) => {
   const subType = type === 'player' ? 'friend' : type
+  if (x === null) x = Math.randint(0, state.field.width)
+  if (y === null) y = Math.randint(0, state.field.height)
+  if (r === null) r = Math.radToDeg(Math.atan2(state.player.y - y, state.player.x - x))
   if (x < 0) x += state.field.width
   if (y < 0) y += state.field.height
   switch (count) {

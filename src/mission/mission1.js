@@ -3,19 +3,29 @@ import addComputer from '../utils/addComputer'
 const self = {
   name: 'Mission-01',
   count: 0,
-  created () {
+  created: () => {
     state.field.setField('sublatant_1')
     addComputer(200, 3200, 350, 'player', 6)
-    Gate('sublatant_2', 100, 100).setPosition(1000, 3200).addChildTo(state.field.object)
+  },
+  update: () => {
+    if (state.field.friend.children.length < 5) {
+      addComputer(null, null, null, 'friend', Math.randint(1, 6))
+    }
   },
   functions: [
     () => {
-      addComputer(-200, 200, 165, 'enemy', 6)
+      addComputer(-200, 200, 165, 'enemy', 3)
+      addComputer(-200, 1600, 170, 'enemy', 4)
       return true
     },
+    () => !state.field.enemy.children.length,
     () => {
-      return state.field.enemy.children.length <= 0
+      addComputer(200, -200, 345, 'enemy', 5)
+      addComputer(200, 200, 15, 'enemy', 4)
+      return true
     },
+    () => !state.field.enemy.children.length,
+    () => Gate('sublatant_2', 100, 100).setPosition(5600, 3400).setRotation(30).addChildTo(state.field.object),
     () => {
       return false
     }
