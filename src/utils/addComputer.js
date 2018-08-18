@@ -5,6 +5,12 @@ const initElement = (x, y, r, type, hash) => {
   const obj = (type === 'player') ? Player() : Computer().setType(type)
   obj.setPosition(x, y).setRotation(r)
   obj.hash = hash
+  obj.subTarget = state.player
+  return obj
+}
+const move = obj => {
+  obj.x += cos(obj.rotation, 70)
+  obj.y += sin(obj.rotation, 70)
 }
 export default (x, y, r, type, count) => {
   const subType = type === 'player' ? 'friend' : type
@@ -19,34 +25,39 @@ export default (x, y, r, type, count) => {
       initElement(x, y, r, type, hash)
       break
     case 2:
-      initElement(x + cos(r - 90, 50), y + sin(r - 90, 50), r, type, hash)
-      initElement(x + cos(r + 90, 50), y + sin(r + 90, 50), r, subType, hash)
+      const leader2 = initElement(x + cos(r - 90, 50), y + sin(r - 90, 50), r, type, hash)
+      move(leader2)
+      initElement(x + cos(r + 90, 50), y + sin(r + 90, 50), r, subType, hash).setSubTarget(leader2, 90, 50)
       break
     case 3:
-      initElement(x, y, r, type, hash)
-      initElement(x + cos(r - 135, 100), y + sin(r - 135, 100), r, subType, hash)
-      initElement(x + cos(r + 135, 100), y + sin(r + 135, 100), r, subType, hash)
+      const leader3 = initElement(x, y, r, type, hash)
+      move(leader3)
+      initElement(x + cos(r - 135, 100), y + sin(r - 135, 100), r, subType, hash).setSubTarget(leader3, -135, 100)
+      initElement(x + cos(r + 135, 100), y + sin(r + 135, 100), r, subType, hash).setSubTarget(leader3, 135, 100)
       break
     case 4:
-      initElement(x, y, r, type, hash)
-      initElement(x + cos(r - 135, 100), y + sin(r - 135, 100), r, subType, hash)
-      initElement(x + cos(r + 135, 100), y + sin(r + 135, 100), r, subType, hash)
-      initElement(x + cos(r + 180, 140), y + sin(r + 180, 140), r, subType, hash)
+      const leader4 = initElement(x, y, r, type, hash)
+      move(leader4)
+      initElement(x + cos(r - 135, 100), y + sin(r - 135, 100), r, subType, hash).setSubTarget(leader4, -135, 100)
+      initElement(x + cos(r + 135, 100), y + sin(r + 135, 100), r, subType, hash).setSubTarget(leader4, 135, 100)
+      initElement(x + cos(r + 180, 140), y + sin(r + 180, 140), r, subType, hash).setSubTarget(leader4, 180, 140)
       break
     case 5:
-      initElement(x, y, r, type, hash)
-      initElement(x + cos(r - 135, 100), y + sin(r - 135, 100), r, subType, hash)
-      initElement(x + cos(r + 135, 100), y + sin(r + 135, 100), r, subType, hash)
-      initElement(x + cos(r - 135, 200), y + sin(r - 135, 200), r, subType, hash)
-      initElement(x + cos(r + 135, 200), y + sin(r + 135, 200), r, subType, hash)
+      const leader5 = initElement(x, y, r, type, hash)
+      move(leader5)
+      initElement(x + cos(r - 135, 100), y + sin(r - 135, 100), r, subType, hash).setSubTarget(leader5, -135, 100)
+      initElement(x + cos(r + 135, 100), y + sin(r + 135, 100), r, subType, hash).setSubTarget(leader5, 135, 100)
+      initElement(x + cos(r - 135, 200), y + sin(r - 135, 200), r, subType, hash).setSubTarget(leader5, -135, 200)
+      initElement(x + cos(r + 135, 200), y + sin(r + 135, 200), r, subType, hash).setSubTarget(leader5, 135, 200)
       break
     case 6:
-      initElement(x, y, r, type, hash)
-      initElement(x + cos(r - 135, 100), y + sin(r - 135, 100), r, subType, hash)
-      initElement(x + cos(r + 135, 100), y + sin(r + 135, 100), r, subType, hash)
-      initElement(x + cos(r - 135, 200), y + sin(r - 135, 200), r, subType, hash)
-      initElement(x + cos(r + 135, 200), y + sin(r + 135, 200), r, subType, hash)
-      initElement(x + cos(r + 180, 140), y + sin(r + 180, 140), r, subType, hash)
+      const leader6 = initElement(x, y, r, type, hash)
+      move(leader6)
+      initElement(x + cos(r - 135, 100), y + sin(r - 135, 100), r, subType, hash).setSubTarget(leader6, -135, 100)
+      initElement(x + cos(r + 135, 100), y + sin(r + 135, 100), r, subType, hash).setSubTarget(leader6, 135, 100)
+      initElement(x + cos(r - 135, 200), y + sin(r - 135, 200), r, subType, hash).setSubTarget(leader6, -135, 200)
+      initElement(x + cos(r + 135, 200), y + sin(r + 135, 200), r, subType, hash).setSubTarget(leader6, 135, 200)
+      initElement(x + cos(r + 180, 140), y + sin(r + 180, 140), r, subType, hash).setSubTarget(leader6, 180, 140)
       break
   }
 }

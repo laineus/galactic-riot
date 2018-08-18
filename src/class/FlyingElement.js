@@ -93,10 +93,12 @@ export default {
       if (Math.abs(this.physical.velocity.x) > this.speed) this.physical.velocity.x = this.physical.velocity.x > 0 ? this.speed : -this.speed
       if (Math.abs(this.physical.velocity.y) > this.speed) this.physical.velocity.y = this.physical.velocity.y > 0 ? this.speed : -this.speed
     }
-    if (this.x < 0) roop ? this.x += this.field.width : this.remove()
-    if (this.x > this.field.width) roop ? this.x -= this.field.width : this.remove()
-    if (this.y < 0) roop ? this.y += this.field.height : this.remove()
-    if (this.y > this.field.height) roop ? this.y -= this.field.height : this.remove()
+    if (roop) return
+    if (this.x < 0 || this.x > this.field.width || this.y < 0 || this.y > this.field.height) this.remove()
+    // if (this.x < 0) roop ? this.x += this.field.width : this.remove()
+    // if (this.x > this.field.width) roop ? this.x -= this.field.width : this.remove()
+    // if (this.y < 0) roop ? this.y += this.field.height : this.remove()
+    // if (this.y > this.field.height) roop ? this.y -= this.field.height : this.remove()
   },
   shot () {
     if (this.shotDelay > 0) return
@@ -104,12 +106,15 @@ export default {
     if (this.mainLaser.name === 'twin') Laser(this, this.mainLaser)
     this.shotDelay = this.mainLaser.delay
   },
-  degreeTo (target) {
-    const deg = Math.radToDeg(Math.atan2(target.y - this.y, target.x - this.x))
+  degreeTo (x, y) {
+    const deg = Math.radToDeg(Math.atan2(y - this.y, x - this.x))
     return deg >= 0 ? deg : deg + 360
   },
+  degreeDiffTo (x, y) {
+    return this.degreeTo(x, y) - this.rotation
+  },
   degreeDiff (target) {
-    return this.degreeTo(target) - this.rotation
+    return this.degreeDiffTo(target.x, target.y)
   },
   distanceDiff (target) {
     return Math.hypot(target.x - this.x, target.y - this.y)
