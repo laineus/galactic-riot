@@ -45,8 +45,8 @@ export default {
       this.target = null
     }
   },
-  damage (app) {
-    this.superMethod('damage', app)
+  damage (damage, shooter) {
+    this.superMethod('damage', damage, shooter)
     this.field.camera.addShock(15)
   }
 }
