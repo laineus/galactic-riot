@@ -13,7 +13,7 @@ export default {
   init (option) {
     this.superInit(option)
     this.field = state.field
-    this.physical.friction = 0.96
+    this.physical.friction = 0.97
     this.physical.velocity.set(0, 0)
     this.hp = 100
     this.mainLaser = lasers.assult
@@ -95,11 +95,9 @@ export default {
     this.speed = this.baseSpeed * this.acceleration
     if (force) {
       this.physical.force(this.cos * this.speed, this.sin * this.speed)
-    } else {
+    } else if (Math.hypot(this.physical.velocity.x, this.physical.velocity.y) < this.speed) {
       this.physical.velocity.x += this.cos
       this.physical.velocity.y += this.sin
-      if (Math.abs(this.physical.velocity.x) > this.speed) this.physical.velocity.x = this.physical.velocity.x > 0 ? this.speed : -this.speed
-      if (Math.abs(this.physical.velocity.y) > this.speed) this.physical.velocity.y = this.physical.velocity.y > 0 ? this.speed : -this.speed
     }
     if (roop) return
     if (this.x < 0 || this.x > this.field.width || this.y < 0 || this.y > this.field.height) this.remove()
