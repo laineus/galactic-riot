@@ -22,6 +22,8 @@ export default {
     if (this.shotDelay > 0) this.shotDelay--
     this.cos = Math.cos(Math.degToRad(this.rotation))
     this.sin = Math.sin(Math.degToRad(this.rotation))
+    if (this.target && !this.target.isActive()) this.target = null
+    if (this.subTarget && !this.subTarget.isActive()) this.subTarget = null
   },
   isActive () {
     return this.hp > 0
@@ -126,11 +128,9 @@ export default {
     return Math.hypot(target.x - this.x, target.y - this.y)
   },
   inVision (target) {
-    if (!target.isActive()) return false
     return Math.abs(this.degreeDiff(target)) < 45 && this.distanceDiff(target) < 560
   },
   inShotRange (target) {
-    if (!target.isActive()) return false
     return Math.abs(this.degreeDiff(target)) < 15 && this.distanceDiff(target) < 400
   },
   findInVision () {
