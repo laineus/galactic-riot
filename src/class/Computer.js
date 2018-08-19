@@ -7,6 +7,8 @@ export default {
     this.setRotation(Math.randint(0, 360))
     this.setMobility(3)
     this.setSpeed(9)
+    this.setMainWeapon('assult')
+    this.setSubWeapon('tailgun')
   },
   update (app) {
     this.superMethod('update', app)

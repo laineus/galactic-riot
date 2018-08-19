@@ -6,13 +6,15 @@ export default {
     state.player = this
     this.setType('friend')
     this.setJet()
-    this.setBody(Sprite('f3_f').setScale(0.2, 0.2))
-    this.setImageName('f3_f')
+    this.setBody(Sprite(state.save.fighter).setScale(0.2, 0.2))
+    this.setImageName(state.save.fighter)
     this.setColorIndex(1)
     this.setMobility(3)
     this.setSpeed(10)
     this.hp = 500
     this.addChildTo(state.field.friend)
+    this.setMainWeapon(state.save.mainWeapon)
+    this.setSubWeapon(state.save.subWeapon)
   },
   update (app) {
     this.superMethod('update', app)

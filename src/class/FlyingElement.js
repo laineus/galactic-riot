@@ -1,4 +1,4 @@
-import { lasers } from '../config/variables'
+import { mainWeapons, subWeapons } from '../config/variables'
 import state from '../config/state'
 export default {
   superClass: 'DisplayElement',
@@ -18,8 +18,6 @@ export default {
     this.physical.friction = 0.97
     this.physical.velocity.set(0, 0)
     this.hp = 100
-    this.mainWeapon = 'assult'
-    this.subWeapon = 'tailgun'
   },
   update () {
     if (this.mainWeaponDelay > 0) this.mainWeaponDelay--
@@ -31,6 +29,12 @@ export default {
   },
   isActive () {
     return this.hp > 0
+  },
+  setMainWeapon (name) {
+    this.mainWeapon = mainWeapons.find(v => v.name === name)
+  },
+  setSubWeapon (name) {
+    this.subWeapon = subWeapons.find(v => v.name === name)
   },
   setType (type) {
     this.type = type
@@ -113,21 +117,20 @@ export default {
   mainAction () {
     if (this.mainWeaponDelay > 0 || !this.mainWeapon) return
     Laser(this, this.mainWeapon)
-    if (this.mainWeapon === 'twin') Laser(this, this.mainWeapon)
-    this.mainWeaponDelay = lasers[this.mainWeapon].delay
+    if (this.mainWeapon.name === 'twin') Laser(this, this.mainWeapon)
+    this.mainWeaponDelay = this.mainWeapon.delay
   },
   subAction () {
     if (this.subWeaponDelay > 0 || !this.subWeapon) return
-    switch (this.subWeapon) {
+    switch (this.subWeapon.name) {
       case 'boost':
         this.boost()
-        this.subWeaponDelay = 20
         break
       default:
         Laser(this, this.subWeapon)
-        this.subWeaponDelay = lasers[this.subWeapon].delay
         break
     }
+    this.subWeaponDelay = this.subWeapon.delay
   },
   boost (power = 30) {
     this.physical.velocity.x += this.cos * power

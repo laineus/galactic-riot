@@ -1,9 +1,8 @@
-import { lasers } from '../config/variables'
 export default {
   superClass: 'FlyingElement',
-  init (parent, laserName) {
+  init (parent, laser) {
     this.superInit()
-    this.laser = lasers[laserName]
+    this.laser = laser
     this.shooter = parent
     this.type = parent.type
     this.target = parent.target
