@@ -1,4 +1,5 @@
 import { settings, colors } from '../config/variables'
+import saveData from '../utils/saveData'
 import Cursor from '../utils/Cursor'
 import labelList from '../utils/labelList'
 export default {
@@ -11,6 +12,7 @@ export default {
                               .setPosition(this.gridX.center(), this.gridY.span(10))
     this.blendMode = 'lighter'
     this.addStartLabel()
+    saveData.load()
   },
   update (app) {
     if (this.startLabel) {

@@ -3,10 +3,15 @@ export default {
   player: null,
   mission: null,
   interface: null,
-  resource: {
-    money: 1000,
-    amount: 50,
-    fighters: [],
-    lasers: []
+  save: {
+    fighter: null,
+    laser: null,
+    resource: {
+      money: 1000,
+      amount: 50,
+      fighters: [],
+      lasers: []
+    },
+    mission: 0
   }
 }
