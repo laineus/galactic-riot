@@ -40,7 +40,15 @@ export default {
       canvas.context.fillStyle = colors.pink
       field.enemy.children.forEach(obj => addArc(canvas.context, obj))
       field.object.children.forEach(obj => {
-        if (obj.name === 'Gate') canvas.context.drawImage(GATE_IMAGE.domElement, (obj.x * SIZE) - 7, (obj.y * SIZE) - 7, 14, 14)
+        if (obj.name === 'Gate') {
+          const x = (obj.x * SIZE)
+          const y = (obj.y * SIZE)
+          canvas.context.save()
+          canvas.context.translate(x, y)
+          canvas.context.rotate(Math.degToRad(obj.rotation))
+          canvas.context.drawImage(GATE_IMAGE.domElement, -7, -7, 14, 14)
+          canvas.context.restore()
+        }
       })
     }
   }
