@@ -23,10 +23,16 @@ export default {
     this.cos = Math.cos(Math.degToRad(this.rotation))
     this.sin = Math.sin(Math.degToRad(this.rotation))
   },
+  isActive () {
+    return this.hp > 0
+  },
   setType (type) {
     this.type = type
     this.addChildTo(state.field[type])
     return this
+  },
+  bullets () {
+    return this.field.bullet.children
   },
   sameGroup () {
     return this.field[this.type].children
@@ -93,10 +99,12 @@ export default {
       if (Math.abs(this.physical.velocity.x) > this.speed) this.physical.velocity.x = this.physical.velocity.x > 0 ? this.speed : -this.speed
       if (Math.abs(this.physical.velocity.y) > this.speed) this.physical.velocity.y = this.physical.velocity.y > 0 ? this.speed : -this.speed
     }
-    if (this.x < 0) roop ? this.x += this.field.width : this.remove()
-    if (this.x > this.field.width) roop ? this.x -= this.field.width : this.remove()
-    if (this.y < 0) roop ? this.y += this.field.height : this.remove()
-    if (this.y > this.field.height) roop ? this.y -= this.field.height : this.remove()
+    if (roop) return
+    if (this.x < 0 || this.x > this.field.width || this.y < 0 || this.y > this.field.height) this.remove()
+    // if (this.x < 0) roop ? this.x += this.field.width : this.remove()
+    // if (this.x > this.field.width) roop ? this.x -= this.field.width : this.remove()
+    // if (this.y < 0) roop ? this.y += this.field.height : this.remove()
+    // if (this.y > this.field.height) roop ? this.y -= this.field.height : this.remove()
   },
   shot () {
     if (this.shotDelay > 0) return
@@ -104,20 +112,25 @@ export default {
     if (this.mainLaser.name === 'twin') Laser(this, this.mainLaser)
     this.shotDelay = this.mainLaser.delay
   },
-  degreeTo (target) {
-    const deg = Math.radToDeg(Math.atan2(target.y - this.y, target.x - this.x))
+  degreeTo (x, y) {
+    const deg = Math.radToDeg(Math.atan2(y - this.y, x - this.x))
     return deg >= 0 ? deg : deg + 360
   },
+  degreeDiffTo (x, y) {
+    return this.degreeTo(x, y) - this.rotation
+  },
   degreeDiff (target) {
-    return this.degreeTo(target) - this.rotation
+    return this.degreeDiffTo(target.x, target.y)
   },
   distanceDiff (target) {
     return Math.hypot(target.x - this.x, target.y - this.y)
   },
   inVision (target) {
+    if (!target.isActive()) return false
     return Math.abs(this.degreeDiff(target)) < 45 && this.distanceDiff(target) < 560
   },
   inShotRange (target) {
+    if (!target.isActive()) return false
     return Math.abs(this.degreeDiff(target)) < 15 && this.distanceDiff(target) < 400
   },
   findInVision () {
@@ -134,13 +147,19 @@ export default {
     this.explosion(1)
     this.hp -= damage
     this.sameHash().forEach(obj => obj.target = shooter)
-    if (this.hp <= 0) this.dead()
+    if (!this.isActive()) this.dead()
   },
   dead () {
     this.explosion(5, 25)
-    for (const tgt of this.targetGroup()) {
+    this.targetGroup().forEach(tgt => {
       if (tgt.target === this) tgt.target = null
-    }
+    })
+    this.sameGroup().forEach(tgt => {
+      if (tgt.subTarget === this) tgt.subTarget = null
+    })
+    this.bullets().forEach(tgt => {
+      if (tgt.target === this) tgt.target = null
+    })
     this.remove()
     return this
   }
