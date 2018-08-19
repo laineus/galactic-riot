@@ -23,10 +23,16 @@ export default {
     this.cos = Math.cos(Math.degToRad(this.rotation))
     this.sin = Math.sin(Math.degToRad(this.rotation))
   },
+  isActive () {
+    return this.hp > 0
+  },
   setType (type) {
     this.type = type
     this.addChildTo(state.field[type])
     return this
+  },
+  bullets () {
+    return this.field.bullet.children
   },
   sameGroup () {
     return this.field[this.type].children
@@ -120,9 +126,11 @@ export default {
     return Math.hypot(target.x - this.x, target.y - this.y)
   },
   inVision (target) {
+    if (!target.isActive()) return false
     return Math.abs(this.degreeDiff(target)) < 45 && this.distanceDiff(target) < 560
   },
   inShotRange (target) {
+    if (!target.isActive()) return false
     return Math.abs(this.degreeDiff(target)) < 15 && this.distanceDiff(target) < 400
   },
   findInVision () {
@@ -139,13 +147,19 @@ export default {
     this.explosion(1)
     this.hp -= damage
     this.sameHash().forEach(obj => obj.target = shooter)
-    if (this.hp <= 0) this.dead()
+    if (!this.isActive()) this.dead()
   },
   dead () {
     this.explosion(5, 25)
-    for (const tgt of this.targetGroup()) {
+    this.targetGroup().forEach(tgt => {
       if (tgt.target === this) tgt.target = null
-    }
+    })
+    this.sameGroup().forEach(tgt => {
+      if (tgt.subTarget === this) tgt.subTarget = null
+    })
+    this.bullets().forEach(tgt => {
+      if (tgt.target === this) tgt.target = null
+    })
     this.remove()
     return this
   }
