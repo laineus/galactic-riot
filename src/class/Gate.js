@@ -5,8 +5,8 @@ export default {
   init (fieldName, x, y) {
     this.superInit()
     this.fieldName = fieldName
-    this.x = x
-    this.y = y
+    this.fieldX = x
+    this.fieldY = y
     this.active = false
     this.blur1 = Sprite('gate_blur').addChildTo(this).setScale(1.5, 1.5)
     this.blur1.blendMode = 'lighter'
@@ -22,8 +22,16 @@ export default {
       this.blur2.tweener.to({ scaleX: 50 }, 200, 'easeInQuad')
       state.interface.lightMask.tweener.to({ alpha: 1 }, 200, 'easeInQuad').to({ alpha: 0 }, 300, 'easeOutQuad')
       setTimeout(() => {
+        state.player.x = this.fieldX
+        state.player.y = this.fieldY
+        state.field.friend.children.forEach(v => {
+          v.rotation = this.rotation
+          v.x = this.fieldX + Math.randint(-100, 100)
+          v.y = this.fieldY + Math.randint(-100, 100)
+        })
         state.field.setField(this.fieldName)
         state.interface.initRadar(state.field, state.player)
+        this.remove()
       }, 200)
       this.active = true
     }

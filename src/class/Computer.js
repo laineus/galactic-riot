@@ -56,7 +56,7 @@ export default {
   ctrAction () {
     if (this.target) {
       if (this.inShotRange(this.target)) {
-        this.shot()
+        this.mainAction()
       }
     }
   }

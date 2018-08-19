@@ -14,6 +14,7 @@ export default {
     this.interfaceField = InterfaceField().addChildTo(this)
   },
   setField (fieldName) {
+    this.fieldName = fieldName
     const fieldSrc = fields[fieldName]
     this.width = fieldSrc.width
     this.height = fieldSrc.height
@@ -29,5 +30,8 @@ export default {
       this.fg.x = this.x * 50 / this.camera.zoom
       this.fg.y = this.y * 50 / this.camera.zoom
     }
+  },
+  is (fieldName) {
+    return this.fieldName === fieldName
   }
 }

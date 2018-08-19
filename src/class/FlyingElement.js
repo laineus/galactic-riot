@@ -5,23 +5,29 @@ export default {
   baseMobility: 0,
   baseSpeed: 0,
   speed: 0,
-  mainLaser: null,
-  shotDelay: 0,
+  mainWeapon: null,
+  mainWeaponDelay: 0,
+  subWeapon: null,
+  subWeaponDelay: 0,
   cos: 0,
   sin: 0,
   acceleration: 1.0,
   init (option) {
     this.superInit(option)
     this.field = state.field
-    this.physical.friction = 0.96
+    this.physical.friction = 0.97
     this.physical.velocity.set(0, 0)
     this.hp = 100
-    this.mainLaser = lasers.assult
+    this.mainWeapon = 'assult'
+    this.subWeapon = 'tailgun'
   },
   update () {
-    if (this.shotDelay > 0) this.shotDelay--
+    if (this.mainWeaponDelay > 0) this.mainWeaponDelay--
+    if (this.subWeaponDelay > 0) this.subWeaponDelay--
     this.cos = Math.cos(Math.degToRad(this.rotation))
     this.sin = Math.sin(Math.degToRad(this.rotation))
+    if (this.target && !this.target.isActive()) this.target = null
+    if (this.subTarget && !this.subTarget.isActive()) this.subTarget = null
   },
   isActive () {
     return this.hp > 0
@@ -93,11 +99,9 @@ export default {
     this.speed = this.baseSpeed * this.acceleration
     if (force) {
       this.physical.force(this.cos * this.speed, this.sin * this.speed)
-    } else {
+    } else if (Math.hypot(this.physical.velocity.x, this.physical.velocity.y) < this.speed) {
       this.physical.velocity.x += this.cos
       this.physical.velocity.y += this.sin
-      if (Math.abs(this.physical.velocity.x) > this.speed) this.physical.velocity.x = this.physical.velocity.x > 0 ? this.speed : -this.speed
-      if (Math.abs(this.physical.velocity.y) > this.speed) this.physical.velocity.y = this.physical.velocity.y > 0 ? this.speed : -this.speed
     }
     if (roop) return
     if (this.x < 0 || this.x > this.field.width || this.y < 0 || this.y > this.field.height) this.remove()
@@ -106,11 +110,28 @@ export default {
     // if (this.y < 0) roop ? this.y += this.field.height : this.remove()
     // if (this.y > this.field.height) roop ? this.y -= this.field.height : this.remove()
   },
-  shot () {
-    if (this.shotDelay > 0) return
-    Laser(this, this.mainLaser)
-    if (this.mainLaser.name === 'twin') Laser(this, this.mainLaser)
-    this.shotDelay = this.mainLaser.delay
+  mainAction () {
+    if (this.mainWeaponDelay > 0 || !this.mainWeapon) return
+    Laser(this, this.mainWeapon)
+    if (this.mainWeapon === 'twin') Laser(this, this.mainWeapon)
+    this.mainWeaponDelay = lasers[this.mainWeapon].delay
+  },
+  subAction () {
+    if (this.subWeaponDelay > 0 || !this.subWeapon) return
+    switch (this.subWeapon) {
+      case 'boost':
+        this.boost()
+        this.subWeaponDelay = 20
+        break
+      default:
+        Laser(this, this.subWeapon)
+        this.subWeaponDelay = lasers[this.subWeapon].delay
+        break
+    }
+  },
+  boost (power = 30) {
+    this.physical.velocity.x += this.cos * power
+    this.physical.velocity.y += this.sin * power
   },
   degreeTo (x, y) {
     const deg = Math.radToDeg(Math.atan2(y - this.y, x - this.x))
@@ -126,11 +147,9 @@ export default {
     return Math.hypot(target.x - this.x, target.y - this.y)
   },
   inVision (target) {
-    if (!target.isActive()) return false
     return Math.abs(this.degreeDiff(target)) < 45 && this.distanceDiff(target) < 560
   },
   inShotRange (target) {
-    if (!target.isActive()) return false
     return Math.abs(this.degreeDiff(target)) < 15 && this.distanceDiff(target) < 400
   },
   findInVision () {
