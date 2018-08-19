@@ -1,8 +1,9 @@
+import { lasers } from '../config/variables'
 export default {
   superClass: 'FlyingElement',
-  init (parent, laser) {
+  init (parent, laserName) {
     this.superInit()
-    this.laser = laser
+    this.laser = lasers[laserName]
     this.shooter = parent
     this.type = parent.type
     this.target = parent.target
@@ -10,8 +11,8 @@ export default {
     this.shooter.shotCount++
     this.setSpeed(this.laser.speed)
     this.setMobility(5)
-    this.setRotation(laser.name === 'tailgun' ? parent.rotation + 180 : parent.rotation)
-    if (laser.name === 'tailgun') {
+    this.setRotation(this.laser.name === 'tailgun' ? parent.rotation + 180 : parent.rotation)
+    if (this.laser.name === 'tailgun') {
       this.setPosition(
         parent.x + (parent.cos * -60),
         parent.y + (parent.sin * -60)

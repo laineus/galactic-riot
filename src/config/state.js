@@ -5,7 +5,8 @@ export default {
   interface: null,
   save: {
     fighter: null,
-    laser: null,
+    mainWeapon: null,
+    subWeapon: null,
     resource: {
       money: 1000,
       amount: 50,

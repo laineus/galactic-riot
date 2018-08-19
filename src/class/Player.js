@@ -35,7 +35,8 @@ export default {
     if (key.getKey('right')) return this.turn(1)
   },
   ctrAction (key) {
-    if (key.getKey('Z')) this.shot()
+    if (key.getKey('Z')) this.mainAction()
+    if (key.getKey('X')) this.subAction()
   },
   searchTarget () {
     if (!this.target) {

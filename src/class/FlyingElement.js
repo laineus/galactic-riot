@@ -5,8 +5,10 @@ export default {
   baseMobility: 0,
   baseSpeed: 0,
   speed: 0,
-  mainLaser: null,
-  shotDelay: 0,
+  mainWeapon: null,
+  mainWeaponDelay: 0,
+  subWeapon: null,
+  subWeaponDelay: 0,
   cos: 0,
   sin: 0,
   acceleration: 1.0,
@@ -16,10 +18,12 @@ export default {
     this.physical.friction = 0.97
     this.physical.velocity.set(0, 0)
     this.hp = 100
-    this.mainLaser = lasers.assult
+    this.mainWeapon = 'assult'
+    this.subWeapon = 'tailgun'
   },
   update () {
-    if (this.shotDelay > 0) this.shotDelay--
+    if (this.mainWeaponDelay > 0) this.mainWeaponDelay--
+    if (this.subWeaponDelay > 0) this.subWeaponDelay--
     this.cos = Math.cos(Math.degToRad(this.rotation))
     this.sin = Math.sin(Math.degToRad(this.rotation))
     if (this.target && !this.target.isActive()) this.target = null
@@ -106,11 +110,28 @@ export default {
     // if (this.y < 0) roop ? this.y += this.field.height : this.remove()
     // if (this.y > this.field.height) roop ? this.y -= this.field.height : this.remove()
   },
-  shot () {
-    if (this.shotDelay > 0) return
-    Laser(this, this.mainLaser)
-    if (this.mainLaser.name === 'twin') Laser(this, this.mainLaser)
-    this.shotDelay = this.mainLaser.delay
+  mainAction () {
+    if (this.mainWeaponDelay > 0 || !this.mainWeapon) return
+    Laser(this, this.mainWeapon)
+    if (this.mainWeapon === 'twin') Laser(this, this.mainWeapon)
+    this.mainWeaponDelay = lasers[this.mainWeapon].delay
+  },
+  subAction () {
+    if (this.subWeaponDelay > 0 || !this.subWeapon) return
+    switch (this.subWeapon) {
+      case 'boost':
+        this.boost()
+        this.subWeaponDelay = 20
+        break
+      default:
+        Laser(this, this.subWeapon)
+        this.subWeaponDelay = lasers[this.subWeapon].delay
+        break
+    }
+  },
+  boost (power = 30) {
+    this.physical.velocity.x += this.cos * power
+    this.physical.velocity.y += this.sin * power
   },
   degreeTo (x, y) {
     const deg = Math.radToDeg(Math.atan2(y - this.y, x - this.x))
