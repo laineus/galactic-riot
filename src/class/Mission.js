@@ -1,3 +1,4 @@
+import missionResult from '../utils/missionResult'
 import state from '../config/state'
 export default {
   superClass: 'DisplayElement',
@@ -21,5 +22,11 @@ export default {
     this.mission.update()
     if (!this.mission.functions[this.mission.index]) return
     if (this.mission.functions[this.mission.index]()) this.mission.index++
+  },
+  missionCompleted () {
+    missionResult(true, 'Time:\nKill:\nMember Death:\nRescue:\n\nRank:\nReward:', '1:14\n10\n12\n5\n\nS\n$1,000').addChildTo(this)
+  },
+  missionFailed () {
+    missionResult(false, 'Loss:', '$1,000').addChildTo(this)
   }
 }
