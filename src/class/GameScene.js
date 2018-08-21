@@ -21,9 +21,12 @@ export default {
     this.interface = InterfaceScreen().addChildTo(this)
     this.interface.initRadar(this.field, state.player)
   },
-  update () {
+  update (app) {
     this.mission.update()
-    if (!this.inProgress) return
+    if (!this.inProgress) {
+      if (app.keyboard.getKeyDown('Z')) this.exit('Title', { skip: true })
+      return
+    }
     if (!state.player.isActive()) {
       this.missionFailed()
     } else if (this.mission.functions[this.phase]()) {

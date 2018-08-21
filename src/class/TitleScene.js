@@ -11,7 +11,7 @@ export default {
     this.logo = Sprite('logo').addChildTo(this).setScale(0.5, 0.5)
                               .setPosition(this.gridX.center(), this.gridY.span(10))
     this.blendMode = 'lighter'
-    this.addStartLabel()
+    option.skip ? this.addMenu() : this.addStartLabel()
     saveData.load()
   },
   update (app) {
