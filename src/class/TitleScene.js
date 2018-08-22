@@ -36,7 +36,7 @@ export default {
   addMenu () {
     this.removeAll()
     this.logo.alpha = 1
-    this.list = labelList(['Mission', 'Customize', 'Exit'], settings.SCREEN_WIDTH_C, 440, this, { margin: 23 })
+    this.list = labelList(['Mission', 'Arsenal', 'Exit'], settings.SCREEN_WIDTH_C, 440, this, { margin: 23 })
     this.list.cursor = new Cursor(this.list, (current, other) => {
       current.fill = colors.blue
       current.fontSize = 15
@@ -47,6 +47,7 @@ export default {
     }, (current) => {
       switch (current.text) {
         case 'Mission': return this.addMissionSelect()
+        case 'Arsenal': return this.addArsenalSelect()
         case 'Exit': return this.addStartLabel()
       }
     }, () => {
@@ -57,6 +58,11 @@ export default {
     this.removeAll()
     this.logo.alpha = 0
     this.missionSelect = MissionSelect(this, () => this.addMenu()).addChildTo(this)
+  },
+  addArsenalSelect () {
+    this.removeAll()
+    this.logo.alpha = 0
+    this.arsenalSelect = ArsenalSelect(this, () => this.addMenu()).addChildTo(this)
   },
   removeAll () {
     if (this.startLabel) {
@@ -70,6 +76,10 @@ export default {
     if (this.missionSelect) {
       this.missionSelect.remove()
       this.missionSelect = null
+    }
+    if (this.arsenalSelect) {
+      this.arsenalSelect.remove()
+      this.arsenalSelect = null
     }
   }
 }
