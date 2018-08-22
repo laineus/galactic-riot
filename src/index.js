@@ -6,9 +6,7 @@ import scenes from './config/scenes'
 import components from './config/components'
 phina.globalize()
 
-for (const component of components) {
-  phina.define(component.className, component.class)
-}
+components.forEach(component => phina.define(component.className, component.class))
 phina.main(() => {
   const game = GameApp({
     title: settings.GAME_TITLE,

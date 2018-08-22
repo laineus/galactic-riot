@@ -39,7 +39,11 @@ export default {
     this.list = labelList(['Mission', 'Customize', 'Exit'], settings.SCREEN_WIDTH_C, 440, this, { margin: 23 })
     this.list.cursor = new Cursor(this.list, (current, other) => {
       current.fill = colors.blue
-      other.forEach(v => v.fill = colors.white)
+      current.fontSize = 15
+      other.forEach(v => {
+        v.fill = colors.white
+        v.fontSize = 14
+      })
     }, (current) => {
       switch (current.text) {
         case 'Mission': return this.addMissionSelect()
