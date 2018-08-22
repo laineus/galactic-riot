@@ -1,10 +1,10 @@
 export default class Cursor {
-  constructor (list, onUpdate, onEnter, onCancel) {
+  constructor (list, onUpdate, onEnter, onCancel, index = 0) {
     this.list = list
     this.onUpdate = onUpdate
     this.onEnter = onEnter
     this.onCancel = onCancel
-    this.index = 0
+    this.index = index
     this.delay = 0
     this.firstFrame = true
   }

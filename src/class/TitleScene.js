@@ -33,7 +33,7 @@ export default {
       shadowColor: colors.blue
     }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(13.5))
   },
-  addMenu () {
+  addMenu (index = 0) {
     this.removeAll()
     this.logo.alpha = 1
     this.list = labelList(['Mission', 'Arsenal', 'Exit'], settings.SCREEN_WIDTH_C, 440, this, { margin: 23 })
@@ -52,7 +52,7 @@ export default {
       }
     }, () => {
       this.addStartLabel()
-    })
+    }, index)
   },
   addMissionSelect () {
     this.removeAll()
@@ -62,7 +62,7 @@ export default {
   addArsenalSelect () {
     this.removeAll()
     this.logo.alpha = 0
-    this.arsenalSelect = ArsenalSelect(this, () => this.addMenu()).addChildTo(this)
+    this.arsenalSelect = ArsenalSelect(this, () => this.addMenu(1)).addChildTo(this)
   },
   removeAll () {
     if (this.startLabel) {
