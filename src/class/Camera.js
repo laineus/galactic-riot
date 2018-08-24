@@ -1,8 +1,8 @@
 import phina from 'phina.js'
 import { settings } from '../config/variables'
 export default class Camera extends phina.display.DisplayElement {
-  constructor (option) {
-    super(option)
+  constructor () {
+    super()
     Object.setPrototypeOf(this, Camera.prototype)
     this.physical.friction = 0.9
     this.physical.velocity.set(0, 0)
