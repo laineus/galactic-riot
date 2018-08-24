@@ -1,6 +1,5 @@
 import { mainWeapons, subWeapons } from '../config/variables'
 import state from '../config/state'
-import Laser from './Laser'
 import Explosion from './Explosion'
 export default class FlyingElement extends phina.display.DisplayElement {
   constructor () {
@@ -28,15 +27,6 @@ export default class FlyingElement extends phina.display.DisplayElement {
     this.sin = Math.sin(Math.degToRad(this.rotation))
     if (this.target && !this.target.isActive()) this.target = null
     if (this.subTarget && !this.subTarget.isActive()) this.subTarget = null
-  }
-  isActive () {
-    return this.hp > 0
-  }
-  setMainWeapon (name) {
-    this.mainWeapon = mainWeapons.find(v => v.name === name)
-  }
-  setSubWeapon (name) {
-    this.subWeapon = subWeapons.find(v => v.name === name)
   }
   setType (type) {
     this.type = type
@@ -116,24 +106,6 @@ export default class FlyingElement extends phina.display.DisplayElement {
     // if (this.y < 0) roop ? this.y += this.field.height : this.remove()
     // if (this.y > this.field.height) roop ? this.y -= this.field.height : this.remove()
   }
-  mainAction () {
-    if (this.mainWeaponDelay > 0 || !this.mainWeapon) return
-    new Laser(this, this.mainWeapon)
-    if (this.mainWeapon.name === 'twin') new Laser(this, this.mainWeapon)
-    this.mainWeaponDelay = this.mainWeapon.delay
-  }
-  subAction () {
-    if (this.subWeaponDelay > 0 || !this.subWeapon) return
-    switch (this.subWeapon.name) {
-      case 'boost':
-        this.boost()
-        break
-      default:
-        new Laser(this, this.subWeapon)
-        break
-    }
-    this.subWeaponDelay = this.subWeapon.delay
-  }
   boost (power = 30) {
     this.physical.velocity.x += this.cos * power
     this.physical.velocity.y += this.sin * power
@@ -165,26 +137,6 @@ export default class FlyingElement extends phina.display.DisplayElement {
   }
   explosion (level, shock = false) {
     new Explosion({ x: this.x, y: this.y, piece: this.imageName, level: level, shock: shock })
-    return this
-  }
-  damage (damage, shooter) {
-    this.explosion(1)
-    this.hp -= damage
-    this.sameHash().forEach(obj => obj.target = shooter)
-    if (!this.isActive()) this.dead()
-  }
-  dead () {
-    this.explosion(5, 25)
-    this.targetGroup().forEach(tgt => {
-      if (tgt.target === this) tgt.target = null
-    })
-    this.sameGroup().forEach(tgt => {
-      if (tgt.subTarget === this) tgt.subTarget = null
-    })
-    this.bullets().forEach(tgt => {
-      if (tgt.target === this) tgt.target = null
-    })
-    this.remove()
     return this
   }
 }

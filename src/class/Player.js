@@ -1,6 +1,6 @@
 import state from '../config/state'
-import FlyingElement from './FlyingElement'
-export default class Player extends FlyingElement {
+import Fighter from './Fighter'
+export default class Player extends Fighter {
   constructor () {
     super()
     Object.setPrototypeOf(this, Player.prototype)
