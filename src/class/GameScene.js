@@ -1,6 +1,7 @@
 import missionResult from '../utils/missionResult'
 import state from '../config/state'
 import { colors } from '../config/variables'
+import Field from './Field'
 import Camera from './Camera'
 export default {
   superClass: 'DisplayScene',
@@ -10,7 +11,7 @@ export default {
     this.superInit(option)
     this.backgroundColor = colors.black
     // Field
-    this.field = Field().addChildTo(this)
+    this.field = new Field().addChildTo(this)
     // Mission
     this.mission = state.mission
     this.mission.created()

@@ -2,7 +2,6 @@ export default [
   { className: 'LoadingScene', class: require('../class/LoadingScene.js').default },
   { className: 'TitleScene', class: require('../class/TitleScene.js').default },
   { className: 'GameScene', class: require('../class/GameScene.js').default },
-  { className: 'Field', class: require('../class/Field.js').default },
   { className: 'Tile', class: require('../class/Tile.js').default },
   { className: 'SlicedSprite', class: require('../class/SlicedSprite.js').default },
   { className: 'Piece', class: require('../class/Piece.js').default },

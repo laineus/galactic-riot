@@ -1,9 +1,9 @@
 import state from '../config/state'
 import { fields } from '../config/variables'
-export default {
-  superClass: 'DisplayElement',
-  init () {
-    this.superInit()
+export default class Field extends phina.display.DisplayElement {
+  constructor () {
+    super()
+    Object.setPrototypeOf(this, Field.prototype)
     state.field = this
     // Layer
     this.friend = DisplayElement().addChildTo(this)
@@ -12,7 +12,7 @@ export default {
     this.object = DisplayElement().addChildTo(this)
     // Interface
     this.interfaceField = InterfaceField().addChildTo(this)
-  },
+  }
   setField (fieldName) {
     this.fieldName = fieldName
     const fieldSrc = fields[fieldName]
@@ -30,7 +30,7 @@ export default {
       this.fg.x = this.x * 50 / this.camera.zoom
       this.fg.y = this.y * 50 / this.camera.zoom
     }
-  },
+  }
   is (fieldName) {
     return this.fieldName === fieldName
   }
