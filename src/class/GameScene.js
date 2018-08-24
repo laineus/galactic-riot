@@ -1,6 +1,7 @@
 import missionResult from '../utils/missionResult'
 import state from '../config/state'
 import { colors } from '../config/variables'
+import Camera from './Camera'
 export default {
   superClass: 'DisplayScene',
   phase: 0,
@@ -14,7 +15,7 @@ export default {
     this.mission = state.mission
     this.mission.created()
     // Camera
-    this.field.camera = Camera().addChildTo(this)
+    this.field.camera = new Camera().addChildTo(this)
     this.field.camera.setField(this.field)
     this.field.camera.setTarget(state.player)
     // Interface
