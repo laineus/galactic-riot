@@ -3,6 +3,7 @@ import saveData from '../utils/saveData'
 import Cursor from '../utils/Cursor'
 import labelList from '../utils/labelList'
 import BlurLabel from './BlurLabel'
+import ArsenalSelect from './ArsenalSelect'
 export default {
   superClass: 'DisplayScene',
   init (option) {
@@ -63,7 +64,7 @@ export default {
   addArsenalSelect () {
     this.removeAll()
     this.logo.alpha = 0
-    this.arsenalSelect = ArsenalSelect(this, () => this.addMenu(1)).addChildTo(this)
+    this.arsenalSelect = new ArsenalSelect(this, () => this.addMenu(1)).addChildTo(this)
   },
   removeAll () {
     if (this.startLabel) {
