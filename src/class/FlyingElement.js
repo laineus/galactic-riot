@@ -1,5 +1,6 @@
 import { mainWeapons, subWeapons } from '../config/variables'
 import state from '../config/state'
+import Explosion from './Explosion'
 export default {
   superClass: 'DisplayElement',
   baseMobility: 0,
@@ -162,7 +163,7 @@ export default {
     return this.targetGroup().find(v => this.inShotRange(v))
   },
   explosion (level, shock = false) {
-    Explosion({ x: this.x, y: this.y, piece: this.imageName, level: level, shock: shock })
+    new Explosion({ x: this.x, y: this.y, piece: this.imageName, level: level, shock: shock })
     return this
   },
   damage (damage, shooter) {
