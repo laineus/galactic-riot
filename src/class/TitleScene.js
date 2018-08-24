@@ -2,6 +2,7 @@ import { settings, colors } from '../config/variables'
 import saveData from '../utils/saveData'
 import Cursor from '../utils/Cursor'
 import labelList from '../utils/labelList'
+import BlurLabel from './BlurLabel'
 export default {
   superClass: 'DisplayScene',
   init (option) {
@@ -24,7 +25,7 @@ export default {
   addStartLabel () {
     this.removeAll()
     this.logo.alpha = 1
-    this.startLabel = BlurLabel({
+    this.startLabel = new BlurLabel({
       text: '- PRESS \'Z\' KEY -',
       fontFamily: 'aldrich',
       fill: colors.white,

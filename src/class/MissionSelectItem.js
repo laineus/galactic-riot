@@ -1,4 +1,5 @@
 import { colors } from '../config/variables'
+import BlurLabel from './BlurLabel'
 export default {
   superClass: 'RectangleShape',
   active: false,
@@ -12,7 +13,7 @@ export default {
       padding: 0
     })
     this.setOrigin(0, 0)
-    BlurLabel({
+    new BlurLabel({
       text: mission.name,
       fontFamily: 'aldrich',
       fontSize: 15,

@@ -1,5 +1,6 @@
 import { settings, colors } from '../config/variables'
 import Cursor from '../utils/Cursor'
+import BlurLabel from './BlurLabel'
 export default {
   superClass: 'DisplayElement',
   init (scene, cancel) {
@@ -27,7 +28,7 @@ export default {
       padding: 0
     }).setOrigin(0, 0)
     item.active = false
-    item.label = BlurLabel({
+    item.label = new BlurLabel({
       text: name,
       fontFamily: 'aldrich',
       fontSize: 15,
