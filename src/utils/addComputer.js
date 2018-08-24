@@ -1,8 +1,9 @@
 import state from '../config/state'
+import Player from '../class/Player'
 const cos = (rotation, distance) => Math.cos(Math.degToRad(rotation)) * distance
 const sin = (rotation, distance) => Math.sin(Math.degToRad(rotation)) * distance
 const initElement = (x, y, r, type, hash) => {
-  const obj = (type === 'player') ? Player() : Computer().setType(type)
+  const obj = (type === 'player') ? new Player() : Computer().setType(type)
   obj.setPosition(x, y).setRotation(r)
   obj.hash = hash
   obj.subTarget = state.player
