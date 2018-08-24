@@ -1,7 +1,8 @@
-export default {
-  superClass: 'FlyingElement',
-  init (parent, laser) {
-    this.superInit()
+import FlyingElement from './FlyingElement'
+export default class Laser extends FlyingElement {
+  constructor (parent, laser) {
+    super()
+    Object.setPrototypeOf(this, Laser.prototype)
     this.laser = laser
     this.shooter = parent
     this.type = parent.type
@@ -36,13 +37,13 @@ export default {
     const flash = SlicedSprite('laser_flash', 1, 3, parent.colorIndex).setScale(0, 0).setPosition(this.x, this.y).setRotation(this.rotation).addChildTo(parent.field.object)
     flash.blendMode = 'lighter'
     flash.tweener.to({ scaleX: 0.08, scaleY: 0.08 }, 16).to({ scaleX: 0, scaleY: 0 }, 16).wait(32).call(() => flash.remove())
-  },
+  }
   update (app) {
-    this.superMethod('update', app)
+    super.update(app)
     this.move(false, true)
     this.hitCheck()
     if (this.laser.isHoming) homing()
-  },
+  }
   hitCheck () {
     for (const tgt of this.targetGroup()) {
       if (this.distanceDiff(tgt) < 30) {
@@ -51,7 +52,7 @@ export default {
         break
       }
     }
-  },
+  }
   homing () {
     if (!this.target) return
     const degDiff = this.degreeDiff(this.target)

@@ -1,5 +1,6 @@
 import { mainWeapons, subWeapons } from '../config/variables'
 import state from '../config/state'
+import Laser from './Laser'
 import Explosion from './Explosion'
 export default class FlyingElement extends phina.display.DisplayElement {
   constructor () {
@@ -117,8 +118,8 @@ export default class FlyingElement extends phina.display.DisplayElement {
   }
   mainAction () {
     if (this.mainWeaponDelay > 0 || !this.mainWeapon) return
-    Laser(this, this.mainWeapon)
-    if (this.mainWeapon.name === 'twin') Laser(this, this.mainWeapon)
+    new Laser(this, this.mainWeapon)
+    if (this.mainWeapon.name === 'twin') new Laser(this, this.mainWeapon)
     this.mainWeaponDelay = this.mainWeapon.delay
   }
   subAction () {
@@ -128,7 +129,7 @@ export default class FlyingElement extends phina.display.DisplayElement {
         this.boost()
         break
       default:
-        Laser(this, this.subWeapon)
+        new Laser(this, this.subWeapon)
         break
     }
     this.subWeaponDelay = this.subWeapon.delay

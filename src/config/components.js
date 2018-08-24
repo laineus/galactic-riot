@@ -9,7 +9,6 @@ export default [
   { className: 'InterfaceField', class: require('../class/InterfaceField.js').default },
   { className: 'Radar', class: require('../class/Radar.js').default },
   { className: 'Computer', class: require('../class/Computer.js').default },
-  { className: 'Laser', class: require('../class/Laser.js').default },
   { className: 'Gate', class: require('../class/Gate.js').default },
   { className: 'MissionSelect', class: require('../class/MissionSelect.js').default },
   { className: 'MissionSelectItem', class: require('../class/MissionSelectItem.js').default }
