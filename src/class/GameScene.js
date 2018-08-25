@@ -4,6 +4,7 @@ import state from '../config/state'
 import { colors } from '../config/variables'
 import Field from './Field'
 import Camera from './Camera'
+import InterfaceScreen from './InterfaceScreen'
 export default class GameScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -21,7 +22,7 @@ export default class GameScene extends phina.display.DisplayScene {
     this.field.camera.setField(this.field)
     this.field.camera.setTarget(state.player)
     // Interface
-    this.interface = InterfaceScreen().addChildTo(this)
+    this.interface = new InterfaceScreen().addChildTo(this)
     this.interface.initRadar(this.field, state.player)
   }
   update (app) {
