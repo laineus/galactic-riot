@@ -1,5 +1,4 @@
 export default [
-  { className: 'TitleScene', class: require('../class/TitleScene.js').default },
   { className: 'GameScene', class: require('../class/GameScene.js').default },
   { className: 'Tile', class: require('../class/Tile.js').default },
   { className: 'SlicedSprite', class: require('../class/SlicedSprite.js').default },

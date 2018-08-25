@@ -1,13 +1,14 @@
+import phina from 'phina.js'
 import { settings, colors } from '../config/variables'
 import saveData from '../utils/saveData'
 import Cursor from '../utils/Cursor'
 import labelList from '../utils/labelList'
 import BlurLabel from './BlurLabel'
 import ArsenalSelect from './ArsenalSelect'
-export default {
-  superClass: 'DisplayScene',
-  init (option) {
-    this.superInit(option)
+export default class TitleScene extends phina.display.DisplayScene {
+  constructor (option) {
+    super(option)
+    Object.setPrototypeOf(this, TitleScene.prototype)
     this.backgroundColor = colors.black
     this.bg = Sprite('title').addChildTo(this).setOrigin(0, 0).setScale(0.75, 0.75)
     this.logo = Sprite('logo').addChildTo(this).setScale(0.5, 0.5)
@@ -15,14 +16,14 @@ export default {
     this.blendMode = 'lighter'
     option.skip ? this.addMenu() : this.addStartLabel()
     saveData.load()
-  },
+  }
   update (app) {
     if (this.startLabel) {
       if (app.keyboard.getKeyDown('Z')) this.addMenu()
     } else if (this.list) {
       this.list.cursor.update(app.keyboard)
     }
-  },
+  }
   addStartLabel () {
     this.removeAll()
     this.logo.alpha = 1
@@ -34,7 +35,7 @@ export default {
       shadowBlur: 6,
       shadowColor: colors.blue
     }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(13.5))
-  },
+  }
   addMenu (index = 0) {
     this.removeAll()
     this.logo.alpha = 1
@@ -55,17 +56,17 @@ export default {
     }, () => {
       this.addStartLabel()
     }, index)
-  },
+  }
   addMissionSelect () {
     this.removeAll()
     this.logo.alpha = 0
     this.missionSelect = MissionSelect(this, () => this.addMenu()).addChildTo(this)
-  },
+  }
   addArsenalSelect () {
     this.removeAll()
     this.logo.alpha = 0
     this.arsenalSelect = new ArsenalSelect(this, () => this.addMenu(1)).addChildTo(this)
-  },
+  }
   removeAll () {
     if (this.startLabel) {
       this.startLabel.remove()
