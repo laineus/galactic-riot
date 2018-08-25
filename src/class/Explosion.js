@@ -1,6 +1,7 @@
 import phina from 'phina.js'
 import state from '../config/state'
 import maskImage from '../utils/maskImage'
+import Piece from './Piece'
 export default class Explosion extends phina.display.DisplayElement {
   constructor (options) {
     super()
@@ -36,7 +37,7 @@ export default class Explosion extends phina.display.DisplayElement {
   }
   piece (pieceImage) {
     Number(this.level).times(() => {
-      Piece(pieceImage, 3, 3)
+      new Piece(pieceImage, 3, 3)
       .addChildTo(this)
       .setRotation(Math.randint(0, 360))
       .setPosition(Math.randint(-15, 15), Math.randint(-15, 15))
