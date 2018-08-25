@@ -3,13 +3,11 @@ import phina from 'phina.js'
 import { settings } from './config/variables'
 import assets from './config/assets'
 import scenes from './config/scenes'
-import components from './config/components'
 import LoadingScene from './class/LoadingScene'
 import TitleScene from './class/TitleScene'
 import GameScene from './class/GameScene'
 phina.globalize()
 
-components.forEach(component => phina.define(component.className, component.class))
 phina.register('LoadingScene', option => new LoadingScene(option))
 phina.register('TitleScene', option => new TitleScene(option))
 phina.register('GameScene', option => new GameScene(option))
