@@ -1,5 +1,6 @@
 import state from '../config/state'
 import { fields } from '../config/variables'
+import InterfaceField from './InterfaceField'
 import Tile from './Tile'
 export default class Field extends phina.display.DisplayElement {
   constructor () {
@@ -12,7 +13,7 @@ export default class Field extends phina.display.DisplayElement {
     this.bullet = DisplayElement().addChildTo(this)
     this.object = DisplayElement().addChildTo(this)
     // Interface
-    this.interfaceField = InterfaceField().addChildTo(this)
+    this.interfaceField = new InterfaceField().addChildTo(this)
   }
   setField (fieldName) {
     this.fieldName = fieldName
