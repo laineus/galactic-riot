@@ -1,9 +1,9 @@
-import missionResult from '../utils/missionResult'
 import state from '../config/state'
 import { colors } from '../config/variables'
 import Field from './Field'
 import Camera from './Camera'
 import InterfaceScreen from './InterfaceScreen'
+import MissionResult from './MissionResult'
 export default class GameScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -37,11 +37,11 @@ export default class GameScene extends phina.display.DisplayScene {
     }
   }
   missionCompleted () {
-    missionResult(true, 'Time:\nKill:\nMember Death:\nRescue:\n\nRank:\nReward:', '1:14\n10\n12\n5\n\nS\n$1,000').addChildTo(this)
+    new MissionResult(true, 'Time:\nKill:\nMember Death:\nRescue:\n\nRank:\nReward:', '1:14\n10\n12\n5\n\nS\n$1,000').addChildTo(this)
     this.inProgress = false
   }
   missionFailed () {
-    missionResult(false, 'Loss:', '$1,000').addChildTo(this)
+    new MissionResult(false, 'Loss:', '$1,000').addChildTo(this)
     this.inProgress = false
   }
 }
