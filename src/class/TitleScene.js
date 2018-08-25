@@ -4,6 +4,7 @@ import saveData from '../utils/saveData'
 import Cursor from '../utils/Cursor'
 import labelList from '../utils/labelList'
 import BlurLabel from './BlurLabel'
+import MissionSelect from './MissionSelect'
 import ArsenalSelect from './ArsenalSelect'
 export default class TitleScene extends phina.display.DisplayScene {
   constructor (option) {
@@ -60,7 +61,7 @@ export default class TitleScene extends phina.display.DisplayScene {
   addMissionSelect () {
     this.removeAll()
     this.logo.alpha = 0
-    this.missionSelect = MissionSelect(this, () => this.addMenu()).addChildTo(this)
+    this.missionSelect = new MissionSelect(this, () => this.addMenu()).addChildTo(this)
   }
   addArsenalSelect () {
     this.removeAll()
