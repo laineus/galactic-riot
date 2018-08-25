@@ -1,5 +1,6 @@
 import state from '../config/state'
 import { fields } from '../config/variables'
+import Tile from './Tile'
 export default class Field extends phina.display.DisplayElement {
   constructor () {
     super()
@@ -23,8 +24,8 @@ export default class Field extends phina.display.DisplayElement {
     this.object.children.clear()
     if (this.bg) this.bg.remove()
     if (this.fg) this.fg.remove()
-    this.bg = Tile('map1_bg', this.width, this.height).addChildTo(this).setOrigin(0, 0)
-    this.fg = Tile('map1_fg', this.width * 1.5, this.height * 1.5).addChildTo(this).setOrigin(0, 0)
+    this.bg = new Tile('map1_bg', this.width, this.height).addChildTo(this).setOrigin(0, 0)
+    this.fg = new Tile('map1_fg', this.width * 1.5, this.height * 1.5).addChildTo(this).setOrigin(0, 0)
     this.fg.update = () => {
       if (!this.camera) return
       this.fg.x = this.x * 50 / this.camera.zoom

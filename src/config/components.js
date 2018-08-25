@@ -1,5 +1,4 @@
 export default [
-  { className: 'Tile', class: require('../class/Tile.js').default },
   { className: 'SlicedSprite', class: require('../class/SlicedSprite.js').default },
   { className: 'Piece', class: require('../class/Piece.js').default },
   { className: 'InterfaceScreen', class: require('../class/InterfaceScreen.js').default },
