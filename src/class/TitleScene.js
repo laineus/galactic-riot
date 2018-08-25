@@ -1,6 +1,6 @@
 import { settings, colors } from '../config/variables'
 import saveData from '../utils/saveData'
-import Cursor from '../utils/Cursor'
+import Cursor from './Cursor'
 import labelList from '../utils/labelList'
 import BlurLabel from './BlurLabel'
 import MissionSelect from './MissionSelect'
@@ -20,8 +20,6 @@ export default class TitleScene extends phina.display.DisplayScene {
   update (app) {
     if (this.startLabel) {
       if (app.keyboard.getKeyDown('Z')) this.addMenu()
-    } else if (this.list) {
-      this.list.cursor.update(app.keyboard)
     }
   }
   addStartLabel () {
@@ -55,7 +53,7 @@ export default class TitleScene extends phina.display.DisplayScene {
       }
     }, () => {
       this.addStartLabel()
-    }, index)
+    }, index).addChildTo(this)
   }
   addMissionSelect () {
     this.removeAll()

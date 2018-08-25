@@ -2,7 +2,7 @@ import { settings } from '../config/variables'
 import state from '../config/state'
 import missions from '../mission/missions'
 import MissionSelectItem from './MissionSelectItem'
-import Cursor from '../utils/Cursor'
+import Cursor from './Cursor'
 export default class MissionSelect extends phina.display.DisplayElement {
   constructor (scene, cancel) {
     super()
@@ -15,9 +15,6 @@ export default class MissionSelect extends phina.display.DisplayElement {
     }, (current) => {
       state.mission = current.mission
       scene.exit('Game')
-    }, cancel)
-  }
-  update (app) {
-    this.cursor.update(app.keyboard)
+    }, cancel).addChildTo(this)
   }
 }

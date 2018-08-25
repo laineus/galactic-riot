@@ -1,5 +1,7 @@
-export default class Cursor {
+export default class Cursor extends phina.app.Element {
   constructor (list, onUpdate, onEnter, onCancel, index = 0) {
+    super()
+    Object.setPrototypeOf(this, Cursor.prototype)
     this.list = list
     this.onUpdate = onUpdate
     this.onEnter = onEnter
@@ -23,7 +25,8 @@ export default class Cursor {
   get other () {
     return this.list.filter((_, i) => i !== this.index)
   }
-  update (key) {
+  update (app) {
+    const key = app.keyboard
     if (this.firstFrame) return this.firstFrame = false
     if (key.getKeyDown('up') || (this.delay === 0 && key.getKey('up'))) {
       this.index--

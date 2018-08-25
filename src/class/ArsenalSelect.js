@@ -1,5 +1,5 @@
 import { settings, colors } from '../config/variables'
-import Cursor from '../utils/Cursor'
+import Cursor from './Cursor'
 import BlurLabel from './BlurLabel'
 export default class ArsenalSelect extends phina.display.DisplayElement {
   constructor (scene, cancel) {
@@ -13,10 +13,7 @@ export default class ArsenalSelect extends phina.display.DisplayElement {
       other.forEach(v => v.active = false)
     }, (current) => {
       if (current.label.text === 'Exit') cancel()
-    }, cancel)
-  }
-  update (app) {
-    this.cursor.update(app.keyboard)
+    }, cancel).addChildTo(this)
   }
   item (name) {
     const item = RectangleShape({
