@@ -3,10 +3,10 @@ import maskImage from '../utils/maskImage'
 const WIDTH = 160
 const HEIGHT = 120
 const SIZE = 0.05
-export default {
-  superClass: 'RectangleShape',
-  init (field, player) {
-    this.superInit({ width: WIDTH, height: HEIGHT, fill: colors.black_05, strokeWidth: 0, padding: 0 })
+export default class Radar extends phina.display.RectangleShape {
+  constructor (field, player) {
+    super({ width: WIDTH, height: HEIGHT, fill: colors.black_05, strokeWidth: 0, padding: 0 })
+    Object.setPrototypeOf(this, Radar.prototype)
     const GATE_IMAGE = maskImage.getImage('gate', colors.white)
     this.clip = canvas => canvas.beginPath().rect(0, 0, WIDTH, HEIGHT)
     this.area = RectangleShape({

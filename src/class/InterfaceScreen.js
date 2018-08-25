@@ -1,5 +1,6 @@
 import { settings, colors } from '../config/variables'
 import state from '../config/state'
+import Radar from './Radar'
 export default class InterfaceScreen extends phina.display.DisplayElement {
   constructor () {
     super()
@@ -17,6 +18,6 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
   }
   initRadar (field, player) {
     if (this.radar) this.radar.remove()
-    this.radar = Radar(field, player).setPosition(20, 20).setOrigin(0, 0).addChildTo(this)
+    this.radar = new Radar(field, player).setPosition(20, 20).setOrigin(0, 0).addChildTo(this)
   }
 }
