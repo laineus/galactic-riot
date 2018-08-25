@@ -1,9 +1,9 @@
 import state from '../config/state'
-export default {
-  superClass: 'DisplayElement',
-  name: 'Gate',
-  init (fieldName, x, y) {
-    this.superInit()
+export default class Gate extends phina.display.DisplayElement {
+  constructor (fieldName, x, y) {
+    super()
+    Object.setPrototypeOf(this, Gate.prototype)
+    this.name = 'Gate'
     this.fieldName = fieldName
     this.fieldX = x
     this.fieldY = y
@@ -13,7 +13,7 @@ export default {
     this.gate = Sprite('gate').addChildTo(this).setScale(0.33, 0.33)
     this.blur2 = Sprite('gate_blur').addChildTo(this).setScale(1, 1)
     this.blur2.blendMode = 'lighter'
-  },
+  }
   update () {
     if (!state.player) return
     if (state.player.distanceDiff(this) < 50 && !this.active) {
