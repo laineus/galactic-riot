@@ -1,4 +1,3 @@
-import phina from 'phina.js'
 import state from '../config/state'
 import maskImage from '../utils/maskImage'
 import Piece from './Piece'

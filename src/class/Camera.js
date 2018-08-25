@@ -1,4 +1,3 @@
-import phina from 'phina.js'
 import { settings } from '../config/variables'
 export default class Camera extends phina.display.DisplayElement {
   constructor () {

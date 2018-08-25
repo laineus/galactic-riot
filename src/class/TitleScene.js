@@ -1,4 +1,3 @@
-import phina from 'phina.js'
 import { settings, colors } from '../config/variables'
 import saveData from '../utils/saveData'
 import Cursor from '../utils/Cursor'

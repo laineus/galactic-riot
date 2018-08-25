@@ -1,4 +1,3 @@
-import phina from 'phina.js'
 import { colors } from '../config/variables'
 export default class BlurLabel extends phina.display.Label {
   constructor (option) {

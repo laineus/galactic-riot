@@ -1,4 +1,3 @@
-import phina from 'phina.js'
 export default class Tile extends phina.display.Sprite {
   constructor (image, width, height) {
     super(image)

@@ -1,4 +1,3 @@
-import phina from 'phina.js'
 import { settings, colors } from '../config/variables'
 export default class LoadingScene extends phina.display.DisplayScene {
   constructor (option) {

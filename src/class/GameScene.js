@@ -1,4 +1,3 @@
-import phina from 'phina.js'
 import missionResult from '../utils/missionResult'
 import state from '../config/state'
 import { colors } from '../config/variables'

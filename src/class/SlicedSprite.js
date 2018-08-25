@@ -1,4 +1,3 @@
-import phina from 'phina.js'
 export default class SlicedSprite extends phina.display.Sprite {
   constructor (image, x, y, index) {
     super(image)
