@@ -4,9 +4,12 @@ import { settings } from './config/variables'
 import assets from './config/assets'
 import scenes from './config/scenes'
 import components from './config/components'
+import LoadingScene from './class/LoadingScene'
 phina.globalize()
 
 components.forEach(component => phina.define(component.className, component.class))
+phina.register('LoadingScene', option => new LoadingScene(option))
+
 phina.main(() => {
   const game = GameApp({
     title: settings.GAME_TITLE,
