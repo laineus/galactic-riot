@@ -71,6 +71,7 @@ export default class TitleScene extends phina.display.DisplayScene {
       this.startLabel = null
     }
     if (Array.isArray(this.list)) {
+      this.list.cursor.remove()
       this.list.forEach(v => v.remove())
       this.list = null
     }
