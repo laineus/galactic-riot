@@ -4,7 +4,6 @@ import Cursor from './Cursor'
 import labelList from '../utils/labelList'
 import BlurLabel from './BlurLabel'
 import MissionSelect from './MissionSelect'
-import ArsenalSelect from './ArsenalSelect'
 export default class TitleScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -14,7 +13,7 @@ export default class TitleScene extends phina.display.DisplayScene {
     this.logo = Sprite('logo').addChildTo(this).setScale(0.5, 0.5)
                               .setPosition(this.gridX.center(), this.gridY.span(10))
     this.blendMode = 'lighter'
-    option.skip ? this.addMenu() : this.addStartLabel()
+    option.skip ? this.addMenu(option.skip) : this.addStartLabel()
     saveData.load()
   }
   update (app) {
@@ -48,7 +47,7 @@ export default class TitleScene extends phina.display.DisplayScene {
     }, (current) => {
       switch (current.text) {
         case 'Mission': return this.addMissionSelect()
-        case 'Arsenal': return this.addArsenalSelect()
+        case 'Arsenal': return this.exit('Arsenal')
         case 'Exit': return this.addStartLabel()
       }
     }, () => {
@@ -59,11 +58,6 @@ export default class TitleScene extends phina.display.DisplayScene {
     this.removeAll()
     this.logo.alpha = 0
     this.missionSelect = new MissionSelect(this, () => this.addMenu()).addChildTo(this)
-  }
-  addArsenalSelect () {
-    this.removeAll()
-    this.logo.alpha = 0
-    this.arsenalSelect = new ArsenalSelect(this, () => this.addMenu(1)).addChildTo(this)
   }
   removeAll () {
     if (this.startLabel) {
@@ -78,10 +72,6 @@ export default class TitleScene extends phina.display.DisplayScene {
     if (this.missionSelect) {
       this.missionSelect.remove()
       this.missionSelect = null
-    }
-    if (this.arsenalSelect) {
-      this.arsenalSelect.remove()
-      this.arsenalSelect = null
     }
   }
 }

@@ -2,7 +2,7 @@ import { settings, colors } from '../config/variables'
 import Cursor from './Cursor'
 import BlurLabel from './BlurLabel'
 export default class ArsenalSelect extends phina.display.DisplayElement {
-  constructor (scene, cancel) {
+  constructor (select, cancel) {
     super()
     Object.setPrototypeOf(this, ArsenalSelect.prototype)
     const LABELS = ['Fighter', 'Main Weapon', 'Sub Weapon', 'Military Force', 'Exit']
@@ -11,9 +11,7 @@ export default class ArsenalSelect extends phina.display.DisplayElement {
     this.cursor = new Cursor(list, (current, other) => {
       current.active = true
       other.forEach(v => v.active = false)
-    }, (current) => {
-      if (current.label.text === 'Exit') cancel()
-    }, cancel).addChildTo(this)
+    }, select, cancel).addChildTo(this)
   }
   item (name) {
     const item = RectangleShape({

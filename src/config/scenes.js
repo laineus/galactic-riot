@@ -1,5 +1,6 @@
 import LoadingScene from '../class/LoadingScene'
 import TitleScene from '../class/TitleScene'
+import ArsenalScene from '../class/ArsenalScene'
 import GameScene from '../class/GameScene'
 export default [
   {
@@ -11,6 +12,11 @@ export default [
     className: 'TitleScene',
     label: 'Title',
     init: option => new TitleScene(option)
+  },
+  {
+    className: 'ArsenalScene',
+    label: 'Arsenal',
+    init: option => new ArsenalScene(option)
   },
   {
     className: 'GameScene',
