@@ -6,16 +6,16 @@ export default class ArsenalScene extends phina.display.DisplayScene {
     Object.setPrototypeOf(this, ArsenalScene.prototype)
     this.backgroundColor = colors.black
     this.bg = Sprite('title').addChildTo(this).setOrigin(0, 0).setScale(0.75, 0.75)
-    this.arsenalSelect = new ArsenalSelect(current => this.select(current), () => this.back()).addChildTo(this)
+    this.arsenal = new ArsenalSelect(current => this.select(current), () => this.cancel()).setPosition(295, 95).addChildTo(this)
   }
   select (current) {
-    switch (current.label.text) {
+    switch (current.name) {
       case 'Exit':
-        this.back()
+        this.cancel()
         break
     }
   }
-  back () {
+  cancel () {
     this.exit('Title', { skip: 1 })
   }
 }
