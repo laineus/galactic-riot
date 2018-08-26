@@ -1,4 +1,3 @@
-import { colors } from '../config/variables'
 import Box from './Box'
 import Text from './Text'
 export default class ArsenalSelect extends phina.display.DisplayElement {
