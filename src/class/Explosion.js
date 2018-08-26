@@ -1,9 +1,10 @@
 import state from '../config/state'
 import maskImage from '../utils/maskImage'
-export default {
-  superClass: 'DisplayElement',
-  init (options) {
-    this.superInit()
+import Piece from './Piece'
+export default class Explosion extends phina.display.DisplayElement {
+  constructor (options) {
+    super()
+    Object.setPrototypeOf(this, Explosion.prototype)
     const x = options.x ? options.x : 0
     const y = options.y ? options.y : 0
     if (!state.field.camera.inVision(x, y)) return
@@ -14,7 +15,7 @@ export default {
     if (options.piece) this.piece(options.piece)
     if (options.shock) state.field.camera.addShock(options.shock)
     setTimeout(() => this.remove(), 1000)
-  },
+  }
   explosion () {
     Array('#321', '#D30', '#EA0', '#FBA').forEach((color, i) => {
       const img = i < 2 ? 'smoke' : 'light'
@@ -32,10 +33,10 @@ export default {
         if (i) sprite.blendMode = 'lighter'
       })
     })
-  },
+  }
   piece (pieceImage) {
     Number(this.level).times(() => {
-      Piece(pieceImage, 3, 3)
+      new Piece(pieceImage, 3, 3)
       .addChildTo(this)
       .setRotation(Math.randint(0, 360))
       .setPosition(Math.randint(-15, 15), Math.randint(-15, 15))

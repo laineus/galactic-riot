@@ -1,17 +1,17 @@
 import { settings } from '../config/variables'
-export default {
-  superClass: 'DisplayElement',
-  zoom: 100,
-  field: null,
-  target: null,
-  shock: 0,
-  diffX: 0,
-  diffY: 0,
-  init () {
-    this.superInit()
+export default class Camera extends phina.display.DisplayElement {
+  constructor () {
+    super()
+    Object.setPrototypeOf(this, Camera.prototype)
     this.physical.friction = 0.9
     this.physical.velocity.set(0, 0)
-  },
+    this.zoom = 100
+    this.field = null
+    this.target = null
+    this.shock = 0
+    this.diffX = 0
+    this.diffY = 0
+  }
   update () {
     if (!this.target) return
     this.updateShock()
@@ -23,15 +23,15 @@ export default {
     const x = this.getScrollPositon(settings.SCREEN_WIDTH, posX, this.field.width)
     const y = this.getScrollPositon(settings.SCREEN_HEIGHT, posY, this.field.height)
     this.field.setPosition(x, y)
-  },
+  }
   setField (field) {
     this.field = field
     return this
-  },
+  }
   setTarget (target) {
     this.target = target
     return this
-  },
+  }
   updateShock () {
     if (this.shock > 0) {
       this.shock = Math.min(this.shock, 40)
@@ -39,7 +39,7 @@ export default {
       this.physical.velocity.y += Math.randint(-this.shock, this.shock)
       this.shock -= 2
     }
-  },
+  }
   lookTarget () {
     const getTarget = () => {
       const tgt = this.target.targetGroup().find(v => v.inShotRange(this.target))
@@ -61,18 +61,18 @@ export default {
     const diffY = target ? (target.y - this.target.y) * 0.7 : this.target.sin * 200
     this.diffX += Math.abs(diffX - this.diffX) > 5 ? Math.sign(diffX - this.diffX) * 5 : Math.sign(diffX - this.diffX)
     this.diffY += Math.abs(diffY - this.diffY) > 5 ? Math.sign(diffY - this.diffY) * 5 : Math.sign(diffY - this.diffY)
-  },
+  }
   addShock (shock) {
     this.shock += shock
     return this
-  },
+  }
   getScrollPositon (screenSize, playerPosition, fieldSize) {
     playerPosition *= this.zoom * 0.01
     fieldSize *= this.zoom * 0.01
     if (playerPosition < (screenSize / 2)) return 0
     if (playerPosition > fieldSize - (screenSize / 2)) return -fieldSize + screenSize
     return (screenSize / 2) - playerPosition
-  },
+  }
   inVision (x, y) {
     x *= this.zoom * 0.01
     y *= this.zoom * 0.01

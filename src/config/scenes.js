@@ -1,10 +1,26 @@
+import LoadingScene from '../class/LoadingScene'
+import TitleScene from '../class/TitleScene'
+import ArsenalScene from '../class/ArsenalScene'
+import GameScene from '../class/GameScene'
 export default [
   {
+    className: 'LoadingScene',
+    label: 'Loading',
+    init: option => new LoadingScene(option)
+  },
+  {
     className: 'TitleScene',
-    label: 'Title'
+    label: 'Title',
+    init: option => new TitleScene(option)
+  },
+  {
+    className: 'ArsenalScene',
+    label: 'Arsenal',
+    init: option => new ArsenalScene(option)
   },
   {
     className: 'GameScene',
-    label: 'Game'
+    label: 'Game',
+    init: option => new GameScene(option)
   }
 ]

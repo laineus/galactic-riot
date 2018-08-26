@@ -4,16 +4,14 @@ export default {
   mission: null,
   interface: null,
   save: {
+    money: 1000,
     fighter: 'f1_f',
+    fighters: [0],
     mainWeapon: 'assult',
+    mainWeapons: [0],
     subWeapon: null,
-    resource: {
-      money: 1000,
-      amount: 50,
-      fighters: [0],
-      mainWeapons: [0],
-      subWeapons: [0]
-    },
+    subWeapons: [0],
+    amount: 50,
     mission: 0
   }
 }

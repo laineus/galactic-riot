@@ -1,5 +1,6 @@
 import state from '../config/state'
 import addComputer from '../utils/addComputer'
+import Gate from '../class/Gate'
 const self = {
   name: 'Mission-01',
   count: 0,
@@ -25,7 +26,7 @@ const self = {
       return true
     },
     () => !state.field.enemy.children.length,
-    () => Gate('sublatant_2', 100, 100).setPosition(5600, 3400).setRotation(30).addChildTo(state.field.object),
+    () => new Gate('sublatant_2', 100, 100).setPosition(5600, 3400).setRotation(30).addChildTo(state.field.object),
     () => state.field.is('sublatant_2'),
     () => {
       addComputer(-200, -200, 225, 'enemy', 5)

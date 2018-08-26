@@ -1,8 +1,8 @@
 import { settings, colors } from '../config/variables'
-export default {
-  superClass: 'DisplayScene',
-  init (option) {
-    this.superInit(option)
+export default class LoadingScene extends phina.display.DisplayScene {
+  constructor (option) {
+    super(option)
+    Object.setPrototypeOf(this, LoadingScene.prototype)
     this.backgroundColor = colors.black
     Label({
       text: 'NOW LOADING...',
@@ -28,7 +28,7 @@ export default {
     loader.onprogress = e => gauge.value = e.progress
     loader.onload = () => setTimeout(() => this.onLoad(), 100)
     loader.load(option.assets)
-  },
+  }
   onLoad () {
     this.flare('loaded')
   }
