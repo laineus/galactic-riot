@@ -1,6 +1,6 @@
 import { settings } from '../config/variables'
 import state from '../config/state'
-import missions from '../mission/missions'
+import missions from '../config/missions'
 import MissionSelectItem from './MissionSelectItem'
 import Cursor from './Cursor'
 export default class MissionSelect extends phina.display.DisplayElement {

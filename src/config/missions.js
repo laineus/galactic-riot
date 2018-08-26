@@ -1,5 +1,5 @@
-import mission1 from './mission1'
-import mission2 from './mission2'
+import mission1 from '../mission/mission1'
+import mission2 from '../mission/mission2'
 export default [
   { name: 'Tutorial' },
   mission1,
