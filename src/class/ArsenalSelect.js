@@ -1,6 +1,6 @@
 import { colors } from '../config/variables'
 import Box from './Box'
-import BlurLabel from './BlurLabel'
+import Text from './Text'
 export default class ArsenalSelect extends phina.display.DisplayElement {
   constructor (select, cancel) {
     super()
@@ -14,12 +14,12 @@ export default class ArsenalSelect extends phina.display.DisplayElement {
       { name: 'Military Force', move: [{ key: 'up', index: 0 }, { key: 'down', index: 4 }] },
       { name: 'Exit', move: [{ key: 'up', index: 3 }] }
     ]
-    this.list[0].image = this.fighter().addChildTo(this).setPosition(120, 120)
+    this.list[0].image = this.fighter(this.list[0]).addChildTo(this).setPosition(120, 120)
     this.list[0].image.active = true
-    this.list[1].image = this.main().addChildTo(this).setPosition(315, 55)
-    this.list[2].image = this.sub().addChildTo(this).setPosition(315, 185)
-    this.list[3].image = this.force().addChildTo(this).setPosition(185, 280)
-    this.list[4].image = this.exit().addChildTo(this).setPosition(185, 336)
+    this.list[1].image = this.main(this.list[1]).addChildTo(this).setPosition(315, 55)
+    this.list[2].image = this.sub(this.list[2]).addChildTo(this).setPosition(315, 185)
+    this.list[3].image = this.force(this.list[3]).addChildTo(this).setPosition(185, 280)
+    this.list[4].image = this.exit(this.list[4]).addChildTo(this).setPosition(185, 336)
     this.listIndex = 0
   }
   update (app) {
@@ -35,39 +35,33 @@ export default class ArsenalSelect extends phina.display.DisplayElement {
       }
     })
   }
-  fighter () {
+  fighter (label) {
     const item = new Box(240, 240)
     item.image = Sprite('f1_f').setScale(0.5, 0.5).setRotation(270).addChildTo(item)
+    item.label = new Text(label.name, 14).setOrigin(0, 0).setPosition(-115, -115).addChildTo(item)
     return item
   }
-  main () {
+  main (label) {
     const item = new Box(110, 110)
-    item.image = Sprite('f1_f').setScale(0.25, 0.25).setRotation(270).addChildTo(item)
+    item.image = Sprite('f1_f').setScale(0.2, 0.2).setRotation(270).addChildTo(item)
+    item.label = new Text(label.name, 12).setOrigin(0, 0).setPosition(-55, -55).addChildTo(item)
     return item
   }
-  sub () {
+  sub (label) {
     const item = new Box(110, 110)
-    item.image = Sprite('f1_f').setScale(0.25, 0.25).setRotation(270).addChildTo(item)
+    item.image = Sprite('f1_f').setScale(0.2, 0.2).setRotation(270).addChildTo(item)
+    item.label = new Text(label.name, 12).setOrigin(0, 0).setPosition(-55, -55).addChildTo(item)
     return item
   }
-  force () {
+  force (label) {
     const item = new Box(370, 40)
-    item.image = new BlurLabel({
-      text: 'Military Force',
-      fontFamily: 'aldrich',
-      fontSize: 15,
-      fill: colors.white
-    })
+    item.key = new Text(`${label.name} :`).setOrigin(0, 0.5).setPosition(-175, 0).addChildTo(item)
+    item.value = new Text('50').setOrigin(1, 0.5).setPosition(175, 0).addChildTo(item)
     return item
   }
-  exit () {
+  exit (label) {
     const item = new Box(110, 32)
-    item.image = new BlurLabel({
-      text: 'Exit',
-      fontFamily: 'aldrich',
-      fontSize: 15,
-      fill: colors.white
-    }).addChildTo(item)
+    item.image = new Text(label.name).addChildTo(item)
     return item
   }
 }
