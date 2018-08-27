@@ -1,11 +1,13 @@
 export default class Cursor extends phina.app.Element {
-  constructor (list, onUpdate, onEnter, onCancel, index = 0) {
+  constructor (list, onUpdate, onEnter, onCancel, vertical = true, index = 0) {
     super()
     Object.setPrototypeOf(this, Cursor.prototype)
     this.list = list
     this.onUpdate = onUpdate
     this.onEnter = onEnter
     this.onCancel = onCancel
+    this.prev = vertical ? 'up' : 'left'
+    this.next = vertical ? 'down' : 'right'
     this.index = index
     this.delay = 0
     this.firstFrame = true
@@ -28,13 +30,13 @@ export default class Cursor extends phina.app.Element {
   update (app) {
     const key = app.keyboard
     if (this.firstFrame) return this.firstFrame = false
-    if (key.getKeyDown('up') || (this.delay === 0 && key.getKey('up'))) {
+    if (key.getKeyDown(this.prev) || (this.delay === 0 && key.getKey(this.prev))) {
       this.index--
-      this.delay = key.getKeyDown('up') ? 8 : 2
+      this.delay = key.getKeyDown(this.prev) ? 8 : 2
     }
-    if (key.getKeyDown('down') || (this.delay === 0 && key.getKey('down'))) {
+    if (key.getKeyDown(this.next) || (this.delay === 0 && key.getKey(this.next))) {
       this.index++
-      this.delay = key.getKeyDown('down') ? 8 : 2
+      this.delay = key.getKeyDown(this.next) ? 8 : 2
     }
     if (this.delay > 0) this.delay--
     if (key.getKeyDown('Z') && this.onEnter) this.onEnter(this.current)

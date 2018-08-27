@@ -52,7 +52,7 @@ export default class TitleScene extends phina.display.DisplayScene {
       }
     }, () => {
       this.addStartLabel()
-    }, index).addChildTo(this)
+    }, true, index).addChildTo(this)
   }
   addMissionSelect () {
     this.removeAll()

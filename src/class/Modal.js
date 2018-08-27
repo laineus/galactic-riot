@@ -19,7 +19,7 @@ export default class Modal extends Box {
     this.cursor = new Cursor(list, (current, other) => {
       current.active = true
       other.forEach(v => v.active = false)
-    }, () => null, () => null).addChildTo(this)
+    }, () => null, () => null, false).addChildTo(this)
   }
   update () {
   }
