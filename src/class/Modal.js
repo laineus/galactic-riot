@@ -3,7 +3,7 @@ import Cursor from './Cursor'
 import Box from './Box'
 import Text from './Text'
 export default class Modal extends Box {
-  constructor () {
+  constructor (select, cancel) {
     super(480, 150)
     Object.setPrototypeOf(this, Modal.prototype)
     this.setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
@@ -19,7 +19,7 @@ export default class Modal extends Box {
     this.cursor = new Cursor(list, (current, other) => {
       current.active = true
       other.forEach(v => v.active = false)
-    }, () => null, () => null, false).addChildTo(this)
+    }, select, cancel, false).addChildTo(this)
   }
   update () {
   }
