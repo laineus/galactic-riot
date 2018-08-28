@@ -11,7 +11,7 @@ export default class ArsenalScene extends phina.display.DisplayScene {
     Object.setPrototypeOf(this, ArsenalScene.prototype)
     this.backgroundColor = colors.black
     this.bg = Sprite('title').addChildTo(this).setOrigin(0, 0).setScale(0.75, 0.75)
-    this.arsenal = new ArsenalSelect(current => this.select(current), () => this.cancel()).setPosition(295, 95 + 20).addChildTo(this)
+    this.arsenal = new ArsenalSelect(this.select.bind(this), this.cancel.bind(this)).setPosition(295, 95 + 20).addChildTo(this)
     this.box = new Box(settings.SCREEN_WIDTH, 40).setOrigin(0, 0).setPosition(0, 20).addChildTo(this)
     this.title = new Text('Arsenal', 24).setOrigin(0, 0).setPosition(25, 20).addChildTo(this)
     this.budgetLabel = new Text('Budget :').setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 150, 25).addChildTo(this)

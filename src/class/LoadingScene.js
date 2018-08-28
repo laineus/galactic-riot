@@ -26,7 +26,7 @@ export default class LoadingScene extends phina.display.DisplayScene {
     }).addChildTo(this)
     const loader = AssetLoader()
     loader.onprogress = e => gauge.value = e.progress
-    loader.onload = () => setTimeout(() => this.onLoad(), 100)
+    loader.onload = () => setTimeout(this.onLoad.bind(this), 100)
     loader.load(option.assets)
   }
   onLoad () {
