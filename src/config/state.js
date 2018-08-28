@@ -1,4 +1,5 @@
 export default {
+  app: null,
   field: null,
   player: null,
   mission: null,
