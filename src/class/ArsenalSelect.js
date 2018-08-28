@@ -20,8 +20,16 @@ export default class ArsenalSelect extends phina.display.DisplayElement {
     this.list[3].image = this.force(this.list[3]).addChildTo(this).setPosition(185, 280)
     this.list[4].image = this.exit(this.list[4]).addChildTo(this).setPosition(185, 336)
     this.listIndex = 0
+    this.start()
+  }
+  start () {
+    this.awake = true
+  }
+  stop () {
+    this.awake = false
   }
   update (app) {
+    if (!this.awake) return
     this.move(app.keyboard)
     if (app.keyboard.getKeyDown('Z')) this.select(this.list[this.listIndex])
     if (app.keyboard.getKeyDown('X')) this.cancel()
