@@ -11,6 +11,13 @@ export default class Cursor extends phina.app.Element {
     this.index = index
     this.delay = 0
     this.firstFrame = true
+    this.start()
+  }
+  start () {
+    this.awake = true
+  }
+  stop () {
+    this.awake = false
   }
   get index () {
     return this._index
@@ -28,6 +35,7 @@ export default class Cursor extends phina.app.Element {
     return this.list.filter((_, i) => i !== this.index)
   }
   update (app) {
+    if (!this.awake) return
     const key = app.keyboard
     if (this.firstFrame) return this.firstFrame = false
     if (key.getKeyDown(this.prev) || (this.delay === 0 && key.getKey(this.prev))) {
