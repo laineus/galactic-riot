@@ -1,26 +1,39 @@
-import { settings } from '../config/variables'
+import { settings, colors } from '../config/variables'
+import state from '../config/state'
 import Cursor from './Cursor'
+import PauseScene from './PauseScene'
 import Box from './Box'
 import Text from './Text'
-export default class Modal extends Box {
+export default class Modal extends PauseScene {
   constructor (select, cancel) {
-    super(480, 150)
+    super(colors.gray_05)
     Object.setPrototypeOf(this, Modal.prototype)
-    this.setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
-    new Text('Are you alright ?', 16).setPosition(0, -25).addChildTo(this)
-    const labels = ['OK', 'Cancel']
+    this.modal = this.modal('Are you alright ?', ['OK', 'Cancel'], select, cancel).addChildTo(this)
+    state.app.pushScene(this)
+  }
+  modal (text, labels, select, cancel) {
+    const modal = new Box(480, 150).setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
+    modal.text = new Text(text, 16).setPosition(0, -25).addChildTo(modal)
     const list = labels.map((v, i) => {
-      const item = new Box(120, 32).addChildTo(this)
-      new Text(v).addChildTo(item)
+      const item = new Box(120, 32).addChildTo(modal)
+      item.name = v
+      item.text = new Text(v).addChildTo(item)
       if (labels.length === 2) item.x += i === 0 ? -80 : 80
       item.y += 35
       return item
     })
-    this.cursor = new Cursor(list, (current, other) => {
+    modal.cursor = new Cursor(list, (current, other) => {
       current.active = true
       other.forEach(v => v.active = false)
-    }, select, cancel, false).addChildTo(this)
-  }
-  update () {
+    }, current => {
+      this.remove()
+      this.exit()
+      select(current)
+    }, () => {
+      this.remove()
+      this.exit()
+      cancel()
+    }, false).addChildTo(modal)
+    return modal
   }
 }

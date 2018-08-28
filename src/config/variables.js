@@ -11,6 +11,9 @@ export const colors = {
   black: '#000',
   black_05: 'rgba(0, 0, 0, 0.5)',
   white: '#FFF',
+  white_05: 'rgba(255, 255, 255, 0.5)',
+  gray: 'rgb(127, 127, 127)',
+  gray_05: 'rgba(127, 127, 127, 0.5)',
   blue: '#0cfcfc',
   green: '#53f623',
   pink: '#fc027d'
