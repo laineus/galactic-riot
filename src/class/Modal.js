@@ -6,7 +6,7 @@ import Box from './Box'
 import Text from './Text'
 export default class Modal extends PauseScene {
   constructor (select, cancel) {
-    super(colors.gray_05)
+    super(colors.dark_07)
     Object.setPrototypeOf(this, Modal.prototype)
     this.modal = this.modal('Are you alright ?', ['OK', 'Cancel'], select, cancel).addChildTo(this)
     state.app.pushScene(this)
