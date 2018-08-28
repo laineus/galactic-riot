@@ -31,12 +31,23 @@ export const fields = {
     height: 3000
   }
 }
-export const fighters = {
-  f1_f: {
-    img: 'f1_f.png',
+export const fighters = [
+  {
+    name: 'f1',
+    img: 'f1_f',
+    speed: 7
+  },
+  {
+    name: 'f2',
+    img: 'f2_f',
+    speed: 7
+  },
+  {
+    name: 'f3',
+    img: 'f3_f',
     speed: 7
   }
-}
+]
 export const mainWeapons = [
   { name: 'assult', image: 'laser', damage: 35, delay: 5, speed: 50, isHoming: false, twinDiff: false },
   { name: 'gatling', image: 'laser', damage: 15, delay: 3, speed: 50, isHoming: false, twinDiff: 15 },
