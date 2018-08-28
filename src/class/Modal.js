@@ -8,10 +8,10 @@ export default class Modal extends PauseScene {
   constructor (select, cancel) {
     super(colors.dark_07)
     Object.setPrototypeOf(this, Modal.prototype)
-    this.modal = this.modal('Are you alright ?', ['OK', 'Cancel'], select, cancel).addChildTo(this)
+    this.modal = this.getModal('Are you alright ?', ['OK', 'Cancel'], select, cancel).addChildTo(this)
     state.app.pushScene(this)
   }
-  modal (text, labels, select, cancel) {
+  getModal (text, labels, select, cancel) {
     const modal = new Box(480, 150).setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
     modal.text = new Text(text, 16).setPosition(0, -25).addChildTo(modal)
     const list = labels.map((v, i) => {
@@ -28,11 +28,11 @@ export default class Modal extends PauseScene {
     }, current => {
       this.remove()
       this.exit()
-      select(current)
+      if (select) select(current)
     }, () => {
       this.remove()
       this.exit()
-      cancel()
+      if (cancel) cancel()
     }, false).addChildTo(modal)
     return modal
   }

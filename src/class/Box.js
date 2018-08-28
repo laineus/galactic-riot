@@ -13,7 +13,6 @@ export default class Box extends phina.display.RectangleShape {
       padding: 0
     })
     Object.setPrototypeOf(this, Box.prototype)
-    this.setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
     this.active = false
   }
   update () {
