@@ -4,6 +4,7 @@ import intToString from '../utils/intToString'
 import ArsenalSelect from './ArsenalSelect'
 import Box from './Box'
 import Text from './Text'
+import Modal from './Modal'
 export default class ArsenalScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -18,6 +19,9 @@ export default class ArsenalScene extends phina.display.DisplayScene {
   }
   select (current) {
     switch (current.name) {
+      case 'Main Weapon':
+        new Modal(v => console.log(v), v => console.log(v)).addChildTo(this)
+        break
       case 'Exit':
         this.cancel()
         break
