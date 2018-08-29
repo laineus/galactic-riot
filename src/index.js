@@ -4,6 +4,7 @@ import { settings } from './config/variables'
 import state from './config/state'
 import assets from './config/assets'
 import scenes from './config/scenes'
+import saveData from './utils/saveData'
 phina.globalize()
 
 scenes.forEach(scene => phina.register(scene.className, scene.init))
@@ -23,3 +24,8 @@ phina.main(() => {
   document.getElementById(settings.DOM_ID).appendChild(app.domElement)
   app.run()
 })
+
+// TODO: remove before release
+// for debug
+window.state = state
+window.saveData = saveData
