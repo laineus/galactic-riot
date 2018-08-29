@@ -10,7 +10,7 @@ const SIZE = 100
 const MARGIN = 10
 export default class FighterSelect extends Box {
   constructor (callback) {
-    super(null, null, colors.dark_07)
+    super(null, null, colors.dark_05)
     Object.setPrototypeOf(this, FighterSelect.prototype)
     this.setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
     this.callback = callback

@@ -15,7 +15,8 @@ export default class ArsenalScene extends phina.display.DisplayScene {
     this.box = new Box(settings.SCREEN_WIDTH, 40).setOrigin(0, 0).setPosition(0, 20).addChildTo(this)
     this.title = new Text('Arsenal', 24).setOrigin(0, 0).setPosition(25, 20).addChildTo(this)
     this.budgetLabel = new Text('Budget :').setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 150, 25).addChildTo(this)
-    this.budgetValue = new Text(`$ ${intToString(state.save.money)}`).setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 20, 25).addChildTo(this)
+    this.budgetValue = new Text().setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 20, 25).addChildTo(this)
+    this.budgetValue.update = () => this.budgetValue.text = `$ ${intToString(state.save.money)}`
   }
   select (current) {
     switch (current.name) {
