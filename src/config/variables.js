@@ -52,6 +52,27 @@ export const fighters = [
     price: 1000,
     img: 'f3_f',
     speed: 7
+  },
+  {
+    id: 4,
+    name: 'f4',
+    price: 1000,
+    img: 'f4_f',
+    speed: 7
+  },
+  {
+    id: 5,
+    name: 'f5',
+    price: 1000,
+    img: 'f5_f',
+    speed: 7
+  },
+  {
+    id: 6,
+    name: 'f6',
+    price: 1000,
+    img: 'f6_f',
+    speed: 7
   }
 ]
 export const fighterFind = id => fighters.find(v => v.id === id)
