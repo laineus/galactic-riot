@@ -6,10 +6,7 @@ export default class Computer extends Fighter {
     Object.setPrototypeOf(this, Computer.prototype)
     this.setPosition(Math.randint(0, this.field.width), Math.randint(0, this.field.height))
     this.setRotation(Math.randint(0, 360))
-    this.setMobility(3)
-    this.setSpeed(9)
-    this.setMainWeapon('assult')
-    this.setSubWeapon('tailgun')
+    this.setMainWeapon(1)
   }
   update (app) {
     super.update(app)
@@ -21,9 +18,8 @@ export default class Computer extends Fighter {
   setType (type) {
     super.setType(type)
     this.setJet()
-    this.setBody(Sprite(type === 'friend' ? 'f1_f' : 'f6_e').setScale(0.2, 0.2))
-    this.setImageName(type === 'friend' ? 'f1_f' : 'f6_e')
     this.setColorIndex(type === 'friend' ? 2 : 3)
+    this.setFighter(1)
     if (type === 'friend') this.setSubTarget(state.player)
     return this
   }

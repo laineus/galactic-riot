@@ -7,15 +7,12 @@ export default class Player extends Fighter {
     state.player = this
     this.setType('friend')
     this.setJet()
-    this.setBody(Sprite(state.save.fighter).setScale(0.2, 0.2))
-    this.setImageName(state.save.fighter)
     this.setColorIndex(1)
-    this.setMobility(3)
-    this.setSpeed(10)
     this.hp = 500
-    this.addChildTo(state.field.friend)
+    this.setFighter(state.save.fighter)
     this.setMainWeapon(state.save.mainWeapon)
     this.setSubWeapon(state.save.subWeapon)
+    this.addChildTo(state.field.friend)
   }
   update (app) {
     super.update(app)

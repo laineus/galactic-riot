@@ -1,4 +1,4 @@
-import { mainWeapons, subWeapons } from '../config/variables'
+import { fighterFind, mainWeaponFind, subWeaponFind } from '../config/variables'
 import Laser from './Laser'
 import FlyingElement from './FlyingElement'
 export default class Fighter extends FlyingElement {
@@ -14,11 +14,19 @@ export default class Fighter extends FlyingElement {
   isActive () {
     return this.hp > 0
   }
-  setMainWeapon (name) {
-    this.mainWeapon = mainWeapons.find(v => v.name === name)
+  setFighter (id) {
+    this.fighter = fighterFind(id)
+    this.setMobility(this.fighter.mobility)
+    this.setSpeed(this.fighter.speed)
+    const key = this.type === 'friend' ? 'img' : 'img2'
+    this.setBody(Sprite(this.fighter[key]).setScale(0.2, 0.2))
+    this.setImageName(this.fighter[key])
   }
-  setSubWeapon (name) {
-    this.subWeapon = subWeapons.find(v => v.name === name)
+  setMainWeapon (id) {
+    this.mainWeapon = mainWeaponFind(id)
+  }
+  setSubWeapon (id) {
+    this.subWeapon = subWeaponFind(id)
   }
   mainAction () {
     if (this.mainWeaponDelay > 0 || !this.mainWeapon) return

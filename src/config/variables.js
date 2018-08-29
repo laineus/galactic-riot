@@ -7,6 +7,7 @@ export const settings = {
   get SCREEN_HEIGHT_C () { return this.SCREEN_HEIGHT / 2 },
   FPS: 30
 }
+
 export const colors = {
   black: '#000',
   black_05: 'rgba(0, 0, 0, 0.5)',
@@ -21,6 +22,7 @@ export const colors = {
   green: '#53f623',
   pink: '#fc027d'
 }
+
 export const fields = {
   sublatant_1: {
     width: 6000,
@@ -31,58 +33,75 @@ export const fields = {
     height: 3000
   }
 }
+
 export const fighters = [
   {
     id: 1,
     name: 'f1',
     price: 1000,
     img: 'f1_f',
-    speed: 7
+    img2: 'f1_e',
+    speed: 7,
+    mobility: 3
   },
   {
     id: 2,
     name: 'f2',
     price: 1000,
     img: 'f2_f',
-    speed: 7
+    img2: 'f2_e',
+    speed: 7,
+    mobility: 3
   },
   {
     id: 3,
     name: 'f3',
     price: 1000,
     img: 'f3_f',
-    speed: 7
+    img2: 'f3_e',
+    speed: 7,
+    mobility: 3
   },
   {
     id: 4,
     name: 'f4',
     price: 1000,
     img: 'f4_f',
-    speed: 7
+    img2: 'f4_e',
+    speed: 7,
+    mobility: 3
   },
   {
     id: 5,
     name: 'f5',
     price: 1000,
     img: 'f5_f',
-    speed: 7
+    img2: 'f5_e',
+    speed: 7,
+    mobility: 3
   },
   {
     id: 6,
     name: 'f6',
     price: 1000,
     img: 'f6_f',
-    speed: 7
+    img2: 'f6_e',
+    speed: 7,
+    mobility: 3
   }
 ]
 export const fighterFind = id => fighters.find(v => v.id === id)
+
 export const mainWeapons = [
-  { name: 'assult', image: 'laser', damage: 35, delay: 5, speed: 50, isHoming: false, twinDiff: false },
-  { name: 'gatling', image: 'laser', damage: 15, delay: 3, speed: 50, isHoming: false, twinDiff: 15 },
-  { name: 'twin', image: 'laser', damage: 10, delay: 7, speed: 50, isHoming: false, twinDiff: 25 },
-  { name: 'sniper', image: 'laser', damage: 60, delay: 10, speed: 50, isHoming: false, twinDiff: false }
+  { id: 1, name: 'assult', image: 'laser', damage: 35, delay: 5, speed: 50, isHoming: false, twinDiff: false },
+  { id: 2, name: 'gatling', image: 'laser', damage: 15, delay: 3, speed: 50, isHoming: false, twinDiff: 15 },
+  { id: 3, name: 'twin', image: 'laser', damage: 10, delay: 7, speed: 50, isHoming: false, twinDiff: 25 },
+  { id: 4, name: 'sniper', image: 'laser', damage: 60, delay: 10, speed: 50, isHoming: false, twinDiff: false }
 ]
+export const mainWeaponFind = id => mainWeapons.find(v => v.id === id)
+
 export const subWeapons = [
-  { name: 'boost', delay: 20 },
-  { name: 'tailgun', image: 'laser', damage: 20, delay: 5, speed: 50, isHoming: false, twinDiff: false }
+  { id: 1, name: 'boost', delay: 20 },
+  { id: 2, name: 'tailgun', image: 'laser', damage: 20, delay: 5, speed: 50, isHoming: false, twinDiff: false }
 ]
+export const subWeaponFind = id => subWeapons.find(v => v.id === id)
