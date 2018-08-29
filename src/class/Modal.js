@@ -5,10 +5,11 @@ import PauseScene from './PauseScene'
 import Box from './Box'
 import Text from './Text'
 export default class Modal extends PauseScene {
-  constructor (select, cancel) {
+  constructor (text, options, select, cancel) {
     super(colors.dark_07)
     Object.setPrototypeOf(this, Modal.prototype)
-    this.modal = this.getModal('Are you alright ?', ['OK', 'Cancel'], select, cancel).addChildTo(this)
+    if (!options) options = ['OK']
+    this.modal = this.getModal(text, options, select, cancel).addChildTo(this)
     state.app.pushScene(this)
   }
   getModal (text, labels, select, cancel) {
