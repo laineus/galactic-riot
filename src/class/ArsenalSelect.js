@@ -1,3 +1,5 @@
+import { fighterFind } from '../config/variables'
+import state from '../config/state'
 import Box from './Box'
 import Text from './Text'
 export default class ArsenalSelect extends phina.display.DisplayElement {
@@ -44,7 +46,14 @@ export default class ArsenalSelect extends phina.display.DisplayElement {
   }
   fighter (label) {
     const item = new Box(240, 240)
-    item.image = Sprite('f1_f').setScale(0.5, 0.5).setRotation(270).addChildTo(item)
+    item.beforeId = state.save.fighter
+    const fighter = fighterFind(state.save.fighter)
+    item.image = Sprite(fighter.img).setScale(0.5, 0.5).setRotation(270).addChildTo(item)
+    item.image.update = () => {
+      if (item.beforeId === state.save.fighter) return
+      item.beforeId = state.save.fighter
+      item.image.setImage(fighterFind(state.save.fighter).img)
+    }
     item.label = new Text(label.name, 14).setOrigin(0, 0).setPosition(-115, -115).addChildTo(item)
     return item
   }

@@ -6,27 +6,29 @@ import Cursor from './Cursor'
 import Box from './Box'
 import Text from './Text'
 import Modal from './Modal'
-const SIZE = 100
-const MARGIN = 10
+const SIZE = 120
+const MARGIN = 15
 export default class FighterSelect extends Box {
   constructor (callback) {
     super(null, null, colors.dark_05)
     Object.setPrototypeOf(this, FighterSelect.prototype)
     this.setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
     this.callback = callback
-    const width = (fighters.length * SIZE) + (fighters.length - 1 * MARGIN)
+    const defaultIndex = fighters.findIndex(v => v.id === state.save.fighter)
+    const width = (fighters.length * SIZE) + ((fighters.length - 1) * MARGIN)
     this.group = DisplayElement().addChildTo(this)
     this.group.setPosition(width / -2, SIZE / -2)
     this.group.list = fighters.map((fighter, i) => this.item(fighter).addChildTo(this.group).setPosition(i * (SIZE + MARGIN), 0))
     this.group.cursor = new Cursor(this.group.list, (current, other) => {
       current.active = true
       other.forEach(v => v.active = false)
-    }, this.select.bind(this), this.exit.bind(this), false).addChildTo(this)
+    }, this.select.bind(this), this.exit.bind(this), false, defaultIndex).addChildTo(this)
   }
   item (fighter) {
     const item = new Box(SIZE, SIZE, colors.black_05).setOrigin(0, 0)
     item.fighter = fighter
-    item.label = new Text(fighter.name).addChildTo(item).setOrigin(0, 0).setPosition(10, 0)
+    item.img = Sprite(fighter.img).addChildTo(item).setPosition(SIZE / 2, SIZE / 2).setScale(0.25, 0.25).setRotation(270)
+    item.label = new Text(fighter.name).addChildTo(item).setOrigin(0, 0).setPosition(0, 0)
     return item
   }
   select (selected) {
