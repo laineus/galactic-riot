@@ -33,21 +33,28 @@ export const fields = {
 }
 export const fighters = [
   {
+    id: 1,
     name: 'f1',
+    price: 1000,
     img: 'f1_f',
     speed: 7
   },
   {
+    id: 2,
     name: 'f2',
+    price: 1000,
     img: 'f2_f',
     speed: 7
   },
   {
+    id: 3,
     name: 'f3',
+    price: 1000,
     img: 'f3_f',
     speed: 7
   }
 ]
+export const fighterFind = id => fighters.find(v => v.id === id)
 export const mainWeapons = [
   { name: 'assult', image: 'laser', damage: 35, delay: 5, speed: 50, isHoming: false, twinDiff: false },
   { name: 'gatling', image: 'laser', damage: 15, delay: 3, speed: 50, isHoming: false, twinDiff: 15 },
