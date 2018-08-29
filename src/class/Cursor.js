@@ -26,7 +26,7 @@ export default class Cursor extends phina.app.Element {
     if (i < 0) i = this.list.length - 1
     if (i >= this.list.length) i = 0
     this._index = i
-    if (this.onUpdate) this.onUpdate(this.current, this.other)
+    if (this.onUpdate) this.onUpdate(this.current, this.other, this.index)
   }
   get current () {
     return this.list[this.index]
@@ -47,7 +47,7 @@ export default class Cursor extends phina.app.Element {
       this.delay = key.getKeyDown(this.next) ? 8 : 2
     }
     if (this.delay > 0) this.delay--
-    if (key.getKeyDown('Z') && this.onEnter) this.onEnter(this.current)
+    if (key.getKeyDown('Z') && this.onEnter) this.onEnter(this.current, this.index)
     if (key.getKeyDown('X') && this.onCancel) this.onCancel()
   }
 }
