@@ -1,4 +1,6 @@
-import { colors, fighters, settings } from '../config/variables'
+import { colors, fighters, fighterFind, settings } from '../config/variables'
+import state from '../config/state';
+import intToString from '../utils/intToString'
 import Cursor from './Cursor'
 import Box from './Box'
 import Text from './Text'
@@ -22,13 +24,31 @@ export default class FighterSelect extends Box {
   }
   item (fighter) {
     const item = new Box(SIZE, SIZE, colors.black_05).setOrigin(0, 0)
+    item.fighter = fighter
     item.label = new Text(fighter.name).addChildTo(item).setOrigin(0, 0).setPosition(10, 0)
     return item
   }
-  select () {
-    new Modal(selected => {
-      if (selected.name !== 'Cancel') this.exit()
-    }, null)
+  select (selected) {
+    const fighter = fighterFind(selected.fighter.id)
+    if (state.save.fighters.includes(selected.fighter.id)) {
+      // select fighter
+      state.save.fighter = fighter.id
+      this.exit()
+    } else {
+      // buy fighter
+      if (state.save.money >= fighter.price) {
+        new Modal(`Are you sure you want to buy ?\n$ ${intToString(fighter.price)}`, ['Buy', 'Cancel'], button => {
+          if (button.name === 'Buy') {
+            state.save.money -= fighter.price
+            state.save.fighters.push(fighter.id)
+            state.save.fighter = fighter.id
+            this.exit()
+          }
+        }, null)
+      } else {
+        new Modal('Money is not enough.')
+      }
+    }
   }
   exit () {
     this.remove()

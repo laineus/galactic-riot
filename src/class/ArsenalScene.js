@@ -19,7 +19,7 @@ export default class ArsenalScene extends phina.display.DisplayScene {
   }
   select (current) {
     switch (current.name) {
-      case 'Main Weapon':
+      case 'Fighter':
         this.arsenal.stop()
         new FighterSelect(() => this.arsenal.start()).addChildTo(this)
         break
