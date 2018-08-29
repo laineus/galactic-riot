@@ -5,14 +5,19 @@ class SaveData {
     if (!json) return
     try {
       const data = JSON.parse(json)
-      state.data = data
+      state.save = data
+      return data
     } catch (e) {
       console.log('セーブデータが破損しています')
+      this.remove()
     }
   }
   save () {
-    const json = JSON.stringify(state.data)
+    const json = JSON.stringify(state.save)
     return localStorage.setItem('save', json)
+  }
+  remove () {
+    localStorage.removeItem('save')
   }
 }
 export default new SaveData
