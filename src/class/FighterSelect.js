@@ -1,6 +1,7 @@
 import { colors, fighters, fighterFind, settings } from '../config/variables'
 import state from '../config/state';
 import intToString from '../utils/intToString'
+import saveData from '../utils/saveData'
 import Cursor from './Cursor'
 import Box from './Box'
 import Text from './Text'
@@ -33,6 +34,7 @@ export default class FighterSelect extends Box {
     if (state.save.fighters.includes(selected.fighter.id)) {
       // select fighter
       state.save.fighter = fighter.id
+      saveData.save()
       this.exit()
     } else {
       // buy fighter
@@ -42,6 +44,7 @@ export default class FighterSelect extends Box {
             state.save.money -= fighter.price
             state.save.fighters.push(fighter.id)
             state.save.fighter = fighter.id
+            saveData.save()
             this.exit()
           }
         }, null)
