@@ -93,15 +93,74 @@ export const fighters = [
 export const fighterFind = id => fighters.find(v => v.id === id)
 
 export const mainWeapons = [
-  { id: 1, name: 'assult', image: 'laser', damage: 35, delay: 5, speed: 50, isHoming: false, twinDiff: false },
-  { id: 2, name: 'gatling', image: 'laser', damage: 15, delay: 3, speed: 50, isHoming: false, twinDiff: 15 },
-  { id: 3, name: 'twin', image: 'laser', damage: 10, delay: 7, speed: 50, isHoming: false, twinDiff: 25 },
-  { id: 4, name: 'sniper', image: 'laser', damage: 60, delay: 10, speed: 50, isHoming: false, twinDiff: false }
+  {
+    id: 1,
+    name: 'Assult',
+    price: 1000,
+    img: 'w_assult',
+    damage: 35,
+    delay: 5,
+    speed: 50,
+    isHoming: false,
+    twinDiff: false
+  },
+  {
+    id: 2,
+    name: 'Gatling',
+    price: 1000,
+    img: 'w_gatling',
+    damage: 15,
+    delay: 3,
+    speed: 50,
+    isHoming: false,
+    twinDiff: 15 },
+  {
+    id: 3,
+    name: 'Twin',
+    price: 1000,
+    img: 'w_twin',
+    damage: 10,
+    delay: 7,
+    speed: 50,
+    isHoming: false,
+    twinDiff: 25
+  },
+  {
+    id: 4,
+    name: 'Sniper',
+    price: 1000,
+    img: 'w_sniper',
+    damage: 60,
+    delay: 10,
+    speed: 50,
+    isHoming: false,
+    twinDiff: false
+  }
 ]
 export const mainWeaponFind = id => mainWeapons.find(v => v.id === id)
 
 export const subWeapons = [
-  { id: 1, name: 'boost', delay: 20 },
-  { id: 2, name: 'tailgun', image: 'laser', damage: 20, delay: 5, speed: 50, isHoming: false, twinDiff: false }
+  {
+    id: 1,
+    name: 'Booster',
+    price: 1000,
+    img: 'w_boost',
+    damage: null,
+    delay: 20,
+    speed: null,
+    isHoming: false,
+    twinDiff: false
+  },
+  {
+    id: 2,
+    name: 'Tailgun',
+    price: 1000,
+    img: 'w_tailgun',
+    damage: 20,
+    delay: 5,
+    speed: 50,
+    isHoming: false,
+    twinDiff: false
+  }
 ]
 export const subWeaponFind = id => subWeapons.find(v => v.id === id)
