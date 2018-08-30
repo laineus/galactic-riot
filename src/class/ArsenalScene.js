@@ -2,6 +2,7 @@ import { settings, colors, fighterFind } from '../config/variables'
 import state from '../config/state'
 import intToString from '../utils/intToString'
 import FighterSelect from './FighterSelect'
+import MilitaryForce from './MilitaryForce'
 import Box from './Box'
 import Text from './Text'
 export default class ArsenalScene extends phina.display.DisplayScene {
@@ -64,6 +65,9 @@ export default class ArsenalScene extends phina.display.DisplayScene {
       case 'Main Weapon':
       case 'Sub Weapon':
       case 'Military Force':
+        content.awake = false
+        new MilitaryForce(() => content.awake = true)
+        break
       case 'Exit':
         this.close()
         break
