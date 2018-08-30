@@ -8,7 +8,7 @@ export default class Cursor extends phina.app.Element {
     this.onCancel = onCancel
     this.prev = vertical ? 'up' : 'left'
     this.next = vertical ? 'down' : 'right'
-    this.index = index
+    this.index = index || 0
     this.delay = 0
     this.firstFrame = true
     this.start()
