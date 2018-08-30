@@ -13,7 +13,7 @@ export default class MilitaryForce {
           saveData.save()
         }
         callback()
-      }, callback)
+      }, callback, 1)
     } else {
       new Modal('Money is not enough.', null, callback, callback)
     }

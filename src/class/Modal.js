@@ -5,14 +5,14 @@ import PauseScene from './PauseScene'
 import Box from './Box'
 import Text from './Text'
 export default class Modal extends PauseScene {
-  constructor (text, options, select, cancel) {
+  constructor (text, options, select, cancel, index = 0) {
     super(colors.dark_05)
     Object.setPrototypeOf(this, Modal.prototype)
     if (!options) options = ['OK']
-    this.modal = this.getModal(text, options, select, cancel).addChildTo(this)
+    this.modal = this.getModal(text, options, select, cancel, index).addChildTo(this)
     state.app.pushScene(this)
   }
-  getModal (text, labels, select, cancel) {
+  getModal (text, labels, select, cancel, index) {
     const modal = new Box(480, 150).setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
     modal.text = new Text(text, 16).setPosition(0, -25).addChildTo(modal)
     const list = labels.map((v, i) => {
@@ -34,7 +34,7 @@ export default class Modal extends PauseScene {
       this.remove()
       this.exit()
       if (cancel) cancel()
-    }, false).addChildTo(modal)
+    }, false, index).addChildTo(modal)
     return modal
   }
 }
