@@ -11,12 +11,16 @@ export default class ArsenalScene extends phina.display.DisplayScene {
     Object.setPrototypeOf(this, ArsenalScene.prototype)
     this.backgroundColor = colors.black
     this.bg = Sprite('title').addChildTo(this).setOrigin(0, 0).setScale(0.75, 0.75)
+    this.header = this.getHeader()
     this.arsenal = new ArsenalSelect(this.select.bind(this), this.cancel.bind(this)).setPosition(295, 95 + 20).addChildTo(this)
-    this.box = new Box(settings.SCREEN_WIDTH, 40).setOrigin(0, 0).setPosition(0, 20).addChildTo(this)
-    this.title = new Text('Arsenal', 24).setOrigin(0, 0).setPosition(25, 20).addChildTo(this)
-    this.budgetLabel = new Text('Budget :').setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 150, 25).addChildTo(this)
-    this.budgetValue = new Text().setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 20, 25).addChildTo(this)
-    this.budgetValue.update = () => this.budgetValue.text = `$ ${intToString(state.save.money)}`
+  }
+  getHeader () {
+    const header = new Box(settings.SCREEN_WIDTH, 40).setOrigin(0, 0).setPosition(0, 20).addChildTo(this)
+    header.title = new Text('Arsenal', 24).setOrigin(0, 0).setPosition(25, 0).addChildTo(header)
+    header.budgetLabel = new Text('Budget :').setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 150, 5).addChildTo(header)
+    header.budgetValue = new Text().setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 20, 5).addChildTo(header)
+    header.budgetValue.update = () => header.budgetValue.text = `$ ${intToString(state.save.money)}`
+    return header
   }
   select (current) {
     switch (current.name) {
