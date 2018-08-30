@@ -29,7 +29,8 @@ export default {
     laser: '/img/laser.png',
     laser_flash: '/img/laser_flash.png',
     smoke: '/img/smoke.png',
-    light: '/img/light.png'
+    light: '/img/light.png',
+    lock: '/img/lock.png'
   },
   font: {
     aldrich: '/font/aldrich.woff'
