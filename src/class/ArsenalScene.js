@@ -1,7 +1,7 @@
 import { settings, colors, fighterFind } from '../config/variables'
 import state from '../config/state'
 import intToString from '../utils/intToString'
-import FighterSelect from './FighterSelect'
+import EquipSelect from './EquipSelect'
 import MilitaryForce from './MilitaryForce'
 import Box from './Box'
 import Text from './Text'
@@ -28,11 +28,11 @@ export default class ArsenalScene extends phina.display.DisplayScene {
   getContent () {
     const content = DisplayElement().setOrigin(0, 0)
     content.list = [
-      { name: 'Fighter', move: [{ key: 'right', index: 1 }, { key: 'down', index: 3 }] },
-      { name: 'Main Weapon', move: [{ key: 'left', index: 0 }, { key: 'down', index: 2 }] },
-      { name: 'Sub Weapon', move: [{ key: 'up', index: 1 }, { key: 'left', index: 0 }, { key: 'down', index: 3 }] },
-      { name: 'Military Force', move: [{ key: 'up', index: 0 }, { key: 'down', index: 4 }] },
-      { name: 'Exit', move: [{ key: 'up', index: 3 }] }
+      { name: 'Fighter', key: 'fighter', move: [{ key: 'right', index: 1 }, { key: 'down', index: 3 }] },
+      { name: 'Main Weapon', key: 'main', move: [{ key: 'left', index: 0 }, { key: 'down', index: 2 }] },
+      { name: 'Sub Weapon', key: 'sub', move: [{ key: 'up', index: 1 }, { key: 'left', index: 0 }, { key: 'down', index: 3 }] },
+      { name: 'Military Force', key: 'amount', move: [{ key: 'up', index: 0 }, { key: 'down', index: 4 }] },
+      { name: 'Exit', key: null, move: [{ key: 'up', index: 3 }] }
     ]
     content.list[0].image = this.getFighter(content.list[0]).addChildTo(content).setPosition(120, 120)
     content.list[0].image.active = true
@@ -57,20 +57,14 @@ export default class ArsenalScene extends phina.display.DisplayScene {
     if (app.keyboard.getKeyDown('X')) this.close()
   }
   contentSelect (content, current) {
-    switch (current.name) {
-      case 'Fighter':
-        content.awake = false
-        new FighterSelect(() => content.awake = true).addChildTo(this)
-        break
-      case 'Main Weapon':
-      case 'Sub Weapon':
-      case 'Military Force':
-        content.awake = false
-        new MilitaryForce(() => content.awake = true)
-        break
-      case 'Exit':
-        this.close()
-        break
+    if (!current.key) {
+      this.close()
+    } else if (current.key === 'amount') {
+      content.awake = false
+      new MilitaryForce(() => content.awake = true)
+    } else {
+      content.awake = false
+      new EquipSelect(current.key, () => content.awake = true).addChildTo(this)
     }
   }
   getFighter (label) {
