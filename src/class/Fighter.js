@@ -31,13 +31,13 @@ export default class Fighter extends FlyingElement {
   mainAction () {
     if (this.mainWeaponDelay > 0 || !this.mainWeapon) return
     new Laser(this, this.mainWeapon)
-    if (this.mainWeapon.name === 'twin') new Laser(this, this.mainWeapon)
+    if (this.mainWeapon.name === 'Twin') new Laser(this, this.mainWeapon)
     this.mainWeaponDelay = this.mainWeapon.delay
   }
   subAction () {
     if (this.subWeaponDelay > 0 || !this.subWeapon) return
     switch (this.subWeapon.name) {
-      case 'boost':
+      case 'Boost':
         this.boost()
         break
       default:

@@ -106,16 +106,6 @@ export const mainWeapons = [
   },
   {
     id: 2,
-    name: 'Gatling',
-    price: 1000,
-    img: 'w_gatling',
-    damage: 15,
-    delay: 3,
-    speed: 50,
-    isHoming: false,
-    twinDiff: 15 },
-  {
-    id: 3,
     name: 'Twin',
     price: 1000,
     img: 'w_twin',
@@ -124,6 +114,17 @@ export const mainWeapons = [
     speed: 50,
     isHoming: false,
     twinDiff: 25
+  },
+  {
+    id: 3,
+    name: 'Gatling',
+    price: 1000,
+    img: 'w_gatling',
+    damage: 15,
+    delay: 3,
+    speed: 50,
+    isHoming: false,
+    twinDiff: 15
   },
   {
     id: 4,
@@ -142,6 +143,17 @@ export const mainWeaponFind = id => mainWeapons.find(v => v.id === id)
 export const subWeapons = [
   {
     id: 1,
+    name: 'Tailgun',
+    price: 1000,
+    img: 'w_tailgun',
+    damage: 20,
+    delay: 5,
+    speed: 50,
+    isHoming: false,
+    twinDiff: false
+  },
+  {
+    id: 2,
     name: 'Booster',
     price: 1000,
     img: 'w_boost',
@@ -152,14 +164,14 @@ export const subWeapons = [
     twinDiff: false
   },
   {
-    id: 2,
-    name: 'Tailgun',
+    id: 3,
+    name: 'Missile',
     price: 1000,
-    img: 'w_tailgun',
+    img: 'w_missile',
     damage: 20,
     delay: 5,
     speed: 50,
-    isHoming: false,
+    isHoming: true,
     twinDiff: false
   }
 ]

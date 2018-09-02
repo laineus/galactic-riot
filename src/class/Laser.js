@@ -12,8 +12,8 @@ export default class Laser extends FlyingElement {
     this.shooter.shotCount++
     this.setSpeed(this.laser.speed)
     this.setMobility(5)
-    this.setRotation(this.laser.name === 'tailgun' ? parent.rotation + 180 : parent.rotation)
-    if (this.laser.name === 'tailgun') {
+    this.setRotation(this.laser.name === 'Tailgun' ? parent.rotation + 180 : parent.rotation)
+    if (this.laser.name === 'Tailgun') {
       this.setPosition(
         parent.x + (parent.cos * -60),
         parent.y + (parent.sin * -60)
@@ -30,7 +30,7 @@ export default class Laser extends FlyingElement {
         parent.y + (parent.sin * 60)
       )
     }
-    const body = new SlicedSprite(this.laser.image, 1, 3, parent.colorIndex).setScale(0.2, 0.2)
+    const body = new SlicedSprite('laser', 1, 3, parent.colorIndex).setScale(0.2, 0.2)
     body.blendMode = 'lighter'
     this.setBody(body)
     this.addChildTo(parent.field.bullet)
