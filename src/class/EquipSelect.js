@@ -1,5 +1,5 @@
 import { colors, settings, fighters, mainWeapons, subWeapons } from '../config/variables'
-import state from '../config/state';
+import state from '../config/state'
 import intToString from '../utils/intToString'
 import saveData from '../utils/saveData'
 import maskImage from '../utils/maskImage'

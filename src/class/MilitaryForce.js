@@ -1,4 +1,4 @@
-import state from '../config/state';
+import state from '../config/state'
 import intToString from '../utils/intToString'
 import saveData from '../utils/saveData'
 import Modal from './Modal'

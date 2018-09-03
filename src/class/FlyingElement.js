@@ -1,4 +1,3 @@
-import { mainWeapons, subWeapons } from '../config/variables'
 import state from '../config/state'
 import Explosion from './Explosion'
 export default class FlyingElement extends phina.display.DisplayElement {
