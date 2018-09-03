@@ -35,3 +35,13 @@ export default class MissionResult extends phina.display.RectangleShape {
     }).setOrigin(0.5, 0).setPosition(settings.SCREEN_WIDTH_C + 80, settings.SCREEN_HEIGHT_C).addChildTo(this)
   }
 }
+// Time: +50
+// Kill: +3
+// Member Death: -3
+// Rescue: +2
+
+// S 90-
+// A 70-90
+// B 50-70
+// C 30-50
+// D -30
