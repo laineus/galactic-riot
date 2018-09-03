@@ -1,4 +1,5 @@
 import { fighterFind, mainWeaponFind, subWeaponFind } from '../config/variables'
+import state from '../config/state'
 import Laser from './Laser'
 import FlyingElement from './FlyingElement'
 export default class Fighter extends FlyingElement {
@@ -49,8 +50,18 @@ export default class Fighter extends FlyingElement {
   damage (damage, shooter) {
     this.explosion(1)
     this.hp -= damage
-    this.sameHash().forEach(obj => obj.target = shooter)
-    if (!this.isActive()) this.dead()
+    // target
+    if (shooter === state.player && this.target) state.score.rescue++
+    this.target = shooter
+    this.sameHash().forEach(obj => {
+      if (!obj.target) obj.target = shooter
+    })
+    // death
+    if (!this.isActive()) {
+      if (this.type === 'friend') state.score.death++
+      if (shooter === state.player) state.score.kill++
+      this.dead()
+    }
   }
   dead () {
     this.explosion(5, 25)

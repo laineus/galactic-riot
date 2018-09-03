@@ -4,15 +4,21 @@ export default {
   player: null,
   mission: null,
   interface: null,
+  score: {
+    time: 0,
+    kill: 0,
+    death: 0,
+    rescue: 0
+  },
   save: {
-    money: 1000,
+    money: 0,
     fighter: 1,
-    fighters: [1, 2],
+    fighters: [1],
     mainWeapon: 1,
     mainWeapons: [1],
     subWeapon: null,
-    subWeapons: [0],
-    amount: 50,
+    subWeapons: [],
+    amount: 10,
     mission: 0
   }
 }
