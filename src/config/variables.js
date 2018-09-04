@@ -156,7 +156,7 @@ export const subWeapons = [
     id: 2,
     name: 'Booster',
     price: 1000,
-    img: 'w_boost',
+    img: 'w_booster',
     damage: null,
     delay: 20,
     speed: null,

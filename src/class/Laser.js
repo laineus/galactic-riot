@@ -43,7 +43,7 @@ export default class Laser extends FlyingElement {
     super.update(app)
     this.move(false, true)
     this.hitCheck()
-    if (this.laser.isHoming) homing()
+    if (this.laser.isHoming) this.homing()
   }
   hitCheck () {
     for (const tgt of this.targetGroup()) {

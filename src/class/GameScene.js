@@ -27,7 +27,7 @@ export default class GameScene extends phina.display.DisplayScene {
   update (app) {
     this.mission.update()
     if (!this.inProgress) {
-      if (app.keyboard.getKeyDown('Z')) this.exit('Title', { skip: true })
+      if (app.keyboard.getKeyDown('Z')) this.exit('Title', { skip: 1 })
       return
     }
     if (!state.player.isActive()) {

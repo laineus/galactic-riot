@@ -38,7 +38,7 @@ export default class Fighter extends FlyingElement {
   subAction () {
     if (this.subWeaponDelay > 0 || !this.subWeapon) return
     switch (this.subWeapon.name) {
-      case 'Boost':
+      case 'Booster':
         this.boost()
         break
       default:
