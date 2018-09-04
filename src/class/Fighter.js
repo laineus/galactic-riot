@@ -51,7 +51,7 @@ export default class Fighter extends FlyingElement {
     this.explosion(1)
     this.hp -= damage
     // target
-    if (shooter === state.player && this.target) state.score.rescue++
+    if (shooter === state.player && this.target !== shooter && this.target) state.score.rescue++
     this.target = shooter
     this.sameHash().forEach(obj => {
       if (!obj.target) obj.target = shooter

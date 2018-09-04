@@ -8,6 +8,10 @@ export default class GameScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
     Object.setPrototypeOf(this, GameScene.prototype)
+    state.score.time = 0
+    state.score.kill = 0
+    state.score.death = 0
+    state.score.rescue = 0
     this.phase = 0
     this.inProgress = true
     this.backgroundColor = colors.black
@@ -25,6 +29,7 @@ export default class GameScene extends phina.display.DisplayScene {
     this.interface.initRadar(this.field, state.player)
   }
   update (app) {
+    state.score.time++
     this.mission.update()
     if (!this.inProgress) {
       if (app.keyboard.getKeyDown('Z')) this.exit('Title', { skip: 1 })
