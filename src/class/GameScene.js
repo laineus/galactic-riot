@@ -42,11 +42,11 @@ export default class GameScene extends phina.display.DisplayScene {
     }
   }
   missionCompleted () {
-    new MissionResult(this, true, 'Time:\nKill:\nMember Death:\nRescue:\n\nRank:\nReward:', '1:14\n10\n12\n5\n\nS\n$1,000').addChildTo(this)
+    new MissionResult(this, true).addChildTo(this)
     this.inProgress = false
   }
   missionFailed () {
-    new MissionResult(this, false, 'Loss:', '$1,000').addChildTo(this)
+    new MissionResult(this, false).addChildTo(this)
     this.inProgress = false
   }
 }

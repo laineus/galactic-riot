@@ -1,6 +1,7 @@
 import { settings, colors } from '../config/variables'
+import state from '../config/state'
 export default class MissionResult extends phina.display.RectangleShape {
-  constructor (scene, completed, keyString, valueString) {
+  constructor (scene, completed) {
     super({
       width: settings.SCREEN_WIDTH,
       height: settings.SCREEN_HEIGHT,
@@ -20,7 +21,7 @@ export default class MissionResult extends phina.display.RectangleShape {
       padding: 0
     }).setOrigin(0.5, 1).setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C - 70).addChildTo(this)
     this.resultKey = Label({
-      text: keyString,
+      text: completed ? this.completedKeyString : this.failedKeyString,
       fontFamily: 'aldrich',
       fontSize: 13,
       align: 'left',
@@ -28,7 +29,7 @@ export default class MissionResult extends phina.display.RectangleShape {
       padding: 0
     }).setOrigin(0.5, 0).setPosition(settings.SCREEN_WIDTH_C - 80, settings.SCREEN_HEIGHT_C).addChildTo(this)
     this.resultValue = Label({
-      text: valueString,
+      text: completed ? this.completedValueString : this.failedValueString,
       fontFamily: 'aldrich',
       fontSize: 13,
       align: 'right',
@@ -41,6 +42,18 @@ export default class MissionResult extends phina.display.RectangleShape {
     if (this.time > 60 && app.keyboard.getKeyDown('Z')) {
       this.scene.exit('Title', { skip: 1 })
     }
+  }
+  get completedKeyString () {
+    return 'Time:\nKill:\nMember Death:\nRescue:\n\nRank:\nReward:'
+  }
+  get failedKeyString () {
+    return 'Loss:'
+  }
+  get completedValueString () {
+    return `${state.score.time}\n${state.score.kill}\n${state.score.death}\n${state.score.rescue}\n\n${'A'}\n${1000}`
+  }
+  get failedValueString () {
+    return `$${1000}`
   }
 }
 // Time: +50

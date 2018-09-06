@@ -2,7 +2,7 @@ import { colors } from '../config/variables'
 import maskImage from '../utils/maskImage'
 const WIDTH = 160
 const HEIGHT = 120
-const SIZE = 0.05
+const SIZE = 0.04
 export default class Radar extends phina.display.RectangleShape {
   constructor (field, player) {
     super({ width: WIDTH, height: HEIGHT, fill: colors.black_05, strokeWidth: 0, padding: 0 })

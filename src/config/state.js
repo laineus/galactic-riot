@@ -10,8 +10,11 @@ export default {
     kill: 0,
     death: 0,
     rescue: 0,
-    get time () {
+    get sec () {
       return Math.floor(this.frame / settings.FPS)
+    },
+    get time () {
+      return `${Math.floor(this.sec / 60)}:${(this.sec % 60) < 10 ? '0' : ''}${this.sec % 60}`
     }
   },
   save: {
