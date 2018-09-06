@@ -1,6 +1,6 @@
 import { settings, colors } from '../config/variables'
 export default class MissionResult extends phina.display.RectangleShape {
-  constructor (completed, keyString, valueString) {
+  constructor (scene, completed, keyString, valueString) {
     super({
       width: settings.SCREEN_WIDTH,
       height: settings.SCREEN_HEIGHT,
@@ -9,6 +9,8 @@ export default class MissionResult extends phina.display.RectangleShape {
       padding: 0
     })
     Object.setPrototypeOf(this, MissionResult.prototype)
+    this.scene = scene
+    this.time = 0
     this.setOrigin(0, 0)
     this.title = Label({
       text: `- Mission ${completed ? 'Completed' : 'Failed'} -`,
@@ -33,6 +35,12 @@ export default class MissionResult extends phina.display.RectangleShape {
       fill: colors.white,
       padding: 0
     }).setOrigin(0.5, 0).setPosition(settings.SCREEN_WIDTH_C + 80, settings.SCREEN_HEIGHT_C).addChildTo(this)
+  }
+  update (app) {
+    this.time++
+    if (this.time > 60 && app.keyboard.getKeyDown('Z')) {
+      this.scene.exit('Title', { skip: 1 })
+    }
   }
 }
 // Time: +50

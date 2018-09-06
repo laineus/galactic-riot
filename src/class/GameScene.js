@@ -1,5 +1,5 @@
 import state from '../config/state'
-import { colors } from '../config/variables'
+import { colors, settings } from '../config/variables'
 import Field from './Field'
 import Camera from './Camera'
 import InterfaceScreen from './InterfaceScreen'
@@ -8,7 +8,7 @@ export default class GameScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
     Object.setPrototypeOf(this, GameScene.prototype)
-    state.score.time = 0
+    state.score.frame = 0
     state.score.kill = 0
     state.score.death = 0
     state.score.rescue = 0
@@ -29,34 +29,24 @@ export default class GameScene extends phina.display.DisplayScene {
     this.interface = new InterfaceScreen().addChildTo(this)
     this.interface.initRadar(this.field, state.player)
   }
-  update (app) {
-    if (!this.inProgress) {
-      // TODO: move to MissionResult
-      if (this.canReturn && app.keyboard.getKeyDown('Z')) this.exit('Title', { skip: 1 })
-      return
-    }
+  update () {
+    if (!this.inProgress) return
     if (!state.player.isActive()) {
       this.missionFailed()
       return
     }
-    state.score.time++
+    state.score.frame++
     this.mission.update()
     if (this.mission.functions[this.phase]()) {
       (this.phase + 1 === this.mission.functions.length) ? this.missionCompleted() : this.phase++
     }
   }
   missionCompleted () {
-    new MissionResult(true, 'Time:\nKill:\nMember Death:\nRescue:\n\nRank:\nReward:', '1:14\n10\n12\n5\n\nS\n$1,000').addChildTo(this)
-    this.end()
+    new MissionResult(this, true, 'Time:\nKill:\nMember Death:\nRescue:\n\nRank:\nReward:', '1:14\n10\n12\n5\n\nS\n$1,000').addChildTo(this)
+    this.inProgress = false
   }
   missionFailed () {
-    new MissionResult(false, 'Loss:', '$1,000').addChildTo(this)
-    this.end()
-  }
-  end () {
+    new MissionResult(this, false, 'Loss:', '$1,000').addChildTo(this)
     this.inProgress = false
-    setTimeout(() => {
-      this.canReturn = true
-    }, 3000);
   }
 }

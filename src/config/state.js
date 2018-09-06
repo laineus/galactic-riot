@@ -1,3 +1,4 @@
+import { settings } from "./variables";
 export default {
   app: null,
   field: null,
@@ -5,10 +6,13 @@ export default {
   mission: null,
   interface: null,
   score: {
-    time: 0,
+    frame: 0,
     kill: 0,
     death: 0,
-    rescue: 0
+    rescue: 0,
+    get time () {
+      return Math.floor(this.frame / settings.FPS)
+    }
   },
   save: {
     money: 0,
