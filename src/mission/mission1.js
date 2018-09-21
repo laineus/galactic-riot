@@ -3,15 +3,11 @@ import addComputer from '../utils/addComputer'
 import Gate from '../class/Gate'
 const self = {
   name: 'Mission-01',
-  count: 0,
   created: () => {
     state.field.setField('sublatant_1')
     addComputer(200, 3200, 350, 'player', 6)
   },
   update: () => {
-    if (state.field.friend.children.length < 5) {
-      addComputer(null, null, null, 'friend', Math.randint(1, 6))
-    }
   },
   functions: [
     () => {

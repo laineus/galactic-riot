@@ -15,6 +15,7 @@ const move = obj => {
   obj.y += sin(obj.rotation, 70)
 }
 export default (x, y, r, type, count) => {
+  if (type === 'friend') state.score.amount -= count
   const subType = type === 'player' ? 'friend' : type
   if (x === null) x = Math.randint(0, state.field.width)
   if (y === null) y = Math.randint(0, state.field.height)

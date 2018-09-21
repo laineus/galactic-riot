@@ -1,9 +1,10 @@
 import state from '../config/state'
-import { colors, settings } from '../config/variables'
+import { colors } from '../config/variables'
 import Field from './Field'
 import Camera from './Camera'
 import InterfaceScreen from './InterfaceScreen'
 import MissionResult from './MissionResult'
+import addComputer from '../utils/addComputer'
 export default class GameScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -12,6 +13,7 @@ export default class GameScene extends phina.display.DisplayScene {
     state.score.kill = 0
     state.score.death = 0
     state.score.rescue = 0
+    state.score.amount = state.save.amount
     this.phase = 0
     this.inProgress = true
     this.canReturn = false
@@ -37,6 +39,7 @@ export default class GameScene extends phina.display.DisplayScene {
     }
     state.score.frame++
     this.mission.update()
+    this.reinforce()
     if (this.mission.functions[this.phase]()) {
       (this.phase + 1 === this.mission.functions.length) ? this.missionCompleted() : this.phase++
     }
@@ -48,5 +51,12 @@ export default class GameScene extends phina.display.DisplayScene {
   missionFailed () {
     new MissionResult(this, false).addChildTo(this)
     this.inProgress = false
+  }
+  reinforce () {
+    if (state.score.amount <= 0) return
+    if (state.field.friend.children.length < 5) {
+      const count = Math.min(state.score.amount, Math.randint(1, 6))
+      addComputer(null, null, null, 'friend', count)
+    }
   }
 }
