@@ -109,7 +109,8 @@ export default class ArsenalScene extends phina.display.DisplayScene {
   getForce (label) {
     const item = new Box(370, 40)
     item.key = new Text(`${label.name} :`).setOrigin(0, 0.5).setPosition(-175, 0).addChildTo(item)
-    item.value = new Text('50').setOrigin(1, 0.5).setPosition(175, 0).addChildTo(item)
+    item.value = new Text(state.save.amount).setOrigin(1, 0.5).setPosition(175, 0).addChildTo(item)
+    item.value.update = () => item.value.text = state.save.amount
     return item
   }
   getExit (label) {
