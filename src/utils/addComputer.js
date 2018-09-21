@@ -4,6 +4,7 @@ import Computer from '../class/Computer'
 const cos = (rotation, distance) => Math.cos(Math.degToRad(rotation)) * distance
 const sin = (rotation, distance) => Math.sin(Math.degToRad(rotation)) * distance
 const initElement = (x, y, r, type, hash) => {
+  if (type === 'friend') state.score.amount--
   const obj = (type === 'player') ? new Player() : new Computer().setType(type)
   obj.setPosition(x, y).setRotation(r)
   obj.hash = hash
@@ -15,7 +16,6 @@ const move = obj => {
   obj.y += sin(obj.rotation, 70)
 }
 export default (x, y, r, type, count) => {
-  if (type === 'friend') state.score.amount -= count
   const subType = type === 'player' ? 'friend' : type
   if (x === null) x = Math.randint(0, state.field.width)
   if (y === null) y = Math.randint(0, state.field.height)
