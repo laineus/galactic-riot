@@ -4,28 +4,31 @@ import Gate from '../class/Gate'
 const self = {
   name: 'Mission-02',
   created: () => {
-    state.field.setField('sublatant_1')
-    addComputer(200, 3200, 350, 'player', 6)
+    state.field.setField('sublatant_3')
+    addComputer(1000, -200, 280, 'player', 6)
   },
   update: () => {
   },
   functions: [
     () => {
-      addComputer(-200, 200, 165, 'enemy', 2)
-      addComputer(-200, 1600, 170, 'enemy', 3)
+      addComputer(1600, -600, 270, 'enemy', 2)
       return true
     },
     () => !state.field.enemy.children.length,
     () => {
-      addComputer(200, -200, 345, 'enemy', 3)
-      addComputer(200, 200, 15, 'enemy', 4)
+      addComputer(1200, 3700, 260, 'enemy', 3)
       return true
     },
     () => !state.field.enemy.children.length,
-    () => new Gate('sublatant_2', 100, 100).setPosition(5600, 3400).setRotation(30).addChildTo(state.field.object),
-    () => state.field.is('sublatant_2'),
+    () => new Gate('sublatant_4', 200, 1500).setPosition(1500, 300).setRotation(10).addChildTo(state.field.object),
+    () => state.field.is('sublatant_4'),
     () => {
-      addComputer(-200, -200, 225, 'enemy', 5)
+      addComputer(1100, 1700, 340, 'enemy', 2)
+      return true
+    },
+    () => !state.field.enemy.children.length,
+    () => {
+      addComputer(2500, 1400, 10, 'enemy', 3)
       return true
     },
     () => !state.field.enemy.children.length
