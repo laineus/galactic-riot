@@ -37,6 +37,7 @@ export default class Player extends Fighter {
   ctrAction (key) {
     if (key.getKey('Z')) this.mainAction()
     if (key.getKey('X')) this.subAction()
+    if (key.getKey('C')) this.boost()
   }
   searchTarget () {
     if (!this.target) {
