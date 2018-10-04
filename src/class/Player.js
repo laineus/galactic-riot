@@ -1,5 +1,7 @@
 import state from '../config/state'
 import Fighter from './Fighter'
+import Box from './Box'
+import { colors } from '../config/variables'
 export default class Player extends Fighter {
   constructor () {
     super()
@@ -9,6 +11,7 @@ export default class Player extends Fighter {
     this.setJet()
     this.setColorIndex(1)
     this.hp = 500
+    this.initSight()
     this.setFighter(state.save.fighter)
     this.setMainWeapon(state.save.mainWeapon)
     this.setSubWeapon(state.save.subWeapon)
@@ -50,5 +53,10 @@ export default class Player extends Fighter {
   damage (damage, shooter) {
     super.damage(damage, shooter)
     this.field.camera.addShock(15)
+  }
+  initSight () {
+    this.sight = new Box(1000, 1, colors.blue).setOrigin(0, 0.5).addChildTo(this)
+    this.sight.blendMode = 'lighter'
+    this.sight.alpha = 0
   }
 }

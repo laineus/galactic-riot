@@ -15,8 +15,10 @@ export default class InterfaceField extends phina.display.DisplayElement {
       this.lockon.y = state.player.target.y
       this.lockon.alpha = 1
       this.lockon.rotation += 10
+      state.player.sight.alpha = 0.5
     } else {
       this.lockon.alpha = 0
+      state.player.sight.alpha = 0
     }
   }
 }
