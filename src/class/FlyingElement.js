@@ -86,6 +86,7 @@ export default class FlyingElement extends phina.display.DisplayElement {
     return this
   }
   accele (direction) {
+    this.speedDirection = direction
     const add = 0.2
     if (direction === 0) {
       if (this.acceleration > 1.0) this.acceleration -= add
@@ -117,7 +118,7 @@ export default class FlyingElement extends phina.display.DisplayElement {
   move (roop, force = false) {
     this.speed = this.baseSpeed * this.acceleration
     if (this.turnBoost > 0) {
-      const r = this.rotation - (60 * this.turnDirection)
+      const r = (this.speedDirection === -1) ? this.rotation + 180 : this.rotation - (60 * this.turnDirection)
       const speed = Math.max((this.turnBoost) / 3, 1.5)
       this.physical.velocity.x = Math.cos(Math.degToRad(r)) * this.baseSpeed * speed
       this.physical.velocity.y = Math.sin(Math.degToRad(r)) * this.baseSpeed * speed
