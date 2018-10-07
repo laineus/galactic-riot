@@ -59,8 +59,8 @@ export default class Camera extends phina.display.DisplayElement {
     }
     const diffX = target ? (target.x - this.target.x) * 0.7 : this.target.cos * 200
     const diffY = target ? (target.y - this.target.y) * 0.7 : this.target.sin * 200
-    this.diffX += Math.abs(diffX - this.diffX) > 5 ? Math.sign(diffX - this.diffX) * 5 : Math.sign(diffX - this.diffX)
-    this.diffY += Math.abs(diffY - this.diffY) > 5 ? Math.sign(diffY - this.diffY) * 5 : Math.sign(diffY - this.diffY)
+    this.diffX += Math.abs(diffX - this.diffX) > 10 ? Math.sign(diffX - this.diffX) * 10 : (diffX - this.diffX)
+    this.diffY += Math.abs(diffY - this.diffY) > 10 ? Math.sign(diffY - this.diffY) * 10 : (diffY - this.diffY)
   }
   addShock (shock) {
     this.shock += shock
