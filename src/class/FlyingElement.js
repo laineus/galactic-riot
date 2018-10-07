@@ -20,8 +20,14 @@ export default class FlyingElement extends phina.display.DisplayElement {
     this.acceleration = 1.0
     this.turnDirection = 0
     this.turnBoost = 0
+    this.oldXs = []
+    this.oldYs = []
   }
   update () {
+    this.oldXs.unshift(this.x)
+    this.oldYs.unshift(this.y)
+    this.oldXs.splice(10)
+    this.oldYs.splice(10)
     this.turnDirection = 0
     if (this.mainWeaponDelay > 0) this.mainWeaponDelay--
     if (this.subWeaponDelay > 0) this.subWeaponDelay--
@@ -62,6 +68,13 @@ export default class FlyingElement extends phina.display.DisplayElement {
   }
   setColorIndex (i) {
     this.colorIndex = i
+    this.color = (() => {
+      switch (i) {
+        case 1: return 'blue'
+        case 2: return 'green'
+        case 3: return 'pink'
+      }
+    })()
     return this
   }
   setMobility (mobility) {
