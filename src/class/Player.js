@@ -8,7 +8,6 @@ export default class Player extends Fighter {
     Object.setPrototypeOf(this, Player.prototype)
     state.player = this
     this.setType('friend')
-    this.setJet()
     this.setColorIndex(1)
     this.hp = 500
     this.initSight()
@@ -16,6 +15,7 @@ export default class Player extends Fighter {
     this.setMainWeapon(state.save.mainWeapon)
     this.setSubWeapon(state.save.subWeapon)
     this.addChildTo(state.field.friend)
+    this.player = true
   }
   update (app) {
     super.update(app)
