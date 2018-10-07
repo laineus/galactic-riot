@@ -49,6 +49,7 @@ export const fighters = [
     price: 1000,
     img: 'f1_f',
     img2: 'f1_e',
+    img3: 'f1_b',
     speed: 7,
     mobility: 3
   },
@@ -58,6 +59,7 @@ export const fighters = [
     price: 1000,
     img: 'f2_f',
     img2: 'f2_e',
+    img3: 'f2_b',
     speed: 7,
     mobility: 3
   },
@@ -67,6 +69,7 @@ export const fighters = [
     price: 1000,
     img: 'f3_f',
     img2: 'f3_e',
+    img3: 'f3_b',
     speed: 7,
     mobility: 3
   },
@@ -76,6 +79,7 @@ export const fighters = [
     price: 1000,
     img: 'f4_f',
     img2: 'f4_e',
+    img3: 'f4_b',
     speed: 7,
     mobility: 3
   },
@@ -85,6 +89,7 @@ export const fighters = [
     price: 1000,
     img: 'f5_f',
     img2: 'f5_e',
+    img3: 'f5_b',
     speed: 7,
     mobility: 3
   },
@@ -94,6 +99,7 @@ export const fighters = [
     price: 1000,
     img: 'f6_f',
     img2: 'f6_e',
+    img3: 'f6_b',
     speed: 7,
     mobility: 3
   }
