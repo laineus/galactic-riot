@@ -2,6 +2,7 @@ import { fighterFind, mainWeaponFind, subWeaponFind, colors } from '../config/va
 import state from '../config/state'
 import Laser from './Laser'
 import FlyingElement from './FlyingElement'
+import FighterBlur from './FighterBlur'
 import maskImage from '../utils/maskImage'
 export default class Fighter extends FlyingElement {
   constructor () {
@@ -27,23 +28,7 @@ export default class Fighter extends FlyingElement {
     this.setImageName(this.fighter[key])
   }
   setBlur () {
-    Number(this.colorIndex === 1 ? 5 : 1).times(i => this.addBlur((i * 2) + 1))
-  }
-  addBlur (i) {
-    const blur = maskImage.getSprite(this.fighter.img3, colors[this.color]).setScale(0.25, 0.25).addChildTo(this)
-    blur.blendMode = 'lighter'
-    blur.update = () => {
-      if (!this.oldXs[i]) return
-      const diffX = this.oldXs[i] - this.x
-      const diffY = this.oldYs[i] - this.y
-      const dis = Math.hypot(diffX, diffY)
-      const deg = Math.radToDeg(Math.atan2(diffY, diffX)) - this.rotation
-      blur.x = Math.cos(Math.degToRad(deg)) * dis
-      blur.y = Math.sin(Math.degToRad(deg)) * dis
-    }
-    blur.scale.x = 0.25 - (i / 150)
-    blur.scale.y = 0.25 - (i / 150)
-    blur.alpha = 0.5 - (i / 20)
+    this.blur = new FighterBlur(maskImage.getName(this.fighter.img3, colors[this.color]), this).setScale(0.25, 0.25).addChildTo(this)
   }
   setMainWeapon (id) {
     this.mainWeapon = mainWeaponFind(id)
