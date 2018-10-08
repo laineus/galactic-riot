@@ -10,8 +10,8 @@ export default class Laser extends FlyingElement {
     this.target = parent.target
     if (!this.shooter.shotCount) this.shooter.shotCount = 0
     this.shooter.shotCount++
-    this.setSpeed(parent.player ? 60 : 50)
-    this.setMobility(5)
+    this.setSpeed(this.laser.speed + (parent.player ? 10 : 0))
+    this.setMobility(30)
     this.setRotation(this.laser.name === 'Tailgun' ? parent.rotation + 180 : parent.rotation)
     if (this.laser.name === 'Tailgun') {
       this.setPosition(
@@ -58,7 +58,7 @@ export default class Laser extends FlyingElement {
     if (!this.target) return
     const degDiff = this.degreeDiff(this.target)
     if (Math.abs(degDiff) > 1) {
-      this.turn((degDiff > 0 && degDiff < 180) || degDiff < -180 ? 1 : -1)
+      this.turn((degDiff > 0 && degDiff < 180) || degDiff < -180 ? 1 : -1, Math.abs(degDiff))
     }
   }
 }

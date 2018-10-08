@@ -101,7 +101,7 @@ export default class FlyingElement extends phina.display.DisplayElement {
       this.jet.scale.y = (this.acceleration + 1) * 0.1
     }
   }
-  turn (direction) {
+  turn (direction, max = 100) {
     this.turnDirection = direction
     const accele = (() => {
       const base = 1
@@ -111,7 +111,7 @@ export default class FlyingElement extends phina.display.DisplayElement {
       }
       return base + Math.min((this.turnBoost) / 3, 2)
     })()
-    this.rotation += this.baseMobility * accele * this.turnDirection
+    this.rotation += Math.min(this.baseMobility, max) * accele * this.turnDirection
     if (this.rotation > 360) this.rotation -= 360
     if (this.rotation < 0) this.rotation += 360
   }
