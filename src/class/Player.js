@@ -9,6 +9,7 @@ export default class Player extends Fighter {
     state.player = this
     this.setType('friend')
     this.setColorIndex(1)
+    this.maxHp = 500
     this.hp = 500
     this.initSight()
     this.setFighter(state.save.fighter)

@@ -7,6 +7,7 @@ export default class FlyingElement extends phina.display.DisplayElement {
     this.field = state.field
     this.physical.friction = 0.95
     this.physical.velocity.set(0, 0)
+    this.maxHp = 100
     this.hp = 100
     this.baseMobility = 0
     this.baseSpeed = 0
