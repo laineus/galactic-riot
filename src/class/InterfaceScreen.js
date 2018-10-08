@@ -24,10 +24,10 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
     this.radar = new Radar(field, player).setPosition(20, 20).setOrigin(0, 0).addChildTo(this)
   }
   initStatus () {
-    this.status = new Box(200, 80).setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 30, 30).addChildTo(this)
+    this.status = DisplayElement().setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 30, 30).addChildTo(this)
     this.status.keys = new Text(null, 13, { align: 'left' }).setPosition(-180, 20).addChildTo(this.status)
-    this.status.keys.update = () => this.status.keys.text = 'Amount:'
+    this.status.keys.update = () => this.status.keys.text = 'Amount:\nKill\nTime:'
     this.status.values = new Text(null, 13, { align: 'right' }).setPosition(-20, 20).addChildTo(this.status)
-    this.status.values.update = () => this.status.values.text = `${state.score.amount} / ${state.save.amount}`
+    this.status.values.update = () => this.status.values.text = `${state.score.amount} / ${state.save.amount}\n${state.score.kill}\n${state.score.time}`
   }
 }
