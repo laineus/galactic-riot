@@ -106,8 +106,7 @@ export default class FlyingElement extends phina.display.DisplayElement {
   turn (direction, max = 100) {
     this.turnDirection = direction
     const accele = (() => {
-      const base = 1
-      // const base = 1.5 - this.acceleration * 0.5
+      const base = 1.5 - this.acceleration * 0.5
       if (this.turnBoost == 0) {
         return base
       }
@@ -137,10 +136,6 @@ export default class FlyingElement extends phina.display.DisplayElement {
     // if (this.x > this.field.width) roop ? this.x -= this.field.width : this.remove()
     // if (this.y < 0) roop ? this.y += this.field.height : this.remove()
     // if (this.y > this.field.height) roop ? this.y -= this.field.height : this.remove()
-  }
-  boost () {
-    if (this.turnBoost > 0) return
-    this.turnBoost = 20
   }
   degreeTo (x, y) {
     const deg = Math.radToDeg(Math.atan2(y - this.y, x - this.x))

@@ -54,6 +54,20 @@ export default class Fighter extends FlyingElement {
     }
     this.subWeaponDelay = this.subWeapon.delay
   }
+  boost () {
+    if (this.turnBoost > 0) return
+    this.stampBlur()
+    this.turnBoost = 20
+  }
+  stampBlur () {
+    const blur = maskImage.getSprite(this.fighter.img3, colors[this.color])
+                          .setPosition(this.x, this.y)
+                          .setRotation(this.rotation)
+                          .setScale(0.25, 0.25)
+                          .addChildTo(state.field.object)
+    blur.blendMode = 'lighter'
+    blur.tweener.to({ scaleX: 0.5, scaleY: 0.5, alpha: 0 }, 250).wait(250).call(() => blur.remove())
+  }
   damage (damage, shooter) {
     this.explosion(1)
     this.hp -= damage
