@@ -31,7 +31,9 @@ export default class Player extends Fighter {
       if (this.field.camera.shock < 3) this.field.camera.addShock(1)
       return this.accele(1)
     }
-    if (key.getKey('down')) return this.accele(-1)
+    if (key.getKey('down')) {
+      return this.accele(-1)
+    }
     this.accele(0)
   }
   ctrlTurn (key) {
@@ -39,9 +41,17 @@ export default class Player extends Fighter {
     if (key.getKey('right')) return this.turn(1)
   }
   ctrAction (key) {
-    if (key.getKey('Z')) this.mainAction()
-    if (key.getKey('X')) this.subAction()
-    if (key.getKeyDown('C')) this.boost()
+    if (key.getKeyDown('C') && this.hp > 50) {
+      this.boost()
+      this.hp -= 50
+      return
+    }
+    if (key.getKey('Z') && this.hp > 1) {
+      this.mainAction()
+      this.hp -= 1
+      return
+    }
+    if (this.hp < this.maxHp) this.hp += 1
   }
   searchTarget () {
     if (!this.target) {
