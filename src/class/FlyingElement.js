@@ -98,8 +98,9 @@ export default class FlyingElement extends phina.display.DisplayElement {
       this.acceleration += add
     }
     if (this.jet) {
-      this.jet.scale.x = (this.acceleration + 1) * 0.1
-      this.jet.scale.y = (this.acceleration + 1) * 0.1
+      const scale = (this.acceleration * 0.1) + (this.turnBoost * 0.005) + 0.1
+      this.jet.scale.x = (direction === -1 && this.turnBoost > 0) ? 0 : scale
+      this.jet.scale.y = scale
     }
   }
   turn (direction, max = 100) {
