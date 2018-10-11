@@ -15,6 +15,17 @@ export default class Computer extends Fighter {
     this.ctrAction()
     if (!this.target) this.searchTarget()
   }
+  get currentTarget () {
+    if (this.target) return this.target
+    if (this.subTarget) return this.subTarget
+    return null
+  }
+  get acceleValue () {
+    if (!this.currentTarget) return 0
+    if (this.degreeDiff(this.currentTarget) > 45) return -1
+    if (this.distanceDiff(this.currentTarget) > 300) return 1
+    return 0
+  }
   setType (type) {
     super.setType(type)
     this.setColorIndex(type === 'friend' ? 2 : 3)
@@ -33,6 +44,7 @@ export default class Computer extends Fighter {
     if (tgt) this.target = tgt
   }
   ctrlSpeed () {
+    this.accele(this.acceleValue)
     this.move(true)
   }
   ctrlTurn () {
