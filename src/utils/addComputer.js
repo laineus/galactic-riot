@@ -8,7 +8,7 @@ const initElement = (x, y, r, type, hash) => {
   const obj = (type === 'player') ? new Player() : new Computer().setType(type)
   obj.setPosition(x, y).setRotation(r)
   obj.hash = hash
-  obj.subTarget = state.player
+  if (type === 'friend') obj.setSubTarget(state.player)
   return obj
 }
 const move = obj => {
