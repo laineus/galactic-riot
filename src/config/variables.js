@@ -39,6 +39,14 @@ export const fields = {
   sublatant_4: {
     width: 7000,
     height: 3000
+  },
+  sublatant_5: {
+    width: 7000,
+    height: 4000
+  },
+  sublatant_6: {
+    width: 4000,
+    height: 7000
   }
 }
 
