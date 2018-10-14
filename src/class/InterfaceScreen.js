@@ -19,6 +19,20 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
     this.initStatus()
     this.initGauge()
     this.initGateNavi()
+    this.initAnalyzer()
+  }
+  initAnalyzer () {
+    this.analyzer = new Text('', 12, { shadow: colors.pink }).addChildTo(this)
+    this.analyzer.update = () => {
+      if (state.player.hp > 0 && state.player.target) {
+        this.analyzer.text = state.player.target.fighter.name
+        this.analyzer.alpha = 1
+        this.analyzer.x = (state.player.target.x * state.field.camera.zoom * 0.01) + state.field.x + 30
+        this.analyzer.y = (state.player.target.y * state.field.camera.zoom * 0.01) + state.field.y + 30
+      } else {
+        this.analyzer.alpha = 0
+      }
+    }
   }
   initGateNavi () {
     this.gateNavi = DisplayElement().addChildTo(this)
