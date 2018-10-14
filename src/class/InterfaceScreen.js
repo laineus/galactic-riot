@@ -22,13 +22,17 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
     this.initAnalyzer()
   }
   initAnalyzer () {
-    this.analyzer = new Text('', 12, { shadow: colors.pink }).addChildTo(this)
+    this.analyzer = DisplayElement().addChildTo(this).setOrigin(0, 0)
+    this.analyzer.label = new Text('', 12, { shadow: colors.pink }).addChildTo(this.analyzer).setOrigin(0, 1).setPosition(-9, 6)
+    this.analyzer.gauge = Gauge({ width: 50, height: 1.5, fill: colors.black, gaugeColor: colors.white, strokeWidth: 0, padding: 0 }).setOrigin(0, 0).addChildTo(this.analyzer)
     this.analyzer.update = () => {
       if (state.player.hp > 0 && state.player.target) {
-        this.analyzer.text = state.player.target.fighter.name
         this.analyzer.alpha = 1
-        this.analyzer.x = (state.player.target.x * state.field.camera.zoom * 0.01) + state.field.x + 30
-        this.analyzer.y = (state.player.target.y * state.field.camera.zoom * 0.01) + state.field.y + 30
+        this.analyzer.x = (state.player.target.x * state.field.camera.zoom * 0.01) + state.field.x + 25
+        this.analyzer.y = (state.player.target.y * state.field.camera.zoom * 0.01) + state.field.y + 25
+        this.analyzer.label.text = state.player.target.fighter.name
+        this.analyzer.gauge.maxValue = state.player.target.maxHp
+        this.analyzer.gauge.value = state.player.target.hp
       } else {
         this.analyzer.alpha = 0
       }
@@ -85,7 +89,7 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
       cornerRadius: 0,
       maxValue: 100,
       value: 100,
-      fill: colors.black_05,
+      fill: colors.black,
       gaugeColor: colors.white,
       stroke: colors.blue,
       strokeWidth: 0,
