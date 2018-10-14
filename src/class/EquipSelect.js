@@ -7,7 +7,7 @@ import Cursor from './Cursor'
 import Box from './Box'
 import Text from './Text'
 import Modal from './Modal'
-const SIZE = 120
+const SIZE = 100
 const MARGIN = 15
 export default class EquipSelect extends Box {
   constructor (key, callback) {
@@ -50,8 +50,9 @@ export default class EquipSelect extends Box {
     if (!this.bought(product.id)) {
       item.lock = new Box(SIZE, 32, colors.dark_07).addChildTo(item).setPosition(SIZE / 2, SIZE / 2)
       item.lock.img = Sprite('lock').addChildTo(item.lock).setScale(0.25, 0.25)
+    } else {
+      item.label = new Text(product.name, 12).addChildTo(item).setOrigin(0, 0).setPosition(0, 0)
     }
-    item.label = new Text(product.name).addChildTo(item).setOrigin(0, 0).setPosition(0, 0)
     return item
   }
   bought (id) {
