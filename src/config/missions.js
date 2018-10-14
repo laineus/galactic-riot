@@ -13,7 +13,5 @@ export default [
   mission5,
   mission6,
   { name: 'Mission-07' },
-  { name: 'Mission-08' },
-  { name: 'Mission-09' },
-  { name: 'Mission-10' }
+  { name: 'Mission-08' }
 ]
