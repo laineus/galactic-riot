@@ -53,7 +53,7 @@ export const fields = {
 export const fighters = [
   {
     id: 1,
-    name: 'f1',
+    name: 'Dagger',
     price: 1000,
     img: 'f1_f',
     img2: 'f1_e',
@@ -63,7 +63,7 @@ export const fighters = [
   },
   {
     id: 2,
-    name: 'f2',
+    name: 'Berkut',
     price: 1000,
     img: 'f2_f',
     img2: 'f2_e',
@@ -73,7 +73,7 @@ export const fighters = [
   },
   {
     id: 3,
-    name: 'f3',
+    name: 'Lightning',
     price: 1000,
     img: 'f3_f',
     img2: 'f3_e',
@@ -83,7 +83,7 @@ export const fighters = [
   },
   {
     id: 4,
-    name: 'f4',
+    name: 'Stingray',
     price: 1000,
     img: 'f4_f',
     img2: 'f4_e',
@@ -93,7 +93,7 @@ export const fighters = [
   },
   {
     id: 5,
-    name: 'f5',
+    name: 'Raven',
     price: 1000,
     img: 'f5_f',
     img2: 'f5_e',
@@ -103,11 +103,21 @@ export const fighters = [
   },
   {
     id: 6,
-    name: 'f6',
+    name: 'Spectre',
     price: 1000,
     img: 'f6_f',
     img2: 'f6_e',
     img3: 'f6_b',
+    speed: 7,
+    mobility: 3
+  },
+  {
+    id: 7,
+    name: 'Marshal',
+    price: 1000,
+    img: 'f7_f',
+    img2: 'f7_e',
+    img3: 'f7_b',
     speed: 7,
     mobility: 3
   }
