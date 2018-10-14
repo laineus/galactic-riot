@@ -11,8 +11,8 @@ export default class Computer extends Fighter {
   update (app) {
     super.update(app)
     this.ctrlSpeed()
-    this.ctrlBoost()
     this.ctrlTurn()
+    this.ctrlBoost()
     this.ctrAction()
     if (!this.target) this.searchTarget()
   }
@@ -49,7 +49,7 @@ export default class Computer extends Fighter {
     this.move(true)
   }
   ctrlBoost () {
-    if (Math.randint(1, 100) !== 1 || !this.target) return
+    if (Math.randint(1, 200) !== 1 || !this.target) return
     if (this.turnDirection !== 0 && this.target.degreeDiff(this) < 15) this.boost()
   }
   ctrlTurn () {
