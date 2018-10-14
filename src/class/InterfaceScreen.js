@@ -72,14 +72,14 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
     this.radar = new Radar(field, player).setPosition(20, 20).setOrigin(0, 0).addChildTo(this)
   }
   initStatus () {
-    this.status = DisplayElement().setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 30, 30).addChildTo(this)
-    this.status.keys = new Text(null, 13, { align: 'left' }).setPosition(-180, 20).addChildTo(this.status)
-    this.status.keys.update = () => this.status.keys.text = 'Amount:\nKill\nTime:'
-    this.status.values = new Text(null, 13, { align: 'right' }).setPosition(-20, 20).addChildTo(this.status)
+    this.status = DisplayElement().setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 25, 25).addChildTo(this)
+    this.status.mission = new Text(state.mission.name, 14, { align: 'left' }).setPosition(-140, 5).addChildTo(this.status)
+    this.status.keys = new Text('Amount:\nKill\nTime:', 13, { align: 'left' }).setPosition(-140, 40).addChildTo(this.status)
+    this.status.values = new Text(null, 13, { align: 'right' }).setPosition(0, 40).addChildTo(this.status)
     this.status.values.update = () => this.status.values.text = `${state.score.amount} / ${state.save.amount}\n${state.score.kill}\n${state.score.time}`
   }
   initGauge () {
-    new Text('Energy:', 12).setPosition(13, settings.SCREEN_HEIGHT - 20).setOrigin(0, 1).addChildTo(this)
+    new Text('Energy:', 13).setPosition(13, settings.SCREEN_HEIGHT - 20).setOrigin(0, 1).addChildTo(this)
     this.gauge = this.getGauge().setPosition(20, settings.SCREEN_HEIGHT - 20).setOrigin(0, 1).addChildTo(this)
   }
   getGauge () {
