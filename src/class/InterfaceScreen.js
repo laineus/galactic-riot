@@ -18,6 +18,36 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
     this.lightMask.blendMode = 'lighter'
     this.initStatus()
     this.initGauge()
+    this.initGateNavi()
+  }
+  initGateNavi () {
+    this.gateNavi = DisplayElement().addChildTo(this)
+    this.gateNavi.update = () => {
+      state.field.object.children.forEach(obj => {
+        if (obj.name === 'Gate' && !obj.nav) {
+          obj.nav = this.makeNav(obj)
+        }
+      })
+    }
+  }
+  makeNav (gate) {
+    const margin = 18
+    const nav = TriangleShape({
+      fill: colors.white,
+      strokeWidth: 0,
+      radius: 6
+    }).addChildTo(this.gateNavi).setScale(1, 3)
+    nav.blendMode = 'lighter'
+    nav.update = () => {
+      if (!gate.parent) return nav.remove()
+      const x = (gate.x * state.field.camera.zoom * 0.01) + state.field.x
+      const y = (gate.y * state.field.camera.zoom * 0.01) + state.field.y
+      nav.rotation = Math.radToDeg(Math.atan2(y - settings.SCREEN_HEIGHT_C, x - settings.SCREEN_WIDTH_C)) + 90
+      nav.x = Math.max(Math.min(x, settings.SCREEN_WIDTH - margin), margin)
+      nav.y = Math.max(Math.min(y, settings.SCREEN_HEIGHT - margin), margin)
+      nav.alpha = (x > 0 && x < settings.SCREEN_WIDTH && y > 0 && y < settings.SCREEN_HEIGHT) ? 0 : 1
+    }
+    return nav
   }
   initRadar (field, player) {
     if (this.radar) this.radar.remove()
