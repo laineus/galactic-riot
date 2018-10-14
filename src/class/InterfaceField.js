@@ -1,10 +1,11 @@
 import state from '../config/state'
 import maskImage from '../utils/maskImage'
+import { colors } from '../config/variables'
 export default class InterfaceField extends phina.display.DisplayElement {
   constructor () {
     super()
     Object.setPrototypeOf(this, InterfaceField.prototype)
-    this.lockon = maskImage.getSprite('circle', '#F31').addChildTo(this).setScale(0.2, 0.2)
+    this.lockon = maskImage.getSprite('circle', colors.pink).addChildTo(this).setScale(0.2, 0.2)
     this.lockon.blendMode = 'lighter'
     this.lockon.alpha = 0
   }
