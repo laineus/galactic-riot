@@ -20,7 +20,7 @@ export default class Gate extends phina.display.DisplayElement {
       state.player.rotation = this.rotation
       this.blur1.tweener.to({ scaleX: 50 }, 200, 'easeInQuad')
       this.blur2.tweener.to({ scaleX: 50 }, 200, 'easeInQuad')
-      state.interface.lightMask.tweener.to({ alpha: 1 }, 200, 'easeInQuad').to({ alpha: 0 }, 300, 'easeOutQuad')
+      state.interface.lightMask.tweener.to({ alpha: 1 }, 200, 'easeInQuad').to({ alpha: 0 }, 300, 'easeOutQuad').play()
       setTimeout(() => {
         state.player.x = this.fieldX
         state.player.y = this.fieldY
