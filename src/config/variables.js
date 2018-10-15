@@ -58,68 +58,75 @@ export const fighters = [
     img: 'f1_f',
     img2: 'f1_e',
     img3: 'f1_b',
+    energy: 300,
     speed: 7,
     mobility: 3
   },
   {
     id: 2,
     name: 'Berkut',
-    price: 1000,
+    price: 2000,
     img: 'f2_f',
     img2: 'f2_e',
     img3: 'f2_b',
-    speed: 7,
-    mobility: 3
+    energy: 400,
+    speed: 8,
+    mobility: 4
   },
   {
     id: 3,
     name: 'Lightning',
-    price: 1000,
+    price: 3500,
     img: 'f3_f',
     img2: 'f3_e',
     img3: 'f3_b',
-    speed: 7,
-    mobility: 3
+    energy: 350,
+    speed: 16,
+    mobility: 4
   },
   {
     id: 4,
     name: 'Stingray',
-    price: 1000,
+    price: 5000,
     img: 'f4_f',
     img2: 'f4_e',
     img3: 'f4_b',
-    speed: 7,
+    energy: 1300,
+    speed: 6,
     mobility: 3
   },
   {
     id: 5,
     name: 'Raven',
-    price: 1000,
+    price: 7000,
     img: 'f5_f',
     img2: 'f5_e',
     img3: 'f5_b',
-    speed: 7,
-    mobility: 3
+    energy: 700,
+    speed: 9,
+    mobility: 5
   },
   {
     id: 6,
     name: 'Spectre',
-    price: 1000,
+    price: 10000,
     img: 'f6_f',
     img2: 'f6_e',
     img3: 'f6_b',
-    speed: 7,
-    mobility: 3
+    energy: 800,
+    speed: 12,
+    mobility: 7
   },
   {
     id: 7,
     name: 'Marshal',
-    price: 1000,
+    price: 12000,
     img: 'f7_f',
     img2: 'f7_e',
     img3: 'f7_b',
-    speed: 7,
-    mobility: 3
+    energy: 900,
+    speed: 13,
+    mobility: 6
   }
 ]
 export const fighterFind = id => fighters.find(v => v.id === id)
