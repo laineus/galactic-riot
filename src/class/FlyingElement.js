@@ -82,6 +82,11 @@ export default class FlyingElement extends phina.display.DisplayElement {
     this.baseMobility = mobility
     return this
   }
+  setEnergy (energy) {
+    this.hp = energy
+    this.maxHp = energy
+    return this
+  }
   setSpeed (speed) {
     this.baseSpeed = speed
     return this

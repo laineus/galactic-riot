@@ -8,7 +8,6 @@ export default class Fighter extends FlyingElement {
   constructor () {
     super()
     Object.setPrototypeOf(this, Fighter.prototype)
-    this.hp = 100
     this.mainWeapon = null
     this.mainWeaponDelay = 0
     this.subWeapon = null
@@ -19,6 +18,7 @@ export default class Fighter extends FlyingElement {
   }
   setFighter (id) {
     this.fighter = fighterFind(id)
+    this.setEnergy(this === state.player ? this.fighter.energy : Math.round(this.fighter.energy / 3))
     this.setMobility(this.fighter.mobility)
     this.setSpeed(this.fighter.speed)
     this.setBlur()
