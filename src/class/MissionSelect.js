@@ -8,8 +8,8 @@ export default class MissionSelect extends phina.display.DisplayElement {
     super()
     Object.setPrototypeOf(this, MissionSelect.prototype)
     const itemHeight = 38
-    this.list = missions.map((mission, i) => new MissionSelectItem(mission).addChildTo(this).setPosition(0, i * itemHeight))
-    this.setPosition(settings.SCREEN_WIDTH_C - 200, settings.SCREEN_HEIGHT_C - missions.length * itemHeight / 2)
+    this.list = this.activeMissions.map((mission, i) => new MissionSelectItem(mission).addChildTo(this).setPosition(0, i * itemHeight))
+    this.setPosition(settings.SCREEN_WIDTH_C - 200, settings.SCREEN_HEIGHT_C - this.activeMissions.length * itemHeight / 2)
     this.cursor = new Cursor(this.list, (current, other) => {
       current.active = true
       other.forEach(v => v.active = false)
@@ -17,5 +17,8 @@ export default class MissionSelect extends phina.display.DisplayElement {
       state.mission = current.mission
       scene.exit('Game')
     }, cancel).addChildTo(this)
+  }
+  get activeMissions () {
+    return missions.filter(m => m.index <= (state.save.mission + 1))
   }
 }
