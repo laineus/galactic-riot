@@ -1,5 +1,7 @@
 import { settings, colors } from '../config/variables'
 import state from '../config/state'
+import saveData from '../utils/saveData'
+import intToString from '../utils/intToString'
 export default class MissionResult extends phina.display.RectangleShape {
   constructor (scene, completed) {
     super({
@@ -10,6 +12,10 @@ export default class MissionResult extends phina.display.RectangleShape {
       padding: 0
     })
     Object.setPrototypeOf(this, MissionResult.prototype)
+    if (completed) {
+      state.save.money += state.mission.reward
+      saveData.save()
+    }
     this.scene = scene
     this.time = 0
     this.setOrigin(0, 0)
@@ -19,7 +25,7 @@ export default class MissionResult extends phina.display.RectangleShape {
       fontSize: 18,
       fill: colors.white,
       padding: 0
-    }).setOrigin(0.5, 1).setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C - 70).addChildTo(this)
+    }).setOrigin(0.5, 1).setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C - 100).addChildTo(this)
     this.resultKey = Label({
       text: completed ? this.completedKeyString : this.failedKeyString,
       fontFamily: 'aldrich',
@@ -27,7 +33,7 @@ export default class MissionResult extends phina.display.RectangleShape {
       align: 'left',
       fill: colors.white,
       padding: 0
-    }).setOrigin(0.5, 0).setPosition(settings.SCREEN_WIDTH_C - 80, settings.SCREEN_HEIGHT_C).addChildTo(this)
+    }).setOrigin(0.5, 0).setPosition(settings.SCREEN_WIDTH_C - 80, settings.SCREEN_HEIGHT_C - 30).addChildTo(this)
     this.resultValue = Label({
       text: completed ? this.completedValueString : this.failedValueString,
       fontFamily: 'aldrich',
@@ -35,7 +41,7 @@ export default class MissionResult extends phina.display.RectangleShape {
       align: 'right',
       fill: colors.white,
       padding: 0
-    }).setOrigin(0.5, 0).setPosition(settings.SCREEN_WIDTH_C + 80, settings.SCREEN_HEIGHT_C).addChildTo(this)
+    }).setOrigin(0.5, 0).setPosition(settings.SCREEN_WIDTH_C + 80, settings.SCREEN_HEIGHT_C - 30).addChildTo(this)
   }
   update (app) {
     this.time++
@@ -44,16 +50,16 @@ export default class MissionResult extends phina.display.RectangleShape {
     }
   }
   get completedKeyString () {
-    return 'Time:\nKill:\nMember Death:\nRescue:\n\nRank:\nReward:'
+    return `${state.mission.name}\n\nTime:\nKill:\nMember Death:\nRescue:\n\nReward:`
   }
   get failedKeyString () {
-    return 'Loss:'
+    return `${state.mission.name}\n\nLoss:`
   }
   get completedValueString () {
-    return `${state.score.time}\n${state.score.kill}\n${state.score.death}\n${state.score.rescue}\n\n${'A'}\n${1000}`
+    return `\n\n${state.score.time}\n${state.score.kill}\n${state.score.death}\n${state.score.rescue}\n\n$${intToString(state.mission.reward)}`
   }
   get failedValueString () {
-    return `$${1000}`
+    return `\n\n$${intToString(state.mission.reward)}`
   }
 }
 // Time: +50
