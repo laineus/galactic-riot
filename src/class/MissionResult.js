@@ -13,6 +13,7 @@ export default class MissionResult extends phina.display.RectangleShape {
     })
     Object.setPrototypeOf(this, MissionResult.prototype)
     if (completed) {
+      state.save.mission = Math.max(state.mission.index, state.save.mission)
       state.save.money += state.mission.reward
       saveData.save()
     }

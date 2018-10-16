@@ -1,6 +1,7 @@
 import state from '../config/state'
 import addComputer from '../utils/addComputer'
 const self = {
+  index: 1,
   name: 'Mission-01',
   reward: 300,
   created: () => {

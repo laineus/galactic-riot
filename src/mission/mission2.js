@@ -2,6 +2,7 @@ import state from '../config/state'
 import addComputer from '../utils/addComputer'
 import Gate from '../class/Gate'
 const self = {
+  index: 2,
   name: 'Mission-02',
   reward: 600,
   created: () => {
