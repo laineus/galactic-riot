@@ -3,6 +3,7 @@ import addComputer from '../utils/addComputer'
 import Gate from '../class/Gate'
 const self = {
   name: 'Mission-04',
+  reward: 1600,
   created: () => {
     state.field.setField('sublatant_3')
     addComputer(1500, 200, 90, 'player', 6)

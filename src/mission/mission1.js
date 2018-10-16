@@ -2,6 +2,7 @@ import state from '../config/state'
 import addComputer from '../utils/addComputer'
 const self = {
   name: 'Mission-01',
+  reward: 300,
   created: () => {
     state.field.setField('sublatant_1')
     addComputer(2500, 2500, 350, 'player', 6)
