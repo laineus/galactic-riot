@@ -20,7 +20,8 @@ export const colors = {
   dark_07: 'rgba(64, 64, 64, 0.7)',
   blue: '#0cfcfc',
   green: '#53f623',
-  pink: '#fc027d'
+  pink: '#fc027d',
+  yellow: '#ED3'
 }
 
 export const fields = {
