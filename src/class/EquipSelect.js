@@ -48,8 +48,9 @@ export default class EquipSelect extends Box {
     item.img = this.bought(product.id) ? Sprite(product.img) : maskImage.getSprite(product.img, colors.black)
     item.img.addChildTo(item).setPosition(SIZE / 2, SIZE / 2).setScale(0.25, 0.25).setRotation(270)
     if (!this.bought(product.id)) {
-      item.lock = new Box(SIZE, 32, colors.dark_07).addChildTo(item).setPosition(SIZE / 2, SIZE / 2)
-      item.lock.img = Sprite('lock').addChildTo(item.lock).setScale(0.25, 0.25)
+      item.lock = new Box(SIZE, 40, colors.dark_07).addChildTo(item).setPosition(SIZE / 2, SIZE / 2)
+      item.lock.img = Sprite('lock').addChildTo(item.lock).setScale(0.16, 0.16).setPosition(0, -9)
+      item.lock.price = new Text(`$ ${intToString(product.price)}`, 13, { shadow: 'transparent' }).addChildTo(item.lock).setPosition(0, 11)
     } else {
       item.label = new Text(product.name, 12).addChildTo(item).setOrigin(0, 0).setPosition(0, 0)
     }
