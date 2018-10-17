@@ -26,7 +26,7 @@ export default {
     mainWeapons: [1],
     subWeapon: null,
     subWeapons: [],
-    amount: 10,
+    amount: 5,
     mission: 0
   }
 }
