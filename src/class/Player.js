@@ -39,7 +39,7 @@ export default class Player extends Fighter {
     if (key.getKey('right')) return this.turn(1)
   }
   ctrAction (key) {
-    if (key.getKeyDown('C') && this.hp > 50) {
+    if (key.getKeyDown('X') && this.hp > 50) {
       this.boost()
       this.hp -= 50
       return
