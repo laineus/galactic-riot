@@ -38,18 +38,13 @@ export default class Player extends Fighter {
     if (key.getKey('left')) return this.turn(-1)
     if (key.getKey('right')) return this.turn(1)
   }
-  get boostEnergy () {
-    return this.attachmentId === 4 ? 50 : 25
-  }
   ctrAction (key) {
-    if (key.getKeyDown('X') && this.hp > this.boostEnergy) {
+    if (key.getKeyDown('X')) {
       this.boost()
-      this.hp -= this.boostEnergy
       return
     }
-    if (key.getKey('Z') && this.hp > 1) {
+    if (key.getKey('Z')) {
       this.mainAction()
-      this.hp -= 1
       return
     }
     if (this.hp < this.maxHp) this.hp += 1

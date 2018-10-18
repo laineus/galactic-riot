@@ -41,26 +41,19 @@ export default class Fighter extends FlyingElement {
     this.attachment = attachmentFind(id)
   }
   mainAction () {
-    if (this.weaponDelay > 0 || !this.weapon) return
+    if (this.weaponDelay > 0 || !this.weapon || this.hp <= 1) return
+    this.hp -= 1
     new Laser(this, this.weapon)
     if (this.weapon.name === 'Twin') new Laser(this, this.weapon)
     if (this.attachmentId === 3) new Laser(this, this.attachment)
     this.weaponDelay = this.weapon.delay
   }
-  subAction () {
-    if (this.attachmentDelay > 0 || !this.attachment) return
-    switch (this.attachment.name) {
-      case 'Booster':
-        this.boost()
-        break
-      default:
-        new Laser(this, this.attachment)
-        break
-    }
-    this.attachmentDelay = this.attachment.delay
+  get boostEnergy () {
+    return this.attachmentId === 4 ? 25 : 50
   }
   boost () {
-    if (this.turnBoost > 0) return
+    if (this.turnBoost > 0 || this.hp <= this.boostEnergy) return
+    this.hp -= this.boostEnergy
     this.stampBlur()
     this.turnBoost = 20
   }
