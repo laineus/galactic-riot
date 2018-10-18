@@ -196,7 +196,7 @@ export const attachments = [
     id: 1,
     name: 'NoviceInsurance',
     price: 1000,
-    img: 'w_tailgun'
+    img: 'w_booster'
   },
   {
     id: 2,
@@ -208,7 +208,12 @@ export const attachments = [
     id: 3,
     name: 'Tailgun',
     price: 1000,
-    img: 'w_booster'
+    img: 'w_tailgun',
+    damage: 20,
+    delay: 5,
+    speed: 50,
+    isHoming: false,
+    twinDiff: false
   },
   {
     id: 4,

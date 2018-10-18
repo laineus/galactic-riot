@@ -44,6 +44,7 @@ export default class Fighter extends FlyingElement {
     if (this.weaponDelay > 0 || !this.weapon) return
     new Laser(this, this.weapon)
     if (this.weapon.name === 'Twin') new Laser(this, this.weapon)
+    if (this.attachmentId === 3) new Laser(this, this.attachment)
     this.weaponDelay = this.weapon.delay
   }
   subAction () {
