@@ -16,6 +16,9 @@ export default class MissionResult extends phina.display.RectangleShape {
       state.save.mission = Math.max(state.mission.index, state.save.mission)
       state.save.money += state.mission.reward
       saveData.save()
+    } else {
+      state.save.money -= this.lost
+      saveData.save()
     }
     this.scene = scene
     this.time = 0
@@ -50,6 +53,9 @@ export default class MissionResult extends phina.display.RectangleShape {
       this.scene.exit('Title', { skip: 1 })
     }
   }
+  get lost () {
+    return (state.mission.reward / 2) * (state.save.attachment === 1 ? 0.5 : 1)
+  }
   get completedKeyString () {
     return `${state.mission.name}\n\nTime:\nKill:\nMember Death:\nRescue:\n\nReward:`
   }
@@ -60,7 +66,7 @@ export default class MissionResult extends phina.display.RectangleShape {
     return `\n\n${state.score.time}\n${state.score.kill}\n${state.score.death}\n${state.score.rescue}\n\n$${intToString(state.mission.reward)}`
   }
   get failedValueString () {
-    return `\n\n$${intToString(state.mission.reward)}`
+    return `\n\n$${intToString(this.lost)}`
   }
 }
 // Time: +50
