@@ -8,8 +8,10 @@ export default class Fighter extends FlyingElement {
   constructor () {
     super()
     Object.setPrototypeOf(this, Fighter.prototype)
+    this.weaponId = null
     this.weapon = null
     this.weaponDelay = 0
+    this.attachmentId = null
     this.attachment = null
     this.attachmentDelay = 0
   }
@@ -31,9 +33,11 @@ export default class Fighter extends FlyingElement {
     this.blur = new FighterBlur(maskImage.getName(this.fighter.img3, colors[this.color]), this).setScale(0.25, 0.25).addChildTo(this)
   }
   setWeapon (id) {
+    this.weaponId = id
     this.weapon = weaponFind(id)
   }
   setAttachment (id) {
+    this.attachmentId = id
     this.attachment = attachmentFind(id)
   }
   mainAction () {
@@ -70,7 +74,7 @@ export default class Fighter extends FlyingElement {
   }
   damage (damage, shooter) {
     this.explosion(1)
-    this.hp -= damage
+    this.hp -= damage * (this.attachmentId === 2 ? 0.5 : 1)
     // target
     if (shooter === state.player && this.target !== shooter && this.target) state.score.rescue++
     this.target = shooter
