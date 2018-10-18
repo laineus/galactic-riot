@@ -1,4 +1,4 @@
-import { colors, settings, fighters, mainWeapons, subWeapons } from '../config/variables'
+import { colors, settings, fighters, mainWeapons, attachments } from '../config/variables'
 import state from '../config/state'
 import intToString from '../utils/intToString'
 import saveData from '../utils/saveData'
@@ -31,14 +31,14 @@ export default class EquipSelect extends Box {
     switch (key) {
       case 'fighter': return 'fighter'
       case 'main': return 'mainWeapon'
-      case 'sub': return 'subWeapon'
+      case 'sub': return 'attachment'
     }
   }
   getProducts (key) {
     switch (key) {
       case 'fighter': return fighters
       case 'main': return mainWeapons
-      case 'sub': return subWeapons
+      case 'sub': return attachments
     }
     return null
   }

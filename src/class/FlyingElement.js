@@ -14,8 +14,8 @@ export default class FlyingElement extends phina.display.DisplayElement {
     this.speed = 0
     this.mainWeapon = null
     this.mainWeaponDelay = 0
-    this.subWeapon = null
-    this.subWeaponDelay = 0
+    this.attachment = null
+    this.attachmentDelay = 0
     this.cos = 0
     this.sin = 0
     this.acceleration = 1.0
@@ -31,7 +31,7 @@ export default class FlyingElement extends phina.display.DisplayElement {
     this.oldYs.splice(10)
     this.turnDirection = 0
     if (this.mainWeaponDelay > 0) this.mainWeaponDelay--
-    if (this.subWeaponDelay > 0) this.subWeaponDelay--
+    if (this.attachmentDelay > 0) this.attachmentDelay--
     this.cos = Math.cos(Math.degToRad(this.rotation))
     this.sin = Math.sin(Math.degToRad(this.rotation))
     if (this.target && !this.target.isActive()) this.target = null

@@ -1,4 +1,4 @@
-import { fighterFind, mainWeaponFind, subWeaponFind, colors } from '../config/variables'
+import { fighterFind, mainWeaponFind, attachmentFind, colors } from '../config/variables'
 import state from '../config/state'
 import Laser from './Laser'
 import FlyingElement from './FlyingElement'
@@ -10,8 +10,8 @@ export default class Fighter extends FlyingElement {
     Object.setPrototypeOf(this, Fighter.prototype)
     this.mainWeapon = null
     this.mainWeaponDelay = 0
-    this.subWeapon = null
-    this.subWeaponDelay = 0
+    this.attachment = null
+    this.attachmentDelay = 0
   }
   isActive () {
     return this.hp > 0
@@ -33,8 +33,8 @@ export default class Fighter extends FlyingElement {
   setMainWeapon (id) {
     this.mainWeapon = mainWeaponFind(id)
   }
-  setSubWeapon (id) {
-    this.subWeapon = subWeaponFind(id)
+  setAttachment (id) {
+    this.attachment = attachmentFind(id)
   }
   mainAction () {
     if (this.mainWeaponDelay > 0 || !this.mainWeapon) return
@@ -43,16 +43,16 @@ export default class Fighter extends FlyingElement {
     this.mainWeaponDelay = this.mainWeapon.delay
   }
   subAction () {
-    if (this.subWeaponDelay > 0 || !this.subWeapon) return
-    switch (this.subWeapon.name) {
+    if (this.attachmentDelay > 0 || !this.attachment) return
+    switch (this.attachment.name) {
       case 'Booster':
         this.boost()
         break
       default:
-        new Laser(this, this.subWeapon)
+        new Laser(this, this.attachment)
         break
     }
-    this.subWeaponDelay = this.subWeapon.delay
+    this.attachmentDelay = this.attachment.delay
   }
   boost () {
     if (this.turnBoost > 0) return
