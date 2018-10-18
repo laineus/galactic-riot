@@ -21,13 +21,16 @@ export default class Fighter extends FlyingElement {
   setFighter (id) {
     this.fighter = fighterFind(id)
     this.setEnergy(this === state.player ? this.fighter.energy : Math.round(this.fighter.energy / 3))
-    this.setMobility(this.fighter.mobility)
-    this.setSpeed(this.fighter.speed)
+    this.setMobilityAndSpeed()
     this.setBlur()
     this.setJet()
     const key = this.type === 'friend' ? 'img' : 'img2'
     this.setBody(Sprite(this.fighter[key]).setScale(0.2, 0.2))
     this.setImageName(this.fighter[key])
+  }
+  setMobilityAndSpeed () {
+    this.setMobility(this.fighter.mobility + (this.attachmentId === 5 ? 2 : 0))
+    this.setSpeed(this.fighter.speed + (this.attachmentId === 5 ? 3 : 0))
   }
   setBlur () {
     this.blur = new FighterBlur(maskImage.getName(this.fighter.img3, colors[this.color]), this).setScale(0.25, 0.25).addChildTo(this)
@@ -39,6 +42,7 @@ export default class Fighter extends FlyingElement {
   setAttachment (id) {
     this.attachmentId = id
     this.attachment = attachmentFind(id)
+    this.setMobilityAndSpeed()
   }
   mainAction () {
     if (this.weaponDelay > 0 || !this.weapon || this.hp <= 1) return
