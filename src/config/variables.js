@@ -132,7 +132,7 @@ export const fighters = [
 ]
 export const fighterFind = id => fighters.find(v => v.id === id)
 
-export const mainWeapons = [
+export const weapons = [
   {
     id: 1,
     name: 'Assult',
@@ -189,7 +189,7 @@ export const mainWeapons = [
     twinDiff: false
   }
 ]
-export const mainWeaponFind = id => mainWeapons.find(v => v.id === id)
+export const weaponFind = id => weapons.find(v => v.id === id)
 
 export const attachments = [
   {

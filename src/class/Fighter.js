@@ -1,4 +1,4 @@
-import { fighterFind, mainWeaponFind, attachmentFind, colors } from '../config/variables'
+import { fighterFind, weaponFind, attachmentFind, colors } from '../config/variables'
 import state from '../config/state'
 import Laser from './Laser'
 import FlyingElement from './FlyingElement'
@@ -8,8 +8,8 @@ export default class Fighter extends FlyingElement {
   constructor () {
     super()
     Object.setPrototypeOf(this, Fighter.prototype)
-    this.mainWeapon = null
-    this.mainWeaponDelay = 0
+    this.weapon = null
+    this.weaponDelay = 0
     this.attachment = null
     this.attachmentDelay = 0
   }
@@ -30,17 +30,17 @@ export default class Fighter extends FlyingElement {
   setBlur () {
     this.blur = new FighterBlur(maskImage.getName(this.fighter.img3, colors[this.color]), this).setScale(0.25, 0.25).addChildTo(this)
   }
-  setMainWeapon (id) {
-    this.mainWeapon = mainWeaponFind(id)
+  setWeapon (id) {
+    this.weapon = weaponFind(id)
   }
   setAttachment (id) {
     this.attachment = attachmentFind(id)
   }
   mainAction () {
-    if (this.mainWeaponDelay > 0 || !this.mainWeapon) return
-    new Laser(this, this.mainWeapon)
-    if (this.mainWeapon.name === 'Twin') new Laser(this, this.mainWeapon)
-    this.mainWeaponDelay = this.mainWeapon.delay
+    if (this.weaponDelay > 0 || !this.weapon) return
+    new Laser(this, this.weapon)
+    if (this.weapon.name === 'Twin') new Laser(this, this.weapon)
+    this.weaponDelay = this.weapon.delay
   }
   subAction () {
     if (this.attachmentDelay > 0 || !this.attachment) return

@@ -1,4 +1,4 @@
-import { settings, colors, fighterFind, mainWeaponFind, attachmentFind } from '../config/variables'
+import { settings, colors, fighterFind, weaponFind, attachmentFind } from '../config/variables'
 import state from '../config/state'
 import intToString from '../utils/intToString'
 import EquipSelect from './EquipSelect'
@@ -82,13 +82,13 @@ export default class ArsenalScene extends phina.display.DisplayScene {
   }
   getMain (label) {
     const item = new Box(110, 110)
-    item.beforeId = state.save.mainWeapon
-    const weapon = mainWeaponFind(state.save.mainWeapon)
+    item.beforeId = state.save.weapon
+    const weapon = weaponFind(state.save.weapon)
     item.image = Sprite(weapon.img).setScale(0.2, 0.2).setRotation(270).addChildTo(item)
     item.image.update = () => {
-      if (item.beforeId === state.save.mainWeapon) return
-      item.beforeId = state.save.mainWeapon
-      item.image.setImage(mainWeaponFind(state.save.mainWeapon).img)
+      if (item.beforeId === state.save.weapon) return
+      item.beforeId = state.save.weapon
+      item.image.setImage(weaponFind(state.save.weapon).img)
     }
     item.label = new Text(label.name, 12).setOrigin(0, 0).setPosition(-55, -55).addChildTo(item)
     return item

@@ -11,7 +11,7 @@ export default class Player extends Fighter {
     this.setColorIndex(1)
     this.initSight()
     this.setFighter(state.save.fighter)
-    this.setMainWeapon(state.save.mainWeapon)
+    this.setWeapon(state.save.weapon)
     this.setAttachment(state.save.attachment)
     this.addChildTo(state.field.friend)
     this.player = true
