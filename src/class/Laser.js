@@ -11,7 +11,7 @@ export default class Laser extends FlyingElement {
     if (!this.shooter.shotCount) this.shooter.shotCount = 0
     this.shooter.shotCount++
     this.setSpeed(this.laser.speed + (parent.player ? 10 : 0))
-    this.setMobility(30)
+    this.setMobility(10)
     this.setRotation(this.laser.name === 'Tailgun' ? parent.rotation + 180 : parent.rotation)
     if (this.laser.name === 'Tailgun') {
       this.setPosition(

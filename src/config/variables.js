@@ -176,6 +176,17 @@ export const mainWeapons = [
     speed: 50,
     isHoming: false,
     twinDiff: false
+  },
+  {
+    id: 5,
+    name: 'Homing',
+    price: 1000,
+    img: 'w_missile',
+    damage: 20,
+    delay: 5,
+    speed: 50,
+    isHoming: true,
+    twinDiff: false
   }
 ]
 export const mainWeaponFind = id => mainWeapons.find(v => v.id === id)
@@ -201,17 +212,6 @@ export const subWeapons = [
     delay: 20,
     speed: null,
     isHoming: false,
-    twinDiff: false
-  },
-  {
-    id: 3,
-    name: 'Missile',
-    price: 1000,
-    img: 'w_missile',
-    damage: 20,
-    delay: 5,
-    speed: 50,
-    isHoming: true,
     twinDiff: false
   }
 ]
