@@ -194,25 +194,33 @@ export const weaponFind = id => weapons.find(v => v.id === id)
 export const attachments = [
   {
     id: 1,
-    name: 'Tailgun',
+    name: 'NoviceInsurance',
     price: 1000,
-    img: 'w_tailgun',
-    damage: 20,
-    delay: 5,
-    speed: 50,
-    isHoming: false,
-    twinDiff: false
+    img: 'w_tailgun'
   },
   {
     id: 2,
-    name: 'Booster',
+    name: 'Armor',
     price: 1000,
-    img: 'w_booster',
-    damage: null,
-    delay: 20,
-    speed: null,
-    isHoming: false,
-    twinDiff: false
+    img: 'w_booster'
+  },
+  {
+    id: 3,
+    name: 'Tailgun',
+    price: 1000,
+    img: 'w_booster'
+  },
+  {
+    id: 4,
+    name: 'LowFuelBooster',
+    price: 1000,
+    img: 'w_booster'
+  },
+  {
+    id: 5,
+    name: 'LightWeightBody',
+    price: 1000,
+    img: 'w_booster'
   }
 ]
 export const attachmentFind = id => attachments.find(v => v.id === id)
