@@ -13,8 +13,7 @@ export default class EquipSelect extends Box {
   constructor (key, callback) {
     super(null, null, colors.dark_05)
     Object.setPrototypeOf(this, EquipSelect.prototype)
-    this.key = this.convertKey(key)
-    this.products = this.getProducts(key)
+    this.key = key
     this.setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
     this.callback = callback
     const defaultIndex = this.products.findIndex(v => v.id === state.save[this.key])
@@ -27,18 +26,11 @@ export default class EquipSelect extends Box {
       other.forEach(v => v.active = false)
     }, this.select.bind(this), this.exit.bind(this), false, defaultIndex).addChildTo(this)
   }
-  convertKey (key) {
-    switch (key) {
-      case 'fighter': return 'fighter'
-      case 'main': return 'weapon'
-      case 'sub': return 'attachment'
-    }
-  }
-  getProducts (key) {
-    switch (key) {
+  get products () {
+    switch (this.key) {
       case 'fighter': return fighters
-      case 'main': return weapons
-      case 'sub': return attachments
+      case 'weapon': return weapons
+      case 'attachment': return attachments
     }
     return null
   }

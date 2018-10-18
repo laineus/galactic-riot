@@ -29,8 +29,8 @@ export default class ArsenalScene extends phina.display.DisplayScene {
     const content = DisplayElement().setOrigin(0, 0)
     content.list = [
       { name: 'Fighter', key: 'fighter', move: [{ key: 'right', index: 1 }, { key: 'down', index: 3 }] },
-      { name: 'Main Weapon', key: 'main', move: [{ key: 'left', index: 0 }, { key: 'down', index: 2 }] },
-      { name: 'Sub Weapon', key: 'sub', move: [{ key: 'up', index: 1 }, { key: 'left', index: 0 }, { key: 'down', index: 3 }] },
+      { name: 'Weapon', key: 'weapon', move: [{ key: 'left', index: 0 }, { key: 'down', index: 2 }] },
+      { name: 'Attachment', key: 'attachment', move: [{ key: 'up', index: 1 }, { key: 'left', index: 0 }, { key: 'down', index: 3 }] },
       { name: 'Military Force', key: 'amount', move: [{ key: 'up', index: 0 }, { key: 'down', index: 4 }] },
       { name: 'Exit', key: null, move: [{ key: 'up', index: 3 }] }
     ]
