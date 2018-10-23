@@ -13,9 +13,25 @@ export default class Box extends phina.display.RectangleShape {
       padding: 0
     })
     Object.setPrototypeOf(this, Box.prototype)
+    this.borderBox = RectangleShape({
+      width: width,
+      height: height,
+      fill: 'transparent',
+      stroke: colors.blue,
+      strokeWidth: 2,
+      padding: 0,
+      alpha: 0
+    }).addChildTo(this)
+    this.borderBox.blendMode = 'lighter'
+    this.borderBox.alpha = 0
     this.active = false
   }
   update () {
-    this.stroke = this.active ? colors.blue : 'transparent'
+    this.borderBox.alpha = this.active ? 1 : 0
+  }
+  setOrigin (x, y) {
+    super.setOrigin(x, y)
+    this.borderBox.setOrigin(0, 0)
+    return this
   }
 }
