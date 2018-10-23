@@ -195,13 +195,13 @@ export const attachments = [
   {
     id: 1,
     name: 'NoviceInsurance',
-    price: 1000,
+    price: 100,
     img: 'w_booster'
   },
   {
     id: 2,
     name: 'Armor',
-    price: 1000,
+    price: 500,
     img: 'w_booster'
   },
   {
@@ -218,13 +218,13 @@ export const attachments = [
   {
     id: 4,
     name: 'LowFuelBooster',
-    price: 1000,
+    price: 2000,
     img: 'w_booster'
   },
   {
     id: 5,
     name: 'LightWeightBody',
-    price: 1000,
+    price: 3000,
     img: 'w_booster'
   }
 ]

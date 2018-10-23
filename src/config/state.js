@@ -24,8 +24,8 @@ export default {
     fighters: [1],
     weapon: 1,
     weapons: [1],
-    attachment: null,
-    attachments: [],
+    attachment: 1,
+    attachments: [1],
     amount: 5,
     mission: 0
   }
