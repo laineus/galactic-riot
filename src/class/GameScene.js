@@ -54,7 +54,7 @@ export default class GameScene extends phina.display.DisplayScene {
   }
   reinforce () {
     if (state.score.amount <= 0) return
-    if (state.field.friend.children.length < 5) {
+    if (state.field.friend.children.length < this.mission.friendCount) {
       const count = Math.min(state.score.amount, Math.randint(1, 6))
       addComputer(null, null, null, 'friend', count)
     }

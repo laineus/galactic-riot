@@ -5,9 +5,10 @@ const self = {
   index: 3,
   name: 'Mission-03',
   reward: 1000,
+  friendCount: 4,
   created: () => {
     state.field.setField('sublatant_1')
-    addComputer(200, 3200, 350, 'player', 6)
+    addComputer(200, 3200, 350, 'player', self.friendCount)
   },
   update: () => {
   },
