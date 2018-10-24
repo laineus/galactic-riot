@@ -4,6 +4,7 @@ import mission3 from '../mission/mission3'
 import mission4 from '../mission/mission4'
 import mission5 from '../mission/mission5'
 import mission6 from '../mission/mission6'
+import mission7 from '../mission/mission7'
 export default [
   { name: 'Tutorial' },
   mission1,
@@ -12,6 +13,6 @@ export default [
   mission4,
   mission5,
   mission6,
-  { name: 'Mission-07' },
+  mission7,
   { name: 'Mission-08' }
 ]
