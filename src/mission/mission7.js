@@ -2,9 +2,9 @@ import state from '../config/state'
 import addComputer from '../utils/addComputer'
 import Gate from '../class/Gate'
 const self = {
-  index: 6,
+  index: 7,
   name: 'Mission-07',
-  reward: 3200,
+  reward: 4000,
   friendCount: 6,
   created: () => {
     state.field.setField('sublatant_3')
