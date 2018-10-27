@@ -20,9 +20,9 @@ export default class Field extends phina.display.DisplayElement {
     const fieldSrc = fields[fieldName]
     this.width = fieldSrc.width
     this.height = fieldSrc.height
-    this.enemy.children.clear()
-    this.bullet.children.clear()
-    this.object.children.clear()
+    this.enemy.children.forEach(e => e.remove())
+    this.bullet.children.forEach(e => e.remove())
+    this.object.children.forEach(e => e.remove())
     if (this.bg) this.bg.remove()
     if (this.fg) this.fg.remove()
     this.bg = new Tile('map1_bg', this.width, this.height).addChildTo(this).setOrigin(0, 0)
