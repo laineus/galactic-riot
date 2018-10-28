@@ -153,7 +153,7 @@ export const weapons = [
     delay: 7,
     speed: 50,
     isHoming: false,
-    twinDiff: 25
+    twinDiff: 35
   },
   {
     id: 3,
@@ -164,7 +164,7 @@ export const weapons = [
     delay: 3,
     speed: 50,
     isHoming: false,
-    twinDiff: 15
+    twinDiff: 35
   },
   {
     id: 4,

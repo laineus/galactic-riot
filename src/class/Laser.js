@@ -19,7 +19,7 @@ export default class Laser extends FlyingElement {
         parent.y + (parent.sin * -60)
       )
     } else if (this.laser.twinDiff) {
-      const add = this.shooter.shotCount % 2 === 0 ? -45 : 45
+      const add = this.shooter.shotCount % 2 === 0 ? -25 : 25
       this.setPosition(
         parent.x + (Math.cos(Math.degToRad(this.rotation + add)) * this.laser.twinDiff),
         parent.y + (Math.sin(Math.degToRad(this.rotation + add)) * this.laser.twinDiff)
