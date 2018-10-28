@@ -117,7 +117,8 @@ export default class FlyingElement extends phina.display.DisplayElement {
       }
       return base + Math.min((this.turnBoost) / 3, 2)
     })()
-    this.rotation += Math.min(this.baseMobility, max) * accele * this.turnDirection
+    const addRotation = Math.min(this.baseMobility, max) * accele
+    this.rotation += Math.min(addRotation, 10) * this.turnDirection
     if (this.rotation > 360) this.rotation -= 360
     if (this.rotation < 0) this.rotation += 360
   }
