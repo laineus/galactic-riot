@@ -4,7 +4,7 @@ import intToString from '../utils/intToString'
 import EquipSelect from './EquipSelect'
 import MilitaryForce from './MilitaryForce'
 import Box from './Box'
-import Text from './Text'
+import BlurText from './BlurText'
 export default class ArsenalScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -19,9 +19,9 @@ export default class ArsenalScene extends phina.display.DisplayScene {
   }
   getHeader () {
     const header = new Box(settings.SCREEN_WIDTH, 40).setOrigin(0, 0).setPosition(0, 20)
-    header.title = new Text('Arsenal', 24).setOrigin(0, 0).setPosition(25, 0).addChildTo(header)
-    header.budgetLabel = new Text('Budget :').setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 150, 5).addChildTo(header)
-    header.budgetValue = new Text().setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 20, 5).addChildTo(header)
+    header.title = new BlurText('Arsenal', 24).setOrigin(0, 0).setPosition(25, 0).addChildTo(header)
+    header.budgetLabel = new BlurText('Budget :').setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 150, 5).addChildTo(header)
+    header.budgetValue = new BlurText().setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 20, 5).addChildTo(header)
     header.budgetValue.update = () => header.budgetValue.text = `$ ${intToString(state.save.money)}`
     return header
   }
@@ -77,7 +77,7 @@ export default class ArsenalScene extends phina.display.DisplayScene {
       item.beforeId = state.save.fighter
       item.image.setImage(fighterFind(state.save.fighter).img)
     }
-    item.label = new Text(label.name, 14).setOrigin(0, 0).setPosition(-115, -115).addChildTo(item)
+    item.label = new BlurText(label.name, 14).setOrigin(0, 0).setPosition(-115, -115).addChildTo(item)
     return item
   }
   getMain (label) {
@@ -90,7 +90,7 @@ export default class ArsenalScene extends phina.display.DisplayScene {
       item.beforeId = state.save.weapon
       item.image.setImage(weaponFind(state.save.weapon).img)
     }
-    item.label = new Text(label.name, 12).setOrigin(0, 0).setPosition(-55, -55).addChildTo(item)
+    item.label = new BlurText(label.name, 12).setOrigin(0, 0).setPosition(-55, -55).addChildTo(item)
     return item
   }
   getSub (label) {
@@ -98,7 +98,7 @@ export default class ArsenalScene extends phina.display.DisplayScene {
     item.beforeId = state.save.attachment
     const weapon = attachmentFind(state.save.attachment)
     item.image = Sprite(weapon ? weapon.img : 'dummy').setScale(0.2, 0.2).setRotation(270).addChildTo(item)
-    item.label = new Text(label.name, 12).setOrigin(0, 0).setPosition(-55, -55).addChildTo(item)
+    item.label = new BlurText(label.name, 12).setOrigin(0, 0).setPosition(-55, -55).addChildTo(item)
     item.image.update = () => {
       if (item.beforeId === state.save.attachment) return
       item.beforeId = state.save.attachment
@@ -108,14 +108,14 @@ export default class ArsenalScene extends phina.display.DisplayScene {
   }
   getForce (label) {
     const item = new Box(370, 40)
-    item.key = new Text(`${label.name} :`).setOrigin(0, 0.5).setPosition(-175, 0).addChildTo(item)
-    item.value = new Text(state.save.amount).setOrigin(1, 0.5).setPosition(175, 0).addChildTo(item)
+    item.key = new BlurText(`${label.name} :`).setOrigin(0, 0.5).setPosition(-175, 0).addChildTo(item)
+    item.value = new BlurText(state.save.amount).setOrigin(1, 0.5).setPosition(175, 0).addChildTo(item)
     item.value.update = () => item.value.text = state.save.amount
     return item
   }
   getExit (label) {
     const item = new Box(110, 32)
-    item.image = new Text(label.name).addChildTo(item)
+    item.image = new BlurText(label.name).addChildTo(item)
     return item
   }
 }

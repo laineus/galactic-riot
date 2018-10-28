@@ -5,7 +5,7 @@ import saveData from '../utils/saveData'
 import maskImage from '../utils/maskImage'
 import Cursor from './Cursor'
 import Box from './Box'
-import Text from './Text'
+import BlurText from './BlurText'
 import Modal from './Modal'
 const SIZE = 100
 const MARGIN = 15
@@ -42,9 +42,9 @@ export default class EquipSelect extends Box {
     if (!this.bought(product.id)) {
       item.lock = new Box(SIZE, 40, colors.dark_07).addChildTo(item).setPosition(SIZE / 2, SIZE / 2)
       item.lock.img = Sprite('lock').addChildTo(item.lock).setScale(0.16, 0.16).setPosition(0, -9)
-      item.lock.price = new Text(`$ ${intToString(product.price)}`, 13, { shadow: 'transparent' }).addChildTo(item.lock).setPosition(0, 11)
+      item.lock.price = new BlurText(`$ ${intToString(product.price)}`, 13, { shadow: 'transparent' }).addChildTo(item.lock).setPosition(0, 11)
     } else {
-      item.label = new Text(product.name, 12).addChildTo(item).setOrigin(0, 0).setPosition(0, 0)
+      item.label = new BlurText(product.name, 12).addChildTo(item).setOrigin(0, 0).setPosition(0, 0)
     }
     return item
   }

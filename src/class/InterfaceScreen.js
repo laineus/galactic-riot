@@ -1,7 +1,7 @@
 import { settings, colors } from '../config/variables'
 import state from '../config/state'
 import Radar from './Radar'
-import Text from './Text'
+import BlurText from './BlurText'
 export default class InterfaceScreen extends phina.display.DisplayElement {
   constructor () {
     super()
@@ -23,7 +23,7 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
   }
   initAnalyzer () {
     this.analyzer = DisplayElement().addChildTo(this).setOrigin(0, 0)
-    this.analyzer.label = new Text('', 12, { shadow: colors.pink }).addChildTo(this.analyzer).setOrigin(0, 1).setPosition(-9, 6)
+    this.analyzer.label = new BlurText('', 12, { shadow: colors.pink }).addChildTo(this.analyzer).setOrigin(0, 1).setPosition(-9, 6)
     this.analyzer.gauge = Gauge({ width: 50, height: 1.5, fill: colors.black, gaugeColor: colors.white, strokeWidth: 0, padding: 0 }).setOrigin(0, 0).addChildTo(this.analyzer)
     this.analyzer.update = () => {
       if (state.player.hp > 0 && state.player.target) {
@@ -73,13 +73,13 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
   }
   initStatus () {
     this.status = DisplayElement().setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 25, 25).addChildTo(this)
-    this.status.mission = new Text(state.mission.name, 14, { align: 'left' }).setPosition(-140, 5).addChildTo(this.status)
-    this.status.keys = new Text('Amount:\nKill\nTime:', 13, { align: 'left' }).setPosition(-140, 40).addChildTo(this.status)
-    this.status.values = new Text(null, 13, { align: 'right' }).setPosition(0, 40).addChildTo(this.status)
+    this.status.mission = new BlurText(state.mission.name, 14, { align: 'left' }).setPosition(-140, 5).addChildTo(this.status)
+    this.status.keys = new BlurText('Amount:\nKill\nTime:', 13, { align: 'left' }).setPosition(-140, 40).addChildTo(this.status)
+    this.status.values = new BlurText(null, 13, { align: 'right' }).setPosition(0, 40).addChildTo(this.status)
     this.status.values.update = () => this.status.values.text = `${state.score.amount} / ${state.save.amount}\n${state.score.kill}\n${state.score.time}`
   }
   initGauge () {
-    new Text('Energy:', 13).setPosition(13, settings.SCREEN_HEIGHT - 20).setOrigin(0, 1).addChildTo(this)
+    new BlurText('Energy:', 13).setPosition(13, settings.SCREEN_HEIGHT - 20).setOrigin(0, 1).addChildTo(this)
     this.gauge = this.getGauge().setPosition(20, settings.SCREEN_HEIGHT - 20).setOrigin(0, 1).addChildTo(this)
   }
   getGauge () {
