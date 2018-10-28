@@ -70,7 +70,7 @@ export const fighters = [
     img: 'f2_f',
     img2: 'f2_e',
     img3: 'f2_b',
-    energy: 400,
+    energy: 500,
     speed: 8,
     mobility: 4
   },
@@ -81,7 +81,7 @@ export const fighters = [
     img: 'f3_f',
     img2: 'f3_e',
     img3: 'f3_b',
-    energy: 350,
+    energy: 400,
     speed: 16,
     mobility: 4
   },
@@ -92,7 +92,7 @@ export const fighters = [
     img: 'f4_f',
     img2: 'f4_e',
     img3: 'f4_b',
-    energy: 1300,
+    energy: 1600,
     speed: 6,
     mobility: 3
   },
@@ -103,7 +103,7 @@ export const fighters = [
     img: 'f5_f',
     img2: 'f5_e',
     img3: 'f5_b',
-    energy: 700,
+    energy: 900,
     speed: 9,
     mobility: 5
   },
@@ -114,7 +114,7 @@ export const fighters = [
     img: 'f6_f',
     img2: 'f6_e',
     img3: 'f6_b',
-    energy: 800,
+    energy: 1100,
     speed: 12,
     mobility: 7
   },
@@ -125,7 +125,7 @@ export const fighters = [
     img: 'f7_f',
     img2: 'f7_e',
     img3: 'f7_b',
-    energy: 900,
+    energy: 1400,
     speed: 13,
     mobility: 6
   }
