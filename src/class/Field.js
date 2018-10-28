@@ -2,6 +2,7 @@ import state from '../config/state'
 import { fields } from '../config/variables'
 import InterfaceField from './InterfaceField'
 import Tile from './Tile'
+import removeChildren from '../utils/removeChildren'
 export default class Field extends phina.display.DisplayElement {
   constructor () {
     super()
@@ -20,9 +21,9 @@ export default class Field extends phina.display.DisplayElement {
     const fieldSrc = fields[fieldName]
     this.width = fieldSrc.width
     this.height = fieldSrc.height
-    this.enemy.children.forEach(e => e.remove())
-    this.bullet.children.forEach(e => e.remove())
-    this.object.children.forEach(e => e.remove())
+    removeChildren(this.enemy)
+    removeChildren(this.bullet)
+    removeChildren(this.object)
     if (this.bg) this.bg.remove()
     if (this.fg) this.fg.remove()
     this.bg = new Tile('map1_bg', this.width, this.height).addChildTo(this).setOrigin(0, 0)
