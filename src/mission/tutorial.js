@@ -9,10 +9,10 @@ const self = {
   friendCount: 1,
   timer: 0,
   condition: {
-    left: false,
-    right: false,
-    up: false,
-    down: false,
+    left: 0,
+    right: 0,
+    up: 0,
+    down: 0,
     boost: 0,
     boostTurn: 0,
     backBoost: 0,
@@ -45,17 +45,17 @@ const self = {
     () => self.wait(80),
     () => self.setSub('[左キー][右キー]： 旋回'),
     () => {
-      if (state.player.turnDirection < 0) self.condition.left = true
-      if (state.player.turnDirection > 0) self.condition.right = true
-      return self.condition.left && self.condition.right
+      if (state.player.turnDirection < 0) self.condition.left++
+      if (state.player.turnDirection > 0) self.condition.right++
+      return self.condition.left > 30 && self.condition.right > 30
     },
     () => self.setSub(''),
     () => self.wait(30),
     () => self.setSub('[上キー][下キー]： 加速・減速'),
     () => {
-      if (state.player.speedDirection < 0) self.condition.up = true
-      if (state.player.speedDirection > 0) self.condition.down = true
-      return self.condition.up && self.condition.down
+      if (state.player.speedDirection < 0) self.condition.up++
+      if (state.player.speedDirection > 0) self.condition.down++
+      return self.condition.up > 30 && self.condition.down > 30
     },
     () => self.setSub(''),
     () => self.wait(30),
@@ -67,21 +67,21 @@ const self = {
     () => self.wait(30),
     () => self.setSub('[X]： ブースト'),
     () => {
-      if ((state.player.speedDirection >= 0) && (state.player.turnDirection === 0) && (state.player.turnBoost === 19)) self.condition.boost++
+      if ((state.player.speedDirection >= 0) && (state.player.turnDirection === 0) && (state.player.turnBoost === 10)) self.condition.boost++
       return self.condition.boost > 1
     },
     () => self.setSub(''),
     () => self.wait(30),
-    () => self.setSub('ブースト + 旋回： ブーストターン', '[X] + [左右キー]                                     '),
+    () => self.setSub('旋回 + ブースト： ブーストターン', '[左右キー] + [X]                                     '),
     () => {
-      if ((state.player.speedDirection >= 0) && (state.player.turnDirection !== 0) && (state.player.turnBoost === 19)) self.condition.boostTurn++
+      if ((state.player.speedDirection >= 0) && (state.player.turnDirection !== 0) && (state.player.turnBoost === 10)) self.condition.boostTurn++
       return self.condition.boostTurn > 1
     },
     () => self.setSub(''),
     () => self.wait(30),
-    () => self.setSub('ブースト + 減速： バックブースト', '[X] + [下キー]                                     '),
+    () => self.setSub('減速 + ブースト： バックブースト', '[下キー] + [X]                                     '),
     () => {
-      if ((state.player.speedDirection < 0) && (state.player.turnBoost === 19)) self.condition.backBoost++
+      if ((state.player.speedDirection < 0) && (state.player.turnBoost === 10)) self.condition.backBoost++
       return self.condition.backBoost > 1
     },
     () => self.setSub(''),
