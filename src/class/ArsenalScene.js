@@ -75,9 +75,11 @@ export default class ArsenalScene extends phina.display.DisplayScene {
     item.image.update = () => {
       if (item.beforeId === state.save.fighter) return
       item.beforeId = state.save.fighter
-      item.image.setImage(fighterFind(state.save.fighter).img)
+      const fighter = fighterFind(state.save.fighter)
+      item.image.setImage(fighter.img)
+      item.label.text = fighter.name
     }
-    item.label = new BlurText(label.name, 14).setOrigin(0, 0).setPosition(-115, -115).addChildTo(item)
+    item.label = new BlurText(fighter.name, 14).setOrigin(0, 0).setPosition(-115, -115).addChildTo(item)
     return item
   }
   getMain (label) {
@@ -88,32 +90,36 @@ export default class ArsenalScene extends phina.display.DisplayScene {
     item.image.update = () => {
       if (item.beforeId === state.save.weapon) return
       item.beforeId = state.save.weapon
-      item.image.setImage(weaponFind(state.save.weapon).img)
+      const weapon = weaponFind(state.save.weapon)
+      item.image.setImage(weapon.img)
+      item.label.text = weapon.name
     }
-    item.label = new BlurText(label.name, 12).setOrigin(0, 0).setPosition(-55, -55).addChildTo(item)
+    item.label = new BlurText(weapon.name, 12).setOrigin(0, 0).setPosition(-55, -55).addChildTo(item)
     return item
   }
   getSub (label) {
     const item = new Box(110, 110)
     item.beforeId = state.save.attachment
-    const weapon = attachmentFind(state.save.attachment)
-    item.image = Sprite(weapon ? weapon.img : 'dummy').setScale(0.2, 0.2).setRotation(270).addChildTo(item)
-    item.label = new BlurText(label.name, 12).setOrigin(0, 0).setPosition(-55, -55).addChildTo(item)
+    const attach = attachmentFind(state.save.attachment)
+    item.image = Sprite(attach ? attach.img : 'dummy').setScale(0.2, 0.2).setRotation(270).addChildTo(item)
+    item.label = new BlurText(attach.name, 12).setOrigin(0, 0).setPosition(-55, -55).addChildTo(item)
     item.image.update = () => {
       if (item.beforeId === state.save.attachment) return
       item.beforeId = state.save.attachment
-      item.image.setImage(attachmentFind(state.save.attachment).img)
+      const attach = attachmentFind(state.save.attachment)
+      item.image.setImage(attach.img)
+      item.label.text = attach.name
     }
     return item
   }
-  getForce (label) {
+  getForce(label) {
     const item = new Box(370, 40)
     item.key = new BlurText(`${label.name} :`).setOrigin(0, 0.5).setPosition(-175, 0).addChildTo(item)
     item.value = new BlurText(state.save.amount).setOrigin(1, 0.5).setPosition(175, 0).addChildTo(item)
     item.value.update = () => item.value.text = state.save.amount
     return item
   }
-  getExit (label) {
+  getExit(label) {
     const item = new Box(110, 32)
     item.image = new BlurText(label.name).addChildTo(item)
     return item
