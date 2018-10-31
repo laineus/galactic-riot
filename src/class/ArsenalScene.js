@@ -5,6 +5,7 @@ import EquipSelect from './EquipSelect'
 import MilitaryForce from './MilitaryForce'
 import Box from './Box'
 import BlurText from './BlurText'
+import Text from './Text'
 export default class ArsenalScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -13,6 +14,8 @@ export default class ArsenalScene extends phina.display.DisplayScene {
     this.bg = Sprite('title').addChildTo(this).setOrigin(0, 0).setScale(0.75, 0.75)
     this.header = this.getHeader().addChildTo(this)
     this.content = this.getContent().addChildTo(this).setPosition(295, 95 + 20)
+    this.sub = new Text('', 14).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT - 30)
+    this.setCursor()
   }
   close () {
     this.exit('Title', { skip: 1 })
@@ -28,14 +31,13 @@ export default class ArsenalScene extends phina.display.DisplayScene {
   getContent () {
     const content = DisplayElement().setOrigin(0, 0)
     content.list = [
-      { name: 'Fighter', key: 'fighter', move: [{ key: 'right', index: 1 }, { key: 'down', index: 3 }] },
-      { name: 'Weapon', key: 'weapon', move: [{ key: 'left', index: 0 }, { key: 'down', index: 2 }] },
-      { name: 'Attachment', key: 'attachment', move: [{ key: 'up', index: 1 }, { key: 'left', index: 0 }, { key: 'down', index: 3 }] },
-      { name: 'Military Force', key: 'amount', move: [{ key: 'up', index: 0 }, { key: 'down', index: 4 }] },
-      { name: 'Exit', key: null, move: [{ key: 'up', index: 3 }] }
+      { name: 'Fighter', desc: 'Fighter select', key: 'fighter', move: [{ key: 'right', index: 1 }, { key: 'down', index: 3 }] },
+      { name: 'Weapon', desc: 'Weapon select', key: 'weapon', move: [{ key: 'left', index: 0 }, { key: 'down', index: 2 }] },
+      { name: 'Attachment', desc: 'Attachment select', key: 'attachment', move: [{ key: 'up', index: 1 }, { key: 'left', index: 0 }, { key: 'down', index: 3 }] },
+      { name: 'Military Force', desc: 'Increase friend\'s fighter', key: 'amount', move: [{ key: 'up', index: 0 }, { key: 'down', index: 4 }] },
+      { name: 'Exit', desc: 'Back to title menu', key: null, move: [{ key: 'up', index: 3 }] }
     ]
     content.list[0].image = this.getFighter(content.list[0]).addChildTo(content).setPosition(120, 120)
-    content.list[0].image.active = true
     content.list[1].image = this.getMain(content.list[1]).addChildTo(content).setPosition(315, 55)
     content.list[2].image = this.getSub(content.list[2]).addChildTo(content).setPosition(315, 185)
     content.list[3].image = this.getForce(content.list[3]).addChildTo(content).setPosition(185, 280)
@@ -48,13 +50,17 @@ export default class ArsenalScene extends phina.display.DisplayScene {
   contentUpdate (app, content) {
     if (!content.awake) return
     content.list[content.listIndex].move.forEach(move => {
-      if (app.keyboard.getKeyDown(move.key)) {
+      if (app.keyboard.getKeyDown(move.key) && content.listIndex !== move.index) {
         content.listIndex = move.index
-        content.list.forEach((r, i) => r.image && (r.image.active = content.listIndex === i))
+        this.setCursor()
       }
     })
     if (app.keyboard.getKeyDown('Z')) this.contentSelect(content, content.list[content.listIndex])
     if (app.keyboard.getKeyDown('X')) this.close()
+  }
+  setCursor () {
+    this.content.list.forEach((r, i) => r.image && (r.image.active = this.content.listIndex === i))
+    this.sub.text = this.content.list[this.content.listIndex].desc
   }
   contentSelect (content, current) {
     if (!current.key) {
