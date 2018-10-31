@@ -44,9 +44,9 @@ export default class EquipSelect extends Box {
       item.lock = new Box(SIZE, 40, colors.dark_07).addChildTo(item).setPosition(SIZE / 2, SIZE / 2)
       item.lock.img = Sprite('lock').addChildTo(item.lock).setScale(0.16, 0.16).setPosition(0, -9)
       item.lock.price = new Text(`$ ${intToString(product.price)}`, 13).addChildTo(item.lock).setPosition(0, 11)
-    } else {
-      item.label = new BlurText(product.name, 12).addChildTo(item).setOrigin(0, 0).setPosition(0, 0)
     }
+    const option = this.bought(product.id) ? {} : { fill: colors.gray, shadow: 'transparent' }
+    item.label = new BlurText(product.name, 12, option).addChildTo(item).setOrigin(0, 0).setPosition(0, 0)
     return item
   }
   bought (id) {
