@@ -194,7 +194,7 @@ export const weaponFind = id => weapons.find(v => v.id === id)
 export const attachments = [
   {
     id: 1,
-    name: 'NoviceInsurance',
+    name: 'Insurance',
     price: 100,
     img: 'w_booster'
   },
@@ -217,13 +217,13 @@ export const attachments = [
   },
   {
     id: 4,
-    name: 'LowFuelBooster',
+    name: 'E-Booster',
     price: 2000,
     img: 'w_booster'
   },
   {
     id: 5,
-    name: 'LightWeightBody',
+    name: 'LightBody',
     price: 3000,
     img: 'w_booster'
   }
