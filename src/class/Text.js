@@ -5,7 +5,7 @@ export default class Text extends phina.display.Label {
       text: text ? text : '',
       fontFamily: 'aldrich',
       fontSize: size,
-      fill: colors.white,
+      fill: colors.white
     }, options))
   }
 }
