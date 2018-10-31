@@ -4,6 +4,7 @@ import Cursor from './Cursor'
 import labelList from '../utils/labelList'
 import BlurLabel from './BlurLabel'
 import MissionSelect from './MissionSelect'
+import Text from './Text'
 export default class TitleScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -12,7 +13,7 @@ export default class TitleScene extends phina.display.DisplayScene {
     this.bg = Sprite('title').addChildTo(this).setOrigin(0, 0).setScale(0.75, 0.75)
     this.logo = Sprite('logo').addChildTo(this).setScale(0.5, 0.5)
                               .setPosition(this.gridX.center(), this.gridY.span(10))
-    this.blendMode = 'lighter'
+    this.sub = new Text('[X] Enter [X] Cancel [↑][↓] Select', 10, { fill: colors.gray }).setOrigin(1, 1).setPosition(settings.SCREEN_WIDTH - 10, settings.SCREEN_HEIGHT - 5).addChildTo(this)
     option.skip ? this.addMenu(option.skip) : this.addStartLabel()
     saveData.load()
   }
@@ -35,6 +36,7 @@ export default class TitleScene extends phina.display.DisplayScene {
   }
   addMenu (index = 0) {
     this.removeAll()
+    this.sub.alpha = 1
     this.logo.alpha = 1
     this.list = labelList(['Mission', 'Arsenal', 'Exit'], settings.SCREEN_WIDTH_C, 440, this, { margin: 23 })
     this.list.forEach(v => v.originalText = v.text)
@@ -61,6 +63,7 @@ export default class TitleScene extends phina.display.DisplayScene {
     this.missionSelect = new MissionSelect(this, () => this.addMenu()).addChildTo(this)
   }
   removeAll () {
+    this.sub.alpha = 0
     if (this.startLabel) {
       this.startLabel.remove()
       this.startLabel = null
