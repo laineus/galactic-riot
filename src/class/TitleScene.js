@@ -37,15 +37,16 @@ export default class TitleScene extends phina.display.DisplayScene {
     this.removeAll()
     this.logo.alpha = 1
     this.list = labelList(['Mission', 'Arsenal', 'Exit'], settings.SCREEN_WIDTH_C, 440, this, { margin: 23 })
+    this.list.forEach(v => v.originalText = v.text)
     this.list.cursor = new Cursor(this.list, (current, other) => {
-      current.fill = colors.blue
+      current.text = `- ${current.originalText} -`
       current.fontSize = 15
       other.forEach(v => {
-        v.fill = colors.white
+        v.text = v.originalText
         v.fontSize = 14
       })
     }, (current) => {
-      switch (current.text) {
+      switch (current.originalText) {
         case 'Mission': return this.addMissionSelect()
         case 'Arsenal': return this.exit('Arsenal')
         case 'Exit': return this.addStartLabel()
