@@ -25,7 +25,7 @@ export default class EquipSelect extends Box {
     this.group.list = this.products.map((product, i) => this.item(product).addChildTo(this.group).setPosition(i * (SIZE + MARGIN), 0))
     this.group.cursor = new Cursor(this.group.list, (current, other) => {
       current.active = true
-      this.sub.text = current.product.name
+      this.sub.text = `${current.product.name}: ${current.product.description}`
       other.forEach(v => v.active = false)
     }, this.select.bind(this), this.exit.bind(this), false, defaultIndex).addChildTo(this)
   }
