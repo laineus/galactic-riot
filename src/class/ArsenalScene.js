@@ -6,6 +6,7 @@ import MilitaryForce from './MilitaryForce'
 import Box from './Box'
 import BlurText from './BlurText'
 import Text from './Text'
+import VerticalSub from './VericalSub';
 export default class ArsenalScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -15,6 +16,7 @@ export default class ArsenalScene extends phina.display.DisplayScene {
     this.header = this.getHeader().addChildTo(this)
     this.content = this.getContent().addChildTo(this).setPosition(295, 95 + 20)
     this.sub = new Text('', 14).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT - 30)
+    this.ja = new VerticalSub('').addChildTo(this).setPosition(settings.SCREEN_WIDTH - 30, settings.SCREEN_HEIGHT_C)
     this.setCursor()
   }
   close () {
@@ -31,11 +33,11 @@ export default class ArsenalScene extends phina.display.DisplayScene {
   getContent () {
     const content = DisplayElement().setOrigin(0, 0)
     content.list = [
-      { name: 'Fighter', desc: 'Fighter select', key: 'fighter', move: [{ key: 'right', index: 1 }, { key: 'down', index: 3 }] },
-      { name: 'Weapon', desc: 'Weapon select', key: 'weapon', move: [{ key: 'left', index: 0 }, { key: 'down', index: 2 }] },
-      { name: 'Attachment', desc: 'Attachment select', key: 'attachment', move: [{ key: 'up', index: 1 }, { key: 'left', index: 0 }, { key: 'down', index: 3 }] },
-      { name: 'Military Force', desc: 'Increase friend\'s fighter', key: 'amount', move: [{ key: 'up', index: 0 }, { key: 'down', index: 4 }] },
-      { name: 'Exit', desc: 'Back to title menu', key: null, move: [{ key: 'up', index: 3 }] }
+      { name: 'Fighter', desc: 'Fighter select', desc_ja: '戦闘機を選択', key: 'fighter', move: [{ key: 'right', index: 1 }, { key: 'down', index: 3 }] },
+      { name: 'Weapon', desc: 'Weapon select', desc_ja: 'メイン兵装を選択', key: 'weapon', move: [{ key: 'left', index: 0 }, { key: 'down', index: 2 }] },
+      { name: 'Attachment', desc: 'Attachment select', desc_ja: '補助装備を選択', key: 'attachment', move: [{ key: 'up', index: 1 }, { key: 'left', index: 0 }, { key: 'down', index: 3 }] },
+      { name: 'Military Force', desc: 'Increase friend\'s fighter', desc_ja: '自軍の戦闘機数を増やす', key: 'amount', move: [{ key: 'up', index: 0 }, { key: 'down', index: 4 }] },
+      { name: 'Exit', desc: 'Back to title menu', desc_ja: 'タイトルメニューへ戻る', key: null, move: [{ key: 'up', index: 3 }] }
     ]
     content.list[0].image = this.getFighter(content.list[0]).addChildTo(content).setPosition(120, 120)
     content.list[1].image = this.getMain(content.list[1]).addChildTo(content).setPosition(315, 55)
@@ -61,6 +63,7 @@ export default class ArsenalScene extends phina.display.DisplayScene {
   setCursor () {
     this.content.list.forEach((r, i) => r.image && (r.image.active = this.content.listIndex === i))
     this.sub.text = this.content.list[this.content.listIndex].desc
+    this.ja.setText(this.content.list[this.content.listIndex].desc_ja)
   }
   contentSelect (content, current) {
     if (!current.key) {
