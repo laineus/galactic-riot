@@ -70,7 +70,11 @@ export default class ArsenalScene extends phina.display.DisplayScene {
       new MilitaryForce(() => content.awake = true)
     } else {
       content.awake = false
-      new EquipSelect(current.key, () => content.awake = true).addChildTo(this)
+      this.sub.alpha = 0
+      new EquipSelect(current.key, () => {
+        content.awake = true
+        this.sub.alpha = 1
+      }).addChildTo(this)
     }
   }
   getFighter (label) {
