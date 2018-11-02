@@ -1,5 +1,5 @@
 import { colors } from '../config/variables'
-const ROTATE_LETTERS = ['ー']
+const ROTATE_LETTERS = ['-', 'ー', '―']
 export default class VerticalSub extends phina.display.Label {
   constructor (text = '', option) {
     super(Object.assign({
