@@ -1,4 +1,5 @@
 import { colors } from '../config/variables'
+const ROTATE_LETTERS = ['ー']
 export default class VerticalSub extends phina.display.Label {
   constructor (text = '', option) {
     super(Object.assign({
@@ -24,7 +25,16 @@ export default class VerticalSub extends phina.display.Label {
     const context = canvas.context
     this._lines.forEach((line, lineIndex) => {
       line.split('').forEach((letter, letterIndex) => {
-        context.fillText(letter, -lineIndex * this.lineSize - this._offset, letterIndex * this.fontSize - this._offsetY)
+        const x = -lineIndex * this.lineSize - this._offset
+        const y = letterIndex * this.fontSize - this._offsetY
+        context.save()
+        context.translate(x, y)
+        if (ROTATE_LETTERS.includes(letter)) {
+          context.translate(-2, -2)
+          context.rotate(Math.degToRad(90))
+        }
+        context.fillText(letter, 0, 0)
+        context.restore()
       })
     })
   }
