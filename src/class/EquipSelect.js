@@ -7,6 +7,7 @@ import Cursor from './Cursor'
 import Box from './Box'
 import Text from './Text'
 import BlurText from './BlurText'
+import VerticalSub from './VerticalSub'
 import Modal from './Modal'
 const SIZE = 100
 const MARGIN = 15
@@ -20,12 +21,15 @@ export default class EquipSelect extends Box {
     const defaultIndex = this.products.findIndex(v => v.id === state.save[this.key])
     const width = (this.products.length * SIZE) + ((this.products.length - 1) * MARGIN)
     this.sub = new Text('', 14).addChildTo(this).setPosition(0, settings.SCREEN_HEIGHT_C - 30)
+    this.ja = new VerticalSub('').addChildTo(this).setPosition(settings.SCREEN_WIDTH_C - 30, 0)
     this.group = DisplayElement().addChildTo(this)
     this.group.setPosition(width / -2, SIZE / -2)
     this.group.list = this.products.map((product, i) => this.item(product).addChildTo(this.group).setPosition(i * (SIZE + MARGIN), 0))
     this.group.cursor = new Cursor(this.group.list, (current, other) => {
       current.active = true
-      this.sub.text = `${current.product.name}: ${current.product.description}`
+      const desc = this.key !== 'fighter' ? current.product.desc : `Energy: ${current.product.energy} Speed: ${current.product.speed} Mobility: ${current.product.mobility}`
+      this.sub.text = `<${current.product.name}> ${desc}`
+      this.ja.setText(this.key === 'fighter' ? '' : current.product.desc_ja)
       other.forEach(v => v.active = false)
     }, this.select.bind(this), this.exit.bind(this), false, defaultIndex).addChildTo(this)
   }

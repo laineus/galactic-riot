@@ -74,9 +74,11 @@ export default class ArsenalScene extends phina.display.DisplayScene {
     } else {
       content.awake = false
       this.sub.alpha = 0
+      this.ja.alpha = 0
       new EquipSelect(current.key, () => {
         content.awake = true
         this.sub.alpha = 1
+        this.ja.alpha = 1
       }).addChildTo(this)
     }
   }
