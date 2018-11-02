@@ -61,8 +61,7 @@ export const fighters = [
     img3: 'f1_b',
     energy: 300,
     speed: 7,
-    mobility: 3,
-    description: ''
+    mobility: 3
   },
   {
     id: 2,
@@ -73,8 +72,7 @@ export const fighters = [
     img3: 'f2_b',
     energy: 500,
     speed: 8,
-    mobility: 4,
-    description: ''
+    mobility: 4
   },
   {
     id: 3,
@@ -85,8 +83,7 @@ export const fighters = [
     img3: 'f3_b',
     energy: 400,
     speed: 16,
-    mobility: 4,
-    description: ''
+    mobility: 4
   },
   {
     id: 4,
@@ -97,8 +94,7 @@ export const fighters = [
     img3: 'f4_b',
     energy: 1600,
     speed: 6,
-    mobility: 3,
-    description: ''
+    mobility: 3
   },
   {
     id: 5,
@@ -109,8 +105,7 @@ export const fighters = [
     img3: 'f5_b',
     energy: 900,
     speed: 9,
-    mobility: 5,
-    description: ''
+    mobility: 5
   },
   {
     id: 6,
@@ -121,8 +116,7 @@ export const fighters = [
     img3: 'f6_b',
     energy: 1100,
     speed: 12,
-    mobility: 7,
-    description: ''
+    mobility: 7
   },
   {
     id: 7,
@@ -133,8 +127,7 @@ export const fighters = [
     img3: 'f7_b',
     energy: 1400,
     speed: 13,
-    mobility: 6,
-    description: ''
+    mobility: 6
   }
 ]
 export const fighterFind = id => fighters.find(v => v.id === id)
@@ -150,7 +143,8 @@ export const weapons = [
     speed: 50,
     isHoming: false,
     twinDiff: false,
-    description: '最も一般的なレーザー'
+    desc: 'The general laser',
+    desc_ja: '最も一般的なレーザー',
   },
   {
     id: 2,
@@ -162,7 +156,8 @@ export const weapons = [
     speed: 50,
     isHoming: false,
     twinDiff: 35,
-    description: '2基のレーザー'
+    desc: 'The twin laser',
+    desc_ja: '2基のレーザー'
   },
   {
     id: 3,
@@ -174,7 +169,8 @@ export const weapons = [
     speed: 50,
     isHoming: false,
     twinDiff: 35,
-    description: '連射力に優れるレーザー'
+    desc: 'The rapid-fire laser',
+    desc_ja: '連射力に優れるレーザー'
   },
   {
     id: 4,
@@ -186,7 +182,8 @@ export const weapons = [
     speed: 50,
     isHoming: false,
     twinDiff: false,
-    description: '高威力なレーザー'
+    desc: 'The powerful laser',
+    desc_ja: '高威力なレーザー'
   },
   {
     id: 5,
@@ -198,7 +195,8 @@ export const weapons = [
     speed: 50,
     isHoming: true,
     twinDiff: false,
-    description: '追尾性のあるレーザー'
+    desc: 'The homing laser',
+    desc_ja: '追尾性のあるレーザー'
   }
 ]
 export const weaponFind = id => weapons.find(v => v.id === id)
@@ -209,14 +207,16 @@ export const attachments = [
     name: 'Insurance',
     price: 100,
     img: 'w_booster',
-    description: 'ミッション失敗時の損失を補償'
+    desc: 'Compensate for loss of mission failure',
+    desc_ja: 'ミッション失敗時の損失を補償'
   },
   {
     id: 2,
     name: 'Armor',
     price: 500,
     img: 'w_booster',
-    description: 'ダメージを軽減'
+    desc: 'Reduce laser damage',
+    desc_ja: 'ダメージを軽減'
   },
   {
     id: 3,
@@ -228,21 +228,24 @@ export const attachments = [
     speed: 50,
     isHoming: false,
     twinDiff: false,
-    description: '後方への射撃'
+    desc: 'Shoot laser behind',
+    desc_ja: '後方への射撃'
   },
   {
     id: 4,
     name: 'E-Booster',
     price: 2000,
     img: 'w_booster',
-    description: 'ブースト時のエネルギー消費を軽減'
+    desc: 'Reduce energy consumption of boost',
+    desc_ja: 'ブースト時のエネルギー消費を軽減'
   },
   {
     id: 5,
     name: 'LightBody',
     price: 3000,
     img: 'w_booster',
-    description: '速度と機動性を向上'
+    desc: 'Improve mobility',
+    desc_ja: '速度と機動性を向上'
   }
 ]
 export const attachmentFind = id => attachments.find(v => v.id === id)
