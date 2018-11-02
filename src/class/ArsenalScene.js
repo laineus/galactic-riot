@@ -6,7 +6,7 @@ import MilitaryForce from './MilitaryForce'
 import Box from './Box'
 import BlurText from './BlurText'
 import Text from './Text'
-import VerticalSub from './VericalSub';
+import VerticalSub from './VerticalSub';
 export default class ArsenalScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
