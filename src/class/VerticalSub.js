@@ -11,9 +11,6 @@ export default class VerticalSub extends phina.display.Label {
     }, option))
     Object.setPrototypeOf(this, VerticalSub.prototype)
   }
-  setText (text) {
-    this.text = text
-  }
   prerender (canvas) {
     super.prerender(canvas)
     const array = this._lines.map(r => r.length)

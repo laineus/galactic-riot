@@ -29,7 +29,7 @@ export default class EquipSelect extends Box {
       current.active = true
       const desc = this.key !== 'fighter' ? current.product.desc : `Energy: ${current.product.energy} Speed: ${current.product.speed} Mobility: ${current.product.mobility}`
       this.sub.text = `<${current.product.name}> ${desc}`
-      this.ja.setText(this.key === 'fighter' ? '' : current.product.desc_ja)
+      this.ja.text = this.key === 'fighter' ? '' : current.product.desc_ja
       other.forEach(v => v.active = false)
     }, this.select.bind(this), this.exit.bind(this), false, defaultIndex).addChildTo(this)
   }

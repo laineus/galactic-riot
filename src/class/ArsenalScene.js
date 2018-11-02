@@ -63,7 +63,7 @@ export default class ArsenalScene extends phina.display.DisplayScene {
   setCursor () {
     this.content.list.forEach((r, i) => r.image && (r.image.active = this.content.listIndex === i))
     this.sub.text = this.content.list[this.content.listIndex].desc
-    this.ja.setText(this.content.list[this.content.listIndex].desc_ja)
+    this.ja.text = this.content.list[this.content.listIndex].desc_ja
   }
   contentSelect (content, current) {
     if (!current.key) {
