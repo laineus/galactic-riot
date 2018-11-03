@@ -13,9 +13,7 @@ export default class VerticalSub extends phina.display.Label {
   }
   prerender (canvas) {
     super.prerender(canvas)
-    const array = this._lines.map(r => r.length)
-    const maxLetter = Math.max(...array)
-    this._offsetY = (maxLetter - 1) * this.fontSize / 2
+    this._offsetY = (this.maxLetter - 1) * this.fontSize / 2
   }
   renderFill (canvas) {
     canvas.context.transform(1, -0.5, 0, 1, 0, 0)
@@ -35,10 +33,14 @@ export default class VerticalSub extends phina.display.Label {
       })
     })
   }
+  get maxLetter () {
+    const array = this._lines.map(r => r.length)
+    return Math.max(...array)
+  }
   calcCanvasWidth () {
-    return super.calcCanvasHeight()
+    return (this._lines.length + 1) * this.fontSize * this.lineHeight
   }
   calcCanvasHeight () {
-    return super.calcCanvasWidth() + (this.fontSize / 2)
+    return (this.maxLetter + 2) * this.fontSize
   }
 }
