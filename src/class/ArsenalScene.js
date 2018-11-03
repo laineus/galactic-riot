@@ -6,7 +6,7 @@ import MilitaryForce from './MilitaryForce'
 import Box from './Box'
 import BlurText from './BlurText'
 import Text from './Text'
-import VerticalSub from './VerticalSub';
+import VerticalSub from './VerticalSub'
 export default class ArsenalScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -70,15 +70,19 @@ export default class ArsenalScene extends phina.display.DisplayScene {
       this.close()
     } else if (current.key === 'amount') {
       content.awake = false
-      new MilitaryForce(() => content.awake = true)
+      this.ja.visible = false
+      new MilitaryForce(() => {
+        content.awake = true
+        this.ja.visible = true
+      })
     } else {
       content.awake = false
       this.sub.alpha = 0
-      this.ja.alpha = 0
+      this.ja.visible = false
       new EquipSelect(current.key, () => {
         content.awake = true
         this.sub.alpha = 1
-        this.ja.alpha = 1
+        this.ja.visible = true
       }).addChildTo(this)
     }
   }

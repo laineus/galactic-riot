@@ -4,12 +4,14 @@ import Cursor from './Cursor'
 import PauseScene from './PauseScene'
 import Box from './Box'
 import BlurText from './BlurText'
+import VerticalSub from './VerticalSub'
 export default class Modal extends PauseScene {
-  constructor (text, options, select, cancel, index = 0) {
+  constructor (text, ja, options, select, cancel, index = 0) {
     super(colors.dark_05)
     Object.setPrototypeOf(this, Modal.prototype)
     if (!options) options = ['OK']
     this.modal = this.getModal(text, options, select, cancel, index).addChildTo(this)
+    this.ja = new VerticalSub(ja).addChildTo(this).setPosition(settings.SCREEN_WIDTH - 30, settings.SCREEN_HEIGHT_C)
     state.app.pushScene(this)
   }
   getModal (text, labels, select, cancel, index) {

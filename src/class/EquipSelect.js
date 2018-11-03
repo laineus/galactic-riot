@@ -68,7 +68,9 @@ export default class EquipSelect extends Box {
     } else {
       // buy product
       if (state.save.money >= product.price) {
-        new Modal(`Are you sure you want to buy ?\n$ ${intToString(product.price)}`, ['Buy', 'Cancel'], button => {
+        const en = `Are you sure you want to buy ?\n$ ${intToString(product.price)}`
+        const ja = 'この装備を購入しますか？ 購入／中止'
+        new Modal(en, ja, ['Buy', 'Cancel'], button => {
           if (button.name === 'Buy') {
             state.save.money -= product.price
             state.save[`${this.key}s`].push(product.id)
@@ -78,7 +80,7 @@ export default class EquipSelect extends Box {
           }
         }, null, 1)
       } else {
-        new Modal('Money is not enough.')
+        new Modal('Money is not enough.', 'お金が足りません')
       }
     }
   }

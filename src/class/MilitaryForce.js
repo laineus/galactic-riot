@@ -8,7 +8,9 @@ export default class MilitaryForce {
   constructor (callback) {
     const price = BASE_PRICE + (state.save.amount * ADD_PRICE)
     if (state.save.money >= price) {
-      new Modal(`Are you sure you want to expand ?\n$ ${intToString(price)}`, ['Expand', 'Cancel'], button => {
+      const en = `Are you sure you want to expand ?\n$ ${intToString(price)}`
+      const ja = '自軍を拡張しますか？ 拡張／中止'
+      new Modal(en, ja, ['Expand', 'Cancel'], button => {
         if (button.name === 'Expand') {
           state.save.money -= price
           state.save.amount++
@@ -17,7 +19,7 @@ export default class MilitaryForce {
         callback()
       }, callback, 1)
     } else {
-      new Modal('Money is not enough.', null, callback, callback)
+      new Modal('Money is not enough.', 'お金が足りません', null, callback, callback)
     }
   }
 }
