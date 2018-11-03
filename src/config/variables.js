@@ -206,7 +206,7 @@ export const attachments = [
     id: 1,
     name: 'Insurance',
     price: 100,
-    img: 'w_booster',
+    img: 'a_insurance',
     desc: 'Compensate for loss of mission failure',
     desc_ja: 'ミッション失敗時の損失を補償'
   },
@@ -214,7 +214,7 @@ export const attachments = [
     id: 2,
     name: 'Armor',
     price: 500,
-    img: 'w_booster',
+    img: 'a_armor',
     desc: 'Reduce laser damage',
     desc_ja: 'ダメージを軽減'
   },
@@ -222,7 +222,7 @@ export const attachments = [
     id: 3,
     name: 'Tailgun',
     price: 1000,
-    img: 'w_tailgun',
+    img: 'a_tailgun',
     damage: 20,
     delay: 5,
     speed: 50,
@@ -235,7 +235,7 @@ export const attachments = [
     id: 4,
     name: 'E-Booster',
     price: 2000,
-    img: 'w_booster',
+    img: 'a_booster',
     desc: 'Reduce energy consumption of boost',
     desc_ja: 'ブースト時のエネルギー消費を軽減'
   },
@@ -243,7 +243,7 @@ export const attachments = [
     id: 5,
     name: 'LightBody',
     price: 3000,
-    img: 'w_booster',
+    img: 'a_lightbody',
     desc: 'Improve mobility',
     desc_ja: '速度と機動性を向上'
   }
