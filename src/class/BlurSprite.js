@@ -15,7 +15,6 @@ export default class BlurSprite extends phina.display.Sprite {
     this.body.setImage(image, width, height)
   }
   draw (canvas) {
-    console.log(1)
     canvas.context.save()
     canvas.context.shadowBlur = this.blur
     canvas.context.shadowColor = this.color
