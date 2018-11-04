@@ -45,7 +45,7 @@ export default class Computer extends Fighter {
     if (tgt) this.target = tgt
   }
   ctrlSpeed () {
-    this.accele(this.acceleValue)
+    this.accele(this.turnBoost > 0 ? this.speedDirection : this.acceleValue)
     this.move(true)
   }
   ctrlBoost () {
