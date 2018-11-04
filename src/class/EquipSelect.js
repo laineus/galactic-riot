@@ -68,6 +68,7 @@ export default class EquipSelect extends Box {
       this.exit()
     } else {
       // buy product
+      this.ja.visible = false
       if (state.save.money >= product.price) {
         const en = `Are you sure you want to buy ?\n$ ${intToString(product.price)}`
         const ja = 'この装備を購入しますか？ 購入／中止'
@@ -83,6 +84,7 @@ export default class EquipSelect extends Box {
       } else {
         new Modal('Money is not enough.', '所持金が足りません')
       }
+      this.ja.visible = true
     }
   }
   exit () {
