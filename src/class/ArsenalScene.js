@@ -7,12 +7,14 @@ import Box from './Box'
 import BlurText from './BlurText'
 import Text from './Text'
 import VerticalSub from './VerticalSub'
+import maskImage from '../utils/maskImage'
 export default class ArsenalScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
     Object.setPrototypeOf(this, ArsenalScene.prototype)
     this.backgroundColor = colors.black
     this.bg = Sprite('title').addChildTo(this).setOrigin(0, 0).setScale(0.75, 0.75)
+    this.blur = this.getBlur(10, 0.5).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C)
     this.header = this.getHeader().addChildTo(this)
     this.content = this.getContent().addChildTo(this).setPosition(295, 95 + 20)
     this.sub = new Text('', 14).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT - 30)
@@ -88,6 +90,7 @@ export default class ArsenalScene extends phina.display.DisplayScene {
   }
   getFighter (label) {
     const item = new Box(240, 240)
+    item.blur = this.getBlur(5).addChildTo(item)
     item.beforeId = state.save.fighter
     const fighter = fighterFind(state.save.fighter)
     item.image = Sprite(fighter.img).setScale(0.5, 0.5).setRotation(270).addChildTo(item)
@@ -103,6 +106,7 @@ export default class ArsenalScene extends phina.display.DisplayScene {
   }
   getMain (label) {
     const item = new Box(110, 110)
+    item.blur = this.getBlur(2.5).addChildTo(item)
     item.beforeId = state.save.weapon
     const weapon = weaponFind(state.save.weapon)
     item.image = Sprite(weapon.img).setScale(0.2, 0.2).setRotation(270).addChildTo(item)
@@ -118,6 +122,7 @@ export default class ArsenalScene extends phina.display.DisplayScene {
   }
   getSub (label) {
     const item = new Box(110, 110)
+    item.blur = this.getBlur(2.5).addChildTo(item)
     item.beforeId = state.save.attachment
     const attach = attachmentFind(state.save.attachment)
     item.image = Sprite(attach ? attach.img : 'dummy').setScale(0.2, 0.2).setRotation(270).addChildTo(item)
@@ -142,5 +147,11 @@ export default class ArsenalScene extends phina.display.DisplayScene {
     const item = new Box(110, 32)
     item.image = new BlurText(label.name).addChildTo(item)
     return item
+  }
+  getBlur (scale, alpha = 0.2) {
+    const blur = maskImage.getSprite('light', colors.white_05).setScale(scale, scale)
+    blur.blendMode = 'lighter'
+    blur.alpha = alpha
+    return blur
   }
 }

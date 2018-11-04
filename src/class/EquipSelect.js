@@ -44,6 +44,9 @@ export default class EquipSelect extends Box {
   item (product) {
     const item = new Box(SIZE, SIZE, colors.black_05).setOrigin(0, 0)
     item.product = product
+    item.blur = maskImage.getSprite('light', colors.white_05).addChildTo(item).setPosition(SIZE / 2, SIZE / 2).setScale(2, 2)
+    item.blur.blendMode = 'lighter'
+    item.blur.alpha = 0.2
     item.img = this.bought(product.id) ? Sprite(product.img) : maskImage.getSprite(product.img, colors.black)
     item.img.addChildTo(item).setPosition(SIZE / 2, SIZE / 2).setScale(0.25, 0.25).setRotation(270)
     if (!this.bought(product.id)) {
