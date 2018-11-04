@@ -29,13 +29,15 @@ export default class TitleScene extends phina.display.DisplayScene {
     this.removeAll()
     this.credit.alpha = 1
     this.credit.logo.alpha = 0
-    this.credit.logo.tweener.wait(100).to({ alpha: 1 }, 300).wait(800).to({ alpha: 0 }, 300)
+    this.credit.logo.tweener.wait(100).to({ alpha: 1 }, 300).wait(800).to({ alpha: 0 }, 300).play()
     this.credit.tweener.wait(1500).to({ alpha: 0 }, 300)
     setTimeout(this.addStartLabel.bind(this), 1800)
+    this.logo.alpha = 0
+    this.logo.y += 10
+    this.logo.tweener.wait(1300).by({ y: -10, alpha: 1 }, 800).play()
   }
   addStartLabel () {
     this.removeAll()
-    this.logo.alpha = 1
     this.startLabel = new BlurLabel({
       text: '- PRESS \'Z\' KEY -',
       fontFamily: 'aldrich',
