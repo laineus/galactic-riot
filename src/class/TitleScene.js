@@ -5,6 +5,7 @@ import labelList from '../utils/labelList'
 import BlurLabel from './BlurLabel'
 import MissionSelect from './MissionSelect'
 import Text from './Text'
+import Box from './Box'
 export default class TitleScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -14,13 +15,23 @@ export default class TitleScene extends phina.display.DisplayScene {
     this.logo = Sprite('logo').addChildTo(this).setScale(0.5, 0.5)
                               .setPosition(this.gridX.center(), this.gridY.span(10))
     this.sub = new Text('[X] Enter [X] Cancel [↑][↓] Select', 10, { fill: colors.gray }).setOrigin(1, 1).setPosition(settings.SCREEN_WIDTH - 10, settings.SCREEN_HEIGHT - 5).addChildTo(this)
-    option.skip ? this.addMenu(option.skip) : this.addStartLabel()
+    this.credit = new Box(settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT, colors.black).addChildTo(this).setOrigin(0, 0)
+    this.credit.logo = Sprite('credit').addChildTo(this.credit).setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C).setScale(0.4, 0.4)
+    option.skip ? this.addMenu(option.skip) : this.addCredit()
     saveData.load()
   }
   update (app) {
     if (this.startLabel) {
       if (app.keyboard.getKeyDown('Z')) this.addMenu()
     }
+  }
+  addCredit () {
+    this.removeAll()
+    this.credit.alpha = 1
+    this.credit.logo.alpha = 0
+    this.credit.logo.tweener.wait(100).to({ alpha: 1 }, 300).wait(800).to({ alpha: 0 }, 300)
+    this.credit.tweener.wait(1500).to({ alpha: 0 }, 300)
+    setTimeout(this.addStartLabel.bind(this), 1800)
   }
   addStartLabel () {
     this.removeAll()
@@ -63,6 +74,7 @@ export default class TitleScene extends phina.display.DisplayScene {
     this.missionSelect = new MissionSelect(this, () => this.addMenu()).addChildTo(this)
   }
   removeAll () {
+    this.credit.alpha = 0
     this.sub.alpha = 0
     if (this.startLabel) {
       this.startLabel.remove()
