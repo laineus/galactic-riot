@@ -34,7 +34,6 @@ export default {
     w_gatling: '/img/w_gatling.png',
     w_twin: '/img/w_twin.png',
     w_sniper: '/img/w_sniper.png',
-    w_booster: '/img/w_booster.png',
     w_missile: '/img/w_missile.png',
     a_insurance: '/img/a_insurance.png',
     a_armor: '/img/a_armor.png',
