@@ -81,7 +81,7 @@ export default class EquipSelect extends Box {
           }
         }, null, 1)
       } else {
-        new Modal('Money is not enough.', 'お金が足りません')
+        new Modal('Money is not enough.', '所持金が足りません')
       }
     }
   }

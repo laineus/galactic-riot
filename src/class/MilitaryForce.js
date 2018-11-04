@@ -19,7 +19,7 @@ export default class MilitaryForce {
         callback()
       }, callback, 1)
     } else {
-      new Modal('Money is not enough.', 'お金が足りません', null, callback, callback)
+      new Modal('Money is not enough.', '所持金が足りません', null, callback, callback)
     }
   }
 }
