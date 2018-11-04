@@ -1,6 +1,7 @@
 export default {
   image: {
     dummy: '/img/dummy.png',
+    credit: '/img/credit.png',
     logo: '/img/logo.png',
     title: '/img/title.png',
     map1_bg: '/img/map1_bg.png',
