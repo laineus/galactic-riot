@@ -7,18 +7,18 @@ const self = {
   friendCount: 3,
   created: () => {
     state.field.setField('sublatant_1')
-    new AddComputer(2500, 2500, 350, 'player', self.friendCount)
+    new AddComputer(2500, 2500, 350, 'player', null, self.friendCount)
   },
   update: () => {
   },
   functions: [
     () => {
-      new AddComputer(-2500, 2500, 315, 'enemy', 2)
+      new AddComputer(-2500, 2500, 315, 'enemy', 1, 2)
       return true
     },
     () => !state.field.enemy.children.length,
     () => {
-      new AddComputer(2500, -2500, 135, 'enemy', 3)
+      new AddComputer(2500, -2500, 135, 'enemy', 1, 3)
       return true
     },
     () => !state.field.enemy.children.length
