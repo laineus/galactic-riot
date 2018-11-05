@@ -30,7 +30,6 @@ export default class Computer extends Fighter {
   setType (type) {
     super.setType(type)
     this.setColorIndex(type === 'friend' ? 2 : 3)
-    this.setFighter(1)
     if (type === 'friend') this.setSubTarget(state.player)
     return this
   }

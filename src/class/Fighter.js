@@ -27,6 +27,7 @@ export default class Fighter extends FlyingElement {
     const key = this.type === 'friend' ? 'img' : 'img2'
     this.setBody(Sprite(this.fighter[key]).setScale(0.2, 0.2))
     this.setImageName(this.fighter[key])
+    return this
   }
   setMobilityAndSpeed () {
     this.setMobility(this.fighter.mobility + (this.attachmentId === 5 ? 2 : 0))

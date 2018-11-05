@@ -1,66 +1,79 @@
 import state from '../config/state'
 import Player from '../class/Player'
 import Computer from '../class/Computer'
-const cos = (rotation, distance) => Math.cos(Math.degToRad(rotation)) * distance
-const sin = (rotation, distance) => Math.sin(Math.degToRad(rotation)) * distance
-const initElement = (x, y, r, type, hash) => {
-  if (type === 'friend') state.score.amount--
-  const obj = (type === 'player') ? new Player() : new Computer().setType(type)
-  obj.setPosition(x, y).setRotation(r)
-  obj.hash = hash
-  if (type === 'friend') obj.setSubTarget(state.player)
-  return obj
-}
-const move = obj => {
-  obj.x += cos(obj.rotation, 70)
-  obj.y += sin(obj.rotation, 70)
-}
-export default (x, y, r, type, count) => {
-  const subType = type === 'player' ? 'friend' : type
-  if (x === null) x = Math.randint(0, state.field.width)
-  if (y === null) y = Math.randint(0, state.field.height)
-  if (r === null) r = Math.radToDeg(Math.atan2(state.player.y - y, state.player.x - x))
-  if (x < 0) x += state.field.width
-  if (y < 0) y += state.field.height
-  const hash = Math.randint(1000000, 9999999)
-  switch (count) {
-    case 1:
-      initElement(x, y, r, type, hash)
-      break
-    case 2:
-      const leader2 = initElement(x + cos(r - 90, 50), y + sin(r - 90, 50), r, type, hash)
-      move(leader2)
-      initElement(x + cos(r + 90, 50), y + sin(r + 90, 50), r, subType, hash).setSubTarget(leader2, 90, 50)
-      break
-    case 3:
-      const leader3 = initElement(x, y, r, type, hash)
-      move(leader3)
-      initElement(x + cos(r - 135, 100), y + sin(r - 135, 100), r, subType, hash).setSubTarget(leader3, -135, 100)
-      initElement(x + cos(r + 135, 100), y + sin(r + 135, 100), r, subType, hash).setSubTarget(leader3, 135, 100)
-      break
-    case 4:
-      const leader4 = initElement(x, y, r, type, hash)
-      move(leader4)
-      initElement(x + cos(r - 135, 100), y + sin(r - 135, 100), r, subType, hash).setSubTarget(leader4, -135, 100)
-      initElement(x + cos(r + 135, 100), y + sin(r + 135, 100), r, subType, hash).setSubTarget(leader4, 135, 100)
-      initElement(x + cos(r + 180, 140), y + sin(r + 180, 140), r, subType, hash).setSubTarget(leader4, 180, 140)
-      break
-    case 5:
-      const leader5 = initElement(x, y, r, type, hash)
-      move(leader5)
-      initElement(x + cos(r - 135, 100), y + sin(r - 135, 100), r, subType, hash).setSubTarget(leader5, -135, 100)
-      initElement(x + cos(r + 135, 100), y + sin(r + 135, 100), r, subType, hash).setSubTarget(leader5, 135, 100)
-      initElement(x + cos(r - 135, 200), y + sin(r - 135, 200), r, subType, hash).setSubTarget(leader5, -135, 200)
-      initElement(x + cos(r + 135, 200), y + sin(r + 135, 200), r, subType, hash).setSubTarget(leader5, 135, 200)
-      break
-    case 6:
-      const leader6 = initElement(x, y, r, type, hash)
-      move(leader6)
-      initElement(x + cos(r - 135, 100), y + sin(r - 135, 100), r, subType, hash).setSubTarget(leader6, -135, 100)
-      initElement(x + cos(r + 135, 100), y + sin(r + 135, 100), r, subType, hash).setSubTarget(leader6, 135, 100)
-      initElement(x + cos(r - 135, 200), y + sin(r - 135, 200), r, subType, hash).setSubTarget(leader6, -135, 200)
-      initElement(x + cos(r + 135, 200), y + sin(r + 135, 200), r, subType, hash).setSubTarget(leader6, 135, 200)
-      initElement(x + cos(r + 180, 140), y + sin(r + 180, 140), r, subType, hash).setSubTarget(leader6, 180, 140)
-      break
+export default class AddComputer {
+  constructor (x, y, r, type, fighterId, count) {
+    if (x < 0) x += state.field.width
+    if (y < 0) y += state.field.height
+    this.x = x !== null ? x : Math.randint(0, state.field.width)
+    this.y = y !== null ? y : Math.randint(0, state.field.height)
+    this.r = r !== null ? r : Math.radToDeg(Math.atan2(state.player.y - y, state.player.x - x))
+    this.type = type
+    this.subType = type === 'player' ? 'friend' : type
+    this.fighterId = fighterId
+    this.hash = Math.randint(1000000, 9999999)
+    this.leader = null
+    this.add(count)
+  }
+  add (count) {
+    switch (count) {
+      case 1:
+        this.getFighter(0, 0, true)
+        break
+      case 2:
+        this.getFighter(-90, 50, true)
+        this.getFighter(90, 50, false)
+        break
+      case 3:
+        this.getFighter(0, 0, true)
+        this.getFighter(-135, 100, false)
+        this.getFighter(135, 100, false)
+        break
+      case 4:
+        this.getFighter(0, 0, true)
+        this.getFighter(-135, 100, false)
+        this.getFighter(135, 100, false)
+        this.getFighter(180, 140, false)
+        break
+      case 5:
+        this.getFighter(0, 0, true)
+        this.getFighter(-135, 100, false)
+        this.getFighter(135, 100, false)
+        this.getFighter(-135, 200, false)
+        this.getFighter(135, 200, false)
+        break
+      case 6:
+        this.getFighter(0, 0, true)
+        this.getFighter(-135, 100, false)
+        this.getFighter(135, 100, false)
+        this.getFighter(-135, 200, false)
+        this.getFighter(135, 200, false)
+        this.getFighter(180, 140, false)
+        break
+    }
+  }
+  cos (rotation, distance) {
+    return distance === 0 ? 0 : Math.cos(Math.degToRad(rotation)) * distance
+  }
+  sin (rotation, distance) {
+    return distance === 0 ? 0 : Math.sin(Math.degToRad(rotation)) * distance
+  }
+  getFighter (rotation, distance, leader) {
+    const x = this.x + this.cos(rotation, distance)
+    const y = this.y + this.sin(rotation, distance)
+    const type = leader ? this.type : this.subType
+    if (type === 'friend') state.score.amount--
+    const obj = (type === 'player') ? new Player() : new Computer().setType(type).setFighter(this.fighterId)
+    obj.hash = this.hash
+    obj.setPosition(x, y).setRotation(this.r)
+    if (leader) {
+      obj.x += this.cos(obj.rotation, 70)
+      obj.y += this.sin(obj.rotation, 70)
+      this.leader = obj
+      if (type === 'friend') obj.setSubTarget(state.player)
+    } else if (this.leader) {
+      obj.setSubTarget(this.leader, rotation, distance)
+    }
+    return obj
   }
 }
