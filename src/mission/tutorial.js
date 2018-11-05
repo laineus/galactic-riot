@@ -1,5 +1,5 @@
 import state from '../config/state'
-import addComputer from '../utils/addComputer'
+import AddComputer from '../utils/AddComputer'
 import Text from '../class/Text'
 import { settings } from '../config/variables'
 const self = {
@@ -20,7 +20,7 @@ const self = {
   },
   created: () => {
     state.field.setField('sublatant_1')
-    addComputer(2500, 2500, 350, 'player', self.friendCount)
+    new AddComputer(2500, 2500, 350, 'player', self.friendCount)
   },
   update: () => {
   },
@@ -94,7 +94,7 @@ const self = {
     () => self.setSub(''),
     () => self.wait(30),
     () => {
-      addComputer(3000, 1500, 180, 'enemy', 1)
+      new AddComputer(3000, 1500, 180, 'enemy', 1)
       return true
     },
     () => self.setSub('赤く光っている敵機を撃墜してみましょう'),

@@ -4,7 +4,7 @@ import Field from './Field'
 import Camera from './Camera'
 import InterfaceScreen from './InterfaceScreen'
 import MissionResult from './MissionResult'
-import addComputer from '../utils/addComputer'
+import AddComputer from '../utils/AddComputer'
 export default class GameScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -56,7 +56,7 @@ export default class GameScene extends phina.display.DisplayScene {
     if (state.score.amount <= 0) return
     if (state.field.friend.children.length < this.mission.friendCount) {
       const count = Math.min(state.score.amount, Math.randint(1, 6))
-      addComputer(null, null, null, 'friend', count)
+      new AddComputer(null, null, null, 'friend', 1, count)
     }
   }
 }
