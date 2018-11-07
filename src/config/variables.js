@@ -151,7 +151,7 @@ export const weapons = [
     name: 'Twin',
     price: 1000,
     img: 'w_twin',
-    damage: 10,
+    damage: 15,
     delay: 7,
     speed: 50,
     isHoming: false,
