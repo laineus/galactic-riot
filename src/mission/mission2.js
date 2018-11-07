@@ -8,7 +8,7 @@ const self = {
   friendCount: 3,
   created: () => {
     state.field.setField('sublatant_3')
-    new new AddComputer(1000, -200, 280, 'player', null, self.friendCount)
+    new AddComputer(1000, -200, 280, 'player', null, self.friendCount)
   },
   update: () => {
   },
