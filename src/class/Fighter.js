@@ -56,7 +56,10 @@ export default class Fighter extends FlyingElement {
     new Laser(this, this.weapon)
     if (this.weapon.name === 'Twin') new Laser(this, this.weapon)
     if (this.attachmentId === 3) new Laser(this, this.attachment)
-    this.weaponDelay = this.weapon.delay
+    this.weaponDelay = this.maxWeaponDelay
+  }
+  get maxWeaponDelay () {
+    return Math.round(this.weapon.delay * (this.type === 'enemy' ? 2 : 1))
   }
   get boostEnergy () {
     return this.attachmentId === 4 ? 25 : 50
