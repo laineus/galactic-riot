@@ -2,8 +2,8 @@ import state from '../config/state'
 import intToString from '../utils/intToString'
 import saveData from '../utils/saveData'
 import Modal from './Modal'
-const BASE_PRICE = 100
-const ADD_PRICE = 20
+const BASE_PRICE = 10
+const ADD_PRICE = 30
 export default class MilitaryForce {
   constructor (callback) {
     const price = BASE_PRICE + (state.save.amount * ADD_PRICE)
