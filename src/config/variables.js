@@ -55,7 +55,7 @@ export const fighters = [
   {
     id: 1,
     name: 'Dagger',
-    price: 1000,
+    price: 600,
     img: 'f1_f',
     img2: 'f1_e',
     img3: 'f1_b',
@@ -66,7 +66,7 @@ export const fighters = [
   {
     id: 2,
     name: 'Berkut',
-    price: 2000,
+    price: 1000,
     img: 'f2_f',
     img2: 'f2_e',
     img3: 'f2_b',
@@ -77,7 +77,7 @@ export const fighters = [
   {
     id: 3,
     name: 'Lightning',
-    price: 3500,
+    price: 2200,
     img: 'f3_f',
     img2: 'f3_e',
     img3: 'f3_b',
@@ -88,7 +88,7 @@ export const fighters = [
   {
     id: 4,
     name: 'Stingray',
-    price: 5000,
+    price: 4000,
     img: 'f4_f',
     img2: 'f4_e',
     img3: 'f4_b',
@@ -136,7 +136,7 @@ export const weapons = [
   {
     id: 1,
     name: 'Assult',
-    price: 1000,
+    price: 300,
     img: 'w_assult',
     damage: 35,
     delay: 5,
@@ -162,7 +162,7 @@ export const weapons = [
   {
     id: 3,
     name: 'Gatling',
-    price: 1000,
+    price: 2000,
     img: 'w_gatling',
     damage: 15,
     delay: 3,
@@ -175,7 +175,7 @@ export const weapons = [
   {
     id: 4,
     name: 'Sniper',
-    price: 1000,
+    price: 2000,
     img: 'w_sniper',
     damage: 60,
     delay: 10,
@@ -188,7 +188,7 @@ export const weapons = [
   {
     id: 5,
     name: 'Homing',
-    price: 1000,
+    price: 5000,
     img: 'w_missile',
     damage: 20,
     delay: 5,

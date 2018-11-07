@@ -19,7 +19,7 @@ export default {
     amount: 0
   },
   save: {
-    money: 0,
+    money: 500,
     fighter: 1,
     fighters: [1],
     weapon: 1,
