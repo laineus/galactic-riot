@@ -4,7 +4,7 @@ import Gate from '../class/Gate'
 const self = {
   index: 3,
   name: 'Mission-03',
-  reward: 1000,
+  reward: 2600,
   friendCount: 4,
   created: () => {
     state.field.setField('sublatant_1')

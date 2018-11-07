@@ -3,7 +3,7 @@ import AddComputer from '../utils/AddComputer'
 const self = {
   index: 1,
   name: 'Mission-01',
-  reward: 300,
+  reward: 800,
   friendCount: 3,
   created: () => {
     state.field.setField('sublatant_1')

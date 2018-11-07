@@ -4,7 +4,7 @@ import Gate from '../class/Gate'
 const self = {
   index: 8,
   name: 'Mission-08',
-  reward: 5400,
+  reward: 8800,
   friendCount: 6,
   route: 0,
   created: () => {
