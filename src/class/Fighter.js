@@ -18,9 +18,14 @@ export default class Fighter extends FlyingElement {
   isActive () {
     return this.hp > 0
   }
+  get energyCoefficient () {
+    if (this === state.player) return 1
+    if (this.type === 'friend') return 0.4
+    return 0.2
+  }
   setFighter (id) {
     this.fighter = fighterFind(id)
-    this.setEnergy(this === state.player ? this.fighter.energy : Math.round(this.fighter.energy / 3))
+    this.setEnergy(this.fighter.energy * this.energyCoefficient)
     this.setMobilityAndSpeed()
     this.setBlur()
     this.setJet()
