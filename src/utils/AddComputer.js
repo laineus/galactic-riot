@@ -59,8 +59,8 @@ export default class AddComputer {
     return distance === 0 ? 0 : Math.sin(Math.degToRad(rotation)) * distance
   }
   getFighter (rotation, distance, leader) {
-    const x = this.x + this.cos(rotation, distance)
-    const y = this.y + this.sin(rotation, distance)
+    const x = this.x + this.cos(this.r - rotation, distance)
+    const y = this.y + this.sin(this.r - rotation, distance)
     const type = leader ? this.type : this.subType
     if (type === 'friend') state.score.amount--
     const obj = (type === 'player') ? new Player() : new Computer().setType(type).setFighter(this.fighterId)
