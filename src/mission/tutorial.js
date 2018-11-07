@@ -20,7 +20,7 @@ const self = {
   },
   created: () => {
     state.field.setField('sublatant_1')
-    new AddComputer(2500, 2500, 350, 'player', self.friendCount)
+    new AddComputer(2500, 2500, 350, 'player', null, self.friendCount)
   },
   update: () => {
   },
@@ -94,7 +94,7 @@ const self = {
     () => self.setSub(''),
     () => self.wait(30),
     () => {
-      new AddComputer(3000, 1500, 180, 'enemy', 1)
+      new AddComputer(3000, 1500, 180, 'enemy', 1, 1)
       return true
     },
     () => self.setSub('赤く光っている敵機を撃墜してみましょう'),
