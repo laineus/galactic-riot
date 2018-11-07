@@ -10,7 +10,7 @@ export default class AddComputer {
     this.r = r !== null ? r : Math.radToDeg(Math.atan2(state.player.y - y, state.player.x - x))
     this.type = type
     this.subType = type === 'player' ? 'friend' : type
-    this.fighterId = fighterId
+    this.fighterId = fighterId || (type === 'player' ? state.save.fighter : state.save.fighters.random())
     this.hash = Math.randint(1000000, 9999999)
     this.leader = null
     this.add(count)
