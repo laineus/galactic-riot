@@ -17,7 +17,7 @@ export default class MissionResult extends phina.display.RectangleShape {
       state.save.money += state.mission.reward
       saveData.save()
     } else {
-      state.save.money -= this.lost
+      state.save.money = Math.max(state.save.money - this.lost, 0)
       saveData.save()
     }
     this.scene = scene
