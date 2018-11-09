@@ -59,7 +59,7 @@ export default class Fighter extends FlyingElement {
     this.weaponDelay = this.maxWeaponDelay
   }
   get maxWeaponDelay () {
-    return Math.round(this.weapon.delay * (this.type === 'enemy' ? 2 : 1))
+    return Math.round(this.weapon.delay * (this.type === 'enemy' ? 1.5 : 1))
   }
   get boostEnergy () {
     return this.attachmentId === 4 ? 25 : 50
@@ -81,7 +81,7 @@ export default class Fighter extends FlyingElement {
   }
   damage (damage, shooter) {
     this.explosion(1)
-    this.hp -= damage * (this.attachmentId === 2 ? 0.5 : 1)
+    this.hp -= damage * (this.attachmentId === 2 ? 0.7 : 1)
     // target
     if (shooter === state.player && this.target !== shooter && this.target) state.score.rescue++
     this.target = shooter
