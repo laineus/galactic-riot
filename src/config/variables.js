@@ -116,7 +116,7 @@ export const fighters = [
     img3: 'f6_b',
     energy: 900,
     speed: 12,
-    mobility: 7
+    mobility: 6
   },
   {
     id: 7,
@@ -127,7 +127,7 @@ export const fighters = [
     img3: 'f7_b',
     energy: 1200,
     speed: 13,
-    mobility: 6
+    mobility: 5
   }
 ]
 export const fighterFind = id => fighters.find(v => v.id === id)
@@ -213,7 +213,7 @@ export const attachments = [
   {
     id: 2,
     name: 'Armor',
-    price: 500,
+    price: 1000,
     img: 'a_armor',
     desc: 'Reduce laser damage',
     desc_ja: 'ダメージを軽減'
@@ -221,7 +221,7 @@ export const attachments = [
   {
     id: 3,
     name: 'Tailgun',
-    price: 1000,
+    price: 500,
     img: 'a_tailgun',
     damage: 20,
     delay: 5,
