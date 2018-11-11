@@ -35,6 +35,10 @@ export default class Player extends Fighter {
     this.accele(0)
   }
   ctrlTurn (key) {
+    if (!this.field.inField(this)) {
+      const degDiff = this.degreeDiffTo(this.field.xCenter, this.field.yCenter)
+      if (Math.abs(degDiff) > 1) return this.turn((degDiff > 0 && degDiff < 180) || degDiff < -180 ? 1 : -1)
+    }
     if (key.getKey('left')) return this.turn(-1)
     if (key.getKey('right')) return this.turn(1)
   }

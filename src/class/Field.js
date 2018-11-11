@@ -37,4 +37,16 @@ export default class Field extends phina.display.DisplayElement {
   is (fieldName) {
     return this.fieldName === fieldName
   }
+  notInField (obj, padding = 0) {
+    return obj.x < padding || obj.x > (this.width - padding) || obj.y < padding || obj.y > (this.height - padding)
+  }
+  inField (obj, padding = 0) {
+    return obj.x >= padding && obj.x <= (this.width - padding) && obj.y >= padding && obj.y <= (this.height - padding)
+  }
+  get xCenter () {
+    return this.width / 2
+  }
+  get yCenter () {
+    return this.height / 2
+  }
 }

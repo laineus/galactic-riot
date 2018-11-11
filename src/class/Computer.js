@@ -53,10 +53,8 @@ export default class Computer extends Fighter {
   }
   ctrlTurn () {
     const degDiff = (() => {
-      const xCenter = this.field.width / 2
-      const yCenter = this.field.height / 2
-      if (Math.abs(this.x - xCenter) > (xCenter - 200) || Math.abs(this.y - yCenter) > (yCenter - 200)) {
-        return this.degreeDiffTo(xCenter, yCenter)
+      if (!this.field.inField(this, 200)) {
+        return this.degreeDiffTo(this.field.xCenter, this.field.yCenter)
       } else if (this.target) {
         return this.degreeDiff(this.target)
       } else if (this.subTarget) {
