@@ -26,7 +26,7 @@ export default class TitleScene extends phina.display.DisplayScene {
     }
   }
   addCredit () {
-    return this.addStartLabel() // debug
+    // return this.addStartLabel() // debug
     this.removeAll()
     this.credit.alpha = 1
     this.credit.logo.alpha = 0
