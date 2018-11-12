@@ -1,6 +1,7 @@
 import state from '../config/state'
 import AddComputer from '../utils/AddComputer'
 import Text from '../class/Text'
+import Gate from '../class/Gate'
 import { settings } from '../config/variables'
 const self = {
   index: 0,
@@ -93,10 +94,14 @@ const self = {
     },
     () => self.setSub(''),
     () => self.wait(30),
+    () => self.setSub('画面上の矢印の先にあるゲートをくぐりましょう'),
+    () => new Gate('sublatant_4', 200, 1500).setPosition(4500, 2000).setRotation(0).addChildTo(state.field.object),
+    () => state.field.is('sublatant_4'),
     () => {
-      new AddComputer(3000, 1500, 180, 'enemy', 1, 1)
+      new AddComputer(1000, 1350, 10, 'enemy', 1, 1)
       return true
     },
+    () => self.wait(30),
     () => self.setSub('赤く光っている敵機を撃墜してみましょう'),
     () => self.wait(120),
     () => !state.field.enemy.children.length,
