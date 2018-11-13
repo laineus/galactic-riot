@@ -17,6 +17,7 @@ export default class Gate extends phina.display.DisplayElement {
   update () {
     if (!state.player) return
     if (state.player.distanceDiff(this) < 50 && !this.active) {
+      state.player.hp = state.player.maxHp
       state.player.rotation = this.rotation
       this.blur1.tweener.to({ scaleX: 50 }, 200, 'easeInQuad')
       this.blur2.tweener.to({ scaleX: 50 }, 200, 'easeInQuad')
