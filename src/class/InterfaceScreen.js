@@ -74,7 +74,7 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
   initStatus () {
     this.status = DisplayElement().setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 25, 25).addChildTo(this)
     this.status.mission = new BlurText(state.mission.name, 14, { align: 'left' }).setPosition(-140, 5).addChildTo(this.status)
-    this.status.keys = new BlurText('Amount:\nKill\nTime:', 13, { align: 'left' }).setPosition(-140, 40).addChildTo(this.status)
+    this.status.keys = new BlurText('Friends:\nKill\nTime:', 13, { align: 'left' }).setPosition(-140, 40).addChildTo(this.status)
     this.status.values = new BlurText(null, 13, { align: 'right' }).setPosition(0, 40).addChildTo(this.status)
     this.status.values.update = () => this.status.values.text = `${state.score.amount} / ${state.save.amount}\n${state.score.kill}\n${state.score.time}`
   }
