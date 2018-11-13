@@ -8,6 +8,7 @@ export default class Laser extends FlyingElement {
     this.shooter = parent
     this.type = parent.type
     this.target = parent.target
+    this.frame = 0
     if (!this.shooter.shotCount) this.shooter.shotCount = 0
     if (this.laser.name !== 'Tailgun') this.shooter.shotCount++
     this.setSpeed(this.laser.speed + (parent.player ? 10 : 0))
@@ -44,6 +45,7 @@ export default class Laser extends FlyingElement {
     this.move(false, true)
     this.hitCheck()
     if (this.laser.isHoming) this.homing()
+    this.frame++
   }
   hitCheck () {
     for (const tgt of this.targetGroup()) {
@@ -55,7 +57,7 @@ export default class Laser extends FlyingElement {
     }
   }
   homing () {
-    if (!this.target) return
+    if (!this.target || this.frame > 60) return
     const degDiff = this.degreeDiff(this.target)
     if (Math.abs(degDiff) > 1) {
       this.turn((degDiff > 0 && degDiff < 180) || degDiff < -180 ? 1 : -1, Math.abs(degDiff))
