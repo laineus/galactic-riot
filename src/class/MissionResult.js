@@ -54,7 +54,7 @@ export default class MissionResult extends phina.display.RectangleShape {
     }
   }
   get lost () {
-    return (state.mission.reward / 2) * (state.save.attachment === 1 ? 0 : 1)
+    return Math.round(state.save.money / 2) * (state.save.attachment === 1 ? 0 : 1)
   }
   get completedKeyString () {
     return `${state.mission.name}\n\nTime:\nKill:\nMember Death:\nRescue:\n\nReward:`
