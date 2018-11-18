@@ -4,6 +4,7 @@ import Gate from '../class/Gate'
 const self = {
   index: 5,
   name: 'Mission-05',
+  bgm: 'battle',
   reward: 4600,
   friendCount: 5,
   created: () => {

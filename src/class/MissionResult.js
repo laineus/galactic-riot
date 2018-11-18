@@ -2,6 +2,7 @@ import { settings, colors } from '../config/variables'
 import state from '../config/state'
 import saveData from '../utils/saveData'
 import intToString from '../utils/intToString'
+import bgm from '../utils/bgm'
 export default class MissionResult extends phina.display.RectangleShape {
   constructor (scene, completed) {
     super({
@@ -20,6 +21,8 @@ export default class MissionResult extends phina.display.RectangleShape {
       state.save.money = Math.max(state.save.money - this.lost, 0)
       saveData.save()
     }
+    bgm.set(null, 1000)
+    setTimeout(() => bgm.set(completed ? 'victory' : 'lose', 50), 1000)
     this.scene = scene
     this.time = 0
     this.setOrigin(0, 0)

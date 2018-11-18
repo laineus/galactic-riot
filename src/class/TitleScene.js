@@ -1,4 +1,4 @@
-import { settings, colors } from '../config/variables'
+import { settings, colors, sounds } from '../config/variables'
 import saveData from '../utils/saveData'
 import Cursor from './Cursor'
 import labelList from '../utils/labelList'
@@ -6,10 +6,12 @@ import BlurLabel from './BlurLabel'
 import MissionSelect from './MissionSelect'
 import Text from './Text'
 import Box from './Box'
+import bgm from '../utils/bgm'
 export default class TitleScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
     Object.setPrototypeOf(this, TitleScene.prototype)
+    bgm.set('title')
     this.backgroundColor = colors.black
     this.bg = Sprite('title').addChildTo(this).setOrigin(0, 0).setScale(0.75, 0.75)
     this.logo = Sprite('logo').addChildTo(this).setScale(0.5, 0.5)

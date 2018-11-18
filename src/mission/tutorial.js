@@ -7,6 +7,7 @@ import { settings } from '../config/variables'
 const self = {
   index: 0,
   name: 'Tutorial',
+  bgm: 'title',
   reward: 0,
   friendCount: 1,
   timer: 0,

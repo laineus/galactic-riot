@@ -3,6 +3,7 @@ import AddComputer from '../utils/AddComputer'
 const self = {
   index: 1,
   name: 'Mission-01',
+  bgm: 'army',
   reward: 800,
   friendCount: 3,
   created: () => {

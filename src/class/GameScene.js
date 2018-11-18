@@ -5,6 +5,7 @@ import Camera from './Camera'
 import InterfaceScreen from './InterfaceScreen'
 import MissionResult from './MissionResult'
 import AddComputer from '../utils/AddComputer'
+import bgm from '../utils/bgm'
 export default class GameScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -30,6 +31,8 @@ export default class GameScene extends phina.display.DisplayScene {
     // Interface
     this.interface = new InterfaceScreen().addChildTo(this)
     this.interface.initRadar(this.field, state.player)
+    // BGM
+    bgm.set(this.mission.bgm)
   }
   update () {
     if (!this.inProgress) return
