@@ -1,9 +1,13 @@
 import FlyingElement from './FlyingElement'
 import SlicedSprite from './SlicedSprite'
+import state from '../config/state'
 export default class Laser extends FlyingElement {
   constructor (parent, laser) {
     super()
     Object.setPrototypeOf(this, Laser.prototype)
+    if (state.field.camera.inVision(parent.x, parent.y)) {
+      SoundManager.play(parent.player ? 'laser2' : 'laser1')
+    }
     this.laser = laser
     this.shooter = parent
     this.type = parent.type
@@ -50,6 +54,9 @@ export default class Laser extends FlyingElement {
   hitCheck () {
     for (const tgt of this.targetGroup()) {
       if (this.distanceDiff(tgt) < 30) {
+        if (state.field.camera.inVision(tgt.x, tgt.y)) {
+          SoundManager.play(tgt.player ? 'hit2' : 'hit1')
+        }
         tgt.damage(this.laser.damage, this.shooter)
         this.remove()
         break

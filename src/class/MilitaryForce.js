@@ -15,6 +15,7 @@ export default class MilitaryForce {
           state.save.money -= price
           state.save.amount++
           saveData.save()
+          SoundManager.play('money')
         }
         callback()
       }, callback, 1)

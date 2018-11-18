@@ -69,6 +69,7 @@ export default class Fighter extends FlyingElement {
     this.hp -= this.boostEnergy
     this.stampBlur()
     this.turnBoost = 20
+    if (state.field.camera.inVision(this.x, this.y)) SoundManager.play('boost')
   }
   stampBlur () {
     const blur = maskImage.getSprite(this.fighter.img3, colors[this.color])

@@ -21,6 +21,8 @@ export default class MissionResult extends phina.display.RectangleShape {
       state.save.money = Math.max(state.save.money - this.lost, 0)
       saveData.save()
     }
+    state.score.progress = false
+    setTimeout(() => SoundManager.play('complete'), 200)
     bgm.set(null, 1000)
     setTimeout(() => bgm.set(completed ? 'victory' : 'lose', 50), 1000)
     this.scene = scene
@@ -53,6 +55,7 @@ export default class MissionResult extends phina.display.RectangleShape {
   update (app) {
     this.time++
     if (this.time > 60 && app.keyboard.getKeyDown('Z')) {
+      SoundManager.play('button')
       this.scene.exit('Title', { skip: 1 })
     }
   }

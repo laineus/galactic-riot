@@ -8,6 +8,7 @@ export default class Explosion extends phina.display.DisplayElement {
     const x = options.x ? options.x : 0
     const y = options.y ? options.y : 0
     if (!state.field.camera.inVision(x, y)) return
+    SoundManager.play('bomb')
     this.level = options.level ? options.level : 5
     this.addChildTo(state.field.object)
     this.setPosition(x, y)

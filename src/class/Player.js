@@ -43,7 +43,7 @@ export default class Player extends Fighter {
     if (key.getKey('right')) return this.turn(1)
   }
   ctrAction (key) {
-    if (state.score.frame < 10) return
+    if (state.score.frame < 10 || !state.score.progress) return
     if (key.getKeyDown('X')) {
       this.boost()
       return

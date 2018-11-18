@@ -15,6 +15,7 @@ export default class GameScene extends phina.display.DisplayScene {
     state.score.death = 0
     state.score.rescue = 0
     state.score.amount = state.save.amount
+    state.score.progress = true
     this.phase = 0
     this.inProgress = true
     this.canReturn = false

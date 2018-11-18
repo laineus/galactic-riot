@@ -25,6 +25,7 @@ export default class Cursor extends phina.app.Element {
   set index (i) {
     if (i < 0) i = this.list.length - 1
     if (i >= this.list.length) i = 0
+    if (this._index !== undefined) SoundManager.play('button')
     this._index = i
     if (this.onUpdate) this.onUpdate(this.current, this.other, this.index)
   }
@@ -47,7 +48,13 @@ export default class Cursor extends phina.app.Element {
       this.delay = key.getKeyDown(this.next) ? 8 : 2
     }
     if (this.delay > 0) this.delay--
-    if (key.getKeyDown('Z') && this.onEnter) this.onEnter(this.current, this.index)
-    if (key.getKeyDown('X') && this.onCancel) this.onCancel()
+    if (key.getKeyDown('Z')) {
+      SoundManager.play('button')
+      if (this.onEnter) this.onEnter(this.current, this.index)
+    }
+    if (key.getKeyDown('X')) {
+      SoundManager.play('button')
+      if (this.onCancel) this.onCancel()
+    }
   }
 }

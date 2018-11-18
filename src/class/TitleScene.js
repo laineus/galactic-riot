@@ -24,7 +24,10 @@ export default class TitleScene extends phina.display.DisplayScene {
   }
   update (app) {
     if (this.startLabel) {
-      if (app.keyboard.getKeyDown('Z')) this.addMenu()
+      if (app.keyboard.getKeyDown('Z')) {
+        SoundManager.play('button')
+        this.addMenu()
+      }
     }
   }
   addCredit () {

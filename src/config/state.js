@@ -16,7 +16,8 @@ export default {
     get time () {
       return `${Math.floor(this.sec / 60)}:${(this.sec % 60) < 10 ? '0' : ''}${this.sec % 60}`
     },
-    amount: 0
+    amount: 0,
+    progress: false
   },
   save: {
     money: 500,

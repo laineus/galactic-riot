@@ -54,12 +54,19 @@ export default class ArsenalScene extends phina.display.DisplayScene {
     if (!content.awake) return
     content.list[content.listIndex].move.forEach(move => {
       if (app.keyboard.getKeyDown(move.key) && content.listIndex !== move.index) {
+        SoundManager.play('button')
         content.listIndex = move.index
         this.setCursor()
       }
     })
-    if (app.keyboard.getKeyDown('Z')) this.contentSelect(content, content.list[content.listIndex])
-    if (app.keyboard.getKeyDown('X')) this.close()
+    if (app.keyboard.getKeyDown('Z')) {
+      SoundManager.play('button')
+      this.contentSelect(content, content.list[content.listIndex])
+    }
+    if (app.keyboard.getKeyDown('X')) {
+      SoundManager.play('button')
+      this.close()
+    }
   }
   setCursor () {
     this.content.list.forEach((r, i) => r.image && (r.image.active = this.content.listIndex === i))

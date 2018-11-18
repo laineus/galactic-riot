@@ -78,6 +78,7 @@ export default class EquipSelect extends Box {
             state.save[`${this.key}s`].push(product.id)
             state.save[this.key] = product.id
             saveData.save()
+            SoundManager.play('money')
             this.exit()
           }
         }, null, 1)
