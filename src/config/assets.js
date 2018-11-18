@@ -1,3 +1,4 @@
+import { sounds } from './variables'
 export default {
   image: {
     dummy: '/img/dummy.png',
@@ -50,6 +51,5 @@ export default {
   font: {
     aldrich: '/font/aldrich.woff'
   },
-  sound: {
-  }
+  sound: Object.keys(sounds).reduce((obj, name) => Object.assign(obj, { [name]: `/sound/${name}.ogg` }), {})
 }

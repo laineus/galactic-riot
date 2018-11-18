@@ -249,3 +249,12 @@ export const attachments = [
   }
 ]
 export const attachmentFind = id => attachments.find(v => v.id === id)
+
+export const sounds = {
+  title: { loop: true, loopStart: 0 },
+  battle: { loop: true, loopStart: 0 },
+  army: { loop: true, loopStart: 0 },
+  riot: { loop: true, loopStart: 0 },
+  victory: { loop: false, loopStart: 0 },
+  lose: { loop: false, loopStart: 0 }
+}
