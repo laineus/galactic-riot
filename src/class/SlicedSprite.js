@@ -4,8 +4,9 @@ export default class SlicedSprite extends phina.display.Sprite {
     Object.setPrototypeOf(this, SlicedSprite.prototype)
     this.sizeX = Math.ceil(this._width / x)
     this.sizeY = Math.ceil(this._height / y)
-    this.posX = ((index - 1) % x) * this.sizeX
-    this.posY = Math.floor((index - 1) / x) * this.sizeY
+    this.x = x
+    this.y = y
+    this.index = index
   }
   draw (canvas) {
     canvas.context.drawImage(
@@ -19,5 +20,13 @@ export default class SlicedSprite extends phina.display.Sprite {
       this.sizeX,
       this.sizeY
     )
+  }
+  get index () {
+    return this._index
+  }
+  set index (i) {
+    this._index = i
+    this.posX = ((i- 1) % this.x) * this.sizeX
+    this.posY = Math.floor((i- 1) / this.x) * this.sizeY
   }
 }
