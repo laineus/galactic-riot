@@ -51,5 +51,18 @@ export default {
   font: {
     aldrich: '/font/aldrich.woff'
   },
-  sound: Object.keys(sounds).reduce((obj, name) => Object.assign(obj, { [name]: `/sound/${name}.ogg` }), {})
+  sound: Object.assign(
+    Object.keys(sounds).reduce((obj, name) => Object.assign(obj, { [name]: `/sound/${name}.ogg` }), {}),
+    {
+      bomb: '/sound/se_bomb.wav',
+      boost: '/sound/se_boost.wav',
+      button: '/sound/se_button.wav',
+      complete: '/sound/se_complete.wav',
+      hit1: '/sound/se_hit1.wav',
+      hit2: '/sound/se_hit2.wav',
+      laser1: '/sound/se_laser1.wav',
+      laser2: '/sound/se_laser2.wav',
+      money: '/sound/se_money.wav'
+    }
+  )
 }
