@@ -1,4 +1,4 @@
-import { settings } from "./variables";
+import { settings } from './variables'
 export default {
   app: null,
   field: null,
