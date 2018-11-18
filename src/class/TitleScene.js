@@ -1,4 +1,5 @@
-import { settings, colors, sounds } from '../config/variables'
+import { settings, colors } from '../config/variables'
+import state from '../config/state'
 import saveData from '../utils/saveData'
 import Cursor from './Cursor'
 import labelList from '../utils/labelList'
@@ -7,6 +8,7 @@ import MissionSelect from './MissionSelect'
 import Text from './Text'
 import Box from './Box'
 import bgm from '../utils/bgm'
+import Volume from './Volume'
 export default class TitleScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -21,6 +23,7 @@ export default class TitleScene extends phina.display.DisplayScene {
     this.credit.logo = Sprite('credit').addChildTo(this.credit).setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C).setScale(0.4, 0.4)
     option.skip ? this.addMenu(option.skip) : this.addCredit()
     saveData.load()
+    Sound.volume = state.save.sound ? 1 : 0
   }
   update (app) {
     if (this.startLabel) {
@@ -75,6 +78,7 @@ export default class TitleScene extends phina.display.DisplayScene {
     }, () => {
       this.addStartLabel()
     }, true, index).addChildTo(this)
+    this.volume = new Volume().addChildTo(this)
   }
   addMissionSelect () {
     this.removeAll()
@@ -92,6 +96,7 @@ export default class TitleScene extends phina.display.DisplayScene {
       this.list.cursor.remove()
       this.list.forEach(v => v.remove())
       this.list = null
+      this.volume.remove()
     }
     if (this.missionSelect) {
       this.missionSelect.remove()
