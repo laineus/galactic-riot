@@ -18,7 +18,7 @@ export default class TitleScene extends phina.display.DisplayScene {
     this.bg = Sprite('title').addChildTo(this).setOrigin(0, 0).setScale(0.75, 0.75)
     this.logo = Sprite('logo').addChildTo(this).setScale(0.5, 0.5)
                               .setPosition(this.gridX.center(), this.gridY.span(10))
-    this.sub = new Text('[X] Enter [X] Cancel [↑][↓] Select', 10, { fill: colors.gray }).setOrigin(1, 1).setPosition(settings.SCREEN_WIDTH - 10, settings.SCREEN_HEIGHT - 5).addChildTo(this)
+    this.sub = new Text('[Z] Enter [X] Cancel [↑][↓] Select', 10, { fill: colors.gray }).setOrigin(1, 1).setPosition(settings.SCREEN_WIDTH - 10, settings.SCREEN_HEIGHT - 5).addChildTo(this)
     this.credit = new Box(settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT, colors.black).addChildTo(this).setOrigin(0, 0)
     this.credit.logo = Sprite('credit').addChildTo(this.credit).setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT_C).setScale(0.4, 0.4)
     option.skip ? this.addMenu(option.skip) : this.addCredit()
