@@ -9,6 +9,7 @@ webSocketServer = new WebSocketServer({ httpServer: httpServer, autoAcceptConnec
 webSocketServer.on('request', request => {
   if (ALLOW_ORIGIN && request.origin !== ALLOW_ORIGIN) {
     request.reject()
+    console.log(`${new Date()} Connection rejected.`)
     return
   }
   const connection = request.accept()
