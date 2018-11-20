@@ -1,7 +1,7 @@
 {
   "name": "galactic-riot-server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/bundle.js",
   "author": "Laineus",
   "license": "MIT",
   "scripts": {
