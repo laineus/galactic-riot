@@ -13,8 +13,9 @@ export default class OnlineScene extends phina.display.DisplayScene {
 
     connect.readyState == connect.OPEN
     // connect.send(JSON.stringify(null))
-    connect.onmessage = text => {
-      JSON.parse(text)
+    connect.onmessage = e => {
+      const data = JSON.parse(e.data)
+      // console.log(data)
     }
   }
 }
