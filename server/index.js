@@ -1,5 +1,5 @@
-const WebSocketServer = require('websocket').server
-const http = require('http')
+import { WebSocketServer } from 'websocket'
+import http from 'http'
 const PORT = 8091
 const ALLOW_ORIGIN = 'galactic-riot.laineus.com'
 
