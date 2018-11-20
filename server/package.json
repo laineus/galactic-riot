@@ -8,6 +8,10 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "webpack": "^4.26.0",
     "websocket": "^1.0.28"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.1.2"
   }
 }
