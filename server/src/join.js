@@ -1,9 +1,12 @@
 import rooms from './rooms'
+import Room from './Room'
 export default connection => {
-  rooms.push(connection)
+  const availableRoom = rooms.find(room => !room.full)
+  const room = availableRoom || new Room
+  if (!availableRoom) rooms.push(room)
+  room.join(connection)
   connection.on('close', (reasonCode, description) => {
     console.log(`${new Date()} Disconnected. Reson: [${reasonCode}] ${description}`)
-    const i = rooms.findIndex(v => v.connection)
-    if (i) rooms.splice(i, 1)
+    rooms.forEach(r => r.leave(connection))
   })
 }
