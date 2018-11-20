@@ -1,2 +1,2 @@
 export const PORT = process.env.PORT
-export const ORIGIN = 'galactic-riot.laineus.com'
+export const ALLOW_ORIGIN = 'galactic-riot.laineus.com'

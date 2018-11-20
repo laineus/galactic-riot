@@ -1,17 +1,17 @@
 import { WebSocketServer } from 'websocket'
+import { ALLOW_ORIGIN } from './settings'
 import httpServer from './httpServer'
+import join from './join'
 
 process.on('uncaughtException', error => console.error(`error: ${error}`))
 
 webSocketServer = new WebSocketServer({ httpServer: httpServer, autoAcceptConnections: false })
 webSocketServer.on('request', request => {
-  // if (request.origin !== ALLOW_ORIGIN) {
-  //   request.reject()
-  //   return
-  // }
+  if (ALLOW_ORIGIN && request.origin !== ALLOW_ORIGIN) {
+    request.reject()
+    return
+  }
   const connection = request.accept()
   console.log(`${new Date()} Connection accepted.`)
-  connection.on('close', (reasonCode, description) => {
-    console.log(`${new Date()} Disconnected. Reson: [${reasonCode}] ${description}`)
-  })
+  join(connection)
 })
