@@ -8,5 +8,7 @@ export default connection => {
   connection.on('close', (reasonCode, description) => {
     console.log(`${new Date()} Disconnected. Reson: [${reasonCode}] ${description}`)
     rooms.forEach(r => r.leave(connection))
+    const i = rooms.findIndex
+    if (i) rooms.splice(i, 1)
   })
 }

@@ -13,6 +13,9 @@ export default class Room {
     const i = this.connections.findIndex(c => c === connection)
     if (i) this.connections.splice(i, 1)
   }
+  get empty () {
+    return this.connections.length === 0
+  }
   get full () {
     return this.connections.length >= MAX
   }
