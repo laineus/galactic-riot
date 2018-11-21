@@ -72,11 +72,18 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
     this.radar = new Radar(field, player).setPosition(20, 20).setOrigin(0, 0).addChildTo(this)
   }
   initStatus () {
+    const title = state.mission ? state.mission.name : 'Online field'
     this.status = DisplayElement().setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 25, 25).addChildTo(this)
-    this.status.mission = new BlurText(state.mission.name, 14, { align: 'left' }).setPosition(-140, 5).addChildTo(this.status)
-    this.status.keys = new BlurText('Friends:\nKill\nTime:', 13, { align: 'left' }).setPosition(-140, 40).addChildTo(this.status)
+    this.status.mission = new BlurText(title, 14, { align: 'left' }).setPosition(-140, 5).addChildTo(this.status)
+    this.status.keys = new BlurText(null, 13, { align: 'left' }).setPosition(-140, 40).addChildTo(this.status)
     this.status.values = new BlurText(null, 13, { align: 'right' }).setPosition(0, 40).addChildTo(this.status)
-    this.status.values.update = () => this.status.values.text = `${state.score.amount} / ${state.save.amount}\n${state.score.kill}\n${state.score.time}`
+    if (state.mission) {
+      this.status.keys.text = 'Friends:\nKill\nTime:'
+      this.status.values.update = () => this.status.values.text = `${state.score.amount} / ${state.save.amount}\n${state.score.kill}\n${state.score.time}`
+    } else {
+      this.status.keys.text = 'Kill\nTime:'
+      this.status.values.update = () => this.status.values.text = `${state.score.kill}\n${state.score.time}`
+    }
   }
   initGauge () {
     new BlurText('Energy:', 13).setPosition(13, settings.SCREEN_HEIGHT - 20).setOrigin(0, 1).addChildTo(this)
