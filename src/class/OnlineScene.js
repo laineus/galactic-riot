@@ -10,6 +10,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
     Object.setPrototypeOf(this, OnlineScene.prototype)
+    this.inProgress = false
     this.connect = this.initConnect()
   }
   initConnect () {
@@ -23,7 +24,6 @@ export default class OnlineScene extends phina.display.DisplayScene {
       this.exit('Title')
     }
     connect.readyState == connect.OPEN
-    // connect.send(JSON.stringify(null))
     connect.onmessage = e => {
       const data = JSON.parse(e.data)
       // console.log(data)
@@ -38,7 +38,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
     this.field = new Field().addChildTo(this)
     this.field.setField('sublatant_1')
     // Player
-    new Player().setPosition(1000, 1000)
+    this.player = new Player().setPosition(1000, 1000)
     // Camera
     this.field.camera = new Camera().addChildTo(this)
     this.field.camera.setField(this.field)
@@ -54,6 +54,13 @@ export default class OnlineScene extends phina.display.DisplayScene {
     // if (!state.player.isActive()) {
     //   return
     // }
+    this.send('playerData', this.playerData)
     state.score.frame++
+  }
+  send (method, data) {
+    this.connect.send(JSON.stringify({ method: method, body: data }))
+  }
+  get playerData () {
+    return { x: this.player.x, y: this.player.y }
   }
 }
