@@ -27,6 +27,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
     connect.onmessage = e => {
       const data = JSON.parse(e.data)
       // console.log(data)
+      if (data.method === 'id') connect.id = data.body.id
     }
     return connect
   }

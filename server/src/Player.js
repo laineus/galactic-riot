@@ -1,12 +1,11 @@
-const randInt = (min, max) => Math.floor(Math.random() * (max + 1 - min)) + min
+import randInt from './randInt'
+import parseData from './parseData'
 export default class Player {
   constructor (connection) {
     this.connection = connection
     this.id = randInt(1000000, 9999999)
-    connection.on('message', message => {
-      const data = JSON.parse(message.utf8Data)
-      if (data.method === 'playerData') this.setPosition(data.body.x, data.body.y)
-    })
+    this.send('id', id)
+    connection.on('message', this.received.bind(this))
     this.setPosition(0, 0)
     return this
   }
@@ -17,5 +16,12 @@ export default class Player {
   }
   get returnData () {
     return { id: this.id, x: this.x, y: this.y }
+  }
+  received (message) {
+    const data = parseData(message)
+    if (data.method === 'playerData') this.setPosition(data.body.x, data.body.y)
+  }
+  send (methodName, data) {
+    this.connection.sendUTF(JSON.stringify({ method: methodName, body: data }))
   }
 }
