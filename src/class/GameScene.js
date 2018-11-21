@@ -7,19 +7,14 @@ import MissionResult from './MissionResult'
 import AddComputer from '../utils/AddComputer'
 import bgm from '../utils/bgm'
 import Text from './Text'
+import resetScore from '../utils/resetScore'
 export default class GameScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
     Object.setPrototypeOf(this, GameScene.prototype)
-    state.score.frame = 0
-    state.score.kill = 0
-    state.score.death = 0
-    state.score.rescue = 0
-    state.score.amount = state.save.amount
-    state.score.progress = true
+    resetScore()
     this.phase = 0
     this.inProgress = true
-    this.canReturn = false
     this.backgroundColor = colors.black
     // Field
     this.field = new Field().addChildTo(this)
