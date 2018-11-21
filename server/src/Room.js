@@ -1,32 +1,34 @@
+import Player from './Player'
 const MAX = 2
 const FPS = 30
 export default class Room {
   constructor () {
-    this.connections = []
+    this.players = []
     this.loop()
   }
   join (connection) {
     if (this.full) return
-    this.connections.push(connection)
+    const player = new Player(connection)
+    this.players.push(player)
   }
   leave (connection) {
-    const i = this.connections.findIndex(c => c === connection)
-    if (i) this.connections.splice(i, 1)
+    const i = this.players.findIndex(p => p.connection === connection)
+    if (i) this.players.splice(i, 1)
   }
   get empty () {
-    return this.connections.length === 0
+    return this.players.length === 0
   }
   get full () {
-    return this.connections.length >= MAX
+    return this.players.length >= MAX
   }
   loop () {
     this.update()
     setTimeout(this.loop.bind(this), 1000 / FPS)
   }
   update () {
-    this.sendToAll('updateData', 123)
+    this.sendToAll('playersData', this.players.map(p => p.returnData))
   }
   sendToAll (methodName, data) {
-    this.connections.forEach(c => c.sendUTF(JSON.stringify({ method: methodName, body: data })))
+    this.players.forEach(p => p.connection.sendUTF(JSON.stringify({ method: methodName, body: data })))
   }
 }
