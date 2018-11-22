@@ -1,10 +1,12 @@
 import randInt from './randInt'
 import parseData from './parseData'
 export default class Player {
-  constructor (connection) {
+  constructor (connection, room) {
+    connection.commit = (methodName, data) => connection.sendUTF(JSON.stringify({ method: methodName, body: data }))
     this.connection = connection
+    this.room = room
     this.id = randInt(1000000, 9999999)
-    this.send('id', this.id)
+    connection.commit('id', this.id)
     connection.on('message', this.received.bind(this))
     this.setState({ fighter: 1, x: 0, y: 0, r: 0, hp: 100 })
     return this
@@ -30,8 +32,9 @@ export default class Player {
   received (message) {
     const data = parseData(message)
     if (data.method === 'playerData') this.setState(data.body)
-  }
-  send (methodName, data) {
-    this.connection.sendUTF(JSON.stringify({ method: methodName, body: data }))
+    if (data.method === 'hit') {
+      const target = this.room.players.find(p => p.id === data.body.id)
+      if (target) target.connection.commit('hit', data.body.damage)
+    }
   }
 }

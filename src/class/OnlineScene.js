@@ -23,6 +23,9 @@ export default class OnlineScene extends phina.display.DisplayScene {
       const data = JSON.parse(e.data)
       if (data.method === 'id') connection.id = data.body
       if (data.method === 'playersData') this.playersData(data.body)
+      if (data.method === 'hit') {
+        this.player.hp -= data.damage
+      }
     }
     connection.commit = (method, data) => connection.send(JSON.stringify({ method: method, body: data }))
     return connection
@@ -36,7 +39,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
         this.players[user.id].rotation = user.r
         this.players[user.id].hp = user.hp
       } else {
-        this.players[user.id] = new OnlinePlayer(this.connection).setFighter(user.fighter)
+        this.players[user.id] = new OnlinePlayer(this.connection, user.id).setFighter(user.fighter)
       }
     })
   }

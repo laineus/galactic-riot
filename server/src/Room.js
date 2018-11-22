@@ -8,7 +8,7 @@ export default class Room {
   }
   join (connection) {
     if (this.full) return
-    const player = new Player(connection)
+    const player = new Player(connection, this)
     this.players.push(player)
   }
   leave (connection) {
@@ -26,9 +26,9 @@ export default class Room {
     setTimeout(this.loop.bind(this), 1000 / FPS)
   }
   update () {
-    this.sendToAll('playersData', this.players.map(p => p.state))
+    this.commitToAll('playersData', this.players.map(p => p.state))
   }
-  sendToAll (methodName, data) {
-    this.players.forEach(p => p.connection.sendUTF(JSON.stringify({ method: methodName, body: data })))
+  commitToAll (methodName, data) {
+    this.players.forEach(p => p.connection.commit(methodName, data))
   }
 }
