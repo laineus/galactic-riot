@@ -1,3 +1,4 @@
+const path = require('path')
 module.exports = {
   entry: __dirname + '/src/index.js',
   output: {
@@ -5,7 +6,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -15,5 +16,9 @@ module.exports = {
         }
       }
     ]
+  },
+  devServer: {
+    contentBase: path.resolve(__dirname, 'public'),
+    port: 8080,
   }
 }
