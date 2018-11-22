@@ -4,7 +4,7 @@ export default class Player {
   constructor (connection) {
     this.connection = connection
     this.id = randInt(1000000, 9999999)
-    this.send('id', id)
+    this.send('id', this.id)
     connection.on('message', this.received.bind(this))
     this.setPosition(0, 0)
     return this
