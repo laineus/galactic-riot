@@ -6,12 +6,14 @@ import InterfaceScreen from './InterfaceScreen'
 import bgm from '../utils/bgm'
 import resetScore from '../utils/resetScore'
 import Player from './Player'
+import OnlinePlayer from './OnlinePlayer'
 export default class OnlineScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
     Object.setPrototypeOf(this, OnlineScene.prototype)
     this.inProgress = false
     this.connect = this.initConnect()
+    this.players = {}
   }
   initConnect () {
     const connect = new WebSocket('ws://127.0.0.1:8091')
@@ -27,9 +29,22 @@ export default class OnlineScene extends phina.display.DisplayScene {
     connect.onmessage = e => {
       const data = JSON.parse(e.data)
       // console.log(data)
-      if (data.method === 'id') connect.id = data.body.id
+      if (data.method === 'id') connect.id = data.body
+      if (data.method === 'playersData') this.playersData(data.body)
     }
     return connect
+  }
+  playersData (users) {
+    users.forEach(user => {
+      if (user.id === this.connect.id) return
+      if (this.players[user.id]) {
+        this.players[user.id].x = user.x
+        this.players[user.id].y = user.y
+        this.players[user.id].rotation = user.r
+      } else {
+        this.players[user.id] = new OnlinePlayer().setFighter(user.fighter)
+      }
+    })
   }
   startGame () {
     resetScore()
@@ -62,6 +77,6 @@ export default class OnlineScene extends phina.display.DisplayScene {
     this.connect.send(JSON.stringify({ method: method, body: data }))
   }
   get playerData () {
-    return { x: this.player.x, y: this.player.y }
+    return { fighter: this.player.fighter.id, x: this.player.x, y: this.player.y, r: this.player.rotation }
   }
 }

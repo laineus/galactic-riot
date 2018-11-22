@@ -6,20 +6,22 @@ export default class Player {
     this.id = randInt(1000000, 9999999)
     this.send('id', this.id)
     connection.on('message', this.received.bind(this))
-    this.setPosition(0, 0)
+    this.setState({ fighter: 1, x: 0, y: 0, r: 0 })
     return this
   }
-  setPosition (x, y) {
-    this.x = x
-    this.y = y
+  setState (state) {
+    this.fighter = state.fighter
+    this.x = state.x
+    this.y = state.y
+    this.r = state.r
     return this
   }
   get returnData () {
-    return { id: this.id, x: this.x, y: this.y }
+    return { id: this.id, fighter: this.fighter, x: this.x, y: this.y, r: this.r }
   }
   received (message) {
     const data = parseData(message)
-    if (data.method === 'playerData') this.setPosition(data.body.x, data.body.y)
+    if (data.method === 'playerData') this.setState(data.body)
   }
   send (methodName, data) {
     this.connection.sendUTF(JSON.stringify({ method: methodName, body: data }))
