@@ -12,29 +12,30 @@ export default class OnlineScene extends phina.display.DisplayScene {
     super(option)
     Object.setPrototypeOf(this, OnlineScene.prototype)
     this.inProgress = false
-    this.connect = this.initConnect()
+    this.connection = this.connect()
     this.players = {}
   }
-  initConnect () {
-    const connect = new WebSocket('ws://127.0.0.1:8091')
-    connect.onopen = () => this.startGame()
-    connect.onclose = () => this.exit('Title', { skip: 1 })
-    connect.onmessage = e => {
+  connect () {
+    const connection = new WebSocket('ws://127.0.0.1:8091')
+    connection.onopen = () => this.startGame()
+    connection.onclose = () => this.exit('Title', { skip: 1 })
+    connection.onmessage = e => {
       const data = JSON.parse(e.data)
-      if (data.method === 'id') connect.id = data.body
+      if (data.method === 'id') connection.id = data.body
       if (data.method === 'playersData') this.playersData(data.body)
     }
-    return connect
+    connection.send = (method, data) => connection.send(JSON.stringify({ method: method, body: data }))
+    return connection
   }
   playersData (users) {
     users.forEach(user => {
-      if (user.id === this.connect.id) return
+      if (user.id === this.connection.id) return
       if (this.players[user.id]) {
         this.players[user.id].x = user.x
         this.players[user.id].y = user.y
         this.players[user.id].rotation = user.r
       } else {
-        this.players[user.id] = new OnlinePlayer().setFighter(user.fighter)
+        this.players[user.id] = new OnlinePlayer(this.connection).setFighter(user.fighter)
       }
     })
   }
@@ -62,11 +63,8 @@ export default class OnlineScene extends phina.display.DisplayScene {
     // if (!state.player.isActive()) {
     //   return
     // }
-    this.send('playerData', this.playerData)
+    this.connection.send('playerData', this.playerData)
     state.score.frame++
-  }
-  send (method, data) {
-    this.connect.send(JSON.stringify({ method: method, body: data }))
   }
   get playerData () {
     return { fighter: this.player.fighter.id, x: this.player.x, y: this.player.y, r: this.player.rotation }
