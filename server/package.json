@@ -6,8 +6,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "npm-run-all --parallel watch:server watch:build",
-    "watch:build": "webpack --watch",
-    "watch:server": "nodemon \"./dist/bundle.js\" --watch \"./dist\""
+    "watch:build": "webpack --watch --mode development",
+    "watch:server": "nodemon \"./dist/bundle.js\" --watch \"./dist\"",
+    "build": "webpack --mode production"
   },
   "dependencies": {
     "webpack": "^4.26.0",
