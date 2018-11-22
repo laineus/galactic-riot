@@ -15,5 +15,7 @@ export default class OnlinePlayer extends Fighter {
     this.setColorIndex(3)
     return this
   }
-  damage () {}
+  damage () {
+    this.explosion(1)
+  }
 }

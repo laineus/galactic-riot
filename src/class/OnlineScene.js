@@ -17,18 +17,10 @@ export default class OnlineScene extends phina.display.DisplayScene {
   }
   initConnect () {
     const connect = new WebSocket('ws://127.0.0.1:8091')
-    connect.onopen = () => {
-      console.log('Connected')
-      this.startGame()
-    }
-    connect.onclose = () => {
-      console.error('Connection failed')
-      this.exit('Title')
-    }
-    connect.readyState == connect.OPEN
+    connect.onopen = () => this.startGame()
+    connect.onclose = () => this.exit('Title', { skip: 1 })
     connect.onmessage = e => {
       const data = JSON.parse(e.data)
-      // console.log(data)
       if (data.method === 'id') connect.id = data.body
       if (data.method === 'playersData') this.playersData(data.body)
     }
