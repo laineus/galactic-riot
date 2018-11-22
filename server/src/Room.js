@@ -26,7 +26,7 @@ export default class Room {
     setTimeout(this.loop.bind(this), 1000 / FPS)
   }
   update () {
-    this.sendToAll('playersData', this.players.map(p => p.returnData))
+    this.sendToAll('playersData', this.players.map(p => p.state))
   }
   sendToAll (methodName, data) {
     this.players.forEach(p => p.connection.sendUTF(JSON.stringify({ method: methodName, body: data })))

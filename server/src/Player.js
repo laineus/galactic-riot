@@ -6,7 +6,7 @@ export default class Player {
     this.id = randInt(1000000, 9999999)
     this.send('id', this.id)
     connection.on('message', this.received.bind(this))
-    this.setState({ fighter: 1, x: 0, y: 0, r: 0 })
+    this.setState({ fighter: 1, x: 0, y: 0, r: 0, hp: 100 })
     return this
   }
   setState (state) {
@@ -14,10 +14,18 @@ export default class Player {
     this.x = state.x
     this.y = state.y
     this.r = state.r
+    this.hp = state.hp
     return this
   }
-  get returnData () {
-    return { id: this.id, fighter: this.fighter, x: this.x, y: this.y, r: this.r }
+  get state () {
+    return {
+      id: this.id,
+      fighter: this.fighter,
+      x: this.x,
+      y: this.y,
+      r: this.r,
+      hp: this.hp
+    }
   }
   received (message) {
     const data = parseData(message)
