@@ -35,7 +35,7 @@ export default class GameScene extends phina.display.DisplayScene {
   }
   update () {
     if (!this.inProgress) return
-    if (!state.player.isActive()) {
+    if (!state.player.isActive) {
       this.missionFailed()
       return
     }

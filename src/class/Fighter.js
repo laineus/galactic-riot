@@ -15,7 +15,7 @@ export default class Fighter extends FlyingElement {
     this.attachment = null
     this.attachmentDelay = 0
   }
-  isActive () {
+  get isActive () {
     return this.hp > 0
   }
   get energyCoefficient () {
@@ -90,7 +90,7 @@ export default class Fighter extends FlyingElement {
       if (!obj.target) obj.target = shooter
     })
     // death
-    if (!this.isActive()) {
+    if (!this.isActive) {
       if (this.type === 'friend') state.score.death++
       if (shooter === state.player) state.score.kill++
       this.dead()

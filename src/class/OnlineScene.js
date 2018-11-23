@@ -64,7 +64,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
   }
   update () {
     if (!this.inProgress) return
-    // if (!state.player.isActive()) {
+    // if (!state.player.isActive) {
     //   return
     // }
     this.connection.commit('playerData', this.playerData)
