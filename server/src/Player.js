@@ -1,10 +1,11 @@
 import randInt from './randInt'
 import parseData from './parseData'
 export default class Player {
-  constructor (connection, room) {
+  constructor (connection, room, team) {
     connection.commit = (methodName, data) => connection.sendUTF(JSON.stringify({ method: methodName, body: data }))
     this.connection = connection
     this.room = room
+    this.team = team
     this.id = randInt(1000000, 9999999)
     connection.commit('id', this.id)
     connection.on('message', this.received.bind(this))

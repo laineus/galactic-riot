@@ -4,16 +4,31 @@ const FPS = 30
 export default class Room {
   constructor () {
     this.players = []
+    this.resetGame()
     this.loop()
+  }
+  resetGame () {
+    this.westKill = 0
+    this.eastKill = 0
   }
   join (connection) {
     if (this.full) return
-    const player = new Player(connection, this)
+    const player = new Player(connection, this, this.dicideTeam())
     this.players.push(player)
   }
   leave (connection) {
     const i = this.players.findIndex(p => p.connection === connection)
     if (i) this.players.splice(i, 1)
+  }
+  get west () {
+    return this.players.filter(p => p.team)
+  }
+  get east () {
+    return this.players.filter(p => !p.team)
+  }
+  dicideTeam () {
+    const east = this.west.length === this.east.length ? this.westKill > this.eastKill : this.west.length > this.east.length
+    return east ? 1 : 0
   }
   get empty () {
     return this.players.length === 0
