@@ -24,6 +24,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
       if (data.method === 'id') connection.id = data.body
       if (data.method === 'playersData') this.playersData(data.body)
       if (data.method === 'hit') this.player.damage(data.body)
+      if (data.method === 'laser' && this.players[data.body]) this.players[data.body].mainAction()
     }
     connection.commit = (method, data) => connection.send(JSON.stringify({ method: method, body: data }))
     return connection

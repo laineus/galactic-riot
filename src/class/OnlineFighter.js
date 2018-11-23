@@ -1,4 +1,6 @@
 import Fighter from './Fighter'
+import Laser from './Laser'
+import { weaponFind } from '../config/variables'
 export default class OnlineFighter extends Fighter {
   constructor (connection, id) {
     super()
@@ -16,6 +18,9 @@ export default class OnlineFighter extends Fighter {
     super.setType('enemy')
     this.setColorIndex(3)
     return this
+  }
+  mainAction () {
+    new Laser(this, weaponFind(1))
   }
   damage (damage) {
     this.explosion(1)

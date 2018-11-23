@@ -37,5 +37,13 @@ export default class Player {
       const target = this.room.players.find(p => p.id === data.body.id)
       if (target) target.connection.commit('hit', data.body.damage)
     }
+    if (data.method === 'laser') {
+      this.commitToOtherPlayer('laser', this.id)
+    }
+  }
+  commitToOtherPlayer (methodName, data) {
+    this.room.players.forEach(p => {
+      if (p !== this) p.connection.commit(methodName, data)
+    })
   }
 }

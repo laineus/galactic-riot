@@ -13,6 +13,10 @@ export default class OnlinePlayer extends Player {
     this.connection.commit('playerData', this.playerData)
     super.dead()
   }
+  mainAction () {
+    const lasers = super.mainAction()
+    if (lasers) this.connection.commit('laser', null)
+  }
   get playerData () {
     return { fighter: this.fighter.id, x: this.x, y: this.y, r: this.rotation, hp: this.hp }
   }
