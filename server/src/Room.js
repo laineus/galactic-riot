@@ -1,6 +1,7 @@
 import Player from './Player'
 const MAX = 2
 const FPS = 30
+const TIME = 120
 export default class Room {
   constructor () {
     this.players = []
@@ -10,6 +11,7 @@ export default class Room {
   resetGame () {
     this.westKill = 0
     this.eastKill = 0
+    this.frame = TIME * FPS
   }
   join (connection) {
     if (this.full) return
@@ -19,6 +21,9 @@ export default class Room {
   leave (connection) {
     const i = this.players.findIndex(p => p.connection === connection)
     if (i) this.players.splice(i, 1)
+  }
+  get time () {
+    return Math.round(this.frame / FPS)
   }
   get west () {
     return this.players.filter(p => !p.team)
@@ -41,7 +46,8 @@ export default class Room {
     setTimeout(this.loop.bind(this), 1000 / FPS)
   }
   update () {
-    this.commitToAll('playersData', this.players.map(p => p.state))
+    this.frame--
+    this.commitToAll('update', { players: this.players.map(p => p.state), time: this.time })
   }
   commitToAll (methodName, data) {
     this.players.forEach(p => p.connection.commit(methodName, data))

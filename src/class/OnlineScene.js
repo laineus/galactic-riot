@@ -2,12 +2,14 @@ import state from '../config/state'
 import { colors, settings } from '../config/variables'
 import Field from './Field'
 import Camera from './Camera'
+import Text from './Text'
 import InterfaceScreen from './InterfaceScreen'
 import bgm from '../utils/bgm'
 import resetScore from '../utils/resetScore'
 import OnlinePlayer from './OnlinePlayer'
 import OnlineFighter from './OnlineFighter'
 import OnlineRespawn from './OnlineRespawn'
+import secToString from '../utils/secToString'
 export default class OnlineScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -22,18 +24,17 @@ export default class OnlineScene extends phina.display.DisplayScene {
     connection.onclose = () => this.exit('Title', { skip: 1 })
     connection.onmessage = e => {
       const data = JSON.parse(e.data)
-      if (data.method === 'init') this.init(data.body)
-      if (data.method === 'playersData') this.playersData(data.body)
+      if (data.method === 'init') this.startGame(data.body)
+      if (data.method === 'update') this.dataUpdate(data.body)
       if (data.method === 'hit') this.player.damage(data.body)
       if (data.method === 'laser' && this.players[data.body]) this.players[data.body].mainAction()
     }
     connection.commit = (method, data) => connection.send(JSON.stringify({ method: method, body: data }))
     return connection
   }
-  init (data) {
-    this.connection.id = data.id
-    this.connection.team = data.team
-    this.startGame()
+  dataUpdate (data) {
+    this.playersData(data.players)
+    this.timer.text = secToString(data.time)
   }
   playersData (users) {
     users.forEach(user => {
@@ -48,7 +49,9 @@ export default class OnlineScene extends phina.display.DisplayScene {
       }
     })
   }
-  startGame () {
+  startGame (data) {
+    this.connection.id = data.id
+    this.connection.team = data.team
     resetScore()
     this.inProgress = true
     this.respawnDelay = 0
@@ -64,6 +67,8 @@ export default class OnlineScene extends phina.display.DisplayScene {
     // Interface
     this.interface = new InterfaceScreen().addChildTo(this)
     this.interface.initRadar(this.field, state.player)
+    // State
+    this.timer = new Text('', 24).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 60)
     // BGM
     bgm.set(null)
   }
