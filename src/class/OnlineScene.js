@@ -1,5 +1,5 @@
 import state from '../config/state'
-import { colors } from '../config/variables'
+import { colors, settings } from '../config/variables'
 import Field from './Field'
 import Camera from './Camera'
 import InterfaceScreen from './InterfaceScreen'
@@ -16,7 +16,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
     this.players = {}
   }
   connect () {
-    const connection = new WebSocket('ws://127.0.0.1:8091')
+    const connection = new WebSocket(settings.WS_SERVER)
     connection.onopen = () => this.startGame()
     connection.onclose = () => this.exit('Title', { skip: 1 })
     connection.onmessage = e => {
