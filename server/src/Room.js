@@ -21,14 +21,14 @@ export default class Room {
     if (i) this.players.splice(i, 1)
   }
   get west () {
-    return this.players.filter(p => p.team)
-  }
-  get east () {
     return this.players.filter(p => !p.team)
   }
+  get east () {
+    return this.players.filter(p => p.team)
+  }
   dicideTeam () {
-    const east = this.west.length === this.east.length ? this.westKill > this.eastKill : this.west.length > this.east.length
-    return east ? 1 : 0
+    const west = this.west.length === this.east.length ? this.westKill <= this.eastKill : this.west.length < this.east.length
+    return west ? 0 : 1
   }
   get empty () {
     return this.players.length === 0

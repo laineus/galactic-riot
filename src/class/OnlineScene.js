@@ -17,7 +17,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
   }
   connect () {
     const connection = new WebSocket(settings.WS_SERVER)
-    connection.onopen = () => this.startGame()
+    connection.onopen = () => true
     connection.onclose = () => this.exit('Title', { skip: 1 })
     connection.onmessage = e => {
       const data = JSON.parse(e.data)
@@ -32,6 +32,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
   init (data) {
     this.connection.id = data.id
     this.connection.team = data.team
+    this.startGame()
   }
   playersData (users) {
     users.forEach(user => {
@@ -52,7 +53,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
     this.backgroundColor = colors.black
     // Field
     this.field = new Field().addChildTo(this)
-    this.field.setField('sublatant_1')
+    this.field.setField('sublatant_5')
     // Camera
     this.field.camera = new Camera().addChildTo(this)
     this.field.camera.setField(this.field)
@@ -65,7 +66,8 @@ export default class OnlineScene extends phina.display.DisplayScene {
     bgm.set(null)
   }
   setPlayer () {
-    this.player = new OnlinePlayer(this.connection).setPosition(1000, 1000)
+    const west = this.connection.team === 0
+    this.player = new OnlinePlayer(this.connection).setPosition(west ? 200 : 6800, Math.randint(1000, 3000)).setRotation(west ? 0 : 180)
     this.field.camera.setTarget(state.player)
   }
   update () {
