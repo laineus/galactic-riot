@@ -11,6 +11,10 @@ export default class OnlinePlayer extends Player {
     super.update(app)
     this.connection.commit('playerData', this.playerData)
   }
+  damage (damage) {
+    if (!this.isActive) return
+    super.damage(damage)
+  }
   dead () {
     this.connection.commit('dead', null)
     super.dead()
