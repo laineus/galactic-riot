@@ -49,23 +49,27 @@ export default class OnlineScene extends phina.display.DisplayScene {
     // Field
     this.field = new Field().addChildTo(this)
     this.field.setField('sublatant_1')
-    // Player
-    this.player = new OnlinePlayer(this.connection).setPosition(1000, 1000)
     // Camera
     this.field.camera = new Camera().addChildTo(this)
     this.field.camera.setField(this.field)
-    this.field.camera.setTarget(state.player)
+    // Player
+    this.setPlayer(this.field.camera)
     // Interface
     this.interface = new InterfaceScreen().addChildTo(this)
     this.interface.initRadar(this.field, state.player)
     // BGM
     bgm.set(null)
   }
+  setPlayer (camera) {
+    this.player = new OnlinePlayer(this.connection).setPosition(1000, 1000)
+    camera.setTarget(state.player)
+  }
   update () {
     if (!this.inProgress) return
-    // if (!state.player.isActive) {
-    //   return
-    // }
+    if (!state.player.isActive) {
+      this.setPlayer()
+      return
+    }
     state.score.frame++
   }
 }
