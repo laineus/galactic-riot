@@ -5,7 +5,7 @@ import Camera from './Camera'
 import InterfaceScreen from './InterfaceScreen'
 import bgm from '../utils/bgm'
 import resetScore from '../utils/resetScore'
-import Player from './Player'
+import OnlinePlayer from './OnlinePlayer'
 import OnlineFighter from './OnlineFighter'
 export default class OnlineScene extends phina.display.DisplayScene {
   constructor (option) {
@@ -49,7 +49,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
     this.field = new Field().addChildTo(this)
     this.field.setField('sublatant_1')
     // Player
-    this.player = new Player().setPosition(1000, 1000)
+    this.player = new OnlinePlayer(this.connection).setPosition(1000, 1000)
     // Camera
     this.field.camera = new Camera().addChildTo(this)
     this.field.camera.setField(this.field)
@@ -65,10 +65,6 @@ export default class OnlineScene extends phina.display.DisplayScene {
     // if (!state.player.isActive) {
     //   return
     // }
-    this.connection.commit('playerData', this.playerData)
     state.score.frame++
-  }
-  get playerData () {
-    return { fighter: this.player.fighter.id, x: this.player.x, y: this.player.y, r: this.player.rotation, hp: this.player.hp }
   }
 }
