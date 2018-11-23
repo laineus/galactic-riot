@@ -26,4 +26,9 @@ export default class OnlineFighter extends Fighter {
     this.explosion(1)
     this.connection.commit('hit', { id: this.id, damage: damage })
   }
+  setFighter (id) {
+    super.setFighter(id)
+    this.setEnergy(this.fighter.energy)
+    return this
+  }
 }
