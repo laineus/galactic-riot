@@ -53,11 +53,11 @@ export default class Fighter extends FlyingElement {
   mainAction () {
     if (this.weaponDelay > 0 || !this.weapon || this.hp <= 1) return false
     this.hp -= 1
-    const lasers = [new Laser(this, this.weapon)]
-    if (this.weapon.name === 'Twin') lasers.push(new Laser(this, this.weapon))
-    if (this.attachmentId === 3) lasers.push(new Laser(this, this.attachment))
+    new Laser(this, this.weapon)
+    if (this.weapon.name === 'Twin') new Laser(this, this.weapon)
+    if (this.attachmentId === 3) new Laser(this, this.attachment)
     this.weaponDelay = this.maxWeaponDelay
-    return lasers
+    return true
   }
   get maxWeaponDelay () {
     return Math.round(this.weapon.delay * (this.type === 'enemy' ? 1.5 : 1))
