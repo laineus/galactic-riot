@@ -20,5 +20,8 @@ export default class OnlinePlayer extends Fighter {
   damage (damage) {
     this.explosion(1)
     this.connection.commit('hit', { id: this.id, damage: damage })
+    if (!this.isActive) {
+      this.dead()
+    }
   }
 }
