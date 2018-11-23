@@ -21,13 +21,17 @@ export default class OnlineScene extends phina.display.DisplayScene {
     connection.onclose = () => this.exit('Title', { skip: 1 })
     connection.onmessage = e => {
       const data = JSON.parse(e.data)
-      if (data.method === 'id') connection.id = data.body
+      if (data.method === 'init') this.init(data.body)
       if (data.method === 'playersData') this.playersData(data.body)
       if (data.method === 'hit') this.player.damage(data.body)
       if (data.method === 'laser' && this.players[data.body]) this.players[data.body].mainAction()
     }
     connection.commit = (method, data) => connection.send(JSON.stringify({ method: method, body: data }))
     return connection
+  }
+  init (data) {
+    this.connection.id = data.id
+    this.connection.team = data.team
   }
   playersData (users) {
     users.forEach(user => {
@@ -53,16 +57,16 @@ export default class OnlineScene extends phina.display.DisplayScene {
     this.field.camera = new Camera().addChildTo(this)
     this.field.camera.setField(this.field)
     // Player
-    this.setPlayer(this.field.camera)
+    this.setPlayer()
     // Interface
     this.interface = new InterfaceScreen().addChildTo(this)
     this.interface.initRadar(this.field, state.player)
     // BGM
     bgm.set(null)
   }
-  setPlayer (camera) {
+  setPlayer () {
     this.player = new OnlinePlayer(this.connection).setPosition(1000, 1000)
-    camera.setTarget(state.player)
+    this.field.camera.setTarget(state.player)
   }
   update () {
     if (!this.inProgress) return
