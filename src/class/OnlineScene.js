@@ -35,6 +35,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
   dataUpdate (data) {
     this.playersData(data.players)
     this.timer.text = secToString(data.time)
+    this.kill.text = `${data.eastKill} - ${data.westKill}`
   }
   playersData (users) {
     users.forEach(user => {
@@ -69,6 +70,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
     this.interface.initRadar(this.field, state.player)
     // State
     this.timer = new Text('', 24).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 60)
+    this.kill = new Text('', 18).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 100)
     // BGM
     bgm.set(null)
   }

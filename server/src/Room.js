@@ -47,7 +47,7 @@ export default class Room {
   }
   update () {
     this.frame--
-    this.commitToAll('update', { players: this.players.map(p => p.state), time: this.time })
+    this.commitToAll('update', { players: this.players.map(p => p.state), time: this.time, westKill: this.westKill, eastKill: this.eastKill })
   }
   commitToAll (methodName, data) {
     this.players.forEach(p => p.connection.commit(methodName, data))
