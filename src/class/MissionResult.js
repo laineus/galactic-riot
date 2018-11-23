@@ -21,7 +21,6 @@ export default class MissionResult extends Result {
     setTimeout(() => bgm.set(completed ? 'victory' : 'lose', 50), 1000)
     this.scene = scene
     this.time = 0
-    this.setOrigin(0, 0)
     this.setTitle(`- Mission ${completed ? 'Completed' : 'Failed'} -`)
     this.setKey(completed ? this.completedKeyString : this.failedKeyString)
     this.setValue(completed ? this.completedValueString : this.failedValueString)

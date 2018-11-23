@@ -7,6 +7,7 @@ import bgm from '../utils/bgm'
 import resetScore from '../utils/resetScore'
 import OnlinePlayer from './OnlinePlayer'
 import OnlineFighter from './OnlineFighter'
+import OnlineRespawn from './OnlineRespawn'
 export default class OnlineScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -76,9 +77,15 @@ export default class OnlineScene extends phina.display.DisplayScene {
     if (!state.player.isActive) {
       if (this.respawnDelay > 0) {
         this.respawnDelay--
-        if (this.respawnDelay === 0) this.setPlayer()
+        this.respawn.gauge.value = this.respawn.gauge.maxValue - this.respawnDelay
+        if (this.respawnDelay === 0) {
+          this.setPlayer()
+          this.respawn.remove()
+        }
       } else {
         this.respawnDelay = 120
+        this.respawn = new OnlineRespawn().addChildTo(this)
+        this.respawn.gauge.maxValue = this.respawnDelay
       }
       return
     }
