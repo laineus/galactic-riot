@@ -43,6 +43,7 @@ export default class Player {
     if (data.method === 'dead') {
       this.hp = 0
       this.team === 0 ? this.room.westKill++ : this.room.eastKill++
+      this.commitToOtherPlayer('dead', this.id)
     }
   }
   commitToOtherPlayer (methodName, data) {
