@@ -1,5 +1,5 @@
 import Fighter from './Fighter'
-import Laser from './Laser'
+import OnlineLaser from './OnlineLaser'
 import { weaponFind } from '../config/variables'
 export default class OnlineFighter extends Fighter {
   constructor (connection, id) {
@@ -20,7 +20,7 @@ export default class OnlineFighter extends Fighter {
     return this
   }
   mainAction () {
-    new Laser(this, weaponFind(1))
+    new OnlineLaser(this, weaponFind(1))
   }
   damage (damage) {
     this.explosion(1)
