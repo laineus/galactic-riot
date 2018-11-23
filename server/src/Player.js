@@ -40,6 +40,10 @@ export default class Player {
     if (data.method === 'laser') {
       this.commitToOtherPlayer('laser', this.id)
     }
+    if (data.method === 'dead') {
+      this.hp = 0
+      this.team === 0 ? this.room.westKill++ : this.room.eastKill++
+    }
   }
   commitToOtherPlayer (methodName, data) {
     this.room.players.forEach(p => {

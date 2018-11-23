@@ -12,7 +12,7 @@ export default class OnlinePlayer extends Player {
     this.connection.commit('playerData', this.playerData)
   }
   dead () {
-    this.connection.commit('playerData', this.playerData)
+    this.connection.commit('dead', null)
     super.dead()
   }
   mainAction () {
