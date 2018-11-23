@@ -41,13 +41,23 @@ export default class Room {
   get full () {
     return this.players.length >= MAX
   }
+  get isActive () {
+    return this.frame > 0
+  }
   loop () {
     this.update()
     setTimeout(this.loop.bind(this), 1000 / FPS)
   }
   update () {
+    if (!this.isActive) return
     this.frame--
     this.commitToAll('update', { players: this.players.map(p => p.state), time: this.time, westKill: this.westKill, eastKill: this.eastKill })
+    if (!this.isActive) {
+      this.commitToAll('end', { westKill: this.westKill, eastKill: this.eastKill })
+      setTimeout(() => {
+        this.players.forEach(p => p.connection.close())
+      }, 5000)
+    }
   }
   commitToAll (methodName, data) {
     this.players.forEach(p => p.connection.commit(methodName, data))
