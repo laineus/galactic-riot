@@ -37,12 +37,12 @@ export default class OnlineScene extends phina.display.DisplayScene {
   playersData (users) {
     users.forEach(user => {
       if (user.id === this.connection.id) return
-      if (this.players[user.id]) {
+      if (this.players[user.id] && this.players[user.id].isActive) {
         this.players[user.id].x = user.x
         this.players[user.id].y = user.y
         this.players[user.id].rotation = user.r
         this.players[user.id].hp = user.hp
-      } else {
+      } else if (user.hp > 0) {
         this.players[user.id] = new OnlineFighter(this.connection, user.id).setFighter(user.fighter)
       }
     })
@@ -50,6 +50,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
   startGame () {
     resetScore()
     this.inProgress = true
+    this.responeDelay = 0
     this.backgroundColor = colors.black
     // Field
     this.field = new Field().addChildTo(this)
@@ -73,7 +74,12 @@ export default class OnlineScene extends phina.display.DisplayScene {
   update () {
     if (!this.inProgress) return
     if (!state.player.isActive) {
-      this.setPlayer()
+      if (this.responeDelay > 0) {
+        this.responeDelay--
+        if (this.responeDelay === 0) this.setPlayer()
+      } else {
+        this.responeDelay = 120
+      }
       return
     }
     state.score.frame++
