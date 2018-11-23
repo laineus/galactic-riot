@@ -50,7 +50,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
   startGame () {
     resetScore()
     this.inProgress = true
-    this.responeDelay = 0
+    this.respawnDelay = 0
     this.backgroundColor = colors.black
     // Field
     this.field = new Field().addChildTo(this)
@@ -74,11 +74,11 @@ export default class OnlineScene extends phina.display.DisplayScene {
   update () {
     if (!this.inProgress) return
     if (!state.player.isActive) {
-      if (this.responeDelay > 0) {
-        this.responeDelay--
-        if (this.responeDelay === 0) this.setPlayer()
+      if (this.respawnDelay > 0) {
+        this.respawnDelay--
+        if (this.respawnDelay === 0) this.setPlayer()
       } else {
-        this.responeDelay = 120
+        this.respawnDelay = 120
       }
       return
     }
