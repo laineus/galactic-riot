@@ -17,5 +17,6 @@ export default class OnlineRespawn extends Result {
       y: settings.SCREEN_HEIGHT_C + 10,
       strokeWidth: 0
     }).addChildTo(this)
+    this.gauge.animationTime = 200
   }
 }

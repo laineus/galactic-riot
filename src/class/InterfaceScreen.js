@@ -25,6 +25,7 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
     this.analyzer = DisplayElement().addChildTo(this).setOrigin(0, 0)
     this.analyzer.label = new BlurText('', 12, { shadow: colors.pink }).addChildTo(this.analyzer).setOrigin(0, 1).setPosition(-9, 6)
     this.analyzer.gauge = Gauge({ width: 50, height: 1.5, fill: colors.black, gaugeColor: colors.white, strokeWidth: 0, padding: 0 }).setOrigin(0, 0).addChildTo(this.analyzer)
+    this.analyzer.gauge.animationTime = 200
     this.analyzer.update = () => {
       if (state.player.hp > 0 && state.player.target) {
         this.analyzer.alpha = 1
@@ -102,6 +103,7 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
       strokeWidth: 0,
       padding: 0
     })
+    gauge.animationTime = 200
     gauge.blendMode = 'lighter'
     gauge.update = () => {
       gauge.maxValue = state.player.maxHp
