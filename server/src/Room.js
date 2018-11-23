@@ -1,4 +1,5 @@
 import Player from './Player'
+import rooms from './rooms'
 const MAX = 2
 const FPS = 30
 const TIME = 120
@@ -20,7 +21,8 @@ export default class Room {
   }
   leave (connection) {
     const i = this.players.findIndex(p => p.connection === connection)
-    if (i) this.players.splice(i, 1)
+    if (i >= 0) this.players.splice(i, 1)
+    if (this.empty) this.remove()
   }
   get time () {
     return Math.round(this.frame / FPS)
@@ -56,10 +58,15 @@ export default class Room {
       this.commitToAll('end', { westKill: this.westKill, eastKill: this.eastKill })
       setTimeout(() => {
         this.players.forEach(p => p.connection.close())
+        this.remove()
       }, 5000)
     }
   }
   commitToAll (methodName, data) {
     this.players.forEach(p => p.connection.commit(methodName, data))
+  }
+  remove () {
+    const i = rooms.findIndex(r => r === this)
+    if (i >= 0) rooms.splice(i, 1)
   }
 }
