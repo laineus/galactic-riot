@@ -1,8 +1,8 @@
 import Fighter from './Fighter'
-export default class OnlinePlayer extends Fighter {
+export default class OnlineFighter extends Fighter {
   constructor (connection, id) {
     super()
-    Object.setPrototypeOf(this, OnlinePlayer.prototype)
+    Object.setPrototypeOf(this, OnlineFighter.prototype)
     this.setPosition(Math.randint(0, this.field.width), Math.randint(0, this.field.height))
     this.setRotation(Math.randint(0, 360))
     this.setType()

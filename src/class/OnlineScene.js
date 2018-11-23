@@ -6,7 +6,7 @@ import InterfaceScreen from './InterfaceScreen'
 import bgm from '../utils/bgm'
 import resetScore from '../utils/resetScore'
 import Player from './Player'
-import OnlinePlayer from './OnlinePlayer'
+import OnlineFighter from './OnlineFighter'
 export default class OnlineScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -37,7 +37,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
         this.players[user.id].rotation = user.r
         this.players[user.id].hp = user.hp
       } else {
-        this.players[user.id] = new OnlinePlayer(this.connection, user.id).setFighter(user.fighter)
+        this.players[user.id] = new OnlineFighter(this.connection, user.id).setFighter(user.fighter)
       }
     })
   }
