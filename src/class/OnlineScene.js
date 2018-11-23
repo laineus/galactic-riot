@@ -63,11 +63,10 @@ export default class OnlineScene extends phina.display.DisplayScene {
     // Camera
     this.field.camera = new Camera().addChildTo(this)
     this.field.camera.setField(this.field)
-    // Player
-    this.setPlayer()
     // Interface
     this.interface = new InterfaceScreen().addChildTo(this)
-    this.interface.initRadar(this.field, state.player)
+    // Player
+    this.setPlayer()
     // State
     this.timer = new Text('', 24).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 60)
     this.kill = new Text('', 18).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 100)
@@ -78,6 +77,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
     const west = this.connection.team === 0
     this.player = new OnlinePlayer(this.connection).setPosition(west ? 200 : 6800, Math.randint(1000, 3000)).setRotation(west ? 0 : 180)
     this.field.camera.setTarget(state.player)
+    this.interface.initRadar(this.field, state.player)
   }
   update () {
     if (!this.inProgress) return
