@@ -4,6 +4,8 @@ export default class OnlinePlayer extends Player {
     super()
     Object.setPrototypeOf(this, OnlinePlayer.prototype)
     this.connection = connection
+    this.setAttachment(null)
+    this.setWeapon(1)
   }
   update (app) {
     super.update(app)
