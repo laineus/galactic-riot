@@ -32,7 +32,9 @@ export default class OnlineScene extends phina.display.DisplayScene {
       if (data.method === 'dead') this.dead(data.body)
       if (data.method === 'result') this.result(data.body)
     }
-    connection.commit = (method, data) => connection.send(JSON.stringify({ method: method, body: data }))
+    connection.commit = (method, data) => {
+      if (connection.readyState === connection.OPEN) connection.send(JSON.stringify({ method: method, body: data }))
+    }
     return connection
   }
   dataUpdate (data) {
