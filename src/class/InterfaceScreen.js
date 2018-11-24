@@ -3,9 +3,10 @@ import state from '../config/state'
 import Radar from './Radar'
 import BlurText from './BlurText'
 export default class InterfaceScreen extends phina.display.DisplayElement {
-  constructor () {
+  constructor (connection = null) {
     super()
     Object.setPrototypeOf(this, InterfaceScreen.prototype)
+    this.connection = connection
     state.interface = this
     this.lightMask = RectangleShape({
       width: settings.SCREEN_WIDTH,
@@ -76,14 +77,14 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
     const title = state.mission ? state.mission.name : 'Online field'
     this.status = DisplayElement().setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 25, 25).addChildTo(this)
     this.status.mission = new BlurText(title, 14, { align: 'left' }).setPosition(-140, 5).addChildTo(this.status)
-    this.status.keys = new BlurText(null, 13, { align: 'left' }).setPosition(-140, 40).addChildTo(this.status)
-    this.status.values = new BlurText(null, 13, { align: 'right' }).setPosition(0, 40).addChildTo(this.status)
-    if (state.mission) {
-      this.status.keys.text = 'Friends:\nKill\nTime:'
+    this.status.keys = new BlurText(null, 13, { align: 'left' }).setPosition(-140, this.connection ? 50 : 43).addChildTo(this.status)
+    this.status.values = new BlurText(null, 13, { align: 'right' }).setPosition(0, this.connection ? 50 : 43).addChildTo(this.status)
+    if (!this.connection) {
+      this.status.keys.text = 'Friends:\nKill:\nTime:'
       this.status.values.update = () => this.status.values.text = `${state.score.amount} / ${state.save.amount}\n${state.score.kill}\n${state.score.time}`
     } else {
-      this.status.keys.text = 'Kill\nDeath\nTime:'
-      this.status.values.update = () => this.status.values.text = `${state.score.kill}\n${state.score.death}\n${state.score.time}`
+      this.status.keys.text = 'Server:\nTeam:\nKill:\nDeath:'
+      this.status.values.update = () => this.status.values.text = `${this.connection.server}\n${this.connection.team ? 'West' : 'East'}\n${state.score.kill}\n${state.score.death}`
     }
   }
   initGauge () {

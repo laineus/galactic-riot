@@ -59,6 +59,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
   startGame (data) {
     this.connection.id = data.id
     this.connection.team = data.team
+    this.connection.server = data.server
     resetScore()
     this.inProgress = true
     this.respawnDelay = 0
@@ -70,7 +71,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
     this.field.camera = new Camera().addChildTo(this)
     this.field.camera.setField(this.field)
     // Interface
-    this.interface = new InterfaceScreen().addChildTo(this)
+    this.interface = new InterfaceScreen(this.connection).addChildTo(this)
     // Player
     this.setPlayer()
     // State

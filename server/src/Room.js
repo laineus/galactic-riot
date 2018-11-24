@@ -8,6 +8,11 @@ export default class Room {
     this.players = []
     this.resetGame()
     this.loop()
+    this.id = this.dicideId()
+  }
+  dicideId () {
+    const roomMax = (id) => rooms.some(r => r.id === id) ? roomMax(id + 1) : id
+    return roomMax(1)
   }
   resetGame () {
     this.start = false
