@@ -53,7 +53,7 @@ export default class Room {
   update () {
     if (!this.isActive) return
     this.frame--
-    this.commitToAll('update', { players: this.players.map(p => p.state), time: this.time, westKill: this.westKill, eastKill: this.eastKill })
+    this.commitToAll('update', { players: this.players.filter(p => p.fighter).map(p => p.state), time: this.time, westKill: this.westKill, eastKill: this.eastKill })
     if (!this.isActive) {
       this.commitToAll('end', { westKill: this.westKill, eastKill: this.eastKill })
       setTimeout(() => {
