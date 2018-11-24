@@ -10,6 +10,7 @@ import OnlinePlayer from './OnlinePlayer'
 import OnlineFighter from './OnlineFighter'
 import OnlineRespawn from './OnlineRespawn'
 import secToString from '../utils/secToString'
+import OnlineResult from './OnlineResult'
 export default class OnlineScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -29,6 +30,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
       if (data.method === 'hit') this.player.damage(data.body.damage, data.body.shooter)
       if (data.method === 'laser' && this.players[data.body]) this.players[data.body].mainAction()
       if (data.method === 'dead') this.dead(data.body)
+      if (data.method === 'result') this.result(data.body)
     }
     connection.commit = (method, data) => connection.send(JSON.stringify({ method: method, body: data }))
     return connection
@@ -37,6 +39,9 @@ export default class OnlineScene extends phina.display.DisplayScene {
     this.playersData(data.players)
     this.timer.text = secToString(data.time)
     this.kill.text = `${data.eastKill} - ${data.westKill}`
+  }
+  result (result) {
+    this.onlineResult = new OnlineResult(this.team ? result.westKill >= result.eastKill : result.eastKill >= result.westKill, result).addChildTo(this)
   }
   dead (data) {
     const fighter = this.players[data.id]
