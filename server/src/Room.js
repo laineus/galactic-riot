@@ -52,6 +52,9 @@ export default class Room {
   get full () {
     return this.players.length >= MAX
   }
+  get canJoin () {
+    return (this.frame > (FPS * 3)) && !this.full
+  }
   get isActive () {
     return this.start && this.frame > 0
   }

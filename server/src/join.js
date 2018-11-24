@@ -1,7 +1,7 @@
 import rooms from './rooms'
 import Room from './Room'
 export default connection => {
-  const availableRoom = rooms.find(room => !room.full)
+  const availableRoom = rooms.find(room => !room.canJoin)
   const room = availableRoom || new Room
   if (!availableRoom) rooms.push(room)
   room.join(connection)
