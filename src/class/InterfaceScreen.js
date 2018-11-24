@@ -82,8 +82,8 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
       this.status.keys.text = 'Friends:\nKill\nTime:'
       this.status.values.update = () => this.status.values.text = `${state.score.amount} / ${state.save.amount}\n${state.score.kill}\n${state.score.time}`
     } else {
-      this.status.keys.text = 'Kill\nTime:'
-      this.status.values.update = () => this.status.values.text = `${state.score.kill}\n${state.score.time}`
+      this.status.keys.text = 'Kill\nDeath\nTime:'
+      this.status.values.update = () => this.status.values.text = `${state.score.kill}\n${state.score.death}\n${state.score.time}`
     }
   }
   initGauge () {

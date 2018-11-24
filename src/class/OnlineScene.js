@@ -26,7 +26,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
       const data = JSON.parse(e.data)
       if (data.method === 'init') this.startGame(data.body)
       if (data.method === 'update') this.dataUpdate(data.body)
-      if (data.method === 'hit') this.player.damage(data.body)
+      if (data.method === 'hit') this.player.damage(data.body.damage, data.body.shooter)
       if (data.method === 'laser' && this.players[data.body]) this.players[data.body].mainAction()
       if (data.method === 'dead') this.dead(data.body)
     }
@@ -38,9 +38,10 @@ export default class OnlineScene extends phina.display.DisplayScene {
     this.timer.text = secToString(data.time)
     this.kill.text = `${data.eastKill} - ${data.westKill}`
   }
-  dead (id) {
-    const fighter = this.players[id]
+  dead (data) {
+    const fighter = this.players[data.id]
     if (fighter && fighter.isActive) fighter.dead()
+    if (this.connection.id === data.shooter) state.score.kill++
   }
   playersData (users) {
     users.forEach(user => {

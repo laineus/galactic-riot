@@ -35,7 +35,7 @@ export default class Player {
     if (data.method === 'playerData') this.setState(data.body)
     if (data.method === 'hit') {
       const target = this.room.players.find(p => p.id === data.body.id)
-      if (target) target.connection.commit('hit', data.body.damage)
+      if (target) target.connection.commit('hit', { damage: data.body.damage, shooter: this.id })
     }
     if (data.method === 'laser') {
       this.commitToOtherPlayer('laser', this.id)
@@ -43,7 +43,7 @@ export default class Player {
     if (data.method === 'dead') {
       this.hp = 0
       this.team === 0 ? this.room.westKill++ : this.room.eastKill++
-      this.commitToOtherPlayer('dead', this.id)
+      this.commitToOtherPlayer('dead', { id: this.id, shooter: data.body })
     }
   }
   commitToOtherPlayer (methodName, data) {

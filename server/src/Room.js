@@ -1,6 +1,6 @@
 import Player from './Player'
 import rooms from './rooms'
-const MAX = 2
+const MAX = 12
 const FPS = 30
 const TIME = 120
 export default class Room {

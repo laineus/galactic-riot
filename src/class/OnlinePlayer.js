@@ -1,4 +1,5 @@
 import Player from './Player'
+import state from '../config/state'
 export default class OnlinePlayer extends Player {
   constructor (connection) {
     super()
@@ -11,12 +12,15 @@ export default class OnlinePlayer extends Player {
     super.update(app)
     this.connection.commit('playerData', this.playerData)
   }
-  damage (damage) {
+  damage (damage, shooter) {
     if (!this.isActive) return
-    super.damage(damage)
+    this.explosion(1)
+    this.hp -= damage * (this.attachmentId === 2 ? 0.7 : 1)
+    if (!this.isActive) this.dead(shooter)
   }
-  dead () {
-    this.connection.commit('dead', null)
+  dead (shooter) {
+    this.connection.commit('dead', shooter)
+    state.score.death++
     super.dead()
   }
   mainAction () {
