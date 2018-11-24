@@ -2,7 +2,7 @@ import Player from './Player'
 import rooms from './rooms'
 const MAX = 12
 const FPS = 30
-const TIME = 120
+const TIME = 180
 export default class Room {
   constructor () {
     this.players = []
@@ -66,13 +66,23 @@ export default class Room {
     if (!this.start && this.players.length > 1) this.start = true 
     if (!this.isActive) return
     this.frame--
-    this.commitToAll('update', { players: this.players.filter(p => p.fighter).map(p => p.state), time: this.time, westKill: this.westKill, eastKill: this.eastKill })
+    this.commitToAll('update', this.updateData)
     if (!this.isActive) {
       this.commitToAll('result', { westKill: this.westKill, eastKill: this.eastKill })
       setTimeout(() => {
         this.players.forEach(p => p.connection.close())
         this.remove()
-      }, 5000)
+      }, 7000)
+    }
+  }
+  get updateData () {
+    return {
+      players: this.players.filter(p => p.fighter).map(p => p.state),
+      time: this.time,
+      westKill: this.westKill,
+      eastKill: this.eastKill,
+      westPlayer: this.west.length,
+      eastPlayer: this.east.length
     }
   }
   commitToAll (methodName, data) {

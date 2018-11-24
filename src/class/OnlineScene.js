@@ -39,6 +39,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
   }
   dataUpdate (data) {
     this.playersData(data.players)
+    this.onlinePlayers.text = `West: ${data.westPlayer} players - East ${data.eastPlayer} players`
     this.timer.text = secToString(data.time)
     this.timer.fontSize = 24
     this.kill.text = `${data.eastKill} - ${data.westKill}`
@@ -84,6 +85,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
     // Player
     this.setPlayer()
     // State
+    this.onlinePlayers = new Text('', 11).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 30)
     this.timer = new Text('Waiting for other player', 18).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 60)
     this.kill = new Text('[X] to back', 12).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 90)
     // BGM
