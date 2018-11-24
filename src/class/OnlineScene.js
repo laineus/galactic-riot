@@ -52,7 +52,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
         this.players[user.id].rotation = user.r
         this.players[user.id].hp = user.hp
       } else if (user.hp > 0) {
-        this.players[user.id] = new OnlineFighter(this.connection, user.id).setFighter(user.fighter)
+        this.players[user.id] = new OnlineFighter(this.connection, user.id).setType(user.team === this.connection.team).setFighter(user.fighter)
       }
     })
   }

@@ -23,6 +23,7 @@ export default class Player {
   get state () {
     return {
       id: this.id,
+      team: this.team,
       fighter: this.fighter,
       x: this.x,
       y: this.y,
