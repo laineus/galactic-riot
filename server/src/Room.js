@@ -10,6 +10,7 @@ export default class Room {
     this.loop()
   }
   resetGame () {
+    this.start = false
     this.westKill = 0
     this.eastKill = 0
     this.frame = TIME * FPS
@@ -21,7 +22,10 @@ export default class Room {
   }
   leave (connection) {
     const i = this.players.findIndex(p => p.connection === connection)
-    if (i >= 0) this.players.splice(i, 1)
+    if (i >= 0) {
+      this.players[i].commitToOtherPlayer('dead', { id: this.players[i].id, shooter: null })
+      this.players.splice(i, 1)
+    }
     if (this.empty) this.remove()
   }
   get time () {
@@ -44,13 +48,14 @@ export default class Room {
     return this.players.length >= MAX
   }
   get isActive () {
-    return this.frame > 0
+    return this.start && this.frame > 0
   }
   loop () {
     this.update()
     setTimeout(this.loop.bind(this), 1000 / FPS)
   }
   update () {
+    if (!this.start && this.players.length > 1) this.start = true 
     if (!this.isActive) return
     this.frame--
     this.commitToAll('update', { players: this.players.filter(p => p.fighter).map(p => p.state), time: this.time, westKill: this.westKill, eastKill: this.eastKill })

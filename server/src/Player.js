@@ -34,6 +34,7 @@ export default class Player {
   received (message) {
     const data = parseData(message)
     if (data.method === 'playerData') this.setState(data.body)
+    if (!this.room.isActive) return
     if (data.method === 'hit') {
       const target = this.room.players.find(p => p.id === data.body.id)
       if (target) target.connection.commit('hit', { damage: data.body.damage, shooter: this.id })
