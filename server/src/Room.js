@@ -79,10 +79,19 @@ export default class Room {
     return {
       players: this.players.filter(p => p.fighter).map(p => p.state),
       time: this.time,
-      westKill: this.westKill,
-      eastKill: this.eastKill,
       westPlayer: this.west.length,
-      eastPlayer: this.east.length
+      eastPlayer: this.east.length,
+      westKill: this.westKill,
+      eastKill: this.eastKill
+    }
+  }
+  get info () {
+    return {
+      time: this.time,
+      westPlayer: this.west.length,
+      eastPlayer: this.east.length,
+      westKill: this.westKill,
+      eastKill: this.eastKill
     }
   }
   commitToAll (methodName, data) {
