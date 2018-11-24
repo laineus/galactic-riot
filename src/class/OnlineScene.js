@@ -38,10 +38,12 @@ export default class OnlineScene extends phina.display.DisplayScene {
   dataUpdate (data) {
     this.playersData(data.players)
     this.timer.text = secToString(data.time)
+    this.timer.fontSize = 24
     this.kill.text = `${data.eastKill} - ${data.westKill}`
+    this.kill.fontSize = 18
   }
   result (result) {
-    this.onlineResult = new OnlineResult(this.team ? result.westKill >= result.eastKill : result.eastKill >= result.westKill, result).addChildTo(this)
+    this.onlineResult = new OnlineResult(this, result).addChildTo(this)
   }
   dead (data) {
     const fighter = this.players[data.id]
@@ -49,6 +51,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
     if (this.connection.id === data.shooter) state.score.kill++
   }
   playersData (users) {
+    this.inProgress = true
     users.forEach(user => {
       if (user.id === this.connection.id) return
       if (this.players[user.id] && this.players[user.id].isActive) {
@@ -66,7 +69,6 @@ export default class OnlineScene extends phina.display.DisplayScene {
     this.connection.team = data.team
     this.connection.server = data.server
     resetScore()
-    this.inProgress = true
     this.respawnDelay = 0
     this.backgroundColor = colors.black
     // Field
@@ -80,8 +82,8 @@ export default class OnlineScene extends phina.display.DisplayScene {
     // Player
     this.setPlayer()
     // State
-    this.timer = new Text('', 24).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 60)
-    this.kill = new Text('', 18).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 100)
+    this.timer = new Text('Waiting for other player', 18).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 60)
+    this.kill = new Text('[X] to back', 12).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 90)
     // BGM
     bgm.set(null)
   }
@@ -91,8 +93,14 @@ export default class OnlineScene extends phina.display.DisplayScene {
     this.field.camera.setTarget(state.player)
     this.interface.initRadar(this.field, state.player)
   }
-  update () {
-    if (!this.inProgress) return
+  update (app) {
+    if (!this.inProgress) {
+      if (app.keyboard.getKeyDown('X')) {
+        this.connection.close()
+        this.exit('Title', { skip: 2 })
+      }
+      return
+    }
     if (!state.player.isActive) {
       if (this.respawnDelay > 0) {
         this.respawnDelay--
