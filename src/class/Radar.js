@@ -19,7 +19,7 @@ export default class Radar extends phina.display.RectangleShape {
     }).setOrigin(0, 0).setPosition(WIDTH, HEIGHT).addChildTo(this)
     this.area.me = maskImage.getSprite(player.imageName, colors.blue).addChildTo(this.area).setScale(0.03, 0.03)
     this.area.me.update = () => {
-      if (!player.isActive()) return this.area.me.remove()
+      if (!player.isActive) return this.area.me.remove()
       this.area.me.setRotation(player.rotation)
       this.area.me.setPosition(player.x * SIZE, player.y * SIZE)
     }

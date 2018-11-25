@@ -1,11 +1,14 @@
+const webpack = require('webpack')
+const path = require('path')
 module.exports = {
   entry: __dirname + '/src/index.js',
   output: {
     path: __dirname + '/public/js',
+    publicPath: '/js/',
     filename: 'bundle.js'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -15,5 +18,14 @@ module.exports = {
         }
       }
     ]
+  },
+  plugins: [
+      new webpack.DefinePlugin({
+        'process.env.WS_SERVER': JSON.stringify(process.env.WS_SERVER)
+      })
+  ],
+  devServer: {
+    contentBase: path.resolve(__dirname, 'public'),
+    port: 8080
   }
 }

@@ -5,7 +5,8 @@ export const settings = {
   SCREEN_HEIGHT: 540,
   get SCREEN_WIDTH_C () { return this.SCREEN_WIDTH / 2 },
   get SCREEN_HEIGHT_C () { return this.SCREEN_HEIGHT / 2 },
-  FPS: 30
+  FPS: 30,
+  WS_SERVER: process.env.WS_SERVER || 'ws://galactic.laineus.com/ws'
 }
 
 export const colors = {

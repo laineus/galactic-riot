@@ -34,8 +34,8 @@ export default class FlyingElement extends phina.display.DisplayElement {
     if (this.attachmentDelay > 0) this.attachmentDelay--
     this.cos = Math.cos(Math.degToRad(this.rotation))
     this.sin = Math.sin(Math.degToRad(this.rotation))
-    if (this.target && !this.target.isActive()) this.target = null
-    if (this.subTarget && !this.subTarget.isActive()) this.subTarget = null
+    if (this.target && !this.target.isActive) this.target = null
+    if (this.subTarget && !this.subTarget.isActive) this.subTarget = null
   }
   setType (type) {
     this.type = type

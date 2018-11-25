@@ -3,9 +3,10 @@ import state from '../config/state'
 import Radar from './Radar'
 import BlurText from './BlurText'
 export default class InterfaceScreen extends phina.display.DisplayElement {
-  constructor () {
+  constructor (connection = null) {
     super()
     Object.setPrototypeOf(this, InterfaceScreen.prototype)
+    this.connection = connection
     state.interface = this
     this.lightMask = RectangleShape({
       width: settings.SCREEN_WIDTH,
@@ -25,6 +26,7 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
     this.analyzer = DisplayElement().addChildTo(this).setOrigin(0, 0)
     this.analyzer.label = new BlurText('', 12, { shadow: colors.pink }).addChildTo(this.analyzer).setOrigin(0, 1).setPosition(-9, 6)
     this.analyzer.gauge = Gauge({ width: 50, height: 1.5, fill: colors.black, gaugeColor: colors.white, strokeWidth: 0, padding: 0 }).setOrigin(0, 0).addChildTo(this.analyzer)
+    this.analyzer.gauge.animationTime = 200
     this.analyzer.update = () => {
       if (state.player.hp > 0 && state.player.target) {
         this.analyzer.alpha = 1
@@ -72,11 +74,18 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
     this.radar = new Radar(field, player).setPosition(20, 20).setOrigin(0, 0).addChildTo(this)
   }
   initStatus () {
+    const title = state.mission ? state.mission.name : 'Online field'
     this.status = DisplayElement().setOrigin(1, 0).setPosition(settings.SCREEN_WIDTH - 25, 25).addChildTo(this)
-    this.status.mission = new BlurText(state.mission.name, 14, { align: 'left' }).setPosition(-140, 5).addChildTo(this.status)
-    this.status.keys = new BlurText('Friends:\nKill\nTime:', 13, { align: 'left' }).setPosition(-140, 40).addChildTo(this.status)
-    this.status.values = new BlurText(null, 13, { align: 'right' }).setPosition(0, 40).addChildTo(this.status)
-    this.status.values.update = () => this.status.values.text = `${state.score.amount} / ${state.save.amount}\n${state.score.kill}\n${state.score.time}`
+    this.status.mission = new BlurText(title, 14, { align: 'left' }).setPosition(-140, 5).addChildTo(this.status)
+    this.status.keys = new BlurText(null, 13, { align: 'left' }).setPosition(-140, this.connection ? 50 : 43).addChildTo(this.status)
+    this.status.values = new BlurText(null, 13, { align: 'right' }).setPosition(0, this.connection ? 50 : 43).addChildTo(this.status)
+    if (!this.connection) {
+      this.status.keys.text = 'Friends:\nKill:\nTime:'
+      this.status.values.update = () => this.status.values.text = `${state.score.amount} / ${state.save.amount}\n${state.score.kill}\n${state.score.time}`
+    } else {
+      this.status.keys.text = 'Server:\nTeam:\nKill:\nDeath:'
+      this.status.values.update = () => this.status.values.text = `${this.connection.server}\n${this.connection.team ? 'West' : 'East'}\n${state.score.kill}\n${state.score.death}`
+    }
   }
   initGauge () {
     new BlurText('Energy:', 13).setPosition(13, settings.SCREEN_HEIGHT - 20).setOrigin(0, 1).addChildTo(this)
@@ -95,6 +104,7 @@ export default class InterfaceScreen extends phina.display.DisplayElement {
       strokeWidth: 0,
       padding: 0
     })
+    gauge.animationTime = 200
     gauge.blendMode = 'lighter'
     gauge.update = () => {
       gauge.maxValue = state.player.maxHp

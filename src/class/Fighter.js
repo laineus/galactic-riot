@@ -15,7 +15,7 @@ export default class Fighter extends FlyingElement {
     this.attachment = null
     this.attachmentDelay = 0
   }
-  isActive () {
+  get isActive () {
     return this.hp > 0
   }
   get energyCoefficient () {
@@ -51,12 +51,13 @@ export default class Fighter extends FlyingElement {
     this.setMobilityAndSpeed()
   }
   mainAction () {
-    if (this.weaponDelay > 0 || !this.weapon || this.hp <= 1) return
+    if (this.weaponDelay > 0 || !this.weapon || this.hp <= 1) return false
     this.hp -= 1
     new Laser(this, this.weapon)
     if (this.weapon.name === 'Twin') new Laser(this, this.weapon)
     if (this.attachmentId === 3) new Laser(this, this.attachment)
     this.weaponDelay = this.maxWeaponDelay
+    return true
   }
   get maxWeaponDelay () {
     return Math.round(this.weapon.delay * (this.type === 'enemy' ? 1.5 : 1))
@@ -90,7 +91,7 @@ export default class Fighter extends FlyingElement {
       if (!obj.target) obj.target = shooter
     })
     // death
-    if (!this.isActive()) {
+    if (!this.isActive) {
       if (this.type === 'friend') state.score.death++
       if (shooter === state.player) state.score.kill++
       this.dead()

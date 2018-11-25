@@ -1,0 +1,22 @@
+{
+  "name": "galactic-riot-server",
+  "version": "1.0.0",
+  "main": "dist/bundle.js",
+  "author": "Laineus",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npm-run-all --parallel watch:server watch:build",
+    "watch:build": "webpack --watch --mode development",
+    "watch:server": "nodemon \"./dist/bundle.js\" --watch \"./dist\"",
+    "build": "webpack --mode production"
+  },
+  "dependencies": {
+    "webpack": "^4.26.0",
+    "websocket": "^1.0.28"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.6",
+    "npm-run-all": "^4.1.3",
+    "webpack-cli": "^3.1.2"
+  }
+}

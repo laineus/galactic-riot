@@ -34,7 +34,7 @@ export default class Computer extends Fighter {
     return this
   }
   setSubTarget (target, r = 0, distance = 0) {
-    if (!target.isActive()) return
+    if (!target.isActive) return
     this.subTarget = target
     this.subTargetRotation = r
     this.subTargetDistance = distance

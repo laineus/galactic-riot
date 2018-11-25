@@ -24,12 +24,10 @@ export default class LoadingScene extends phina.display.DisplayScene {
       y: settings.SCREEN_HEIGHT_C + 10,
       strokeWidth: 0
     }).addChildTo(this)
+    gauge.animationTime = 200
     const loader = AssetLoader()
     loader.onprogress = e => gauge.value = e.progress
-    loader.onload = () => setTimeout(this.onLoad.bind(this), 100)
+    loader.onload = () => this.flare('loaded')
     loader.load(option.assets)
-  }
-  onLoad () {
-    this.flare('loaded')
   }
 }
