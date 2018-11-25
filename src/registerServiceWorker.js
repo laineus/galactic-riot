@@ -1,9 +1,10 @@
-const PUBLIC_KEY = ''
+import axios from 'axios'
+import { settings } from './config/variables'
+
 const SERVICE_WORKER_SCRIPT = '/js/serviceWorker.js'
 
-const setSubscription = subscription => {
-  console.log(subscription.toJSON())
-  // register to server
+const sendSubscription = subscription => {
+  axios.post(settings.HTTP_SERVER, subscription.toJSON())
 }
 
 const urlBase64ToUint8Array = base64String => {
@@ -15,18 +16,22 @@ const urlBase64ToUint8Array = base64String => {
   return outputArray
 }
 
+const subscribe = registration => {
+  axios.get(settings.HTTP_SERVER).then(response => {
+    const publicKey = response.data.publicKey
+    registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(publicKey)
+    }).then(sendSubscription)
+  })
+}
+
 export default () => {
   if (!navigator.serviceWorker) return
   Notification.requestPermission(permission => {
     if (permission !== 'granted') return
     navigator.serviceWorker.register(SERVICE_WORKER_SCRIPT).then(registration => {
-      registration.pushManager.getSubscription().then(subscription => {
-        if (subscription) return setSubscription(subscription)
-        registration.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: urlBase64ToUint8Array(PUBLIC_KEY)
-        }).then(setSubscription)
-      })
+      registration.pushManager.getSubscription().then(subscription => subscription ? sendSubscription(subscription) : subscribe(registration))
     })
   })
 }
