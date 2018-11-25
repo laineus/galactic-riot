@@ -1,22 +1,28 @@
 import http from 'http'
+import express from 'express'
 import { PORT } from './settings'
 import rooms from './rooms'
 import register from './register'
 
-const httpServer = http.createServer((request, response) => {
-  response.writeHead(200, { 'Content-Type': 'application/json' })
-  if (request.method === 'GET') {
-    response.end(JSON.stringify({ rooms: rooms.map(r => r.info) }))
-  } else if (request.method === 'POST') {
-    let body = ''
-    request.on('data', chunk => body += chunk)
-    request.on('end', () => {
-      const data = JSON.parse(body)
-      register(data)
-      response.end()
-    })
-  }
+const app = express()
+app.use((_request, response, next) => {
+  response.header('Access-Control-Allow-Origin', '*')
+  response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  next()
 })
-httpServer.listen(PORT, () => console.log(`${new Date()} Server is listening on port ${PORT}`))
+app.get('/', (_request, response) => {
+  response.send(JSON.stringify({ rooms: rooms.map(r => r.info) }))
+})
+app.post('/', (request, response) => {
+  let body = ''
+  request.on('data', chunk => body += chunk)
+  request.on('end', () => {
+    const data = JSON.parse(body)
+    register(data)
+    response.send()
+  })
+})
 
+const httpServer = http.Server(app)
+httpServer.listen(PORT)
 export default httpServer
