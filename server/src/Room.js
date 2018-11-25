@@ -1,14 +1,17 @@
 import Player from './Player'
 import rooms from './rooms'
+import randInt from './randInt'
 const MAX = 12
 const FPS = 30
 const TIME = 120
+const BGM_NAMES = ['battle', 'army', 'riot']
 export default class Room {
   constructor () {
     this.players = []
     this.resetGame()
     this.loop()
     this.id = this.dicideId()
+    this.bgm = BGM_NAMES[randInt(0, BGM_NAMES.length - 1)]
   }
   dicideId () {
     const roomMax = (id) => rooms.some(r => r.id === id) ? roomMax(id + 1) : id

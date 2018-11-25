@@ -25,7 +25,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
     connection.onclose = () => this.exit('Title', { skip: 2 })
     connection.onmessage = e => {
       const data = JSON.parse(e.data)
-      if (data.method === 'init') this.startGame(data.body)
+      if (data.method === 'init') this.init(data.body)
       if (data.method === 'update') this.dataUpdate(data.body)
       if (data.method === 'hit') this.player.damage(data.body.damage, data.body.shooter)
       if (data.method === 'laser' && this.players[data.body]) this.players[data.body].mainAction()
@@ -38,12 +38,16 @@ export default class OnlineScene extends phina.display.DisplayScene {
     return connection
   }
   dataUpdate (data) {
+    if (!this.inProgress) {
+      bgm.set(this.connection.bgm)
+      this.kill.fontSize = 18
+      this.timer.fontSize = 24
+      this.inProgress = true
+    }
     this.playersData(data.players)
     this.onlinePlayers.text = `West: ${data.westPlayer} players - East ${data.eastPlayer} players`
     this.timer.text = secToString(data.time)
-    this.timer.fontSize = 24
     this.kill.text = `${data.eastKill} - ${data.westKill}`
-    this.kill.fontSize = 18
   }
   result (result) {
     this.onlineResult = new OnlineResult(this, result).addChildTo(this)
@@ -54,7 +58,6 @@ export default class OnlineScene extends phina.display.DisplayScene {
     if (this.connection.id === data.shooter) state.score.kill++
   }
   playersData (users) {
-    this.inProgress = true
     users.forEach(user => {
       if (user.id === this.connection.id) return
       if (this.players[user.id] && this.players[user.id].isActive) {
@@ -67,10 +70,11 @@ export default class OnlineScene extends phina.display.DisplayScene {
       }
     })
   }
-  startGame (data) {
+  init (data) {
     this.connection.id = data.id
     this.connection.team = data.team
     this.connection.server = data.server
+    this.connection.bgm = data.bgm
     resetScore()
     this.respawnDelay = 0
     this.backgroundColor = colors.black

@@ -7,7 +7,7 @@ export default class Player {
     this.room = room
     this.team = team
     this.id = randInt(1000000, 9999999)
-    connection.commit('init', { id: this.id, team: this.team, server: this.room.id })
+    connection.commit('init', { id: this.id, team: this.team, server: this.room.id, bgm: this.room.bgm })
     connection.on('message', this.received.bind(this))
     this.setState({ fighter: 0, x: 0, y: 0, r: 0, hp: 100 })
     return this
