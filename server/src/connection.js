@@ -1,9 +1,9 @@
-require('dotenv').config()
 import mysql from 'mysql'
+import { DB_HOST, DB_USER, DB_PASS, DB_NAME } from './settings'
 
 export default mysql.createConnection({
-  host : process.env.DB_HOST,
-  user : process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME
+  host : DB_HOST,
+  user : DB_USER,
+  password: DB_PASS,
+  database: DB_NAME
 })

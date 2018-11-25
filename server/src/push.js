@@ -1,8 +1,8 @@
-require('dotenv').config()
 import webpush from 'web-push'
 import connection from './connection'
+import { VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY } from './settings'
 
-webpush.setVapidDetails('mailto:lainen000@gmail.com', process.env.VAPID_PUBLIC_KEY, process.env.VAPID_PRIVATE_KEY)
+webpush.setVapidDetails('mailto:lainen000@gmail.com', VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY)
 
 const params = {
   title: 'GALACTIC RIOT',
