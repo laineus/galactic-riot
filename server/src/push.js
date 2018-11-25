@@ -1,6 +1,6 @@
 require('dotenv').config()
-const webpush = require('web-push')
-const connection = require('./dbConnection').default
+import webpush from 'web-push'
+import connection from './connection'
 
 webpush.setVapidDetails('mailto:lainen000@gmail.com', process.env.VAPID_PUBLIC_KEY, process.env.VAPID_PRIVATE_KEY)
 
