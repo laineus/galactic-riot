@@ -11,6 +11,7 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
+    "web-push": "^3.3.3",
     "webpack": "^4.26.0",
     "websocket": "^1.0.28"
   },
