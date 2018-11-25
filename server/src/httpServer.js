@@ -1,6 +1,6 @@
 import http from 'http'
 import express from 'express'
-import { PORT } from './settings'
+import { PORT, VAPID_PUBLIC_KEY } from './settings'
 import rooms from './rooms'
 import register from './register'
 
@@ -11,7 +11,7 @@ app.use((_request, response, next) => {
   next()
 })
 app.get('/', (_request, response) => {
-  response.send(JSON.stringify({ rooms: rooms.map(r => r.info) }))
+  response.send(JSON.stringify({ rooms: rooms.map(r => r.info), publicKey: VAPID_PUBLIC_KEY }))
 })
 app.post('/', (request, response) => {
   let body = ''
