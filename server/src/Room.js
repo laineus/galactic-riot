@@ -2,7 +2,7 @@ import Player from './Player'
 import rooms from './rooms'
 const MAX = 12
 const FPS = 30
-const TIME = 180
+const TIME = 120
 export default class Room {
   constructor () {
     this.players = []
