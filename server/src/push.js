@@ -9,16 +9,18 @@ const params = {
   body: '対戦を待っているプレイヤーがいます！'
 }
 
-connection.query('SELECT * FROM subscriptions', (error, rows) => {
-  if (error) return
-  Promise.all(rows.map(row => {
-    const subscription = {
-      endpoint: row.endpoint,
-      keys: {
-        auth: row.auth,
-        p256dh: row.p256dh
+export default () => {
+  connection.query('SELECT * FROM subscriptions', (error, rows) => {
+    if (error) return
+    Promise.all(rows.map(row => {
+      const subscription = {
+        endpoint: row.endpoint,
+        keys: {
+          auth: row.auth,
+          p256dh: row.p256dh
+        }
       }
-    }
-    return webpush.sendNotification(subscription, JSON.stringify(params), {})
-  })).then(r => console.log(r)).catch(console.error)
-})
+      return webpush.sendNotification(subscription, JSON.stringify(params), {})
+    }))
+  })
+}
