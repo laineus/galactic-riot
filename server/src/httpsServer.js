@@ -1,6 +1,7 @@
-import http from 'http'
+import fs from 'fs'
+import https from 'https'
 import express from 'express'
-import { PORT, VAPID_PUBLIC_KEY } from './settings'
+import { PORT, VAPID_PUBLIC_KEY, SSL_CERT, SSL_KEY } from './settings'
 import rooms from './rooms'
 import register from './register'
 
@@ -23,6 +24,6 @@ app.post('/', (request, response) => {
   })
 })
 
-const httpServer = http.Server(app)
-httpServer.listen(PORT)
-export default httpServer
+const httpsServer = https.createServer({ key: fs.readFileSync(SSL_KEY), cert: fs.readFileSync(SSL_CERT) }, app)
+httpsServer.listen(PORT)
+export default httpsServer

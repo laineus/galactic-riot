@@ -7,3 +7,5 @@ export const DB_PASS = process.env.DB_PASS
 export const DB_NAME = process.env.DB_NAME
 export const VAPID_PUBLIC_KEY = process.env.VAPID_PUBLIC_KEY
 export const VAPID_PRIVATE_KEY = process.env.VAPID_PRIVATE_KEY
+export const SSL_KEY = process.env.SSL_KEY
+export const SSL_CERT = process.env.SSL_CERT

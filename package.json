@@ -4,7 +4,7 @@
   "author": "laineus",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server --hot --mode development --host 0.0.0.0",
+    "dev": "webpack-dev-server --hot --mode development --host 0.0.0.0 --https",
     "watch": "webpack --watch --mode development",
     "build": "webpack --mode production"
   },
