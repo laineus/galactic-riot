@@ -6,6 +6,7 @@ import Text from './Text'
 import InterfaceScreen from './InterfaceScreen'
 import bgm from '../utils/bgm'
 import resetScore from '../utils/resetScore'
+import registerServiceWorker from '../utils/registerServiceWorker'
 import OnlinePlayer from './OnlinePlayer'
 import OnlineFighter from './OnlineFighter'
 import OnlineRespawn from './OnlineRespawn'
@@ -91,7 +92,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
     // State
     this.onlinePlayers = new Text('', 11).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 30)
     this.timer = new Text('Waiting for other player', 18).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 60)
-    this.kill = new Text('[X] to back', 12).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 90)
+    this.kill = new Text('[X] Back to title  [C] Register notification', 12).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 90)
     // BGM
     bgm.set(null)
   }
@@ -106,6 +107,9 @@ export default class OnlineScene extends phina.display.DisplayScene {
       if (app.keyboard.getKeyDown('X')) {
         this.connection.close()
         this.exit('Title', { skip: 2 })
+      }
+      if (app.keyboard.getKeyDown('C')) {
+        registerServiceWorker()
       }
       return
     }

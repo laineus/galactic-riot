@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { settings } from './config/variables'
+import { settings } from '../config/variables'
 
 const SERVICE_WORKER_SCRIPT = '/js/serviceWorker.js'
 
