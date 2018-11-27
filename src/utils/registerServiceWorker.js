@@ -28,7 +28,7 @@ export default () => {
   if (!navigator.serviceWorker) return
   Notification.requestPermission(permission => {
     if (permission !== 'granted') return
-    navigator.serviceWorker.register(settings.SERVICE_WORKER_SCRIPT).then(registration => {
+    navigator.serviceWorker.register(settings.SERVICE_WORKER_SCRIPT, { scope: '/' }).then(registration => {
       registration.pushManager.getSubscription().then(subscription => subscription ? sendSubscription(subscription) : subscribe(registration))
     })
   })
