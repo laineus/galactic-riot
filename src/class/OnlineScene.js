@@ -12,6 +12,7 @@ import OnlineFighter from './OnlineFighter'
 import OnlineRespawn from './OnlineRespawn'
 import secToString from '../utils/secToString'
 import OnlineResult from './OnlineResult'
+import getPushEndPoint from '../utils/getPushEndPoint'
 export default class OnlineScene extends phina.display.DisplayScene {
   constructor (option) {
     super(option)
@@ -76,6 +77,9 @@ export default class OnlineScene extends phina.display.DisplayScene {
     this.connection.team = data.team
     this.connection.server = data.server
     this.connection.bgm = data.bgm
+    getPushEndPoint().then(endpoint => {
+      this.connection.commit('push', { endpoint: endpoint })
+    })
     resetScore()
     this.respawnDelay = 0
     this.backgroundColor = colors.black
