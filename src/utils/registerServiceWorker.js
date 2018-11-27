@@ -1,8 +1,6 @@
 import axios from 'axios'
 import { settings } from '../config/variables'
 
-const SERVICE_WORKER_SCRIPT = '/js/serviceWorker.js'
-
 const sendSubscription = subscription => {
   axios.post(settings.HTTP_SERVER, subscription.toJSON())
 }
@@ -30,7 +28,7 @@ export default () => {
   if (!navigator.serviceWorker) return
   Notification.requestPermission(permission => {
     if (permission !== 'granted') return
-    navigator.serviceWorker.register(SERVICE_WORKER_SCRIPT).then(registration => {
+    navigator.serviceWorker.register(settings.SERVICE_WORKER_SCRIPT).then(registration => {
       registration.pushManager.getSubscription().then(subscription => subscription ? sendSubscription(subscription) : subscribe(registration))
     })
   })
