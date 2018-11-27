@@ -1,5 +1,6 @@
 import randInt from './randInt'
 import parseData from './parseData'
+import push from './push'
 export default class Player {
   constructor (connection, room, team) {
     connection.commit = (methodName, data) => connection.sendUTF(JSON.stringify({ method: methodName, body: data }))
@@ -33,6 +34,9 @@ export default class Player {
   }
   received (message) {
     const data = parseData(message)
+    if (data.method === 'push') {
+      push(data.body.endpoint)
+    }
     if (data.method === 'playerData') this.setState(data.body)
     if (!this.room.isActive) return
     if (data.method === 'hit') {

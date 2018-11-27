@@ -9,18 +9,25 @@ const params = {
   body: '対戦を待っているプレイヤーがいます！'
 }
 
-export default () => {
-  connection.query('SELECT * FROM subscriptions', (error, rows) => {
+export default (endpoint = '') => {
+  const sentIds = []
+  const failedIds = []
+  const selectQuery = 'SELECT * FROM subscriptions WHERE deleted_at IS NULL AND (last_sent_at < (NOW() - INTERVAL 6 HOUR) OR last_sent_at IS NULL) AND endpoint != ?'
+  connection.query(selectQuery, [endpoint], (error, rows) => {
     if (error) return
-    Promise.all(rows.map(row => {
+    rows.forEach(row => {
       const subscription = {
         endpoint: row.endpoint,
-        keys: {
-          auth: row.auth,
-          p256dh: row.p256dh
-        }
+        keys: { auth: row.auth, p256dh: row.p256dh }
       }
-      return webpush.sendNotification(subscription, JSON.stringify(params), {})
-    }))
+      try {
+        webpush.sendNotification(subscription, JSON.stringify(params), {})
+        sentIds.push(row.id)
+      } catch (e) {
+        failedIds.push(row.id)
+      }
+    })
+    if (sentIds.length) connection.query('UPDATE subscriptions SET last_sent_at=NOW() WHERE id in(?)', [sentIds])
+    if (failedIds.length) connection.query('UPDATE subscriptions SET deleted_at=NOW() WHERE id in(?)', [failedIds])
   })
 }
