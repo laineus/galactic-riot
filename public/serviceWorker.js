@@ -5,6 +5,7 @@ self.addEventListener('push', e => {
 }, false)
 
 self.addEventListener('notificationclick', e => {
-  const data = e.notification.data || {}
-  e.waitUntil(data, data.url ? clients.openWindow(data.url) : null)
+  e.notification.close()
+  const url = e.notification.data ? e.notification.data.url : '/'
+  e.waitUntil(clients.openWindow(url))
 }, false)

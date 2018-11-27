@@ -6,7 +6,8 @@ webpush.setVapidDetails('mailto:lainen000@gmail.com', VAPID_PUBLIC_KEY, VAPID_PR
 
 const params = {
   title: 'GALACTIC RIOT',
-  body: '対戦を待っているプレイヤーがいます！'
+  body: '対戦を待っているプレイヤーがいます！',
+  data: { url: 'https://galactic.laineus.com' }
 }
 
 export default (endpoint = '') => {
