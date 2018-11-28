@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
+require('dotenv').config()
 module.exports = {
   entry: __dirname + '/src/index.js',
   output: {
@@ -20,10 +21,12 @@ module.exports = {
     ]
   },
   plugins: [
-      new webpack.DefinePlugin({
-        'process.env.WS_SERVER': JSON.stringify(process.env.WS_SERVER),
-        'process.env.HTTP_SERVER': JSON.stringify(process.env.HTTP_SERVER)
-      })
+    new webpack.DefinePlugin({
+      'process.env': {
+        WS_SERVER: JSON.stringify(process.env.WS_SERVER),
+        HTTP_SERVER: JSON.stringify(process.env.HTTP_SERVER)
+      }
+    })
   ],
   devServer: {
     contentBase: path.resolve(__dirname, 'public'),
