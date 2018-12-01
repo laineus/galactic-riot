@@ -16,18 +16,23 @@ export default (endpoint = '') => {
   const selectQuery = 'SELECT * FROM subscriptions WHERE deleted_at IS NULL AND (last_sent_at < (NOW() - INTERVAL 6 HOUR) OR last_sent_at IS NULL) AND endpoint != ?'
   connection.query(selectQuery, [endpoint], (error, rows) => {
     if (error) return
-    rows.forEach(row => {
-      const subscription = {
-        endpoint: row.endpoint,
-        keys: { auth: row.auth, p256dh: row.p256dh }
-      }
-      webpush.sendNotification(subscription, JSON.stringify(params), {}).then(() => {
-        sentIds.push(row.id)
-      }).catch(() => {
-        failedIds.push(row.id)
+    Promise.all(
+      rows.map(row => {
+        const subscription = {
+          endpoint: row.endpoint,
+          keys: { auth: row.auth, p256dh: row.p256dh }
+        }
+        return webpush.sendNotification(subscription, JSON.stringify(params), {}).then(() => {
+          sentIds.push(row.id)
+          return true
+        }).catch(() => {
+          failedIds.push(row.id)
+          return true
+        })
       })
+    ).then(() => {
+      if (sentIds.length) connection.query('UPDATE subscriptions SET last_sent_at=NOW() WHERE id in(?)', [sentIds])
+      if (failedIds.length) connection.query('UPDATE subscriptions SET deleted_at=NOW() WHERE id in(?)', [failedIds])
     })
-    if (sentIds.length) connection.query('UPDATE subscriptions SET last_sent_at=NOW() WHERE id in(?)', [sentIds])
-    if (failedIds.length) connection.query('UPDATE subscriptions SET deleted_at=NOW() WHERE id in(?)', [failedIds])
   })
 }
