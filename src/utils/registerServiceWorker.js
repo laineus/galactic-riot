@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { settings } from '../config/variables'
 
+const apiEndpoint = `${settings.HTTP_SERVER}/api`
+
 const sendSubscription = subscription => {
-  axios.post(settings.HTTP_SERVER, subscription.toJSON())
+  axios.post(apiEndpoint , subscription.toJSON())
 }
 
 const urlBase64ToUint8Array = base64String => {
@@ -15,7 +17,7 @@ const urlBase64ToUint8Array = base64String => {
 }
 
 const subscribe = registration => {
-  axios.get(settings.HTTP_SERVER).then(response => {
+  axios.get(apiEndpoint).then(response => {
     const publicKey = response.data.publicKey
     registration.pushManager.subscribe({
       userVisibleOnly: true,
