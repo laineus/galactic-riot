@@ -19,8 +19,12 @@ app.post('*', (request, response) => {
   request.on('data', chunk => body += chunk)
   request.on('end', () => {
     const data = JSON.parse(body)
-    register(data)
-    response.send()
+    register(data).then(() => {
+      response.sendStatus(201)
+    }).catch(error => {
+      console.error(error)
+      response.sendStatus(401)
+    })
   })
 })
 

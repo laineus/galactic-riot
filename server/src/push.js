@@ -25,7 +25,8 @@ export default (endpoint = '') => {
         return webpush.sendNotification(subscription, JSON.stringify(params), {}).then(() => {
           sentIds.push(row.id)
           return true
-        }).catch(() => {
+        }).catch(error => {
+          console.error(error)
           failedIds.push(row.id)
           return true
         })
