@@ -21,12 +21,11 @@ export default (endpoint = '') => {
         endpoint: row.endpoint,
         keys: { auth: row.auth, p256dh: row.p256dh }
       }
-      try {
-        webpush.sendNotification(subscription, JSON.stringify(params), {})
+      webpush.sendNotification(subscription, JSON.stringify(params), {}).then(() => {
         sentIds.push(row.id)
-      } catch (e) {
+      }).catch(() => {
         failedIds.push(row.id)
-      }
+      })
     })
     if (sentIds.length) connection.query('UPDATE subscriptions SET last_sent_at=NOW() WHERE id in(?)', [sentIds])
     if (failedIds.length) connection.query('UPDATE subscriptions SET deleted_at=NOW() WHERE id in(?)', [failedIds])
