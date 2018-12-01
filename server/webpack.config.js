@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 require('dotenv').config()
 module.exports = {
+  devtool: 'eval', // evalでないとmysqlでerror https://github.com/webpack/webpack/issues/3150
   entry: __dirname + '/src/index.js',
   target: 'node',
   output: {
