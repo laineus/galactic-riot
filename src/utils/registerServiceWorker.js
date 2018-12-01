@@ -3,9 +3,7 @@ import { settings } from '../config/variables'
 
 const apiEndpoint = `${settings.HTTP_SERVER}/api`
 
-const sendSubscription = subscription => {
-  axios.post(apiEndpoint , subscription.toJSON())
-}
+const sendSubscription = subscription => axios.post(apiEndpoint, subscription.toJSON())
 
 const urlBase64ToUint8Array = base64String => {
   const padding = '='.repeat((4 - base64String.length % 4) % 4)
@@ -17,7 +15,7 @@ const urlBase64ToUint8Array = base64String => {
 }
 
 const subscribe = registration => {
-  axios.get(apiEndpoint).then(response => {
+  return axios.get(apiEndpoint).then(response => {
     const publicKey = response.data.publicKey
     registration.pushManager.subscribe({
       userVisibleOnly: true,
@@ -26,12 +24,11 @@ const subscribe = registration => {
   })
 }
 
-export default () => {
-  if (!navigator.serviceWorker) return
-  Notification.requestPermission(permission => {
-    if (permission !== 'granted') return
-    navigator.serviceWorker.register(settings.SERVICE_WORKER_SCRIPT, { scope: '/' }).then(registration => {
-      registration.pushManager.getSubscription().then(subscription => subscription ? sendSubscription(subscription) : subscribe(registration))
-    })
-  })
+export default async () => {
+  if (!navigator.serviceWorker) throw new Error('Not supported')
+  const permission = await Notification.requestPermission()
+  if (permission !== 'granted') throw new Error('Permit required')
+  const registration = await navigator.serviceWorker.register(settings.SERVICE_WORKER_SCRIPT, { scope: '/' })
+  const subscription = await registration.pushManager.getSubscription()
+  return subscription ? sendSubscription(subscription) : subscribe(registration)
 }

@@ -97,6 +97,8 @@ export default class OnlineScene extends phina.display.DisplayScene {
     this.onlinePlayers = new Text('', 11).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 30)
     this.timer = new Text('Waiting for other player', 18).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 60)
     this.kill = new Text('[X] Back to title  [C] Register notification', 12).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, 90)
+    this.sentRegistration = false
+    this.sub = new Text('', 14).addChildTo(this).setPosition(settings.SCREEN_WIDTH_C, settings.SCREEN_HEIGHT - 30)
     // BGM
     bgm.set(null)
   }
@@ -113,7 +115,17 @@ export default class OnlineScene extends phina.display.DisplayScene {
         this.exit('Title', { skip: 2 })
       }
       if (app.keyboard.getKeyDown('C')) {
-        registerServiceWorker()
+        if (this.sentRegistration) return
+        this.sentRegistration = true
+        registerServiceWorker().then(() => {
+          this.sub.text = 'Registration successful'
+          setTimeout(() => this.sub.text = '', 3000)
+        }).catch(error => {
+          console.error(error)
+          this.sub.text = 'Registration faild'
+          setTimeout(() => this.sub.text = '', 3000)
+        })
+        this.kill.text = this.kill.text.replace('  [C] Register notification', '')
       }
       return
     }
