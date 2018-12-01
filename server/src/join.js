@@ -6,7 +6,7 @@ export default connection => {
   if (!availableRoom) rooms.push(room)
   room.join(connection)
   connection.on('close', (reasonCode, description) => {
-    console.log(`${new Date()} Disconnected. Reson: [${reasonCode}] ${description}`)
+    // console.log(`${new Date()} Disconnected. Reson: [${reasonCode}] ${description}`)
     rooms.forEach(r => r.leave(connection))
   })
 }
