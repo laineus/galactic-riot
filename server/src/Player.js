@@ -34,6 +34,7 @@ export default class Player {
   }
   received (message) {
     const data = parseData(message)
+    if (!data) return
     if (data.method === 'push') {
       push(data.body.endpoint)
     }

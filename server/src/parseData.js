@@ -1,7 +1,8 @@
 export default message => {
   try {
-    return JSON.parse(message.utf8Data)
+    const data = JSON.parse(message.utf8Data)
+    return (data && data.method && data.body) ? data : false
   } catch (e) {
-    return { method: null, body: null }
+    return false
   }
 }
