@@ -77,9 +77,12 @@ export default class OnlineScene extends phina.display.DisplayScene {
     this.connection.team = data.team
     this.connection.server = data.server
     this.connection.bgm = data.bgm
-    getPushEndPoint().then(endpoint => {
-      this.connection.commit('push', { endpoint: endpoint })
-    })
+    setTimeout(() => {
+      if (this.inProgress) return
+      getPushEndPoint().then(endpoint => {
+        this.connection.commit('push', { endpoint: endpoint })
+      })
+    }, 1000)
     resetScore()
     this.respawnDelay = 0
     this.backgroundColor = colors.black
