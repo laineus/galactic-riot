@@ -29,6 +29,6 @@ export default {
     attachments: [1],
     amount: 5,
     mission: 0,
-    sound: true
+    sound: false
   }
 }
