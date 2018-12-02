@@ -10,10 +10,11 @@ const params = {
   data: { url: 'https://galactic.laineus.com' }
 }
 
-export default (endpoint = '') => {
+export default (endpoint) => {
+  endpoint = endpoint || ''
   const sentIds = []
   const failedIds = []
-  const selectQuery = 'SELECT * FROM subscriptions WHERE deleted_at IS NULL AND (last_sent_at < (NOW() - INTERVAL 6 HOUR) OR last_sent_at IS NULL) AND endpoint != ?'
+  const selectQuery = 'SELECT * FROM subscriptions WHERE deleted_at IS NULL AND (last_sent_at < (NOW() - INTERVAL 1 HOUR) OR last_sent_at IS NULL) AND endpoint != ?'
   connection.query(selectQuery, [endpoint], (error, rows) => {
     if (error) return
     Promise.all(
