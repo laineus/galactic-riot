@@ -7,7 +7,7 @@ process.on('uncaughtException', error => console.error(`error: ${error}`))
 
 const webSocketServer = new WebSocketServer({ httpServer: httpsServer, autoAcceptConnections: false })
 webSocketServer.on('request', request => {
-  if (ALLOW_ORIGIN && request.origin !== ALLOW_ORIGIN) {
+  if (ALLOW_ORIGIN && !ALLOW_ORIGIN.split(',').some(origin => origin === request.origin)) {
     request.reject()
     // console.log(`${new Date()} Connection rejected.`)
     return
