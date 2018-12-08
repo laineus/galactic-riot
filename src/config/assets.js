@@ -1,5 +1,5 @@
-import { sounds } from './variables'
-export default {
+import { sounds, settings } from './variables'
+const assets = {
   image: {
     dummy: '/img/dummy.png',
     credit: '/img/credit.png',
@@ -67,3 +67,9 @@ export default {
     }
   )
 }
+Object.keys(assets).forEach(type => {
+  Object.keys(assets[type]).forEach(name => {
+    assets[type][name] = `.${assets[type][name]}`
+  })
+})
+export default assets

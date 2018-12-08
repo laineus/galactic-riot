@@ -12,7 +12,7 @@ export const settings = {
   CLIENT_SERVER,
   WS_SERVER,
   HTTP_SERVER,
-  SERVICE_WORKER_SCRIPT: `${CLIENT_SERVER}/serviceWorker.js`
+  SERVICE_WORKER_SCRIPT: './serviceWorker.js'
 }
 
 export const colors = {
