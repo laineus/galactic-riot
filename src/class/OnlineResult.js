@@ -15,6 +15,7 @@ export default class OnlineResult extends Result {
     this.setTitle(`- ${completed ? 'Victory' : 'Defeat'} -`)
     this.setKey('Online field\n\nResult:\nKill:\nDeath:')
     this.setValue(`\n\n${result.westKill}-${result.eastKill}\n${state.score.kill}\n${state.score.death}`)
+    gtag('event', 'finish', { 'event_category': 'mission', 'event_label': 'online', 'value': completed ? 1 : 0 })
   }
   update (app) {
     this.time++

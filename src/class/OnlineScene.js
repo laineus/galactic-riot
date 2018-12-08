@@ -45,6 +45,7 @@ export default class OnlineScene extends phina.display.DisplayScene {
       this.kill.fontSize = 18
       this.timer.fontSize = 24
       this.inProgress = true
+      gtag('event', 'start', { 'event_category': 'mission', 'event_label': 'online' })
     }
     this.playersData(data.players)
     this.onlinePlayers.text = `West: ${data.westPlayer} players - East ${data.eastPlayer} players`

@@ -24,6 +24,7 @@ export default class MissionResult extends Result {
     this.setTitle(`- Mission ${completed ? 'Completed' : 'Failed'} -`)
     this.setKey(completed ? this.completedKeyString : this.failedKeyString)
     this.setValue(completed ? this.completedValueString : this.failedValueString)
+    gtag('event', 'finish', { 'event_category': 'mission', 'event_label': state.mission.name, 'value': completed ? 1 : 0 })
   }
   update (app) {
     this.time++

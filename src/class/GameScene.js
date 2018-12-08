@@ -32,6 +32,7 @@ export default class GameScene extends phina.display.DisplayScene {
     bgm.set(this.mission.bgm)
     // Credit
     this.credit()
+    gtag('event', 'start', { 'event_category': 'mission', 'event_label': this.mission.name })
   }
   update () {
     if (!this.inProgress) return
