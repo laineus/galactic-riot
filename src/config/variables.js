@@ -1,3 +1,4 @@
+const CLIENT_SERVER = process.env.CLIENT_SERVER || 'https://galactic.laineus.com'
 const WS_SERVER = process.env.WS_SERVER || 'wss://galactic.laineus.com/ws'
 const HTTP_SERVER = process.env.HTTP_SERVER || 'https://galactic.laineus.com'
 export const settings = {
@@ -8,9 +9,10 @@ export const settings = {
   get SCREEN_WIDTH_C () { return this.SCREEN_WIDTH / 2 },
   get SCREEN_HEIGHT_C () { return this.SCREEN_HEIGHT / 2 },
   FPS: 30,
+  CLIENT_SERVER,
   WS_SERVER,
   HTTP_SERVER,
-  SERVICE_WORKER_SCRIPT: `${HTTP_SERVER}/serviceWorker.js`
+  SERVICE_WORKER_SCRIPT: `${CLIENT_SERVER}/serviceWorker.js`
 }
 
 export const colors = {

@@ -23,6 +23,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
+        CLIENT_SERVER: JSON.stringify(process.env.CLIENT_SERVER),
         WS_SERVER: JSON.stringify(process.env.WS_SERVER),
         HTTP_SERVER: JSON.stringify(process.env.HTTP_SERVER)
       }
