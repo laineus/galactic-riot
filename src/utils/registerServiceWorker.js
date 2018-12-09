@@ -28,7 +28,7 @@ export default async () => {
   if (!navigator.serviceWorker) throw new Error('Not supported')
   const permission = await Notification.requestPermission()
   if (permission !== 'granted') throw new Error('Permit required')
-  const registration = await navigator.serviceWorker.register(settings.SERVICE_WORKER_SCRIPT, { scope: '/' })
+  const registration = await navigator.serviceWorker.register(settings.SERVICE_WORKER_SCRIPT)
   const subscription = await registration.pushManager.getSubscription()
   return subscription ? sendSubscription(subscription) : subscribe(registration)
 }
