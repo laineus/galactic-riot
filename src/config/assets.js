@@ -32,7 +32,7 @@ const assets = {
     f5_b: '/img/f5_b.png',
     f6_b: '/img/f6_b.png',
     f7_b: '/img/f7_b.png',
-    w_assult: '/img/w_assult.png',
+    w_assault: '/img/w_assault.png',
     w_gatling: '/img/w_gatling.png',
     w_twin: '/img/w_twin.png',
     w_sniper: '/img/w_sniper.png',

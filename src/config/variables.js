@@ -142,9 +142,9 @@ export const fighterFind = id => fighters.find(v => v.id === id)
 export const weapons = [
   {
     id: 1,
-    name: 'Assult',
+    name: 'Assault',
     price: 300,
-    img: 'w_assult',
+    img: 'w_assault',
     damage: 35,
     delay: 5,
     speed: 50,
