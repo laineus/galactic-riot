@@ -18,7 +18,7 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "phina.js": "^0.2.3"
   }
 }
