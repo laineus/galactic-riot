@@ -1,4 +1,4 @@
-import mysql from 'mysql'
+import mysql from 'mysql2'
 import { DB_HOST, DB_USER, DB_PASS, DB_NAME } from './settings'
 
 export default mysql.createConnection({
