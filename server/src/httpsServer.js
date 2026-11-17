@@ -13,18 +13,17 @@ app.use((_request, response, next) => {
 app.get('*', (_request, response) => {
   response.send(JSON.stringify({ rooms: rooms.map(r => r.info), publicKey: VAPID_PUBLIC_KEY }))
 })
-app.post('*', (request, response) => {
-  let body = ''
-  request.on('data', chunk => body += chunk)
-  request.on('end', () => {
-    const data = JSON.parse(body)
-    register(data).then(() => {
-      response.sendStatus(201)
-    }).catch(error => {
-      console.error(error)
-      response.sendStatus(401)
-    })
+// Parse regardless of Content-Type for compatibility with existing clients.
+app.post('*', express.json({ limit: '16kb', type: () => true }), (request, response) => {
+  register(request.body).then(() => {
+    response.sendStatus(201)
+  }).catch(error => {
+    console.error(error)
+    response.sendStatus(401)
   })
+})
+app.use((error, _request, response, _next) => {
+  response.sendStatus(error.status === 413 ? 413 : 400)
 })
 
 const httpServer = http.createServer(app)

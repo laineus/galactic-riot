@@ -7,6 +7,7 @@ const TIME = 120
 const BGM_NAMES = ['battle', 'army', 'riot']
 export default class Room {
   constructor () {
+    this.removed = false
     this.players = []
     this.resetGame()
     this.loop()
@@ -62,8 +63,9 @@ export default class Room {
     return this.start && this.frame > 0
   }
   loop () {
+    if (this.removed) return
     this.update()
-    setTimeout(this.loop.bind(this), 1000 / FPS)
+    if (!this.removed) this.loopTimer = setTimeout(this.loop.bind(this), 1000 / FPS)
   }
   update () {
     if (!this.start && this.players.length > 1) this.start = true 
@@ -72,7 +74,7 @@ export default class Room {
     this.commitToAll('update', this.updateData)
     if (!this.isActive) {
       this.commitToAll('result', { westKill: this.westKill, eastKill: this.eastKill })
-      setTimeout(() => {
+      this.closeTimer = setTimeout(() => {
         this.players.forEach(p => p.connection.close())
         this.remove()
       }, 7000)
@@ -101,6 +103,9 @@ export default class Room {
     this.players.forEach(p => p.connection.commit(methodName, data))
   }
   remove () {
+    this.removed = true
+    clearTimeout(this.loopTimer)
+    clearTimeout(this.closeTimer)
     const i = rooms.findIndex(r => r === this)
     if (i >= 0) rooms.splice(i, 1)
   }

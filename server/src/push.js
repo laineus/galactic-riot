@@ -1,5 +1,6 @@
 import webpush from 'web-push'
 import connection from './connection'
+import isAllowedPushEndpoint from './isAllowedPushEndpoint'
 import { VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY } from './settings'
 
 webpush.setVapidDetails('mailto:lainen000@gmail.com', VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY)
@@ -18,12 +19,12 @@ export default (endpoint) => {
   connection.query(selectQuery, [endpoint], (error, rows) => {
     if (error) return
     Promise.all(
-      rows.map(row => {
+      rows.filter(row => isAllowedPushEndpoint(row.endpoint)).map(row => {
         const subscription = {
           endpoint: row.endpoint,
           keys: { auth: row.auth, p256dh: row.p256dh }
         }
-        return webpush.sendNotification(subscription, JSON.stringify(params), {}).then(() => {
+        return webpush.sendNotification(subscription, JSON.stringify(params), { timeout: 10000 }).then(() => {
           sentIds.push(row.id)
           return true
         }).catch(error => {

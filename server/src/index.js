@@ -5,7 +5,7 @@ import join from './join'
 
 process.on('uncaughtException', error => console.error(`error: ${error}`))
 
-const webSocketServer = new WebSocketServer({ httpServer: httpsServer, autoAcceptConnections: false })
+const webSocketServer = new WebSocketServer({ httpServer: httpsServer, autoAcceptConnections: false, maxReceivedFrameSize: 16 * 1024, maxReceivedMessageSize: 16 * 1024 })
 webSocketServer.on('request', request => {
   if (ALLOW_ORIGIN && !ALLOW_ORIGIN.split(',').some(origin => origin === request.origin)) {
     request.reject()
